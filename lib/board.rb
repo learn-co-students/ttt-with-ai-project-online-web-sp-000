@@ -20,4 +20,42 @@ class Board
     puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
    end
 
+   def position(number)
+     @cells[number.to_i - 1]
+   end
+
+   def full?
+     array = @cells.map{ |cell| cell.strip}.reject{ |element| element.empty? }
+     if array.length == 9
+       return true
+     elsif array.length < 9
+       return false
+     end
+   end
+
+   def turn_count
+     @cells.count("X" || "O") + 1
+   end
+
+   def taken?(position)
+     @cells[position.to_i - 1] == "X" || @cells[position.to_i - 1] == "O"
+   end
+
+   def valid_move?(move)
+     if !taken?(move) && move.to_i.between?(1, 9)
+       true
+     else
+       false
+     end
+
+    #  user_move = move.to_i - 1
+    #  array = @cells.map{ |cell| cell.strip}
+
+    #  if user_move.is_a? Integer && array[user_move].empty? && user_move
+    #    true
+    #  else
+    #    false
+    #  end
+   end
+
 end
