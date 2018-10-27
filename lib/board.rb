@@ -42,11 +42,11 @@ class Board
    end
 
    def valid_move?(move)
-     if !taken?(move) && move.to_i.between?(1, 9)
-       true
-     else
-       false
-     end
+     !taken?(move) && move.to_i.between?(1, 9)
    end
 
+   def update(position, player)
+    #  binding.pry
+
+   end
 end
