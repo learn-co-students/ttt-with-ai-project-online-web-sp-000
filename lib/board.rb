@@ -47,15 +47,6 @@ class Board
      else
        false
      end
-
-    #  user_move = move.to_i - 1
-    #  array = @cells.map{ |cell| cell.strip}
-
-    #  if user_move.is_a? Integer && array[user_move].empty? && user_move
-    #    true
-    #  else
-    #    false
-    #  end
    end
 
 end
