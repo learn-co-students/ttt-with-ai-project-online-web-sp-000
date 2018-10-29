@@ -34,7 +34,7 @@ class Board
    end
 
    def turn_count
-     @cells.count("X" || "O") + 1
+     @cells.count("X") + @cells.count("O")
    end
 
    def taken?(position)
@@ -46,7 +46,6 @@ class Board
    end
 
    def update(position, player)
-    #  binding.pry
-
+     @cells[position.to_i - 1] = player.token
    end
 end
