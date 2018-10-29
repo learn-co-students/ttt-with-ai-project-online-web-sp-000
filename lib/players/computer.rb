@@ -5,7 +5,7 @@ module Players
   class Computer < Player
 
     def move(board)
-      binding.pry
+      if board.turn_count && !board.taken?
     end
   end
 end
