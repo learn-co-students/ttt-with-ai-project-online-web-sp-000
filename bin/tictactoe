@@ -3,23 +3,25 @@
 require_relative '../config/environment'
 
 
-puts "Would you like to play 1 or 2 player mode?"
+puts "Would you like to play 0, 1, or 2 player mode?"
   input = gets.strip
-
-if input == "1"
-  puts "Great! Would you like to be X or O?"
-  input_player = gets.strip
-  if input_player == "X"
-    game.new
-  else
-    game.new("O", "X")
-elsif input = "2"
-  puts "Okay, two player mode it is!"
-  puts "Would you like to be X or O?"
-  input_player = gets.strip
-  if input_player == "X"
-    game.new
-  else
-    game.new("O", "X")
+  if input == "0"
+    #?
+  if input == "1"
+    puts "Great! Would you like to go 'first' and be X or 'second' and be O?"
+    input_player = gets.strip
+    if input_player == "first"
+      game.new
+    else
+      # somehow make them player 2
+    end
+  elsif input == "2"
+    puts "Okay, two player mode it is!"
+    puts "Would you like to be X or O?"
+    input_player = gets.strip
+    if input_player == "X"
+      game.new
+    else
+      game.new("O", "X")
+    end
   end
-end
