@@ -4,10 +4,6 @@ module Players
 
   class Computer < Player
 
-    # def initialize(token = "X")
-    #   super
-    # end
-
     def move(board)
       move = nil
 
