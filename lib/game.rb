@@ -21,19 +21,19 @@ class Game
   end
 
   def current_player
-    board.turn_count % 2 == 0 ? player_1 : player_2
+    @board.turn_count % 2 == 0 ? player_1 : player_2
   end
 
   def won?
     WIN_COMBINATIONS.detect do |combination|
-      board.cells[combination[0]] == board.cells[combination[1]] &&
-      board.cells[combination[1]] == board.cells[combination[2]] &&
-      board.taken?(combination[0] + 1)
+      @board.cells[combination[0]] == @board.cells[combination[1]] &&
+      @board.cells[combination[1]] == @board.cells[combination[2]] &&
+      @board.taken?(combination[0] + 1)
     end
   end
 
   def draw?
-    !won? && board.full?
+    !won? && @board.full?
   end
 
   def over?
