@@ -12,9 +12,10 @@ puts "Would you like to play 0, 1, or 2 player mode?"
     player_1 = Players::Computer.new("O")
     player_2 = Players::Computer.new("X")
     Game.new(player_1, player_2).play
+    puts "Would you like to seem them play another round? y/n"
+    input_repeat = gets.strip
 
   elsif input == "1"
-
     puts "Great! Would you like to go 'first' and be X or 'second' and be O?"
     input_player = gets.strip
     if input_player == "first"
@@ -25,6 +26,7 @@ puts "Would you like to play 0, 1, or 2 player mode?"
       player_2 = Players::Human.new("O")
     end
     Game.new(player_1, player_2).play
+    puts
 
   elsif input == "2"
     puts "Okay, two player mode it is!"
