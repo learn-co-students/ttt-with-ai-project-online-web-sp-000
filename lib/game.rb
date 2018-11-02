@@ -57,7 +57,7 @@ class Game
       @board.update(current_move, player)
       puts "#{player.token} moved #{current_move}"
       @board.display
-      puts ""
+      puts "\n"
     end
   end
 
