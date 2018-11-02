@@ -62,6 +62,7 @@ class Game
   end
 
   def play
+    @board.display
     while !over?
       turn
     end
@@ -70,6 +71,7 @@ class Game
     elsif draw?
       puts "Cat's Game!"
     end
+
   end
 
 end

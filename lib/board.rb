@@ -29,7 +29,7 @@ class Board
   end
 
   def turn_count
-    @cells.count("X") + @cells.count("O")
+    @cells.count{|token| token == "X" || token == "O"}
   end
 
   def taken?(input)
