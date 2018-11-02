@@ -19,9 +19,10 @@ puts "Would you like to play 0, 1, or 2 player mode?"
     input_player = gets.strip
     if input_player == "first"
       player_1 = Players::Human.new("X")
-      player_2 = Players::Human.new("O")
+      player_2 = Players::Computer.new("O")
+      Board.display
     else
-      player_1 = Players::Human.new("O")
+      player_1 = Players::Computer.new("O")
       player_2 = Players::Human.new("X")
     end
       Game.new(player_1, player_2).play
