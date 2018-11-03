@@ -63,28 +63,25 @@ class Game
   end
 
   def play
-    @board.display
     while !over?
       turn
     end
     if won?
       puts "Congratulations #{winner}!"
       @board.display
-      puts "Would you like to play again? (y/n)"
-      answer = gets
-      if answer == "y"
-        Game.start
-      end
     elsif draw?
       puts "Cat's Game!"
       @board.display
-      puts "Would you like to play again? (y/n)"
-      answer = gets.chomp
-      if answer == "y"
-        Game.start
+      if Players::Human == @player_1 || Players::Human == @player_2
+        puts "Would you like to play again? (y/n)"
+        input = gets.chomp
+        if input == "y"
+          Game.start
+        end
       end
     end
   end
+
 
   def self.start
     puts "Would you like to play 0, 1, or 2 player mode?"
