@@ -72,13 +72,12 @@ class Game
     elsif draw?
       puts "Cat's Game!"
       @board.display
-      if Players::Human == @player_1 || Players::Human == @player_2
-        puts "Would you like to play again? (y/n)"
-        input = gets.chomp
-        if input == "y"
-          Game.start
-        end
-      end
+      # binding.pry
+    end
+    puts "Would you like to play again? (y/n)"
+    input = gets.chomp
+    if input == "y"
+      Game.start
     end
   end
 
