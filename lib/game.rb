@@ -18,6 +18,18 @@ class Game
     @board = board
   end
 
+  def self.all_computer_game
+    self.new(Players::Computer.new("X"), Players::Computer.new("O"))
+  end
+
+  def self.computer_first_game
+    self.new(Players::Computer.new("X"))
+  end
+
+  def self.computer_second_game
+    self.new(Players::Human.new("X"), Players::Computer.new("O"))
+  end
+
   def current_player
     @board.turn_count.odd? ? player_2 : player_1
   end
@@ -45,12 +57,13 @@ class Game
   end
 
   def turn
-    cell = current_player.move
+    cell = current_player.move(@board)
     if !@board.valid_move?(cell)
-      current_player.move
+      current_player.move(@board)
     else
       @board.update(cell, current_player)
     end
+    @board.display
   end
 
   def play
