@@ -15,7 +15,6 @@ module Players
 
     def move(board)
       corners = ["1", "3", "7", "9"]
-      edges = ["2", "4", "6", "8"]
       if board.turn_count <= 1
         turn_1 = corners.detect{|corner| board.valid_move?(corner)}
       elsif board.turn_count == 2 || board.turn_count == 3
@@ -25,12 +24,15 @@ module Players
           turn_2 = corners.detect{|corner| board.valid_move?(corner)}
         end
       else
-        turn_array = WINNING_SPACES.detect do |winning_array|
-          winning_array.all?{|cell| board.position(cell) == self.token || board.position(cell) == " "}
+        this_turn = WINNING_SPACES.detect do |winning_array|
+          winning_array.detect{|cell| board.valid_move?(cell)}
         end
-        turn_array.detect{|cell| board.valid_move?(cell)}
+        if this_turn.class == Array
+          this_turn.detect{|cell| board.valid_move?(cell)}
+        else
+          board.cells.shuffle.detect{|cell| board.valid_move?(cell)}
+        end
       end
-
     end
 
   end
