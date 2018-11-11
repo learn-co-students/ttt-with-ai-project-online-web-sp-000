@@ -24,14 +24,14 @@ def start_game
       puts "#{game.player_1.name}, you'll be 'X'."
     end
   when "2"
-    puts "Who is going first?"
+    puts "What is player one's name?"
     name_1 = gets.strip.downcase
-    puts "Who is going second?"
+    puts "What is player two's name?"
     name_2 = gets.strip.downcase
     game = Game.new
     game.player_1.name = name_1.capitalize
     game.player_2.name = name_2.capitalize
-    puts "#{name_1} will be \"X\". #{name_2} will be \"O\"."
+    puts "#{player_1.name} will be \"X\". #{player_2.name} will be \"O\"."
   when "0"
     game = Game.all_computer_game
   else
