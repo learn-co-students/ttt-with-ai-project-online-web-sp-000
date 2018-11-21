@@ -76,12 +76,14 @@ class Game
   def self.start
     puts "Hi! Welcome to Tic-Tac-Toe!"
     puts "How many players? 0, 1 or 2?"
-    player_count = gets.strip.to_i
+    player_count = gets.strip
 
-    if player_count == 100
+    if player_count == "wargames"
       wargames
       return
     end
+
+    player_count = player_count.to_i
 
     puts "Who should go first? Player 1 (press 1) or Player 2 (press 2)? The first player is \"X\"."
     first_player = gets.strip.to_i
@@ -131,7 +133,7 @@ class Game
         c << game
       end
     end
-    
+
     puts "X: #{x.count}"
     puts "O: #{o.count}"
     puts "C: #{c.count}"
