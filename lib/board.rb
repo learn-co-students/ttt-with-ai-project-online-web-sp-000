@@ -42,4 +42,14 @@ class Board
   def update(input, player)
     @cells[input.to_i - 1] = player.token
   end
+
+  def open_positions
+    MOVES.select do |move|
+      !taken?(move)
+    end
+  end
+
+  def current_token
+    turn_count % 2 == 0 ? "X" : "O"
+  end
 end

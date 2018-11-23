@@ -23,10 +23,14 @@ class Game
   end
 
   def won?
+    Game.won?(@board.cells)
+  end
+
+  def self.won?(cells)
     WIN_COMBINATIONS.find do |win_combination|
-      position_1 = @board.cells[win_combination[0]]
-      position_2 = @board.cells[win_combination[1]]
-      position_3 = @board.cells[win_combination[2]]
+      position_1 = cells[win_combination[0]]
+      position_2 = cells[win_combination[1]]
+      position_3 = cells[win_combination[2]]
       (position_1 == "X" && position_2 == "X" && position_3 == "X") ||
         (position_1 == "O" && position_2 == "O" && position_3 == "O")
     end
@@ -75,7 +79,7 @@ class Game
 
   def self.start
     puts "Hi! Welcome to Tic-Tac-Toe!"
-    puts "How many players? 0, 1 or 2?"
+    puts "How many players? 0, 1, 2 or wargames?"
     player_count = gets.strip
 
     if player_count == "wargames"
@@ -110,6 +114,8 @@ class Game
 
     if play_again == "Y"
       start
+    else
+      puts "Thank you for playing!"
     end
   end
 
