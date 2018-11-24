@@ -5,10 +5,11 @@ module Players
 		def move(board)
 			center_move(board) ||
 				second_move(board) ||
-				third_move(board) ||
+        third_move(board) ||
+        magic_move(board) ||
 				trapping_move(board) ||
 				winning_move(board) ||
-				blocking_move(board) || 
+				blocking_move(board) ||
 				random_move(board)
 		end
 
@@ -30,10 +31,27 @@ module Players
 					board.valid_move?(move)
 				end
 			end
-		end
+    end
+
+    def magic_move(board)
+      return unless board.taken?(5)
+
+      case1 = board.position(5) == board.position(9) && !board.taken?(3) && !board.taken?(7)
+      case2 = board.position(5) == board.position(1) && !board.taken?(3) && !board.taken?(7)
+      case3 = board.position(5) == board.position(7) && !board.taken?(1) && !board.taken?(9)
+      case4 = board.position(5) == board.position(3) && !board.taken?(1) && !board.taken?(9)
+
+      if case1 || case2
+        "3"
+      elsif case3 || case4
+        "1"
+      end
+    end
 
 		def trapping_move(board)
-			corners_taken = board.position(1) == board.position(9) || board.position(3) == board.position(7)
+			corners_taken1 = board.taken?(1) && board.position(1) == board.position(9)
+			corners_taken2 = board.taken?(3) && board.position(3) == board.position(7)
+			corners_taken = corners_taken1 || corners_taken2
 			if board.turn_count == 3 && corners_taken && board.valid_move?("2")
 				"2"
 			end
