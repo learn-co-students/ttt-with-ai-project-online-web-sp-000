@@ -25,7 +25,13 @@ class Board
   end
 
   def turn_count
-    @cells.collect {|x| x == " "}.size / 3
+    counter = 0
+    @cells.each do |element|
+      if element != " "
+        counter += 1
+      end
+    end
+    counter 
   end
 
   def taken?(position)
