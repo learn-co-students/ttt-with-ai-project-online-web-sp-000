@@ -39,6 +39,51 @@ class Game
     false
   end
 
+  def draw?
+    if @board.turn_count == 9
+      if (won?) == false
+        true
+      else
+        false
+      end
+    else 
+      false
+    end
+  end
+
+  def over?
+    self.draw? || self.won?
+  end
+
+  def winner
+    combination = self.won?
+    if combination != false
+      @board.cells[combination[0]]
+    else
+      nil
+    end
+  end
+
+
+  def turn
+    number = current_player.move(@board)
+    if @board.valid_move?(number)
+      @board.update(number, current_player)
+    else
+      turn
+    end
+  end
+
+  def play
+    while !self.over?
+      self.turn
+    end
+    if self.draw?
+      puts "Cat's Game!"
+    elsif self.won?
+      puts "Congratulations #{self.winner}!"
+    end
+  end
 
 
 
