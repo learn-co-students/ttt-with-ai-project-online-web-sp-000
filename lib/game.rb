@@ -12,52 +12,41 @@ class Game
   end
 
   def won?
-    WIN_COMBINATIONS.each do |combo|
-      if combo.all? {|x| @board.cells[x] == "X"}
-        return combo
-      end
-      if combo.all? {|x| @board.cells[x] == "O"}
-        return combo
-      end
-    end
-    return false
+    board.won?
   end
 
   def draw?
-    if (!won? && @board.full?)
-      return true
-    end
-    return false
+    board.draw?
   end
 
   def over?
-    if (draw? || won?)
-      return true
-    end
-    return false
+    board.over?
   end
 
   def winner
-    if won?
-      return @board.cells[won?[0]]
-    end
-    return nil
+    board.winner
   end
 
   def turn
     input = current_player.move(board)
     if @board.valid_move?(input)
       @board.update(input, current_player)
-      @board.display
     else
       turn
     end
   end
 
   def play
+    Gem.win_platform? ? (system "cls") : (system "clear")
     while !over?
+      puts "Player #{current_player.token}'s turn:"
+      puts "Please while while the AI Processes" if (9 - board.turn_count) > 7 && current_player.is_a?(Players::Computer)
+      @board.display
+      sleep(2) if current_player.is_a?(Players::Computer) && board.turn_count > 1
       turn
+      Gem.win_platform? ? (system "cls") : (system "clear")
     end
+    @board.display
     puts "Congratulations #{winner}!" if won?
     puts "Cat's Game!" if draw?
   end

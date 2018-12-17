@@ -2,8 +2,8 @@ class Board
   attr_accessor :cells
   WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
 
-  def initialize
-    @cells = clean_board
+  def initialize(cells = clean_board)
+    @cells = cells
   end
 
   def clean_board
@@ -15,6 +15,7 @@ class Board
   end
 
   def display
+    puts ""
     puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
     puts "-----------"
     puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
@@ -85,5 +86,9 @@ class Board
 
   def current_player
     return turn_count % 2 == 0 ? "X" : "O"
+  end
+
+  def other_player
+    return turn_count % 2 == 0 ? "O" : "X"
   end
 end
