@@ -4,4 +4,5 @@ module Players
       predict = MinMax.new
       "#{predict.next_move(board)+1}"
     end
+  end
 end
