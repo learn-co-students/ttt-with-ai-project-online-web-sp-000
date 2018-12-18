@@ -35,6 +35,7 @@ class Game
   end
 
   def turn
+    board.display
     player = current_player
     input = player.move(board)
     until board.valid_move?(input)

@@ -2,9 +2,31 @@
 
 require_relative '../config/environment'
 
-puts "How many players?"
-input = gets.strip
-if input == "2 players"
-  game = Game.new(player_1 = Player::Human("X"), player_2 = Player::Human("O"))
+puts "Welcome to Tic-tac-toe with AI!"
+
+def before_playing
+  puts "What type of game would you like to play: 0, 1 or 2 players?"
+  puts "To launch a 0 players game - computer vs computer - type '0'"
+  puts "To launch a 1 player game - computer vs human - type '1'"
+  puts "To launch a 2 players game - human vs human - type '2'"
+end
+
+before_playing
+
+user_input = gets.strip
+
+until user_input == "0" || user_input == "1" || user_input == "2"
+  before_playing
+  user_input = gets.strip
+end
+
+if user_input == "0"
+  game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
   game.play
-elsif input == ...
+elsif user_input == "1"
+  game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+  game.play
+elsif user_input == "2"
+  game = Game.new(Players::Human.new("X"), Players::Human.new("O"))
+  game.play
+end
