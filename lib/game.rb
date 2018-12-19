@@ -50,13 +50,28 @@ class Game
             nil
         end
     end
-
+    
     def turn 
-        input = gets.strip
-
+      puts "Please enter 1-9:"
+        input = current_player.move(input)
+            
+        if board.valid_move?(input)
+          board.update(input, current_player)
+          board.display
+        else
+          turn
+        end
     end
-       
-       
-       
+    def play
+        until over? 
+            turn
+        end
+        if won?
+            puts "Congratulations #{winner}!"
+        elsif draw?
+            puts "Cat's Game!"
+        end
+    end
+
 end
 
