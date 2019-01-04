@@ -10,7 +10,7 @@ class Game
     [0, 3, 6],
     [1, 4, 7],
     [2, 5, 8]
-  ].freeze
+  ]
 
   def initialize(player_1 = Players::Human.new('X'), player_2 = Players::Human.new('O'), board = Board.new)
     @player_1 = player_1
