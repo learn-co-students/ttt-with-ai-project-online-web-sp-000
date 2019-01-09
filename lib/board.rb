@@ -18,4 +18,15 @@ class Board
     puts (" #{self.cells[6]} | #{self.cells[7]} | #{self.cells[8]} ")
   end
   
+  def full?
+    flag = true
+    self.cells.each do |cell|
+      if cell == " "
+        flag = false
+        break
+      end
+    end
+    flag
+  end
+  
 end
