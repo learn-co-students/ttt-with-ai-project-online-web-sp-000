@@ -1,10 +1,10 @@
 require 'pry'
 class Game
-    attr_accessor :player_1, :player_2, :board, :winner, :comp_1, :comp_2, :hum_1, :hum_2
+    attr_accessor :player_1, :player_2, :board, :winner
     
     extend Players
   
-    def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+    def initialize(player_1, player_2, board = Board.new)
       @board = board 
       @player_1 = player_1 
       @player_2 = player_2
@@ -38,9 +38,7 @@ class Game
   end
   end
   return false
-    # WIN_COMBINATIONS.detect do |winner|
-    #   @board.cells[winner[0]] == @board.cells[winner[1]] && @board.cells[winner[1]] ==@board.cells[winner[2]]
-    #   end
+   
   
   end 
   
@@ -61,35 +59,35 @@ class Game
     end
     end
   
-  def start 
+  # def start 
     
-    puts "Welcome to Tic-Tac_Toe!" 
+  #   puts "Welcome to Tic-Tac_Toe!" 
 
-    puts "Do you have 0, 1 or 2 players?"
+  #   puts "Do you have 0, 1 or 2 players?"
 
-    user_game_type = gets
+  #   user_game_type = gets
     
-    if user_game_type == 0 
-      @comp_1 = Players::Computer.new("X") 
-      @comp_2 = Players::Computer.new("O")
+  #   if user_game_type == 0 
+  #     @comp_1 = Players::Computer.new("X") 
+  #     @comp_2 = Players::Computer.new("O")
     
-    elsif user_game_type == 1 
-      puts "Do you want to go first and be X or go second and be O?"
-      puts "Type X or O"
-      token_choice = gets 
-      if token_choice == "X" 
-        @hum_1 = Players::Human.new("X")
-        @comp_2 = Players::Computer.new("O")
-      elsif token_choice == "O" 
-        @comp_1 = Players::Computer.new("X")
-        @hum_2 = Players::Human.new("O")
-      end
-    elsif user_game_type == 2 
-      @hum_1 = Players::Human.new("X")
-      @hum_2 = Players::Human.new("O")
-    end 
+  #   elsif user_game_type == 1 
+  #     puts "Do you want to go first and be X or go second and be O?"
+  #     puts "Type X or O"
+  #     token_choice = gets 
+  #     if token_choice == "X" 
+  #       @hum_1 = Players::Human.new("X")
+  #       @comp_2 = Players::Computer.new("O")
+  #     elsif token_choice == "O" 
+  #       @comp_1 = Players::Computer.new("X")
+  #       @hum_2 = Players::Human.new("O")
+  #     end
+  #   elsif user_game_type == 2 
+  #     @hum_1 = Players::Human.new("X")
+  #     @hum_2 = Players::Human.new("O")
+  #   end 
       
-  end 
+  # end 
   
   def play 
     say_winner = winner
@@ -112,16 +110,23 @@ class Game
   
  
   
-  def turn 
-    puts "Player 1, enter 1-9:"
+  def turn
+    
+    prompt_user = current_player.token
+    
+    
+    puts "Player #{prompt_user} enter 1-9:"
     
      user_input = current_player.move(board)
      
     if board.valid_move?(user_input) && current_player == player_1
       board.update(user_input, @player_1)
+      puts board.display
       elsif board.valid_move?(user_input) && current_player == player_2
       board.update(user_input, @player_2)
+      puts board.display
     else 
+      puts "Invalid or taken try again."
       turn 
       
     end
