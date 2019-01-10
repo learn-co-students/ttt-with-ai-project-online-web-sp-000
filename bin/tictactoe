@@ -1,3 +1,13 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic-Tac_Toe!" 
+
+puts "Do you have 0, 1 or 2 players?"
+
+user_game_type = gets 
+
+
+
+
