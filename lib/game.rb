@@ -59,36 +59,7 @@ class Game
     end
     end
   
-  # def start 
-    
-  #   puts "Welcome to Tic-Tac_Toe!" 
 
-  #   puts "Do you have 0, 1 or 2 players?"
-
-  #   user_game_type = gets
-    
-  #   if user_game_type == 0 
-  #     @comp_1 = Players::Computer.new("X") 
-  #     @comp_2 = Players::Computer.new("O")
-    
-  #   elsif user_game_type == 1 
-  #     puts "Do you want to go first and be X or go second and be O?"
-  #     puts "Type X or O"
-  #     token_choice = gets 
-  #     if token_choice == "X" 
-  #       @hum_1 = Players::Human.new("X")
-  #       @comp_2 = Players::Computer.new("O")
-  #     elsif token_choice == "O" 
-  #       @comp_1 = Players::Computer.new("X")
-  #       @hum_2 = Players::Human.new("O")
-  #     end
-  #   elsif user_game_type == 2 
-  #     @hum_1 = Players::Human.new("X")
-  #     @hum_2 = Players::Human.new("O")
-  #   end 
-      
-  # end 
-  
   def play 
     say_winner = winner
     
