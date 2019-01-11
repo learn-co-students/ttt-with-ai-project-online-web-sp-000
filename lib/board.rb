@@ -18,6 +18,11 @@ class Board
     puts (" #{self.cells[6]} | #{self.cells[7]} | #{self.cells[8]} ")
   end
   
+  def position(user_input)
+    user_input = user_input.to_i - 1
+    self.cells[user_input]
+  end
+  
   def full?
     flag = true
     self.cells.each do |cell|
@@ -27,6 +32,35 @@ class Board
       end
     end
     flag
+  end
+  
+  def turn_count
+    counter = 0
+    self.cells.each do |cell|
+      cell == " " ? next : counter += 1
+    end
+    counter
+  end
+  
+  def taken?(move)
+    if self.position(move) == "X" || self.position(move) == "O"
+      true
+    else
+      false
+    end
+  end
+  
+  def valid_move?(move)
+    if move > "0" && move <= "9"
+      !taken?(move)
+    else
+      false
+    end
+    
+    def update(move, player)
+      i = move.to_i - 1
+      self.cells[i] = player.token unless !valid_move?(move)
+    end
   end
   
 end
