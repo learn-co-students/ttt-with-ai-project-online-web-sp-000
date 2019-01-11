@@ -14,8 +14,12 @@ class Game
     [0,4,8],
     [2,4,6]]
 
-  def initialize
+  def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+    #player_1 needs to access the Players module and then the Human who is playing as "X", then makes a new instance when needed
+    #player_2 needs to access the Players module and then the Computer who is playing as "O", then makes a new instance when needed
     @board = board
+    @player_1 = player_1
+    @player_2 = player_2
   end
 
 end
