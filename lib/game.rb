@@ -22,4 +22,9 @@ class Game
     @player_2 = player_2
   end
 
+  def current_player #returns the correct player, X, for the third move
+
+
+  end
+
 end
