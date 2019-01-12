@@ -37,11 +37,11 @@
 
 
     def valid_move?(position)
-    !(taken?(position))  && (0..9).include?(position.to_i - 1)
-  end
+      !(taken?(position))  && (0..9).include?(position.to_i - 1)
+    end
 
-  def update(position, player)
-    cells[position.to_i - 1] = player.token
+    def update(position, player)
+      cells[position.to_i - 1] = player.token
     end
 
 
