@@ -39,8 +39,6 @@ class Game
     @board.full? && !won?
   end
 
-  # Natasha's part
-
   def over?
     board.full? || won? || draw?
   end
@@ -52,32 +50,15 @@ class Game
     end
   end
 
-  def self.start
-
-  end
-
-  #  def turn
-  #    player = current_player
-  #      current_move = player.move(@board)
-  #      if !@board.valid_move?(current_move)
-  #        turn
-  #      else
-  #      #update changes to player_2
-  #       #@board.update(current_move, player)
-  #    end
-  #    @board.display
-  #  end
-
   def turn
     puts "Please enter 1-9:"
-    user_input = current_player.move(board)
+    user_input = current_player.move(board) #player_1 plays the first round
 
-    if board.valid_move?(user_input)
-      board.update(user_input, current_player)
-      # binding.pry
+    if board.valid_move?(user_input)   #determines if valid_move
+      board.update(user_input, current_player)  #switches to the player_2
       board.display
     else
-      turn
+      turn  # takes a turn
     end
   end
 
