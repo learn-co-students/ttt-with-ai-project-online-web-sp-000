@@ -76,9 +76,9 @@ class Game
 #   end
 # end
 
-def play()
+def play(board)
     while !over?
-      turn(@board)
+      turn(board)
     end
     if won?
       puts "Congratulations #{winner}!"
