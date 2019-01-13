@@ -27,8 +27,11 @@
      cells.all? {|cell| cell == "X" || cell == "O"}
    end
 
-   def turn_count
-     @cells.collect {|x| x == " "}.size / 3
+   def turn_count  # iterate and count to look at each element of cells and if there is an x or o it increments the count
+     #@cells.collect {|x| x == " "}.size / 3
+     cells.count do |token|
+       token == "X" || token == "O"
+     end 
    end
 
    def taken?(position)
@@ -37,7 +40,7 @@
 
 
     def valid_move?(position)
-      !(taken?(position))  && (0..9).include?(position.to_i - 1)
+      !taken?(position) && position.to_i.between?(1,9)
     end
 
     def update(position, player)

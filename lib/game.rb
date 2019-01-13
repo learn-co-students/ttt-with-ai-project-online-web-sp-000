@@ -23,14 +23,15 @@ class Game
   end
 
   def current_player #returns the correct player, X, for the third move
-    @board.turn_count.odd? ? @player_1 : @player_2
+    self.board.turn_count.even? ? player_1 : player_2
   end
 
   def won?
     WIN_COMBINATIONS.detect do |combinations|
-      @board.cells[combinations[0]] == @board.cells[combinations[1]] &&
-      @board.cells[combinations[1]] == @board.cells[combinations[2]] &&
-      @board.taken?(combinations[0] +1)
+      #@board.cells[combinations[0]] == @board.cells[combinations[1]] &&
+      #@board.cells[combinations[1]] == @board.cells[combinations[2]] &&
+      #@board.taken?(combinations[0] +1)
+      combinations.all? {|cell| board.cells[cell] == player_1.token} || combinations.all? { |cell| board.cells[cell] == player_2.token }
     end
   end
 
@@ -41,7 +42,7 @@ class Game
   # Natasha's part
 
   def over?
-    @board.full? || won? || draw?
+    board.full? || won? || draw?
   end
 
   def winner
@@ -51,26 +52,44 @@ class Game
     end
   end
 
-   def turn
-     player = current_player
-       current_move = player.move(@board)
-       if !@board.valid_move?(current_move)
-         turn
-       else
-       #update changes to player_2
-       @board.update(current_move, player)
-     end
-     @board.display
-   end
+  def self.start
 
-def play
-    while !over?
-      turn(@board)
-    end
-    if won?
-      puts "Congratulations #{winner}!"
-    elsif draw?
-      puts "Cat's Game!"
+  end
+
+  #  def turn
+  #    player = current_player
+  #      current_move = player.move(@board)
+  #      if !@board.valid_move?(current_move)
+  #        turn
+  #      else
+  #      #update changes to player_2
+  #       #@board.update(current_move, player)
+  #    end
+  #    @board.display
+  #  end
+
+  def turn
+    puts "Please enter 1-9:"
+    user_input = current_player.move(board)
+
+    if board.valid_move?(user_input)
+      board.update(user_input, current_player)
+      # binding.pry
+      board.display
+    else
+      turn
     end
   end
-end
+
+
+ def play
+     while !over?
+       turn
+     end
+     if won?
+       puts "Congratulations #{winner}!"
+     else
+       puts "Cat's Game!"
+     end
+   end
+ end
