@@ -62,27 +62,16 @@ class Game
     @board.display
   end
 
-  def play
-    # plays the first turn of the game
-    #plays the first few turns of the game
-     while !over? do
-      turn
-     end
-       if won?
-         puts "Congratulations #{winner}!"
-       elsif draw?
-         puts "Cat's Game!"
-       end
+
+  def play(board)
+    move(@board)
+    while over?(@board) == true
+      turn(@board)
+    end
+    if won?(@board) == true
+      puts "Congratulations #{winner(@board)}!"
+    else draw?(@board)
+      puts "Cats Game!"
     end
   end
-
-  # def turn
-  #   @user_input = current_player.move(@board)
-  #   if @board.valid_move?(@user_input)
-  #      @board.update(@user_input, current_player)
-  #      @board.display
-  #   else puts "Please enter a number 1-9:"
-  #     turn
-  #   @board.display
-  #   end
-  # end
+end
