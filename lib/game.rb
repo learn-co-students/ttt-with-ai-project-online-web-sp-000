@@ -38,4 +38,38 @@ class Game
     @board.full? && !won?
   end
 
+  def over?
+    @board.full? || won? || draw?
+  end
+
+  def winner
+    if won?
+      combination = won?
+      @board.cells[combination[0]]
+    end
+  end
+
+
+  def turn
+    @user_input = current_player.move(@board)
+    if @board.valid_move?(@user_input)
+       @board.update(@user_input, current_player)
+       @board.display
+    else puts "Please enter a number 1-9:"
+      turn
+    @board.display
+    end
+  end
+
+
+  def play
+     while !over? do
+      turn
+     end
+     if won?
+       puts "Congratulations #{winner}!"
+     elsif draw?
+       puts "Cat's Game!"
+     end
+    end
 end

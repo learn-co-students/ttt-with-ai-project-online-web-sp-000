@@ -1,15 +1,17 @@
-module Players
-  class Computer < Player
-    #build computer logic that represents the Computer Player
-    #It should return a valid move in the form of a 1-9 string
-    #You can hardcode your logic, things like "On turn 1 always try to go
-    #in the middle if you can" and if not "try to go in a corner" or any logic tree you can think of
-    def move(board)
-      #if this is my first move, then go to cell "5", else if this is my 2nd move, check to see if cell "5" is empty
-      #if cell "5" is taken, put token at a corner
-      #if I took cell "5" then pick a corner
+# The idea of being efficient wanting to check the win combinations is good…just keep in mind that
+#  the collection is not very big, the logic of checking WHICH combinations to check might outweigh 
+#  just checking all of those. You might be able to leverage one of ruby’s nice efficient methods like any?
 
-    end
+# opt for a win combo rather than a block combo - more efficient
+# check for a win combo first then check for a block combo
 
-  end
-end
+#first few moves determines the rest of the game => where strategy comes in
+
+# take middle cell if empty
+# after the first move, make another move based on empty cells
+# once everyone has 2 tokens on the board, you use a win combo or a block combo and make a move 
+# =>iterate over win combos and block combo to check for a win use detect enumerable
+
+# “X”, “X”, “”
+# “O”,”O”,” “
+# “ “, “X”, “ “
