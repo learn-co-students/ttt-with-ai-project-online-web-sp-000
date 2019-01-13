@@ -27,11 +27,11 @@
      cells.all? {|cell| cell == "X" || cell == "O"}
    end
 
-   def turn_count  # iterate and count to look at each element of cells and if there is an x or o it increments the count
-     #@cells.collect {|x| x == " "}.size / 3
+   def turn_count  # iterate and count to look at each element of cells and if there is an "X" or "O" and then increments the count
+     #@cells.collect {|x| x == " "}.size / 3  => assigns the board empty spaces
      cells.count do |token|
        token == "X" || token == "O"
-     end 
+     end
    end
 
    def taken?(position)
