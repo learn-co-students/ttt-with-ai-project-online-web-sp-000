@@ -38,6 +38,8 @@ class Game
     @board.full? && !won?
   end
 
+  # Natasha's part
+
   def over?
     @board.full? || won? || draw?
   end
@@ -49,27 +51,38 @@ class Game
     end
   end
 
-
   def turn
-    @user_input = current_player.move(@board)
-    if @board.valid_move?(@user_input)
-       @board.update(@user_input, current_player)
-       @board.display
-    else puts "Please enter a number 1-9:"
-      turn
-    @board.display
+    player = current_player
+      current_move = player.move(@board)
+      if !@board.valid_move?(current_move)
+        turn
+      else
+      #update changes to player_2
     end
+    @board.display
   end
 
-
   def play
+    # plays the first turn of the game
+    #plays the first few turns of the game
      while !over? do
       turn
      end
-     if won?
-       puts "Congratulations #{winner}!"
-     elsif draw?
-       puts "Cat's Game!"
-     end
+       if won?
+         puts "Congratulations #{winner}!"
+       elsif draw?
+         puts "Cat's Game!"
+       end
     end
-end
+  end
+
+  # def turn
+  #   @user_input = current_player.move(@board)
+  #   if @board.valid_move?(@user_input)
+  #      @board.update(@user_input, current_player)
+  #      @board.display
+  #   else puts "Please enter a number 1-9:"
+  #     turn
+  #   @board.display
+  #   end
+  # end
