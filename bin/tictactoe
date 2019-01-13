@@ -10,6 +10,8 @@ require_relative '../config/environment'
     change_it = user_game_type.to_i
     
     
+    
+    def start_game(change_it)
     case change_it
     when 0 
       @comp_1 = Players::Computer.new("X") 
@@ -28,11 +30,29 @@ require_relative '../config/environment'
         new_game = Game.new(@hum_1, @comp_2)
         new_game.play
         
+        puts "Game Over! Would you like to play again?"
+      puts "Y for Yes, N for No and quit: " 
+      play_again = gets.strip
+      if play_again == "Y"
+        start_game(change_it)
+      elsif play_again == "N"
+        exit
+        end
+        
       elsif token_choice == "O" 
         @comp_1 = Players::Computer.new("X")
         @hum_2 = Players::Human.new("O")
         new_game = Game.new(@comp_1, @hum_2)
         new_game.play
+        
+        puts "Game Over! Would you like to play again?"
+      puts "Y for Yes, N for No and quit: " 
+      play_again = gets.strip
+      if play_again == "Y"
+        start_game(change_it)
+      elsif play_again == "N"
+        exit
+        end
       end
       
     when 2 
@@ -41,9 +61,35 @@ require_relative '../config/environment'
       new_game = Game.new(@hum_1, @hum_2)
       new_game.play
       
+      puts "Game Over! Would you like to play again?"
+      puts "Y for Yes, N for No and quit: " 
+      play_again = gets.strip
+      if play_again == "Y"
+        start_game(change_it)
+      elsif play_again == "N"
+        exit
+        end
+      
       else 
       "invalid entry"
+    end
     end 
+    
+    start_game(change_it)
+    
+   # if over?
+    # puts "Do you want to play again?: Y for yes, N for no and exit"
+     # user_input = gets.strip 
+    #  if user_input == "Y"
+        #start_game
+        #elsif user_input == "N" 
+       # exit 
+       # end 
+      #  end 
+      
+     
+      
+      
     
     
     
