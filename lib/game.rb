@@ -51,34 +51,21 @@ class Game
     end
   end
 
-  def turn()
-    player = current_player
-      current_move = player.move(@board)
-      if !@board.valid_move?(current_move)
-        turn
-      else
-      #update changes to player_2
-    end
-    @board.display
-  end
+   def turn
+     player = current_player
+       current_move = player.move(@board)
+       if !@board.valid_move?(current_move)
+         turn
+       else
+       #update changes to player_2
+       @board.update(current_move, player)
+     end
+     @board.display
+   end
 
-
-#   def play(board)
-#     move(@board)
-#     while over?(@board) == true
-#       turn(@board)
-#     end
-#     if won?(@board) == true
-#       puts "Congratulations #{winner(@board)}!"
-#     else draw?(@board)
-#       puts "Cats Game!"
-#     end
-#   end
-# end
-
-def play(board)
+def play
     while !over?
-      turn(board)
+      turn(@board)
     end
     if won?
       puts "Congratulations #{winner}!"
