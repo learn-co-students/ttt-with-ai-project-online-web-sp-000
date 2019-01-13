@@ -51,7 +51,7 @@ class Game
     end
   end
 
-  def turn
+  def turn()
     player = current_player
       current_move = player.move(@board)
       if !@board.valid_move?(current_move)
@@ -63,15 +63,27 @@ class Game
   end
 
 
-  def play(board)
-    move(@board)
-    while over?(@board) == true
+#   def play(board)
+#     move(@board)
+#     while over?(@board) == true
+#       turn(@board)
+#     end
+#     if won?(@board) == true
+#       puts "Congratulations #{winner(@board)}!"
+#     else draw?(@board)
+#       puts "Cats Game!"
+#     end
+#   end
+# end
+
+def play()
+    while !over?
       turn(@board)
     end
-    if won?(@board) == true
-      puts "Congratulations #{winner(@board)}!"
-    else draw?(@board)
-      puts "Cats Game!"
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
     end
   end
 end
