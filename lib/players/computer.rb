@@ -19,27 +19,19 @@
 module Players
   class Computer < Player
     def move(board)
+      move = nil
       #first move
       # if "5" in board is not taken
-      #move = "5"
-
-      #second move
-      #elsif board.turn_count
-      # if "5" is not taken then take it
-
-      # if "5" is taken the take "3"
-
-      #third move
+      if board(5).empty?
+        move = "5"
+      #first move if cell 5 is occupied
+      # if "5" is not taken then take cell 3
+      elsif board.turn_count == "1"
+        move = "3"
+      #if you went first and took cell 5, take a corner
+    elsif board.turn_count == "2"
+      move = [1, 3, 7, 9].detect {|cell| cell == }
 
     end
-
-        #Natasha does lines 1-20
-        #Patrice does lines 23-28
-        #Meisuleen does lines 30-42
-
-
-
-
-
   end
 end
