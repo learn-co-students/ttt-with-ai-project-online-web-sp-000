@@ -30,8 +30,8 @@ module Players
         move = "3"
       #if you went first and took cell 5, take a corner
     elsif board.turn_count == "2"
-      move = [1, 3, 7, 9].detect {|cell| cell == }
-
+      move = [1, 3, 7, 9].detect {|cell| cell.empty?} #take cell }  #how to use .detect to make a token occupy a corner cell ruby
+      end
     end
   end
 end
