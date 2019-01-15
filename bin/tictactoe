@@ -1,3 +1,50 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def start 
+   puts "Welcome to Tic-Tac-Toe!"
+   puts "Would you like to play a 0, 1, or 2 person game?"
+   input = gets.strip
+   while input != '0' && input != '1' && input != '2'
+    puts "\nI'm sorry, that's not a valid option."
+    puts "Would you like to play a 0, 1, or 2 person game?"
+    input = gets.strip
+  end
+  if input == '1'
+    puts "Who should go first and be 'X'? You (1) or the computer (2)?"
+    first_player_choice = gets.strip
+    while first_player_choice != '1' && first_player_choice != '2'
+      puts "\nI'm sorry, that's not a valid option."
+      puts "Who should go first and be 'X'? You (1) or the computer (2)?"
+      first_player_choice = gets.strip
+    end
+  end
+  
+  case input 
+    when '0'
+      game = Game.new(Players::Computer.new('X'), Players::Computer.new('O'))
+    when '1'
+      if first_player_choice == '1'
+        game = Game.new(Players::Human.new('X'), Players::Computer.new('O'))
+      else 
+        game = Game.new(Players::Computer.new('X'), Players::Human.new('O'))
+      end 
+    when '2'
+      game = Game.new(Players::Human.new('X'), Players::Human.new('O')) 
+    end
+  
+    
+  game.play
+  puts "Would you like to play again? (Y) or (N)"
+  again = gets.strip.upcase
+  if again != 'Y' and again != 'N'
+    puts "I'm sorry, would you like to play again? (Y) or (N)"
+    again = gets.strip.upcase
+  end
+  if again == 'Y'
+    start 
+  end
+end
+
+start
