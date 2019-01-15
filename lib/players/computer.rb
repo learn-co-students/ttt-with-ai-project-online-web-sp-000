@@ -31,6 +31,14 @@ module Players
       #if you went first and took cell 5, take a corner
     elsif board.turn_count == "2"
       move = [1, 3, 7, 9].detect {|cell| cell.empty?} #take cell }  #how to use .detect to make a token occupy a corner cell ruby
+
+      # on the 3rd move if there are 2 matching tokens next to each other, take the spot that is next to it
+      #check corners first then sides => take the one that is available first
+
+      #check to see if there are any winning combinations (iterate through WIN_COMBINATIONS)
+
+     # if cell is taken that is next to your token, use block method(write out a block method)
+
       end
     end
   end
