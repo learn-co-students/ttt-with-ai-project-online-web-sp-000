@@ -55,4 +55,15 @@ class Game
     answer
   end
 
+  def turn
+    if self.board.valid_move?(current_player.move(self.board))
+      self.board.update(current_player.move(self.board))
+    else
+      while !self.board.valid_move?(current_player.move(self.board)) do
+        puts "invalid"
+        current_player.move(self.board)
+      end
+    end
+  end
+
 end
