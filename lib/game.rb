@@ -23,15 +23,24 @@ class Game
   end
   
   def won?
-    
+    WIN_COMBINATIONS.each do |combination|
+      if combination.all? {|index| self.board.cells[index] == "X"} || combination.all? {|index| self.board.cells[index] == "O"}
+        return combination
+      end
+    end
+    false
+  end
+  
+  def full?
+    self.board.cells.all? {|token| token == "X" || token == "O"}
   end
   
   def draw?
-    
+    full? && !won?
   end
   
   def over?
-    
+    draw? || full? || won?
   end
   
   def winner
