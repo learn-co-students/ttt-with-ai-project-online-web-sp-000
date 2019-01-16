@@ -22,11 +22,11 @@ module Players
       move = nil
       #first move
       # if "5" in board is not taken
-      if board(5).empty?
+      if board.cells[5].empty?
         move = "5"
       #first move if cell 5 is occupied
       # if "5" is not taken then take cell 3
-      elsif board.turn_count == "1"
+    elsif board.turn_count == "1"
         move = "3"
       #if you went first and took cell 5, take a corner
     elsif board.turn_count == "2"
@@ -35,12 +35,30 @@ module Players
 #make sure you chain board with the other methods
       # on the 3rd move if there are 2 matching tokens next to each other, take the spot that is next to it
       #check corners first then sides => take the one that is available first
+    elsif board.turn_count == "3"
+      move = ["1", "3", "7", "9"].detect {|position| !board.taken?(position)}
 
-      #check to see if there are any winning combinations (iterate through WIN_COMBINATIONS)
+    elsif board.turn_count == "3"  #then check sides => take the one that is available first
+      move = ["2", "4", "6", "8"].detect {|position| !board.taken?(position)}
+      move = foo if move.nil
 
-     # if cell is taken that is next to your token, use block method(write out a block method)
 
-      end
+  #check how you can check for WINNING_COMBINATIONS
+        WINNING_COMBINATIONS.any? {|line| (line - board) == [] }
+
+       move = [1, 3, 7, 9, 2, 4, 6, 8].detect{|i| !board.taken?(i)}.to_s if move == nil
     end
+    move
   end
 end
+end
+      # && board.position(1)  && !board.taken?(position)
+
+      #check to see if there are any winning combinations (iterate through WIN_COMBINATIONS)
+      #  def has_winner(board)
+      #    WINNING_COMBINATIONS.any? {|line| (line - board) == [] }
+      #  end
+
+
+
+     # if cell is taken that is next to your token, use block method(write out a block method)
