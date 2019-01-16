@@ -12,10 +12,30 @@ class Game
   [2,4,6]
 ]
 
-  def initialize(player_1 = Player.new("X"), player_2 = Player.new("Y"), board = Board.new)
+  def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
     self.player_1 = player_1
     self.player_2 = player_2
     self.board = board
+  end
+  
+  def current_player
+    current_turn = self.board.turn_count.odd? ? player_2 : player_1
+  end
+  
+  def won?
+    
+  end
+  
+  def draw?
+    
+  end
+  
+  def over?
+    
+  end
+  
+  def winner
+    
   end
 
 end
