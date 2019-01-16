@@ -17,11 +17,11 @@ class Game
     self.player_2 = player_2
     self.board = board
   end
-  
+
   def current_player
     current_turn = self.board.turn_count.odd? ? player_2 : player_1
   end
-  
+
   def won?
     WIN_COMBINATIONS.each do |combination|
       if combination.all? {|index| self.board.cells[index] == "X"} || combination.all? {|index| self.board.cells[index] == "O"}
@@ -30,21 +30,29 @@ class Game
     end
     false
   end
-  
+
   def full?
     self.board.cells.all? {|token| token == "X" || token == "O"}
   end
-  
+
   def draw?
     full? && !won?
   end
-  
+
   def over?
     draw? || full? || won?
   end
-  
+
   def winner
-    
+    answer = nil
+    WIN_COMBINATIONS.each do |combination|
+      if combination.all? {|index| self.board.cells[index] == "X"}
+        answer = "X"
+      elsif combination.all? {|index| self.board.cells[index] == "O"}
+        answer = "O"
+      end
+    end
+    answer
   end
 
 end
