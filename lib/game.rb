@@ -17,6 +17,32 @@ class Game
     self.player_2 = player_2
     self.board = board
   end
+  
+  def current_player
+    current_turn = self.board.turn_count
+    
+    if current_turn.odd?
+      player_1.token
+    else
+      player_2.token
+    end
+  end
+  
+  def won?
+    
+  end
+  
+  def draw?
+    
+  end
+  
+  def over?
+    
+  end
+  
+  def winner
+    
+  end
 
   def current_player
     current_turn = self.board.turn_count.odd? ? player_2 : player_1
