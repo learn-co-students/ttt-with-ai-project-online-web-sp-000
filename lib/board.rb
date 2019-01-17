@@ -56,7 +56,7 @@ class Board
     i = move.to_i - 1
     self.cells[i] = player.token unless !valid_move?(move)
   end
-  
+
   def valid_move?(move)
     if move > "0" && move <= "9"
       !taken?(move)
@@ -64,10 +64,10 @@ class Board
       false
     end
   end
-    
+
     def update(move, player)
       i = move.to_i - 1
       self.cells[i] = player.token unless !valid_move?(move)
     end
-  
+
 end

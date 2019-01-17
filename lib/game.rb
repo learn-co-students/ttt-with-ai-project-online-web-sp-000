@@ -56,13 +56,23 @@ class Game
   end
 
   def turn
-    if self.board.valid_move?(current_player.move(self.board))
-      self.board.update(current_player.move(self.board))
+    current_move = current_player.move(self.board)
+    until self.board.valid_move?(current_move) do
+      puts "invalid"
+      current_move = current_player.move(self.board)
+    end
+    self.board.cells[current_move.to_i - 1] = current_player.token
+  end
+
+  def play
+    until over? do
+      turn
+    end
+
+    if draw?
+      puts "Cat's Game!"
     else
-      while !self.board.valid_move?(current_player.move(self.board)) do
-        puts "invalid"
-        current_player.move(self.board)
-      end
+      puts "Congratulations #{winner}!"
     end
   end
 
