@@ -21,6 +21,7 @@
  module Players
    class Computer < Player
      def move(board)
+       board.check_for_wins_or_blocks
        move = nil
 #       #first move
 #       # if "5" in board is not taken
@@ -39,18 +40,30 @@
 #       #check corners first then sides => take the one that is available first
      elsif board.turn_count == "3"
        move = ["1", "3", "7", "9"].detect {|position| !board.taken?(position)}
-#
-     elsif board.turn_count == "3"  #then check sides => take the one that is available first
-       move = ["2", "4", "6", "8"].detect {|position| !board.taken?(position)}
+#     if move.nil? do
+    #  elsif board.turn_count == "3"  #then check sides => take the one that is available first
+    #    move = ["2", "4", "6", "8"].detect {|position| !board.taken?(position)}
 #       move = foo if move.nil
 #
 #
 #   #check how you can check for WINNING_COMBINATIONS
-         Game::WIN_COMBINATIONS.detect {|combo|}
 
-      elsif WIN_COMBINATIONS.any? { |line| line.all? { |position| board.(position) == "X" || "O"} }
+    #After turn_count == "2" check win combos
+    #Check where I have 2 matching tokens
+    #compare
+    #move into that empty cell that matches a win combo
+    #board.check_for_wins_or_blocks or return nil
+
+
+
+
+
+
+      #    Game::WIN_COMBINATIONS.detect {|combo|}
+      #
+      # elsif WIN_COMBINATIONS.any? { |line| line.all? { |position| board.(position) == "X" || "O"} }
 #
-        move = [1, 3, 7, 9, 2, 4, 6, 8].detect {|i| !board.taken?(i)}.to_s if move == nil
+        # move = [1, 3, 7, 9, 2, 4, 6, 8].detect {|i| !board.taken?(i)}.to_s if move == nil
      end
      move
    end
