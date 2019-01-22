@@ -47,30 +47,25 @@
       cells[position.to_i - 1] = player.token
     end
 
-    def block(token)
-    #  return index of where to block use boolean
+#     def block(token)
+#     #  return index of where to block use boolean
+#     end
+# #difference is the current player
+#     def wins(token)
+#     # return an index of a win and make a move or return a nil
+#     end
+#
+#
+#     #After turn_count == "2" check win combos(make this a priority) or block method
+#     #Check where I have 2 matching tokens
+#     #compare
+#     #move into that empty cell that matches a win combo
+#     #board.check_for_wins_or_blocks or return nil
+#
+#     def check_for_wins_or_blocks(token)
+#
+#       #figure out whose turn it is happens in computer.rb
+#
+# # either returns “nil” if there’s no place to go that fits the description of a win or block
+# # OR returns the index of where you SHOULD go, because that DOES exist
     end
-#difference is the current player
-    def wins(token)
-    # return an index of a win and make a move or return a nil
-    end
-
-
-    #After turn_count == "2" check win combos(make this a priority) or block method
-    #Check where I have 2 matching tokens
-    #compare
-    #move into that empty cell that matches a win combo
-    #board.check_for_wins_or_blocks or return nil
-
-    def check_for_wins_or_blocks(token)
-      binding.pry
-      #figure out whose turn it is happens in computer.rb
-
-# either returns “nil” if there’s no place to go that fits the description of a win or block
-# OR returns the index of where you SHOULD go, because that DOES exist
-
-
-    end
-
-
-end

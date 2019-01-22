@@ -21,16 +21,16 @@
  module Players
    class Computer < Player
      def move(board)
-       board.check_for_wins_or_blocks
        move = nil
 #       #first move
 #       # if "5" in board is not taken
-       if board.cells[5].empty?
-         move = "5"
+     if board.cells[5].empty?
+       move = "5"
+
 #       #first move if cell 5 is occupied
 #       # if "5" is not taken then take cell 3
      elsif board.turn_count == "1"
-         move = "3"
+       move = "3"
 #       #if you went first and took cell 5, take a corner
      elsif board.turn_count == "2"
        move = ["1", "3", "7", "9"].detect {|position| !board.taken?(position)} #take cell }  #how to use .detect to make a token occupy a corner cell ruby
@@ -45,29 +45,22 @@
     #    move = ["2", "4", "6", "8"].detect {|position| !board.taken?(position)}
 #       move = foo if move.nil
 #
-#
-#   #check how you can check for WINNING_COMBINATIONS
-
-    #After turn_count == "2" check win combos
-    #Check where I have 2 matching tokens
-    #compare
-    #move into that empty cell that matches a win combo
-    #board.check_for_wins_or_blocks or return nil
-
-
-
-
-
-
-      #    Game::WIN_COMBINATIONS.detect {|combo|}
-      #
-      # elsif WIN_COMBINATIONS.any? { |line| line.all? { |position| board.(position) == "X" || "O"} }
-#
-        # move = [1, 3, 7, 9, 2, 4, 6, 8].detect {|i| !board.taken?(i)}.to_s if move == nil
+     Game::WIN_COMBINATIONS.detect do |combo|
+       if combo.select {|element| board.position((element + 1).to_s) == token}.length == 2 && combo.any? {|space| board.position((space + 1).to_s).empty?}
+         move = combo.detect {|int| board.position((int + 1).to_s).empty?}
+       end
      end
-     move
+     # iterate over win_combination if I cant make a winning move block the opponent
+     # if the opponent can win block them
+      move = [1, 3, 7, 9, 2, 4, 6, 8].detect {|i| !board.taken?(i)}.to_s if move == nil
+     end
+     move.to_s
    end
  end
  end
+
+
+
+
       #check to see if there are any winning combinations (iterate through WIN_COMBINATIONS)
      # if cell is taken that is next to your token, use block method(write out a block method)
