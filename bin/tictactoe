@@ -1,3 +1,29 @@
 #!/usr/bin/env ruby
-
+require 'pry'
 require_relative '../config/environment'
+
+Game.greet
+quit = '' 
+
+until quit == 'y'
+  quit = ''
+  game = Game.setup
+  if game
+    game.play
+  end
+  
+  until %w(y n).include?(quit) 
+    puts ''
+    puts "Quit?"
+    puts '-' * 45
+    puts '<y> Yes'
+    puts '<n> No'
+    puts '-' * 45
+    quit = gets.chomp
+    puts ''
+  end
+end
+
+puts ''
+puts "Goodbye!"
+puts ''
