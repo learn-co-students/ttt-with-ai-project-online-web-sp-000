@@ -22,5 +22,27 @@ class Board
     @cells[input]
   end
 
-  
+  def full?
+      !@cells.any? { |c| c == " " }
+  end
+
+  def turn_count
+    move_counter = 0
+    @cells.each do |space|
+     if space == "X" || space == "O"
+       move_counter += 1
+     end
+   end
+     move_counter
+  end
+
+  def taken?(input)
+    input = input.to_i - 1
+    if (@cells[input] == " " || @cells[input] == "" || @cells[input] == nil)
+      false
+    else
+      true
+    end
+  end
+
 end
