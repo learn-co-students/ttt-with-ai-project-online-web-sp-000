@@ -39,9 +39,18 @@ class Board
   def taken?(input)
     input = input.to_i - 1
     if (@cells[input] == " " || @cells[input] == "" || @cells[input] == nil)
-      false
+      return false
     else
+      return true
+    end
+  end
+
+  def valid_move?(input)
+    input_to_integer = input.to_i - 1
+    if !(taken?(input)) && input_to_integer.between?(0, 8)
       true
+    else
+      false
     end
   end
 
