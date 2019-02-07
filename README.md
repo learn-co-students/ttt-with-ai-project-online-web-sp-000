@@ -1,4 +1,4 @@
-# Tic-tac-toe with AI
+rspec ./spec/04_game_spec.rb# Tic-tac-toe with AI
 
 ## Objectives
 1. Build a command-line interface (CLI).

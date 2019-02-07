@@ -19,4 +19,12 @@ class Game
   [2,4,6] # Rigth to Left diagonal
   ]
 
+  def current_player
+    if @board.turn_count.even?
+      player_1
+    else
+      player_2
+    end
+  end
+
 end
