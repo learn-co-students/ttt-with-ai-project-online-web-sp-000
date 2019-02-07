@@ -1,3 +1,37 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+input = ""
+
+until input == "exit"
+  puts "Hi! Welcome to Tic Tac Toe!"
+  puts "What kind of game would you like to play? Please, choose player mode:
+  Press 0 for Computer vs Computer
+  Press 1 for You vs Computer
+  Press 2 for You vs "
+  puts ""
+  puts "To list all of the genres in your library, enter 'list genres'."
+  puts "To list all of the songs by a particular artist, enter 'list artist'."
+  puts "To list all of the songs of a particular genre, enter 'list genre'."
+  puts "To play a song, enter 'play song'."
+  puts "To quit, type 'exit'."
+  puts "What would you like to do?"
+
+  input = gets.chomp.downcase
+
+  case input
+  when "list artists"
+    list_artists
+  when "list songs"
+    list_songs
+  when "list genres"
+    list_genres
+  when "list artist"
+    list_songs_by_artist
+  when "list genre"
+    list_songs_by_genre
+  when "play song"
+    play_song
+  end
+end
