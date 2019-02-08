@@ -18,7 +18,8 @@ until input == "n"
     game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new).play
   when "1"
     puts "Would you like to go first? [y/ n]"
-    if gets.strip = "y"
+    input = gets.strip.downcase
+    if input = "y"
       game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new).play
     else
       game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new).play
