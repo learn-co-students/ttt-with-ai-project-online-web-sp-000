@@ -10,6 +10,8 @@ module Players
     def move(board)
       if board.turn_count == 0
         "5"
+      elsif board.cells[4] == " "
+        "5"
       elsif board.cells[0] == " "
         "1"
       elsif board.cells[2] == " "
