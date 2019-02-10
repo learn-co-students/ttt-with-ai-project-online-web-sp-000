@@ -44,7 +44,8 @@ def over?
 end
 
 def winner
-if won?
+binding.pry
+
   current_player.token
 end
 end
