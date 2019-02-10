@@ -7,6 +7,7 @@ module Players
     def move(board)
       if !@board.taken?(1)
         move(1)
+        binding.pry
       elsif !@board.taken?(2)
         move(2)
       elsif !@board.taken?(3)
