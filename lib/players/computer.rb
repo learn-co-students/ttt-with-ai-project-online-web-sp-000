@@ -5,6 +5,7 @@ module Players
 
 
     def move(board)
+
       rand(1..9).to_s
       # 1
       #
@@ -25,6 +26,7 @@ module Players
       # elsif !(board.taken?(9))
       #   move(9)
     #end
+
   end
   end
 end
