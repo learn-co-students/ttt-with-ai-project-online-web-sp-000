@@ -1,3 +1,19 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+ puts "welcome to ttt"
+ game = Game.new
+ end
+ player_number = ""
+ player_1 = ""
+ puts "What game do you want to play? 0,1 or 2 players?"
+ player_number = gets.chomp
+ puts "Who should go first and be X?" #p1 or p2
+ player_x = gets.chomp
+  if player_number == 0
+    player_1 == Players::Computer.new && player_1 == player_2
+  elsif player_number == 1
+    player_1 == Players::Human.new
+    player_2 == Players::Computer.new
