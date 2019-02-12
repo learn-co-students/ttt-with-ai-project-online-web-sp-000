@@ -61,6 +61,8 @@ class Game
       puts "Congratulations #{winner}!"
     end
 
+    @board.display
+
   end
 
 end
