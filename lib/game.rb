@@ -55,14 +55,14 @@ class Game
     while (!over?)
       turn
     end
+
+    @board.display
+    
     if draw?
       puts "Cat's Game!"
     else
       puts "Congratulations #{winner}!"
     end
-
-    @board.display
-
   end
 
 end
