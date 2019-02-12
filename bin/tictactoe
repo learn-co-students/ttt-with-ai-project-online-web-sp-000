@@ -4,35 +4,23 @@
 
 require_relative '../config/environment'
 
- def start
- puts "welcome to ttt"
+puts "Welcome to Tic Tac Toe!"
+game = Game.new
+until game.won?
+ game.play
+end
+
+puts "Would you like to play again?"
+play_again = gets.strip
+if play_again.downcase == "n" || play_again.downcase == "no"
+elsif play_again.downcase == "y" || play_again.downcase == "yes"
  game = Game.new
+ until game.won?
+   game.play
  end
-
- player_number = ""
- player_1 = ""
- puts "What game do you want to play? 0,1 or 2 players?"
- player_number = gets.chomp
- puts "Who should go first and be X?" #p1 or p2
- player_x = gets.chomp
-  if player_number == "0" && player_x == "1"
-    player_1 == Players::Computer.new("X")
-    player_2 == Players::Computer.new("O")
-  elsif player_number == "0" && player_x == "2"
-      player_1 == Players::Computer.new("0")
-      player_2 == Players::Computer.new("X")
-  elsif player_number == "1" && player_x == "1"
-        player_1 == Players::Human.new("X")
-        player_2 == Players::Computer.new("O")
-  elsif player_number == "1" && player_x == "2"
-          player_1 == Players::Human.new("0")
-          player_2 == Players::Computer.new("X")
-        elsif player_number == "2" && player_x == "1"
-              player_1 == Players::Human.new("X")
-              player_2 == Players::Human.new("O")
-        elsif player_number == "2" && player_x == "2"
-                player_1 == Players::Human.new("0")
-                player_2 == Players::Human.new("X")
-
+else
+puts "Thanks for playing!"
+exit
 end
-end
+
+ 
