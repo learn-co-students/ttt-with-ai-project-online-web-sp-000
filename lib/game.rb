@@ -1,6 +1,7 @@
 require 'pry'
 class Game
   attr_accessor :board, :player_1, :player_2
+  attr_reader :game_type, :who_is_first, :play_again_answer
 
   WIN_COMBINATIONS = [
     [0,1,2],
@@ -39,6 +40,7 @@ class Game
 
   def won?
     if winning_combo? != nil
+      true
       winning_combo?
     elsif !draw?
       false
@@ -59,10 +61,71 @@ class Game
 
   def turn
     current_player.move(board)
-    if board.valid_move?(current_player.input.to_i - 1)
-      update(current_player.input.to_i - 1, current_player)
+    if board.valid_move?(current_player.input)
+      board.update(current_player.input, current_player.token)
     else
       current_player.move(board)
+    end
+  end
+
+  def play
+    until over?
+      puts "#{current_player.token}'s turn!"
+      turn
+    end
+
+    if over?
+      if won?
+        board.display
+        puts "Congratulations #{winner}!"
+      elsif draw?
+        board.display
+        puts "Cat's Game!"
+      end
+    play_again?
+    end
+
+  end
+
+  def welcome
+    puts "Welcome to Tic-tac-toe!"
+    choose_game_type
+    if @game_type == "0"
+      Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+    elsif @game_type == "1"
+      if @who_is_first == "c"
+        Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+      elsif @who_is_first == "h"
+        Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+      end
+    elsif @game_type == "2"
+      Game.new(Players::Human.new("X"), Players::Human.new("O"))
+    end
+    play
+  end
+
+  def choose_game_type
+    puts "What mode do you want to play this game in:"
+    puts "   for Computer vs. Computer: type 0"
+    puts "   for Computer vs. Human: type 1"
+    puts "   for Human vs. Human: type 2"
+    @game_type = gets.chomp
+
+    if @game_type == "1"
+      puts "Who should go first?"
+      puts "   for computer, type c"
+      puts "   for human, type h"
+      @who_is_first = gets.chomp
+    end
+  end
+
+  def play_again?
+    puts "Would you like to play again?"
+    puts "   to play again, type yes"
+    puts "   to exit, type no"
+    @play_again_answer = gets
+    if @play_again_answer == "yes"
+      welcome
     end
   end
 
