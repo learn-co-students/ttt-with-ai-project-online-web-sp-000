@@ -4,6 +4,7 @@ module Players
 
     def move(board)
       puts "Please enter a number 1-9:"
+      board.display
       @input = gets
     end
 
