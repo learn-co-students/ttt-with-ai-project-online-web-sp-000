@@ -63,11 +63,26 @@ class Game
   end
   
   def turn 
-    input = gets.strip
-    if @board.valid_move?(input)
-      # @board.update(input, self.current_player)
+    user_input = gets.strip
+    the_move = self.current_player.move(user_input)
+    if @board.valid_move?(the_move)
+       @board.update(the_move, self.current_player)
     else
-      puts "Invalid Move! Please enter another cell"
+      input_2 = gets.strip
+      self.current_player.move(input_2)
+    end
+  end
+  
+  def play
+    until self.over?
+    first_input = gets.strip
+    self.current_player.move(first_input)
+    self.over?
+    self.turn
+    # second_input = gets.strip
+    # self.current_player.move(second_input)
+    binding.pry
+    self.over?
     end
   end
   
