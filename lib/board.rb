@@ -4,7 +4,6 @@ class Board
   attr_accessor :cells
   
   def initialize
-    # @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
     reset!
   end
   
@@ -43,8 +42,6 @@ class Board
   def valid_move?(user_input)
     if !taken?(user_input) && (user_input.to_i > 0 && user_input.to_i < 10)
       return true
-    else
-      return false
     end
   end
   
