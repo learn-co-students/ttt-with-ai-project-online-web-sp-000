@@ -23,7 +23,6 @@ class Game
   def won?
     if self.winner == "X" || self.winner == "O"
       return @the_win_ary
-     
     end
   end
   
@@ -35,6 +34,7 @@ class Game
   
   def over?
     if self.draw? || self.won?
+      # binding.pry
       return true 
     end
   end
@@ -52,7 +52,7 @@ class Game
         @the_win_ary << win_comb_2
         @the_win_ary << win_comb_3
         return "X"
-      elsif@board.cells[win_comb_1] == "O" && @board.cells[win_comb_2] == "O" && @board.cells[win_comb_3] == "O"
+      elsif @board.cells[win_comb_1] == "O" && @board.cells[win_comb_2] == "O" && @board.cells[win_comb_3] == "O"
         @the_win_ary << win_comb_1
         @the_win_ary << win_comb_2
         @the_win_ary << win_comb_3
@@ -74,16 +74,15 @@ class Game
   end
   
   def play
-    until self.over?
-    first_input = gets.strip
-    self.current_player.move(first_input)
-    self.over?
-    self.turn
-    # second_input = gets.strip
-    # self.current_player.move(second_input)
-    binding.pry
-    self.over?
-    end
+     until self.over?
+     self.turn
+     end
+       if self.won?
+         puts "Congratulations #{self.winner}!"
+         
+       elsif self.draw?
+         puts "Cat's Game!"
+       end
   end
   
 end
