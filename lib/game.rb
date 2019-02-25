@@ -63,10 +63,11 @@ class Game
   end
   
   def turn 
-    user_input = gets.strip
-    the_move = self.current_player.move(user_input)
-    if @board.valid_move?(the_move)
-       @board.update(the_move, self.current_player)
+    puts "#{self.current_player.token} please enter 1 - 9"
+    input = self.current_player.move(board)
+    if @board.valid_move?(input)
+       @board.update(input, self.current_player)
+       @board.display
     else
       input_2 = gets.strip
       self.current_player.move(input_2)
@@ -74,15 +75,48 @@ class Game
   end
   
   def play
-     until self.over?
-     self.turn
-     end
-       if self.won?
-         puts "Congratulations #{self.winner}!"
-         
-       elsif self.draw?
-         puts "Cat's Game!"
-       end
+    until self.over?
+    self.turn
+    end
+    if self.won?
+      puts "Congratulations #{self.winner}!"
+    elsif self.draw?
+      puts "Cat's Game!"
+    end
   end
   
+  def start 
+    puts "Welcome to Tic Tac Toe"
+    puts "Please select the number of players...0, 1, or 2"
+    input = gets.strip
+    if input == "2"
+    puts "2-Player Game!"
+    board.display
+    puts "Player 1 is 'X',  Player 2 is 'O'"
+    play
+    elsif input == "1"
+    puts "1-Player Game!"
+    one_player
+    board.display
+    puts "Player 1 is 'X',  Computer is 'O'"
+    play
+    elsif input == "0"
+    puts "Enjoy this game by the computer"
+    zero_player
+    board.display
+    play
+    end
+  end
+  
+  def one_player
+    @player_2 = Players::Computer.new("O")
+  end
+  
+  def zero_player
+    @player_1 = Players::Computer.new("X")
+    @player_2 = Players::Computer.new("O")
+  end
+  
+ 
+ 
 end
