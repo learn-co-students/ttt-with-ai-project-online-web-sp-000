@@ -34,7 +34,6 @@ class Game
   
   def over?
     if self.draw? || self.won?
-      # binding.pry
       return true 
     end
   end
@@ -80,18 +79,26 @@ class Game
     end
     if self.won?
       puts "Congratulations #{self.winner}!"
-      puts "Would you like to play again? (Y/N)"
-      input = gets.strip
-      if input == "Y" || input == "y"
-        self.reset
-        self.start
-      elsif input == "N" || input == "n"
-        puts "Ok, thanks for playing!"
-      else
-        puts "Invalid Input Please Try Again (Y/N)"
-      end
+    #   puts "Would you like to play again? (Y/N)"
+    #   input = gets.strip
+    #   if input == "Y" || input == "y"
+    #     self.reset
+    #     self.start
+    #   elsif input == "N" || input == "n"
+    #     puts "Ok, thanks for playing!"
+    #   else
+    #     puts "Invalid Input Please Try Again (Y/N)"
+    #   end
     elsif self.draw?
       puts "Cat's Game!"
+    #   puts "Would you like to play again? (Y/N)"
+    #   input_2 = gets.strip
+    #   if input_2 == "Y" || input == "y"
+    #     self.reset
+    #     self.start
+    #   elsif input_2 == "N" || input == "n"
+    #     puts "Ok, thanks for playing!"
+    #   end
     end
   end
   
@@ -140,6 +147,14 @@ class Game
     @player_2 = Players::Computer.new("O")
   end
   
- 
+  # def play_again
+  #   puts "Would you like to play again? (Y/N)"
+  #   input = gets.strip
+  #   if input == "Y" || input == "y"
+  #     self.reset
+  #     self.start
+  #   elsif input == "N" || input == "n"
+  #     puts "Ok, thanks for playing!"
+  # end
  
 end
