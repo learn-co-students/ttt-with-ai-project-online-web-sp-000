@@ -69,10 +69,9 @@ class Game
       board.update(input, self.current_player)
       board.display
     else
-      puts"Invalid Move. Try Again..."
+      puts "Invalid Move. Please try again."
       self.turn
     end
-   
   end
   
   def play
@@ -81,6 +80,16 @@ class Game
     end
     if self.won?
       puts "Congratulations #{self.winner}!"
+      puts "Would you like to play again? (Y/N)"
+      input = gets.strip
+      if input == "Y" || input == "y"
+        self.reset
+        self.start
+      elsif input == "N" || input == "n"
+        puts "Ok, thanks for playing!"
+      else
+        puts "Invalid Input Please Try Again (Y/N)"
+      end
     elsif self.draw?
       puts "Cat's Game!"
     end
@@ -99,7 +108,6 @@ class Game
     puts "1-Player Game!"
     one_player
     board.display
-    puts "Player 1 is 'X',  Computer is 'O'"
     play
     elsif input == "0"
     puts "Enjoy this game by the computer"
@@ -109,8 +117,22 @@ class Game
     end
   end
   
+  def reset
+    @player_1 = Players::Human.new("X")
+    @player_2 = Players::Human.new("O")
+    @board.reset!
+  end
+  
   def one_player
+    puts "Who would you like to be X or O"
+    input = gets.strip
+    if input == "X" || input == "x"
     @player_2 = Players::Computer.new("O")
+    puts "Player 1 is X Computer is O"
+    elsif input == "O" || input == "o"
+    @player_1 = Players::Computer.new("X")
+    puts "Computer is X Player 1 is O"
+    end
   end
   
   def zero_player
