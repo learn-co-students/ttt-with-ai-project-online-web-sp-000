@@ -2,16 +2,8 @@
 
 require_relative '../config/environment'
 
-def play_again
-  #   puts "Would you like to play again? (Y/N)"
-  #   input = gets.strip
-  #   if input == "Y" || input == "y"
-  #     self.reset
-  #     self.start
-  #   elsif input == "N" || input == "n"
-  #     puts "Ok, thanks for playing!"
-  # end
-
-Game.new.start
-play_again
+ 
+game = Game.new
+game.start
+game.play_again
 
