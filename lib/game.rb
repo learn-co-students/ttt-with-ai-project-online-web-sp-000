@@ -65,13 +65,14 @@ class Game
   def turn 
     puts "#{self.current_player.token} please enter 1 - 9"
     input = self.current_player.move(board)
-    if @board.valid_move?(input)
-       @board.update(input, self.current_player)
-       @board.display
+    if  board.valid_move?(input)
+      board.update(input, self.current_player)
+      board.display
     else
-      input_2 = gets.strip
-      self.current_player.move(input_2)
+      puts"Invalid Move. Try Again..."
+      self.turn
     end
+   
   end
   
   def play
