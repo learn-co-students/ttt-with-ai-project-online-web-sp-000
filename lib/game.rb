@@ -73,16 +73,25 @@ end
 end
 
 def turn
-puts "Please enter 1-9:"
-input = gets.strip
-input = input.to_i
+input = current_player.input
 player = current_player
- if self.board.valid_move?(input) == true
-   update(input, player)
-   display_board
-  else
-    turn
-  end
+self.board.update(input.to_i-1, player)
+self.board.display
+end
+end
+
+
+def play
+current_player.input
+if self.board.valid_move?(input.to_i-1) == true
+  turn
+if draw?
+  puts "Cat's Game!"
+elsif over?
+  puts "Congratulations #{winner}!"
+else
+  play
+end
 end
 
 end

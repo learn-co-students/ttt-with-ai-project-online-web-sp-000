@@ -18,8 +18,8 @@ def display
   puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
 end
 
-def position(user_input)
-  index = (user_input.to_i - 1)
+def position(input)
+  index = (input.to_i - 1)
   @cells[index]
 end
 
@@ -56,7 +56,6 @@ def update(position, player)
 index = (position.to_i - 1)
 @cells[index] = player.token
 end
-
 
 
 end
