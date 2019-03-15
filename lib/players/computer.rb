@@ -32,8 +32,7 @@ class Computer < Player
         end
     else
       combo_index = close(board).sample[1]
-
-  #HERE IS THE PROBLEM. The computer sometimes panics when I take its spot or I win.
+#HERE IS THE PROBLEM. The computer sometimes panics when I take its spot or I win.
         CLOSE_COMBINATIONS[combo_index].each_with_index do |value, index|
             if value != "X" && value != "O"
               open_spot = index
@@ -42,7 +41,9 @@ class Computer < Player
         gets_position = CLOSE_COMBINATIONS[combo_index][open_spot]
     end
     gets_position += 1
-  end
+    puts gets_position
+    gets_position
+end
 
   def close(board)
     result = []
