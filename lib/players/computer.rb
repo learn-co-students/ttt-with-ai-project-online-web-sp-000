@@ -12,7 +12,7 @@ class Computer < Player
     [2,4,6]]
 
   def move(board)
-    puts "Please input a #1-9."
+    puts "Player #{self.token} - Please input a #1-9."
     input = psuedo_gets(board).to_s
     input
   end
@@ -22,7 +22,7 @@ class Computer < Player
     if close(board) == []
       gets_position = [0,2,4,6,8].sample
     else
-      combo_index = close(board)[0][1]
+      combo_index = close(board)[0][1].to_i
       CLOSE_COMBINATIONS[combo_index].each_with_index do |value, index|
           (value == "X" || value == "O") ? gets_position = index : ""
       end

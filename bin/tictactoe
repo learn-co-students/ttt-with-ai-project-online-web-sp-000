@@ -1,7 +1,25 @@
 #!/usr/bin/env ruby
-
+require "/home/mackenzie_km/ttt-with-ai-project-online-web-sp-000/config/environment.rb"
 require_all 'lib'
 
 puts "Welcome to Tic Tac Toe!"
-game = Game.new
-game.play
+
+def mode
+  puts "What mode would you like to play?"
+  puts "For 0 player, type '0'"
+  puts "For 1 player, type '1'"
+  puts "For 2 player, type '2'"
+  mode = gets.strip
+  case mode
+    when "0"
+      game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+    when "1"
+      game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+    when "2"
+      game = Game.new(Players::Human.new("X"), Players::Human.new("O"))
+  end
+  game
+end
+
+game = mode
+game.play 
