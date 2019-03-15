@@ -41,35 +41,35 @@ result
 end
 
 def draw?
-  if won?
-    return false
-  elsif !self.board.full?
-    false
-  else
-    puts "Cat's Game!"
-    true
-end
+    if won?
+      false
+    elsif !self.board.full?
+      false
+    else
+      puts "Cat's Game!"
+      true
+  end
 end
 
 def over?
- if draw?
-   return true
-elsif won?
-  return true
-else
-  false
-end
+   if draw?
+     return true
+  elsif won?
+    return true
+  else
+    false
+  end
 end
 
 def winner
-sub_array = won?
-  if won? == nil
-    return nil
-  elsif self.board.cells[sub_array[1]] == "X"
-   return "X"
- elsif self.board.cells[sub_array[1]] == "O"
-   return "O"
-end
+  sub_array = won?
+    if won? == nil
+    nil
+    elsif self.board.cells[sub_array[1]] == "X"
+    "X"
+   elsif self.board.cells[sub_array[1]] == "O"
+    "O"
+  end
 end
 
 def turn
@@ -79,13 +79,13 @@ def turn
     self.board.update(input, player)
     self.board.display
   else
-    turn 
+    turn
   end
 end
 
 
   def play
-    turn
+    turn until over?
       if draw?
         puts "Cat's Game!"
       elsif over?
