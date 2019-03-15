@@ -1,6 +1,8 @@
 module Players
 class Computer < Player
 
+  require "pry"
+
   CLOSE_COMBINATIONS =
     [[0,1,2],
     [3,4,5],
@@ -13,19 +15,31 @@ class Computer < Player
 
   def move(board)
     puts "Player #{self.token} - Please input a #1-9."
-    input = psuedo_gets(board).to_s
+    input = "#{psuedo_gets(board)}"
     input
   end
 
   def psuedo_gets(board)
-    gets_position = ""
+    close(board)
+    gets_position = 0
+    open_spot = 0
     if close(board) == []
-      gets_position = [0,2,4,6,8].sample
+      random = rand(0..8)
+        if board.valid_move?(random)
+          gets_position = random
+        else
+          psuedo_gets(board)
+        end
     else
-      combo_index = close(board)[0][1].to_i
-      CLOSE_COMBINATIONS[combo_index].each_with_index do |value, index|
-          (value == "X" || value == "O") ? gets_position = index : ""
-      end
+      combo_index = close(board).sample[1]
+
+  #HERE IS THE PROBLEM. The computer sometimes panics when I take its spot or I win.
+        CLOSE_COMBINATIONS[combo_index].each_with_index do |value, index|
+            if value != "X" && value != "O"
+              open_spot = index
+            end
+        end
+        gets_position = CLOSE_COMBINATIONS[combo_index][open_spot]
     end
     gets_position += 1
   end
