@@ -73,25 +73,24 @@ end
 end
 
 def turn
-input = current_player.input
-player = current_player
-self.board.update(input.to_i-1, player)
-self.board.display
-end
+  input = self.current_player.move(self.board).to_i
+  player = current_player
+  if self.board.valid_move?(input)
+    self.board.update(input, player)
+    self.board.display
+  else
+    turn 
+  end
 end
 
 
-def play
-current_player.input
-if self.board.valid_move?(input.to_i-1) == true
-  turn
-if draw?
-  puts "Cat's Game!"
-elsif over?
-  puts "Congratulations #{winner}!"
-else
-  play
-end
-end
+  def play
+    turn
+      if draw?
+        puts "Cat's Game!"
+      elsif over?
+        puts "Congratulations #{winner}!"
+      end
+  end
 
 end

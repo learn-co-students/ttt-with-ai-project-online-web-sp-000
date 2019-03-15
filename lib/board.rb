@@ -1,6 +1,7 @@
 require "pry"
 class Board
   attr_accessor :cells
+  attr_reader :input
 
 def initialize
   @cells = Array.new(9, " ")
@@ -8,6 +9,11 @@ end
 
 def reset!
   @cells = Array.new(9, " ")
+end
+
+def input=(input)
+  @input = gets.strip
+  @input.to_i
 end
 
 def display
