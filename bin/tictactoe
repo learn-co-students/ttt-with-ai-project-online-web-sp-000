@@ -1,3 +1,40 @@
 #!/usr/bin/env ruby
+require 'pry'
 
 require_relative '../config/environment'
+
+puts "Hello and welcome to TicTacToe"
+puts "How many players would like to participate? (0-2)"
+
+num_players = ""
+game = ""
+while num_players = gets.chomp
+  case num_players
+  when "0"
+    game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+    break
+  when "1"
+    puts "Do you want to go first? (y/n)"
+    first = ""
+    while first = gets.chomp
+      case first
+      when "y"
+        game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+        break
+      when "n"
+        game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+        break
+      else
+        puts "Please enter y or n"
+      end
+    end
+    break
+  when "2"
+    game = Game.new(Players::Human.new("X"), Players::Human.new("O"))
+    break
+  else
+    puts "Please enter a number between 0 and 2."
+  end
+end
+
+game.play
