@@ -1,3 +1,39 @@
 #!/usr/bin/env ruby
+require "/home/mackenzie_km/ttt-with-ai-project-online-web-sp-000/config/environment.rb"
+require_all 'lib'
 
-require_relative '../config/environment'
+puts "Welcome to Tic Tac Toe!"
+
+def load_mode
+  puts "What mode would you like to play?"
+  puts "For 0 player, type '0'"
+  puts "For 1 player, type '1'"
+  puts "For 2 player, type '2'"
+  mode = gets.strip
+  case mode
+    when "0"
+      game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+    when "1"
+      game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+    when "2"
+      game = Game.new(Players::Human.new("X"), Players::Human.new("O"))
+    else
+      puts "Error - please choose a mode."
+      game = load_mode
+  end
+  game
+end
+
+def play
+  puts "Do you want to play? Y/N"
+  answer = gets.strip.upcase
+  while answer != "N"
+    game = load_mode
+    game.play
+    puts "Do you want to play? Y/N"
+    answer = gets.strip.upcase
+  end
+  puts "Thanks for playing - goodbye."
+end
+
+play

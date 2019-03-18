@@ -1,0 +1,30 @@
+
+[1mFrom:[0m /home/mackenzie_km/ttt-with-ai-project-online-web-sp-000/lib/players/computer.rb @ line 23 Players::Computer#psuedo_gets:
+
+    [1;34m22[0m: [32mdef[0m [1;34mpsuedo_gets[0m(board)
+ => [1;34m23[0m:   binding.pry
+    [1;34m24[0m:   gets_position = [1;34m0[0m
+    [1;34m25[0m:   open_spot = [1;34m0[0m
+    [1;34m26[0m:   [32mif[0m close(board) == []
+    [1;34m27[0m:     random = rand([1;34m0[0m..[1;34m8[0m)
+    [1;34m28[0m:       [32mif[0m board.valid_move?(random)
+    [1;34m29[0m:         gets_position = random
+    [1;34m30[0m:       [32melse[0m
+    [1;34m31[0m:         psuedo_gets(board)
+    [1;34m32[0m:       [32mend[0m
+    [1;34m33[0m:   [32melse[0m
+    [1;34m34[0m:     combo_index = close(board)[[1;34m0[0m][[1;34m0[0m]
+    [1;34m35[0m:     [1;34m#need to get just an array - check[0m
+    [1;34m36[0m:     [1;34m#then iterate through the array to see where the blank space is. save as determined spot - check[0m
+    [1;34m37[0m:     [1;34m#use combo_index[0][1] to return the index of where it is in close combinations[0m
+    [1;34m38[0m:     [1;34m#COMBINATIONS[index][spot]... now I know where to go! But how to tell machine?[0m
+    [1;34m39[0m:     [1;34;4mCLOSE_COMBINATIONS[0m[combo_index].each_with_index [32mdo[0m |value, index|
+    [1;34m40[0m:         [32mif[0m value != [31m[1;31m"[0m[31mX[1;31m"[0m[31m[0m && value != [31m[1;31m"[0m[31mO[1;31m"[0m[31m[0m
+    [1;34m41[0m:           open_spot = index
+    [1;34m42[0m:         [32mend[0m
+    [1;34m43[0m:     [32mend[0m
+    [1;34m44[0m:     gets_position = [1;34;4mCLOSE_COMBINATIONS[0m[combo_index][open_spot]
+    [1;34m45[0m:   [32mend[0m
+    [1;34m46[0m:   gets_position += [1;34m1[0m
+    [1;34m47[0m: [32mend[0m
+
