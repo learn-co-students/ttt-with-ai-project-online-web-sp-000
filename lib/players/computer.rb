@@ -45,7 +45,7 @@ class Computer < Player
     gets_position
 end
 
-  def close(board)
+def close(board)
     result = []
     CLOSE_COMBINATIONS.each_with_index do |sub_array, index|
       index_1 = sub_array[0]
