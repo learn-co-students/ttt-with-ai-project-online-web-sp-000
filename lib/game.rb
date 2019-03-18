@@ -46,7 +46,6 @@ def draw?
     elsif !self.board.full?
       false
     else
-      puts "Cat's Game!"
       true
   end
 end
