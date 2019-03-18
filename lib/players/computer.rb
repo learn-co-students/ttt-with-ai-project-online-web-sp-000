@@ -25,16 +25,15 @@ class Computer < Player
     open_spot = 0
     if close(board) == []
       random = rand(0..8)
-        if board.valid_move?(random)
+        if board.valid_move?(random+1)
           gets_position = random
         else
           psuedo_gets(board)
         end
     else
       combo_index = close(board).sample[1]
-#HERE IS THE PROBLEM. The computer sometimes panics when I take its spot or I win.
         CLOSE_COMBINATIONS[combo_index].each_with_index do |value, index|
-            if value != "X" && value != "O"
+            if !board.taken?(index+1) && board.valid_move?(index+1)
               open_spot = index
             end
         end
@@ -46,22 +45,26 @@ class Computer < Player
 end
 
 def close(board)
+#binding.pry
     result = []
     CLOSE_COMBINATIONS.each_with_index do |sub_array, index|
+#these return the numbers/indexes associated with a winning combination
       index_1 = sub_array[0]
       index_2 = sub_array[1]
       index_3 = sub_array[2]
 
+#these tell you the values associated with a winning combination
       board_index_1 = board.cells[index_1]
       board_index_2 = board.cells[index_2]
       board_index_3 = board.cells[index_3]
 
-        if (board_index_1 == "X" && board_index_2 == "X") || (board_index_2 == "X" && board_index_3 == "X") || (board_index_1 == "X" && board_index_3 == "X") ||
-          (board_index_1 == "O" && board_index_2 == "O") || (board_index_2 == "O" && board_index_3 == "O") || (board_index_1 == "O" && board_index_3 == "O")
+      if (board_index_1 == board_index_2 && !board.taken?(index_3+1) && board.valid_move?(index_3+1)) ||
+        (board_index_3 == board_index_2 && !board.taken?(index_1+1) && board.valid_move?(index_1+1)) ||
+        (board_index_3 == board_index_1 && !board.taken?(index_2+1) && board.valid_move?(index_2+1))
             result << [sub_array, index]
-        end
+      end
     end
-    result
+      result
   end
 
 end
