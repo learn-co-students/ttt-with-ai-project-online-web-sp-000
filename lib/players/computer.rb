@@ -11,6 +11,7 @@ class Players
       [2, 4, 6]]
 
     PREFFERRED_CELLS = [1, 3, 7, 9, 5, 2, 4, 6, 8]
+    CORNERS = [1, 3, 7, 9]
 
     def move(board)
       @board = board
@@ -29,7 +30,15 @@ class Players
         board.update(target.to_s, self)
         moved = true
       end
-      # Preferentially select middle, then corners, then everything else
+      # If oponent went first and chose a corner, choose the middle
+      if board.turn_count == 1 && !moved
+        # Check to see if a corner is selected:
+        if CORNERS.find { |cell| board.cells[cell - 1] != " " }
+          board.update("5", self)
+          moved = true
+        end
+      end
+      # Preferentially select corners, then middle, then everything else
       unless moved
         target = PREFFERRED_CELLS.find { |cell| board.valid_move?(cell.to_s) }
         board.update(target.to_s, self)
