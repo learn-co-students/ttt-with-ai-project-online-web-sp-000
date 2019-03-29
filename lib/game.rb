@@ -59,7 +59,7 @@ class Game
       @board.display
       turn
     end
-
+    # binding.pry
     @board.valid_move?(move.to_i) ? @board.cells[move.to_i - 1] = current_player.token : turn
     system 'clear'
     @board.display
