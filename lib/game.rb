@@ -1,5 +1,5 @@
 class Game
-  attr_accessor :board, :player_1, :player_2, :token
+  attr_accessor :board, :player_1, :player_2
 
   WIN_COMBINATIONS = [
     [0,1,2],
@@ -11,8 +11,6 @@ class Game
     [0,4,8],
     [6,4,2]
   ]
-
-
 
   def initialize(p_1 = Players::Human.new("X"), p_2 = Players::Human.new("O"), board = Board.new)
     self.player_1 = p_1
@@ -30,15 +28,12 @@ class Game
   end
 
   def won?
-    win_combo =
-      WIN_COMBINATIONS.find_all do |combo|
+      WIN_COMBINATIONS.find do |combo|
         # binding.pry
-        @board.taken?(combo[0]) &&
+        @board.taken?(combo[0] + 1) && # +1  to undo index correction in board.position()
         @board.cells[combo[0]] == @board.cells[combo[1]] &&
         @board.cells[combo[1]] == @board.cells[combo[2]]
-      end.flatten
-
-    win_combo.empty? ? false : win_combo
+      end
   end
 
   def draw?
@@ -54,6 +49,31 @@ class Game
   end
 
   def turn
-    current_player.move(@board)
+    # binding.pry
+    puts "Your move #{current_player.token}. Choose wisely!"
+    puts "(Type \"reset\" at any time to violently turn the board over like a child)"
+    move = current_player.move(@board)
+    if move == "reset"
+      @board.reset!
+      system 'clear'
+      @board.display
+      turn
+    end
+
+    @board.valid_move?(move.to_i) ? @board.cells[move.to_i - 1] = current_player.token : turn
+    system 'clear'
+    @board.display
+  end
+
+  def play
+    until over? || draw?
+      turn
+    end
+
+    if won?
+      puts "Congratulations #{winner}!"
+    else
+      puts "Cat's Game!"
+    end
   end
 end

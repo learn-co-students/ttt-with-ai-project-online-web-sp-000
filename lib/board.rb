@@ -15,6 +15,15 @@ class Board
     puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
     puts "-----------"
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
+    puts
+    puts
+    puts "   GUIDE"
+    puts " 1 | 2 | 3 "
+    puts "-----------"
+    puts " 4 | 5 | 6 "
+    puts "-----------"
+    puts " 7 | 8 | 9 "
+    puts
   end
 
   def position(index)
@@ -41,5 +50,8 @@ class Board
     @cells[index.to_i - 1] = player.token
   end
 
+  def reset!
+    @cells = Array.new(9, " ")
+  end
 
 end
