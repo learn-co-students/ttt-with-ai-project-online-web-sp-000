@@ -41,7 +41,7 @@ class Board
   end
 
   def valid_move?(index)
-    index = index.to_i - 1
+    index = index.to_i - 1 if index.is_a? String
     index.between?(0, 8) && !taken?(index)
   end
 end

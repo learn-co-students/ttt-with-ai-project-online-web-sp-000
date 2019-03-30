@@ -1,4 +1,6 @@
+require 'pry'
 class Game
+
   attr_accessor :board, :player_1, :player_2
 
   def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
@@ -61,15 +63,9 @@ class Game
   end
 
   def turn
-    puts 'Please enter 1-9:'
-    user_input = gets.strip
-    index = @board.input_to_index(user_input)
-    if @board.valid_move?(index)
-      move(index, current_player.token)
-      @board.display_board
-    else
-      turn
-    end
+    move = current_player.move(@board)
+    @board.update(move, current_player)
+    @board.display
   end
 
   def current_player
