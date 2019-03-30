@@ -82,7 +82,11 @@ class Game
   def turn
     move = current_player.move(@board)
     @board.update(move, current_player)
+<<<<<<< HEAD
     @board.display
+=======
+    @board.display_board
+>>>>>>> 36609985f4c8c1872b6c52f737c6607dfd35613c
   end
 
   def current_player
