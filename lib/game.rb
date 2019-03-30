@@ -29,17 +29,34 @@ class Game
     won? || draw?
   end
 
-  def start
+  def self.start
     puts "Welcome to Tic-Tac-Toe!"
+
     puts "How many Human Players will be playing? (0,1,2)"
+    human_players = nil
     while (0..2).none?(human_players)
       human_players = gets.chomp.to_i
     end
-    puts "Who should go first? (1, 2)"
-    while (1..2).none?(first)
-      first = gets.chomp.to_i
-    end
 
+
+
+    if human_players == 0
+      game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+    elsif human_players == 1
+      puts "Who should go first? (Computer, Human)"
+      first = nil
+      while ["human", "computer"].none?(first)
+        first = gets.chomp.downcase
+      end
+      if first == "human"
+        game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+      elsif first == "computer"
+        game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+      end
+    elsif human_players == 2
+      game = Game.new(Players::Human.new("X"), Players::Human.new("O"))
+    end
+    game.play
   end
 
   WIN_COMBINATIONS = [
