@@ -43,7 +43,6 @@ class Board
   end
 
   def valid_move?(index)
-    # binding.pry
     !taken?(index) && (1..9).include?(index.to_i)
   end
 

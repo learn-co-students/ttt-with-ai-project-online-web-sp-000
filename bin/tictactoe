@@ -10,9 +10,13 @@ puts "What type of game would you like to play?"
 puts "For Slaughterbots versus Decepticorns, enter 0"
 puts "One player, enter 1"
 puts "Two players, enter 2"
-game_type = gets.strip.to_i
+game_type = gets.strip
 
-if game_type ==
+if game_type != "war games"
+  game_type = game_type.to_i
+end
+
+if game_type == 0 || game_type == "war games"
   game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
 elsif game_type == 1
   puts "And who should go first? Enter 1, for you or 2, for the computer"
@@ -30,4 +34,10 @@ end
 
 game.board.display
 
-game.play
+if game_type == "war games"
+  100.times { game.play }
+else
+  game.play
+end
+
+puts Game.win_count

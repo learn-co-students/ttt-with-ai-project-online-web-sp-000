@@ -1,6 +1,8 @@
 class Game
   attr_accessor :board, :player_1, :player_2
 
+  @@win_count = { :win => 0, :lose => 0 }
+
   WIN_COMBINATIONS = [
     [0,1,2],
     [3,4,5],
@@ -16,7 +18,6 @@ class Game
     self.player_1 = p_1
     self.player_2 = p_2
     self.board = board
-    # binding.pry
   end
 
   def board
@@ -29,7 +30,6 @@ class Game
 
   def won?
       WIN_COMBINATIONS.find do |combo|
-        # binding.pry
         @board.taken?(combo[0] + 1) && # +1  to undo index correction in board.position()
         @board.cells[combo[0]] == @board.cells[combo[1]] &&
         @board.cells[combo[1]] == @board.cells[combo[2]]
@@ -49,7 +49,6 @@ class Game
   end
 
   def turn
-    # binding.pry
     puts "Your move #{current_player.token}. Choose wisely!"
     puts "(Type \"reset\" at any time to violently turn the board over like a child)"
     move = current_player.move(@board)
@@ -59,7 +58,6 @@ class Game
       @board.display
       turn
     end
-    # binding.pry
     @board.valid_move?(move.to_i) ? @board.cells[move.to_i - 1] = current_player.token : turn
     system 'clear'
     @board.display
@@ -72,8 +70,14 @@ class Game
 
     if won?
       puts "Congratulations #{winner}!"
+      @@win_count[:win] += 1
     else
       puts "Cat's Game!"
+      @@win_count[:lose] += 1
     end
+  end
+
+  def self.win_count
+    @@win_count
   end
 end
