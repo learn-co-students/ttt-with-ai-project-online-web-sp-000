@@ -9,33 +9,20 @@ def start
   var = gets.strip
   case var
     when "0"
-      Game.new(Player::Computer.new("X"), Player::Computer.new("O")).play
-      puts "Play again?"
-      restart
+      Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
+      puts "Play again!  (ctrl + c) to exit"
+      start
     when "1"
-      Game.new(Player::Human.new("X"), Player::Computer.new("O")).play
-      puts "Play again?"
-      restart
+      Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
+      puts "Play again!  (ctrl + c) to exit"
+      start
     when "2"
-      Game.new(Player::Human.new("X"), Player::Human.new("O")).play
-      puts "Play again?"
-      restart
+      Game.new(Players::Human.new("X"), Players::Human.new("O")).play
+      puts "Play again!  (ctrl + c) to exit"
+      start
     else
       puts "Invalid entry."
       start
   end
-
-  def restart
-    puts "Please enter yes or no"
-    var = gets.strip
-  case var
-    when "yes"
-      start
-    when "no"
-      puts "Thanks for playing!"
-    else
-      restart
-  end
-end
 end
 start
