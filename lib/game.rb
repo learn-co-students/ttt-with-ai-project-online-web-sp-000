@@ -16,19 +16,55 @@ class Game
   def won?
     win=false
     WIN_COMBINATIONS.each do |win_comb|
-      if(@board[win_comb[0]]=="X" && @board[win_comb[1]]=="X" && @board[win_comb[2]]=="X")
+      if(@board.cells[win_comb[0]]=="X" && @board.cells[win_comb[1]]=="X" && @board.cells[win_comb[2]]=="X")
         win=win_comb
-      elsif(@board[win_comb[0]]=="O" && @board[win_comb[1]]=="O" && @board[win_comb[2]]=="O")
+      elsif(@board.cells[win_comb[0]]=="O" && @board.cells[win_comb[1]]=="O" && @board.cells[win_comb[2]]=="O")
         win=win_comb
      end
     end
     win
   end
   
+  def draw?
+    !won? && board.full?
+  end
+  
+  def over?
+    won? || draw? ? true : false
+  end
+  
+  def winner
+    if won?
+      return @board.cells[won?[0]]
+    end
+  end
+  
+  def turn
+    player=current_player
+    puts"Player #{player.token}, please entre a number between 1 and 9"
+    input=player.move(board)
+    if(!board.valid_move?(input))
+      puts "That input is invalid"
+      turn
+    else
+      board.update(input,player)
+       board.display
+    end
+  end
+  
+  def play
+     until over?
+     self.turn
+     end
+     
+     if won?
+       puts"Congratulations #{winner}!"
+     end
+     
+     if draw?
+       puts"Cat's Game!"
+     end
+     
+  end
+    
 end
-
-
-
-
-
-#learn spec/04_game_spec.rb

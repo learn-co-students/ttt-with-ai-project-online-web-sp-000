@@ -1,7 +1,7 @@
 module Players
   class Human < Player
     
-    def move(x)
+    def move(board)
       puts "Please enter an input"
       input=gets
     end
