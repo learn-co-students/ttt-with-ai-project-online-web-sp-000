@@ -107,6 +107,71 @@ describe "Board" do
     end
   end
 
+  describe '#corner_move_available?' do
+    it 'returns available corner index' do
+      board.cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+      
+      expect(board.corner_move_available?).to eq(0)
+    end
+    it 'returns available corner index' do
+      board.cells = ["X", " ", " ", " ", " ", " ", " ", " ", " "]
+      
+      expect(board.corner_move_available?).to eq(2)
+    end
+    it 'returns available corner index' do
+      board.cells = ["X", "X", "X", "O", "X", "O", " ", " ", " "]
+      
+      expect(board.corner_move_available?).to eq(6)
+    end
+    it 'returns available corner index' do
+      board.cells = ["X", " ", "X", " ", " ", " ", "X", " ", "X"]
+      
+      expect(board.corner_move_available?).to eq(false)
+    end
+  end
+  
+  describe '#win_imminent?' do
+    it 'returns true if two tokens and empty in a "row"' do
+      board.cells = ["X", "X", " ", " ", " ", " ", " ", " ", " "]
+      
+      expect(board.win_imminent?).to match_array([0, 1, 2])
+    end
+    it 'returns true if two tokens and empty in a "row"' do
+      board.cells = ["X", " ", " ", "X", " ", " ", " ", " ", " "]
+      
+      expect(board.win_imminent?).to match_array([0, 3, 6])
+    end
+    it 'returns true if two tokens and empty in a "row"' do
+      board.cells = ["X", "X", "O", " ", " ", " ", " ", " ", " "]
+      
+      expect(board.win_imminent?).to be(false)
+    end
+    it 'returns true if two tokens and empty in a "row"' do
+      board.cells = ["X", " ", " ", " ", "X", " ", " ", " ", " "]
+      
+      expect(board.win_imminent?).to match_array([0, 4, 8])
+    end
+    it 'returns true if two tokens and empty in a "row"' do
+      board.cells = ["X", " ", " ", " ", "O", " ", " ", " ", "X"]
+      
+      expect(board.win_imminent?).to be(false)
+    end
+    it 'returns true if two tokens and empty in a "row"' do
+      board.cells = [" ", " ", " ", " ", " ", "O", " ", " ", "O"]
+      
+      expect(board.win_imminent?).to match_array([2, 5, 8])
+    end
+    it 'returns true if two tokens and empty in a "row"' do
+      board.cells = ["X", " ", " ", " ", "O", " ", " ", "O", "X"]
+      
+      expect(board.win_imminent?).to match_array([1, 4, 7])
+    end
+    it 'returns true if two tokens and empty in a "row"' do
+      board.cells = ["X", "X", "O", " ", "O", " ", " ", "O", "X"]
+      
+      expect(board.win_imminent?).to match_array([2, 4, 6])
+    end
+  end
   describe '#valid_move?' do
     it 'returns true for user input between 1-9 that is not taken' do
       board.cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "]
@@ -116,7 +181,132 @@ describe "Board" do
       expect(board.valid_move?("invalid")).to be_falsey
     end
   end
-
+  
+  describe '#setup?' do
+    it 'returns index of best move if any setup shape present' do
+      board.cells = [" ", " ", "O", " ", "X", " ", "X", " ", " "]
+      
+      expect(board.setup?).to eq(0).or eq(8)
+    end
+    it 'returns index of best move if horse shape present' do
+      board.cells = [" ", " ", "X", " ", "O", " ", " ", "X", " "]
+      
+      expect(board.setup?).to eq(8)
+    end
+    it 'returns true if half cross present' do
+      board.cells = [" ", "O", " ", " ", "X", "O", " ", " ", " "]
+      
+      expect(board.setup?).to eq(2)
+    end
+    it 'returns index of best move if diagonal_sandwich present' do
+      board.cells = ["X", " ", " ", " ", "O", " ", " ", " ", "X"]
+      
+      expect(board.setup?).to eq(1).or eq(3).or eq(5).or eq(7)
+    end
+    it 'returns nil when no setup present' do
+      board.cells = [" ", "X", "O", " ", " ", " ", " ", " ", " "]
+      
+      expect(board.setup?).to eq(false)
+    end
+  end
+  
+  describe '#diagonal_sword?' do
+    it 'returns index of best move if diagonal sword present' do
+      board.cells = [" ", " ", "O", " ", "X", " ", "X", " ", " "]
+      
+      expect(board.diagonal_sword?).to eq(0).or eq(8)
+    end
+    it 'returns index of best move if diagonal sword present' do
+      board.cells = ["O", " ", " ", " ", "X", " ", " ", " ", "X"]
+      
+      expect(board.diagonal_sword?).to eq(2).or eq(6)
+    end
+    it 'returns false if diagonal sword not present' do
+      board.cells = [" ", " ", "O", " ", "X", " ", "O", " ", " "]
+      
+      expect(board.diagonal_sword?).to eq(false)
+    end
+  end
+  
+  describe '#horse_shape?' do
+    it 'returns index of best move if horse shape present' do
+      board.cells = ["X", " ", " ", " ", "O", "X", " ", " ", " "]
+      
+      expect(board.horse_shape?).to eq(2)
+    end
+    it 'returns index of best move if horse shape present' do
+      board.cells = [" ", " ", "X", " ", "O", " ", " ", "X", " "]
+      
+      expect(board.horse_shape?).to eq(8)
+    end
+    it 'returns false if horse shape not present' do
+      board.cells = ["X", " ", "O", " ", "O", "X", " ", " ", " "]
+      
+      expect(board.horse_shape?).to eq(false)
+    end
+    it 'returns false if horse shape not present' do
+      board.cells = ["X", " ", " ", " ", "O", " ", " ", " ", "X"]
+      
+      expect(board.horse_shape?).to eq(false)
+    end
+  end
+  
+  describe '#half_cross?' do
+    it 'returns true if half cross present' do
+      board.cells = [" ", " ", " ", "X", "O", " ", " ", "X", " "]
+      
+      expect(board.half_cross?).to eq(6)
+    end
+    it 'returns true if half cross present' do
+      board.cells = [" ", "X", " ", "X", "O", " ", " ", " ", " "]
+      
+      expect(board.half_cross?).to eq(0)
+    end
+    it 'returns true if half cross present' do
+      board.cells = [" ", "O", " ", " ", "X", "O", " ", " ", " "]
+      
+      expect(board.half_cross?).to eq(2)
+    end
+    it 'returns true if half cross present' do
+      board.cells = [" ", " ", " ", "X", "O", " ", "O", "X", " "]
+      
+      expect(board.half_cross?).to be(false)
+    end
+    it 'returns true if half cross present' do
+      board.cells = [" ", " ", " ", "X", "O", " ", " ", " ", " "]
+      
+      expect(board.half_cross?).to be(false)
+    end
+  end
+  
+  describe '#diagonal_sandwich?' do
+    it 'returns index of best move if diagonal_sandwich present' do
+      board.cells = [" ", " ", "X", " ", "O", " ", "X", " ", " "]
+      
+      expect(board.diagonal_sandwich?).to eq(1).or eq(3).or eq(5).or eq(7)
+    end
+    it 'returns index of best move if diagonal_sandwich present' do
+      board.cells = ["X", " ", " ", " ", "O", " ", " ", " ", "X"]
+      
+      expect(board.diagonal_sandwich?).to eq(1).or eq(3).or eq(5).or eq(7)
+    end
+    it 'returns false if board has other tokens other than diagonal_sandwich' do
+      board.cells = [" ", "O", "X", " ", "O", " ", "X", " ", " "]
+      
+      expect(board.diagonal_sandwich?).to be(false)
+    end
+    it 'returns false if board has other tokens other than diagonal_sandwich' do
+      board.cells = [" ", "O", "X", " ", "X", "O", " ", " ", " "]
+      
+      expect(board.diagonal_sandwich?).to be(false)
+    end
+    it 'returns index of best move if diagonal_sandwich present' do
+      board.cells = ["X", " ", "O", " ", "O", " ", " ", " ", "X"]
+      
+      expect(board.diagonal_sandwich?).to eq(false)
+    end
+  end
+  
   describe '#update' do
     it 'updates the cells in the board with the player token according to the input' do
       player = double("player", :token => "X")

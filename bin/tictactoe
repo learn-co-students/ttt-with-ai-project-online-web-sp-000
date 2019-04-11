@@ -1,3 +1,182 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+choice = "y"
+
+puts "=*=*=*=*=*=*=*=*=*=*=*=*=*="
+puts "Welcome to Tic Tac Toe!!!!!"
+puts "*=*=*=*=*=*=*=*=*=*=*=*=*=*\n\n"
+
+while choice == "y"
+
+  puts "Menu:"
+  puts "1. 0-player game"
+  puts "2. 1-player game"
+  puts "3. 2-player game"
+  puts "4. 1-player game versus Smart Computer"
+  puts "5. 1-player game versus Insane Computer"
+  puts "6. Wargames (Insane Computer vs Insane Computer)"
+  puts "7. Wargames (Insane Computer vs Smart Computer)"
+  puts "8. Wargames (Insane Computer vs Computer)"
+  puts "Enter game mode number (1 - 8):"
+  menu_choice = gets.chomp
+
+
+  if menu_choice == "1"
+    puts "\nWelcome to 0-player mode!\n\n"
+  #  while choice == "y"
+    board = Board.new
+    player_1 = Players::Computer.new("X")
+    player_2 = Players::Computer.new("O")
+    game = Game.new(player_1, player_2, board)
+    game.play
+    puts "Would you like to play again? (y/n):"
+    choice = gets.chomp
+  #  end
+    
+  elsif menu_choice == "2"
+    puts "\nWelcome to 1-player mode!\n\n"
+    puts "Who goes first? ('comp'/'human'):"
+    first = gets.chomp
+    if (first == 'comp')
+      player_1 = Players::Computer.new("X")
+      player_2 = Players::Human.new("O")
+    else
+      player_1 = Players::Human.new("X")
+      player_2 = Players::Computer.new("O")
+    end
+    board = Board.new
+    game = Game.new(player_1, player_2, board)
+    game.play
+    puts "Would you like to play again? (y/n):"
+    choice = gets.chomp
+    
+  elsif menu_choice == "3"
+    puts "\nWelcome to 2-player mode!\n\n"
+    game = Game.new
+    game.play
+    puts "Would you like to play again (y/n):"
+    choice = gets.chomp
+    #end
+    
+  elsif menu_choice == "4"
+    puts "\nWelcome to 1-player mode versus Smart Computer!\n\n"
+    puts "Who goes first? ('comp'/'human'):"
+    first = gets.chomp
+    if (first == 'comp')
+      player_1 = Players::SmartComputer.new("X")
+      player_2 = Players::Human.new("O")
+    else
+      player_1 = Players::Human.new("X")
+      player_2 = Players::SmartComputer.new("O")
+    end
+    board = Board.new
+    game = Game.new(player_1, player_2, board)
+    game.play
+    puts "Would you like to play again? (y/n):"
+    choice = gets.chomp
+    
+  elsif menu_choice == "5"
+    puts "\nWelcome to 1-player mode versus Insane Computer!\n\n"
+    puts "Who goes first? ('comp'/'human'):"
+    first = gets.chomp
+    if (first == 'comp')
+      player_1 = Players::InsaneComputer.new("X")
+      player_2 = Players::Human.new("O")
+    else
+      player_1 = Players::Human.new("X")
+      player_2 = Players::InsaneComputer.new("O")
+    end
+    board = Board.new
+    game = Game.new(player_1, player_2, board)
+    game.play
+    puts "Would you like to play again? (y/n):"
+    choice = gets.chomp
+    
+  elsif menu_choice == "6"
+    puts "\nWelcome to Wargames!\n\n"
+    games_results = {
+      :X => 0,
+      :O => 0,
+      :draw => 0
+    }
+    100.times do
+      board = Board.new
+      player_1 = Players::InsaneComputer.new("X")
+      player_2 = Players::InsaneComputer.new("O")
+      game = Game.new(player_1, player_2, board)
+      game.play
+      winner = game.winner
+      if winner == nil
+        games_results[:draw] += 1
+      else
+        games_results[winner.to_sym] += 1
+      end
+    end
+    puts "Results:"
+    puts "Player X has won #{games_results[:X]} games."
+    puts "Player O has won #{games_results[:O]} games."
+    puts "There were #{games_results[:draw]} draws."
+    
+    puts "Would you like to play again? (y/n):"
+    choice = gets.chomp
+    
+  elsif menu_choice == "7"
+    puts "\nWelcome to Wargames!\n\n"
+    games_results = {
+      :X => 0,
+      :O => 0,
+      :draw => 0
+    }
+    100.times do
+      board = Board.new
+      player_1 = Players::InsaneComputer.new("X")
+      player_2 = Players::SmartComputer.new("O")
+      game = Game.new(player_1, player_2, board)
+      game.play
+      winner = game.winner
+      if winner == nil
+        games_results[:draw] += 1
+      else
+        games_results[winner.to_sym] += 1
+      end
+    end
+    puts "Results:"
+    puts "Player X has won #{games_results[:X]} games."
+    puts "Player O has won #{games_results[:O]} games."
+    puts "There were #{games_results[:draw]} draws."
+    
+    puts "Would you like to play again? (y/n):"
+    choice = gets.chomp 
+  elsif menu_choice == "8"
+  
+    puts "\nWelcome to Wargames!\n\n"
+    games_results = {
+      :X => 0,
+      :O => 0,
+      :draw => 0
+    }
+    100.times do
+      board = Board.new
+      player_1 = Players::InsaneComputer.new("X")
+      player_2 = Players::Computer.new("O")
+      game = Game.new(player_1, player_2, board)
+      game.play
+      winner = game.winner
+      if winner == nil
+        games_results[:draw] += 1
+      else
+        games_results[winner.to_sym] += 1
+      end
+    end
+    puts "Results:"
+    puts "Player X has won #{games_results[:X]} games."
+    puts "Player O has won #{games_results[:O]} games."
+    puts "There were #{games_results[:draw]} draws."
+    
+    puts "Would you like to play again? (y/n):"
+    choice = gets.chomp
+  end
+end
