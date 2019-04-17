@@ -1,3 +1,21 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic-Tac-Toe! Press 1 to play against a friend and 2 to play the computer."
+opponent = gets.strip
+  
+if opponent == "1"
+  puts "Spaces are numbered 1-9, with 1 at the top left."
+  Game.new.play
+elsif opponent == "2"
+  puts "Press 1 to play first, 2 to play second."
+  order = gets.strip
+  if order == "1"
+    puts "Spaces are numbered 1-9, with 1 at the top left."
+    Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
+  elsif order == "2"
+    puts "Spaces are numbered 1-9, with 1 at the top left."
+    Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new).play
+  end
+end
