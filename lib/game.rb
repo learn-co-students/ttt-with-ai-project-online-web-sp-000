@@ -43,6 +43,7 @@ class Game
   def over?
     @board.full? || draw? || won?
   end 
+
   
   def winner 
     #won? returns winning combo 
@@ -52,7 +53,7 @@ class Game
   end 
   
   def turn 
-    @board.display
+     @board.display
     player = current_player
     puts "Please enter 1-9:"
     current_move = player.move(@board)
@@ -70,7 +71,26 @@ class Game
     turn until over?    
     
     @board.display
-    if won?
+   player = current_player
+  current_move = player.move(@board)
+  if !@board.valid_move?(current_move)
+    turn
+  else
+     @board.update(current_move, player)
+    puts "#{player.token} moved #{current_move}"
+    @board.display
+    puts "\n\n"
+  end 
+end 
+ 
+  def play
+    while !over?     
+      turn
+    end
+    
+    @board.display
+
+     if won?
       puts "Congratulations #{winner}!"
     elsif draw?
       puts "Cat's Game!"
