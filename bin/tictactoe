@@ -1,3 +1,38 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def lets_play
+  puts "Let's play some Tic Tac Toe! Please select the number of players:
+
+  0: 2 AI players
+  1: Human/AI game
+  2: Human/Human game"
+
+  game_mode = gets.strip
+  if game_mode == "0"
+    Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
+    game_mode == "1"
+    puts "Would you like to go first?"
+    if gets.strip.downcase == "y" || gets.strip.downcase == "yes"
+      Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
+    else
+      Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new).play
+    end
+
+  elsif
+    game_mode == "1"
+    puts "Would you like to go first?"
+    if gets.strip.downcase == "y" || gets.strip.downcase == "yes"
+      Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
+    else
+      Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new).play
+    end
+
+  elsif game_mode == "2"
+    Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
+  end
+  puts "Play again?"
+end
+
+lets_play until gets.strip == "no" || gets.strip == "n"
