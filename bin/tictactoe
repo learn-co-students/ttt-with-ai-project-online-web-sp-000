@@ -1,3 +1,36 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def start
+  puts ""
+  puts "   Welcome to Tic Tac Toe!"
+  puts "        #{Board.new.cells[0]} | #{Board.new.cells[1]} | #{Board.new.cells[2]} "
+  puts "       -----------"
+  puts "        #{Board.new.cells[3]} | #{Board.new.cells[4]} | #{Board.new.cells[5]} "
+  puts "       -----------"
+  puts "        #{Board.new.cells[6]} | #{Board.new.cells[7]} | #{Board.new.cells[8]} "
+  puts "   Please choose game mode:"
+  puts "       -----------"
+  puts "   1. Computer vs. Computer"
+  puts "   2. Player one vs. Computer"
+  puts "   3. Player one vs. Player two"
+
+  input = gets.chomp.to_s
+
+  if input == "1"
+    Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
+    "Game Over"
+    start
+  elsif input == "2"
+    Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
+    "Game Over"
+    start
+  else input == "3"
+    Game.new(Players::Human.new("X"), Players::Human.new("O")).play
+    "Game Over"
+    start
+  end
+end
+
+start
