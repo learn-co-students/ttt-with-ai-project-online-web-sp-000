@@ -21,4 +21,57 @@ class Game
       @board = board
     end
 
+    def current_player
+      turn_count(board).even? ? player_1 : player_2
+    end
+
+    def turn
+      current_player.move(board)
+      binding.pry
+      if board.valid_move?(current_player.move(board))
+        current_player.move(board)
+        board.display
+      else
+        turn
+    end
+  end
+
+
+
+    def turn_count(board)
+      board.cells.count { |token| token == 'X' || token == 'O' }
+    end
+
+  def won?
+    WIN_COMBINATIONS.detect do |combo|
+      board.cells[combo[0]] == board.cells[combo[1]] &&
+        board.cells[combo[1]] == board.cells[combo[2]] &&
+        position_taken?(board, combo[0])
+      end
+    end
+
+def position_taken?(board, index)
+  board.cells[index] == 'X' || board.cells[index] == 'O'
+end
+
+def draw?
+  !won? && full?
+end
+
+def full?
+  board.cells.all? { |token| token == 'X' || token == 'O' }
+end
+
+def over?
+  won? || draw?
+end
+
+def winner
+  if winning_combo = won?
+    board.cells[winning_combo.first]
+  end
+end
+
+
+
 end
