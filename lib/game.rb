@@ -26,15 +26,23 @@ class Game
     end
 
     def turn
-      current_player.move(board)
-      binding.pry
-      if board.valid_move?(current_player.move(board))
-        current_player.move(board)
+      position = current_player.move(board)
+      if board.valid_move?(position)
+        board.update(position, current_player)
         board.display
       else
         turn
     end
   end
+
+  def play
+    turn until over?
+    if won?
+        puts "Congratulations #{winner}!"
+      elsif draw?
+        puts "Cat's Game!"
+      end
+    end
 
 
 
