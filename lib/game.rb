@@ -59,7 +59,7 @@ end
 
 def turn
     puts "Please enter a number 1-9:"
-    puts "It is No.#{rounds+1} round! And it is #{current_player.token}'s turn!"
+    puts "It is No.#{@board.turn_count+1} round! And it is #{current_player.token}'s turn!"
     user_input = current_player.move(@board)
     if @board.valid_move?(user_input)
        @board.update(user_input, current_player)
@@ -80,9 +80,13 @@ def play
     elsif draw?
         puts "Cat's Game!"
       end
+  puts "Do you want to play again? [y/n]"
+  input=gets.strip
+  start if input=="y"
 end
 
 def start
+  @board.reset!
   puts "Hi, welcome to Tic Tac Toe World!"
   puts "Here we have three modes for you to choose, please input the number so you will start a game!"
   puts "1.0 player(computer will play themselves)"
@@ -104,12 +108,23 @@ def start
 end
 
 def zero_player
-
+  puts "OK,now computers start to play against each other!"
+  @player_1=Players::Computer.new("X")
+  @player_2=Players::Computer.new("O")
+  play
 end
 
 def one_player
   puts "You want to play with the computer? Great!Do you want to go first or second?[f/s] The first one will be assigned an \"X\"."
-  self.initialize()
+  input= gets.chomp
+  if input=="f"
+   @player_1=Players::Human.new("X")
+   @player_2=Players::Computer.new("O")
+else
+  @player_1=Players::Computer.new("X")
+  @player_2=Players::Human.new("O")
+end
+  play
 end
 
 def two_player
@@ -117,7 +132,4 @@ def two_player
    play
 end
 
-def rounds
-  @board.cells.select {|number|number!=" "}.size
-end
 end
