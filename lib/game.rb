@@ -59,14 +59,16 @@ end
 
 def turn
     puts "Please enter a number 1-9:"
-    puts "It is #{rounds+1} round! And it is #{current_player.token}'s turn!"
+    puts "It is No.#{rounds+1} round! And it is #{current_player.token}'s turn!"
     user_input = current_player.move(@board)
-    while ! @board.valid_move?(user_input)
-      puts "Wrong input."
+    if @board.valid_move?(user_input)
+       @board.update(user_input, current_player)
+       @board.display
+    else  puts "Wrong input."
+      @board.display
       turn
     end
-      @board.update(user_input, current_player)
-     @board.display
+
   end
 
 def play
@@ -106,11 +108,12 @@ def zero_player
 end
 
 def one_player
+  puts "You want to play with the computer? Great!Do you want to go first or second?[f/s] The first one will be assigned an \"X\"."
+  self.initialize()
 end
 
 def two_player
-   puts "Whoever plays first will be assigned an \"X\"!"
-
+   puts "You want to play with your friend? Great!Whoever plays first will be assigned an \"X\"!"
    play
 end
 
