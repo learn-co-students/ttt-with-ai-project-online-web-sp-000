@@ -4,6 +4,7 @@ class Computer < Player
 
   ##mostly reference from the online source, but I change something on line 19,check the comment there
   def move(board)
+
       move = nil
 
       # When going first, take the middle square. When going second, take the middle square if it isn't yet taken.
@@ -11,7 +12,7 @@ class Computer < Player
         move = "5"
 
       # If going second and the middle square is taken, take the upper-left corner square.
-      elsif board.turn_count == 1
+    elsif board.turn_count == 1
         move = "1"
 
       # If you went first (and took the middle), take a corner square with your second move.
@@ -22,8 +23,8 @@ class Computer < Player
 
 
       # If you went second (and took the middle) and the other player has occupied opposing corner squares, blow up the attempted trap by taking a side square.
-      elsif board.turn_count == 3 && (board.position(1) == board.position(9) || board.position(3) == board.position(7))
-        move = "2"
+    elsif board.turn_count == 3 && (board.position(1) == board.position(9) || board.position(3) == board.position(7))
+        move = [2, 4, 6, 8].select{|i| !board.taken?(i)}.sample.to_s
 
       # From here on, run through the WIN_COMBINATIONS array, checking whether any of the combinations have two squares filled with the same token and a third, empty square.
       else
