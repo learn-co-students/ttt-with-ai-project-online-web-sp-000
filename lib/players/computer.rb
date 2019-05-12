@@ -16,18 +16,22 @@ class Players
       elsif !(self.oppwin?(board) == nil)
         self.oppwin?(board)
       else
-        self.find_spot(board)
+        self.seek_spot(board)
       end
     end
     def row_full?(row)
       row.detect{|e| e == ' '}
     end
-    def mewin?(board)
+    def clone_board(board)
       elegant = board.rows.map do |row|
         row.map do |index|
           board.cells[index]
         end
       end
+      elegant
+    end
+    def mewin?(board)
+      elegant = self.clone_board(board)
       xrows = elegant.map do |row|
           row.count {|e| e == self.token}
       end
@@ -43,11 +47,7 @@ class Players
       nil
     end
     def oppwin?(board)
-      elegant = board.rows.map do |row|
-        row.map do |index|
-          board.cells[index]
-        end
-      end
+      elegant = clone_board(board)
       xrows = elegant.map do |row|
           row.count {|e| e == self.opptoken}
       end
@@ -73,7 +73,7 @@ class Players
         nil
       end
     end
-    def find_spot(board)
+    def seek_spot(board)
       spots = [1, 2, 3, 4, 5, 6, 7, 8, 9]
       if board.valid_move?(5)
         5

@@ -1,4 +1,3 @@
-require 'pry'
 class Game
   attr_accessor :board, :player_1, :player_2
   def initialize (player_1 = Players::Human.new('X'), player_2 =Players::Human.new('O'), board = Board.new)
@@ -26,6 +25,7 @@ class Game
     player
   end
   def won?
+      winner = nil
       WIN_COMBINATIONS.each do |combo|
         #creates an array to test with #all?
         posit = [" ", " ", " "]
@@ -36,13 +36,13 @@ class Game
         counter +=1
         #tests for full array
         if posit.all? {|var| var == "X"}
-          return combo
+          winner = combo
         elsif posit.all? {|var| var == "O"}
-          return combo
+          winner = combo
         end
       end
     end
-    return false
+    winner
   end
   def draw?
     if board.full? == true
