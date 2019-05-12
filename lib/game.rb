@@ -1,7 +1,7 @@
 class Game
 
   attr_accessor :board, :player_1, :player_2
-
+  # board combos
   WIN_COMBINATIONS = [
     [0,1,2],
     [3,4,5],
@@ -20,26 +20,26 @@ class Game
   end
 
   def current_player
-   if board.turn_count.even? then player_1
-   else player_2
-   end
- end
-
- def won?
-  WIN_COMBINATIONS.each do |win_combination|
-    if @board.cells[win_combination[0]] == "X" && @board.cells[win_combination[1]] == "X" && @board.cells[win_combination[2]] == "X"
-      return win_combination
-    elsif
-      @board.cells[win_combination[0]] == "O" && @board.cells[win_combination[1]] == "O" && @board.cells[win_combination[2]] == "O"
-      return win_combination
-    else
-      false
+    if board.turn_count.even? then player_1
+    else player_2
     end
   end
-  false
-end
 
-def full?
+  def won?
+    WIN_COMBINATIONS.each do |win_combination|
+      if @board.cells[win_combination[0]] == "X" && @board.cells[win_combination[1]] == "X" && @board.cells[win_combination[2]] == "X"
+        return win_combination
+      elsif
+        @board.cells[win_combination[0]] == "O" && @board.cells[win_combination[1]] == "O" && @board.cells[win_combination[2]] == "O"
+        return win_combination
+      else
+        false
+      end
+    end
+    false
+  end
+
+  def full?
   @board.cells.none?{|space| space == " "}
   end
 
@@ -59,22 +59,22 @@ def full?
   end
 
   def turn
-  puts "Please enter 1-9:"
-  move = current_player.move(@board)
-  if board.valid_move?(move)
-    board.update(move,current_player)
-    board.display
-  else turn
+    puts "Please enter 1-9:"
+    move = current_player.move(@board)
+    if board.valid_move?(move) then
+      board.update(move,current_player)
+      board.display
+    else turn
+    end
   end
-end
 
-def play
-while over? == false
-  turn
-end
-if draw? == true then puts "Cat's Game!"
-else puts "Congratulations #{winner}!"
-end
+  def play
+  while over? == false
+    turn
+  end
+  if draw? == true then puts "Cat's Game!"
+  else puts "Congratulations #{winner}!"
+  end
 end
 
 end
