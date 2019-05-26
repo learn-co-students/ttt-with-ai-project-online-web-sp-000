@@ -26,17 +26,42 @@ class Game
     else 
       return player_2
     end 
-    #binding.pry 
   end 
   
   def won?
-    #binding.pry 
-    if WIN_COMBINATIONS[0] == WIN_COMBINATIONS[1] && WIN_COMBINATIONS[1] == WIN_COMBINATIONS[2]
-       return WIN_COMBINATIONS[0]
+    WIN_COMBINATIONS.select do |combo|
+      #binding.pry 
+      if board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]] && (board.cells != " "  || board.cells != "" )
+          return combo
+      end 
+    end 
+      false 
+  end 
+  
+  def draw? 
+    if board.full? && !won? 
+      true 
+    else 
+      false 
     end 
   end 
   
+  def over? 
+    if draw? || won?
+      true 
+    else 
+      false 
+    end 
+  end 
   
-  
+  def winner
+    #binding.pry 
+    if won?
+      combo = won?
+      board.cells[combo[0]]
+    elsif !won?
+      nil 
+    end 
+  end 
   
 end 
