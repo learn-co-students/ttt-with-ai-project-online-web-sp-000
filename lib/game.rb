@@ -21,11 +21,20 @@ class Game
   end 
   
   def current_player 
+     if board.turn_count.even? 
+      return player_1
+    else 
+      return player_2
+    end 
     #binding.pry 
-    board.cells.count("X").even? || board.cells.count("O").even?
   end 
   
- 
+  def won?
+    #binding.pry 
+    if WIN_COMBINATIONS[0] == WIN_COMBINATIONS[1] && WIN_COMBINATIONS[1] == WIN_COMBINATIONS[2]
+       return WIN_COMBINATIONS[0]
+    end 
+  end 
   
   
   
