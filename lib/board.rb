@@ -55,7 +55,6 @@ class Board
     user_input = user_input.to_i - 1 
     #binding.pry 
     @cells[user_input] = player.token 
-    #== token
   end 
   
 end 
