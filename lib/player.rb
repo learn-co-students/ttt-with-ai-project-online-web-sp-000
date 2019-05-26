@@ -6,13 +6,9 @@ class Player
     @token = token 
   end 
   
-  def move(user_input)
-        #binding.pry 
+  def move(board)
     puts "Put an input"
-    user_input = gets.strip 
-        
-    puts user_input 
-        #@cells[user_input] = Player.token
+    input = gets.strip 
   end
   
   
