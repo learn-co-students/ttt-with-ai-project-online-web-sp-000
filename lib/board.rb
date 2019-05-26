@@ -53,7 +53,6 @@ class Board
   
   def update(user_input, player)
     user_input = user_input.to_i - 1 
-    #binding.pry 
     @cells[user_input] = player.token 
   end 
   

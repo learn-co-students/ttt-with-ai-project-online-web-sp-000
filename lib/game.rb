@@ -1,3 +1,4 @@
+require 'pry'
 class Game 
   attr_accessor :board, :player_1, :player_2  
   
@@ -13,12 +14,18 @@ class Game
   
   ]
   
-  def initialize
-    
+  def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+      @board = board
+      @player_1 = player_1 
+      @player_2 = player_2 
   end 
   
+  def current_player 
+    #binding.pry 
+    board.cells.count("X").even? || board.cells.count("O").even?
+  end 
   
-  
+ 
   
   
   
