@@ -193,11 +193,12 @@ describe 'Game' do
 
     it 'changes to player 2 after the first turn' do
       game = Game.new
+      
       allow($stdout).to receive(:puts)
 
       expect(game.player_1).to receive(:gets).and_return("1")
       expect(game.player_2).to receive(:gets).and_return("2")
-
+      
       game.turn
       game.turn
     end

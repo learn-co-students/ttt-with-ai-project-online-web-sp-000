@@ -17,4 +17,28 @@ describe 'Players::Computer' do
       expect(valid_moves).to include(computer_move)
     end
   end
+  
+  describe '#move' do
+    it 'returns a winning move if one is available' do
+      computer = Players::Computer.new("X")
+      board = Board.new
+      board.cells = ["X", "X", " ", "O", "O", " ", " ", " ", " "]
+
+      computer_move = computer.move(board)
+
+      expect(computer_move).to eq("3")
+    end
+  end
+  
+    describe '#move' do
+    it 'blocks an opponents winning move if necessary' do
+      computer = Players::Computer.new("O")
+      board = Board.new
+      board.cells = ["X", "X", " ", "", "", " ", " ", " ", " "]
+
+      computer_move = computer.move(board)
+
+      expect(computer_move).to eq("3")
+    end
+  end
 end
