@@ -68,18 +68,18 @@ class Game
   end 
   
   def turn
-   #binding.pry 
     new_move = current_player.move(board) 
       if board.valid_move?(new_move) 
-         board.update(new_move, player_1)
+         board.update(new_move, current_player)
       else
-     # binding.pry
-          new_move
-       #end 
-        
-    
-    #board.valid_move?(user_input)
+         turn 
      end 
   end  
+  
+  def play 
+    until over?
+      turn 
+    end 
+  end 
   
 end 
