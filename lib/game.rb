@@ -1,6 +1,7 @@
 require 'pry'
 class Game 
-  attr_accessor :board, :player_1, :player_2  
+ 
+  attr_accessor :board, :player_1, :player_2   
   
   WIN_COMBINATIONS = [
   [0, 1, 2],
@@ -31,7 +32,9 @@ class Game
   def won?
     WIN_COMBINATIONS.select do |combo|
       #binding.pry 
-      if board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]] && (board.cells != " "  || board.cells != "" )
+      if (board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]]) && (board.cells[combo[0]] != " ")
+        
+        #|| board.cells != "" )
           return combo
       end 
     end 
@@ -59,9 +62,24 @@ class Game
     if won?
       combo = won?
       board.cells[combo[0]]
-    elsif !won?
-      nil 
+    else 
+      return nil 
     end 
   end 
+  
+  def turn
+   #binding.pry 
+    new_move = current_player.move(board) 
+      if board.valid_move?(new_move) 
+         board.update(new_move, player_1)
+      else
+     # binding.pry
+          new_move
+       #end 
+        
+    
+    #board.valid_move?(user_input)
+     end 
+  end  
   
 end 
