@@ -1,10 +1,9 @@
+require 'pry'
 module Players 
   class Computer < Player 
-  
-    def move(board)
-      if board.cells.taken?
-        puts board.cells  
-      end 
-    end 
+   def move(board) 
+      
+   end 
+     
   end
 end 

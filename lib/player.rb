@@ -6,10 +6,7 @@ class Player
     @token = token 
   end 
   
-  def move(board)
-    puts "Put an input"
-    input = gets.strip 
-  end
+
   
   
   
