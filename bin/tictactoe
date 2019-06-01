@@ -1,3 +1,28 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic-tac-toe"
+
+puts "Do you want to play a 0, 1 or 2 player game?"
+
+puts "Who should go first?"
+
+input = gets.strip
+
+case input
+when 0
+game = Game.new(player_1 = Players::Computer.new("X"),player_2 = Players::Computer.new("O"),board = Board.new)
+when 1
+  puts "Do you want to go first and be X? Y/N"
+  input1 = gets.strip
+  if input1 = "Y"
+    game = Game.new(player_1 = Players::Human.new("X"),player_2 = Players::Computer.new("O"),board = Board.new)
+  else
+    game = Game.new(player_1 = Players::Computer.new("O"),player_2 = Players::Human.new("X"),board = Board.new)
+when 2
+  puts "Who do you want to go first? player 1 or 2"
+game = Game.new(player_1 = Players::Human.new("X"),player_2 = Players::Human.new("O"),board = Board.new)
+end
+
+game.play
