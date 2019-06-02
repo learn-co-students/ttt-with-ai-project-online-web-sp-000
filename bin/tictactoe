@@ -1,3 +1,112 @@
 #!/usr/bin/env ruby
-
+# require 'colorize'
 require_relative '../config/environment'
+
+$game = Game.new 
+WHOFIRST = "Who would you like to go first, \"X or O?\""
+def greeting_message
+  puts "Welco to Mortal TicTacToe. Choose your demise!".colorize(:red)
+  puts "Press 0 to play wargames.".colorize(:yellow)
+  puts "Press 1 to play against the computer.".colorize(:light_blue)
+  puts "Press 2 to go mano a mano with another player.".colorize(:yellow)
+  puts "Type exit to end program.".colorize(:light_blue)
+end
+
+def get_player_input
+  greeting_message
+  input = gets.chomp
+end
+
+def store_players_order
+  puts WHOFIRST
+  #stores the player choice of letter "x or o"
+  player_type = []
+  first = gets.chomp.upcase
+  player_type << first
+  #find who's in the first array index
+  if player_type.first == "X"
+    player_type << "O"
+  else
+    player_type << "X"
+  end
+  player_type
+end
+
+def get_random_order
+  letter = rand(1..2).to_i
+  if letter == 1
+    return "X"
+  else
+    return "O"
+  end
+end
+
+def set_computer_order
+  player_type = []
+  if get_random_order == "X"
+    player_type << "X"
+    player_type << "O"
+  else
+    player_type << "O"
+    player_type << "X"
+  end
+end
+
+
+def computer_game
+  computer_first = set_computer_order
+  $game.board.display
+  computer_player1 = Players::Computer.new(computer_first.first)
+  computer_player2 = Players::Computer.new(computer_first.last)
+  $game.player_1 = computer_player1
+  $game.player_2 = computer_player2
+  $game.play
+end
+
+def against_computer
+  players_order =  store_players_order
+  $game.board.display
+  human_player = Players::Human.new(players_order.first) 
+  computer_player = Players::Computer.new(players_order.last)
+  $game.player_1 = human_player
+  $game.player_2 = computer_player
+  $game.play
+end
+
+def mano_a_mano
+  players_order =  store_players_order
+  $game.board.display
+  human_player1 = Players::Human.new(players_order.first) 
+  human_player2 = Players::Human.new(players_order.last)
+  $game.player_1 = human_player1
+  $game.player_2 = human_player2
+  $game.play
+end
+
+def start_game
+  input = get_player_input
+  while input != "exit"
+    case input
+      when "0"
+        counter = 0
+        100.times do 
+          computer_game 
+          if $game.won?
+            counter += 1
+          end
+          $game.board.reset!
+        end
+        puts "TicTacToe to the death was won #{counter} by computer!"  
+      when "1"
+        against_computer
+        $game.board.reset!
+      when "2"
+        mano_a_mano
+        $game.board.reset!
+    end
+    input = get_player_input
+  end
+  puts "Hasta La Pasta!"
+end
+
+start_game
