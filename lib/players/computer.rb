@@ -2,11 +2,9 @@ require 'pry'
 module Players 
   class Computer < Player 
    def move(board) 
-     #binding.pry 
-      if board.cells.include?(" ")
-        self.Board.update 
-      else
-        nil  
+   
+      if !board.taken?(4)
+        return "5" 
       end 
    end 
      
