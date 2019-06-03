@@ -2,9 +2,11 @@ require 'pry'
 module Players 
   class Computer < Player 
    def move(board) 
-    # binding.pry 
-      if board.cells[combo[0]].empty?
-        self.turn 
+     #binding.pry 
+      if board.cells.include?(" ")
+        self.Board.update 
+      else
+        nil  
       end 
    end 
      
