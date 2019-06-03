@@ -1,4 +1,3 @@
-require 'pry'
 class Game 
  
   attr_accessor :board, :player_1, :player_2   
@@ -24,21 +23,18 @@ class Game
   def current_player 
      if board.turn_count.even? 
       return player_1
-    else 
+     else 
       return player_2
-    end 
+     end 
   end 
   
   def won?
     WIN_COMBINATIONS.select do |combo|
-      #binding.pry 
       if (board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]]) && (board.cells[combo[0]] != " ")
-        
-        #|| board.cells != "" )
           return combo
+              end 
       end 
-    end 
-      false 
+        false 
   end 
   
   def draw? 
@@ -58,7 +54,6 @@ class Game
   end 
   
   def winner
-    #binding.pry 
     if won?
       combo = won?
       board.cells[combo[0]]
@@ -73,19 +68,22 @@ class Game
          board.update(new_move, current_player)
       else
          turn 
-     end 
+      end 
   end  
   
   def play 
     until over?
       turn 
     end 
+    
     if won?
       puts "Congratulations #{winner}!"
     end 
+    
     if draw?
       puts "Cat's Game!"
     end 
+  
   end 
   
  

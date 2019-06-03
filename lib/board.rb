@@ -1,4 +1,3 @@
-require 'pry'
 class Board 
 
   attr_accessor :cells 
@@ -36,7 +35,7 @@ class Board
         count+=1 
           end 
       end 
-      count 
+        count 
   end 
   
   def taken?(index)
@@ -46,9 +45,9 @@ class Board
   
   def valid_move?(user_input)
     user_input = user_input.to_i 
-    if user_input.between?(1,9) && !taken?(user_input) 
-      true 
-    end 
+      if user_input.between?(1,9) && !taken?(user_input) 
+        true 
+      end 
   end 
   
   def update(user_input, player)
