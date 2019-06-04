@@ -63,6 +63,7 @@ class Game
   end 
   
   def turn
+    board.display 
     new_move = current_player.move(board) 
       if board.valid_move?(new_move) 
          board.update(new_move, current_player)
@@ -77,6 +78,7 @@ class Game
     end 
     
     if won?
+      board.display
       puts "Congratulations #{winner}!"
     end 
     
