@@ -3,7 +3,7 @@
 require_relative '../config/environment'
 
  puts "Welcome player(s)!" 
- puts "What mode would you like to play? 1 player or 2 players?"
+ puts "What mode would you like to play? Press 0 for computer vs. computer, 1 for 1 player or 2 for 2 players."
  mode = gets.strip 
   if mode == "0"
     game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
