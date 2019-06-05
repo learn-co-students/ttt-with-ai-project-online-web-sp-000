@@ -48,8 +48,10 @@ attr_accessor :board, :player_1, :player_2
   end
 
   def turn
+    board.display
     current_move = current_player.move(board)
     if !board.valid_move?(current_move)
+      puts "Invalid move! Please make another selection."
       turn
     else
       board.update(current_move, current_player)
@@ -62,6 +64,7 @@ attr_accessor :board, :player_1, :player_2
         turn
       end
       if won?
+        board.display
         puts "Congratulations #{winner}!"
       else
         puts "Cat's Game!"
