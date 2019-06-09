@@ -69,7 +69,17 @@ WIN_COMBINATIONS = [
   end
   
   def turn
-    @board.update(current_player.move,current_player)
+    
+    puts "It's now #{current_player.token}'s turn."
+    input = current_player.move(input).to_i
+    
+    if !@board.valid_move?(input.to_s)
+      turn
+    
+    
+    
+    end
+
     
   end
 end
