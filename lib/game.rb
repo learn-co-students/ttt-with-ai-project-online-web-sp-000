@@ -37,10 +37,6 @@ WIN_COMBINATIONS = [
     @board.cells[win1] == @board.cells[win2] && @board.cells[win2] == @board.cells[win3] && @board.cells[win1] != " "
     end  
   end
-
-  def draw?
-    
-  end
   
   def draw?
     if !won? && @board.full?
@@ -69,36 +65,20 @@ WIN_COMBINATIONS = [
     @board.cells[winning_location]
      else
      nil
+    end
   end
+  
+  def turn
+    @board.update(current_player.move,current_player)
     
   end
-  
-  
 end
 
 =begin
 
-
-  describe '#winner' do
-    it 'returns X when X won' do
-      game = Game.new
-      game.board.cells = ["X", " ", " ", " ", "X", " ", " ", " ", "X"]
-
-      expect(game.winner).to eq("X")
-    end
-
-    it 'returns O when O won' do
-      game = Game.new
-      game.board.cells = ["X", "O", " ", " ", "O", " ", " ", "O", "X"]
-
-      expect(game.winner).to eq("O")
-    end
-
-    it 'returns nil when no winner' do
-      game = Game.new
-      game.board.cells = ["X", "O", " ", " ", " ", " ", " ", "O", "X"]
-
-      expect(game.winner).to be_nil
+  def update(user_input,current_player)
+    if valid_move?(user_input)
+      @cells[user_input.to_i - 1] = current_player.token
     end
   end
 
