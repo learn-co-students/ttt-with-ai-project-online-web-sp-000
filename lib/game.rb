@@ -73,11 +73,20 @@ WIN_COMBINATIONS = [
     puts "It's now #{current_player.token}'s turn."
     input = current_player.move(input).to_i
     
-    if !@board.valid_move?(input.to_s)
-      turn
+    if @board.valid_move?(input.to_s)
+      
+      update
+      
+      
+      input == 1
+
+    @player_1 = input
+    elsif input == 2
+      @player_2 = input 
+ #     binding.pry
     
-    
-    
+  else
+    turn
     end
 
     
@@ -85,12 +94,6 @@ WIN_COMBINATIONS = [
 end
 
 =begin
-
-  def update(user_input,current_player)
-    if valid_move?(user_input)
-      @cells[user_input.to_i - 1] = current_player.token
-    end
-  end
 
   describe 'turn' do
     it 'makes valid moves' do
