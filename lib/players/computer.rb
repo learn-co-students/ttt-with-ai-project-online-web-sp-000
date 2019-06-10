@@ -2,8 +2,8 @@ require "pry"
 module Players
   class Computer < Player
     
-    def move(input)
-      user_input = gets.strip
+    def move(board)
+      "1"
     end  
     
   end
