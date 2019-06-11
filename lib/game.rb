@@ -90,10 +90,4 @@ WIN_COMBINATIONS = [
     end
   end
   
-  
 end
-
-=begin
-
-
-=end
