@@ -1,3 +1,57 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+class TicTacToe
+
+  attr_accessor :game_type, :first_player, :player_1, :player_2
+
+  def initialize
+    start_game
+  end
+
+  def start_game
+    choose_game_type
+    set_players
+    game = Game.new(self.player_1, self.player_2)
+    game.play
+    puts "Would you like to play again? Y/N"
+    play_again = gets.chomp
+    start_game if play_again == 'Y'
+  end
+
+  def choose_game_type
+    puts "Welcome to Tic Tac Toe"
+    puts "What kind of game would you like to play?" \
+          " Enter '2' for Human vs. Human, '1' for Human vs. Computer, and '0'" \
+          "for Computer vs. Computer"
+    self.game_type = gets.chomp
+    self.game_type = gets.chomp while ! ['0', '1', '2'].include? self.game_type
+
+    if self.game_type == '1'
+      puts "Who should go first and be 'X'? Enter 'Human' or 'Computer'"
+      self.first_player = gets.chomp
+    end
+  end
+
+  def set_players
+    if self.game_type == '0'
+      self.player_1 = Players::Computer.new("X")
+      self.player_2 = Players::Computer.new("O")
+    elsif self.game_type == '2'
+      self.player_1 = Players::Human.new("X")
+      self.player_2 = Players::Human.new("O")
+    elsif self.game_type == '1'
+      if self.first_player == 'Human'
+        self.player_1 = Players::Human.new("X")
+        self.player_2 = Players::Computer.new("O")
+      else
+        self.player_1 = Players::Computer.new("X")
+        self.player_2 = Players::Human.new("O")
+      end
+    end
+  end
+
+end
+
+TicTacToe.new
