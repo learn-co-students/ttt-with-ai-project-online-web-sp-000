@@ -23,6 +23,10 @@ class Board
    @cells[input.to_i - 1]
   end 
   
+  def input_to_i(input)
+    input.to_i
+  end
+    
   def full?
    @cells.each do |cell|
       if cell == " "
@@ -40,10 +44,10 @@ class Board
   end
   
   def valid_move?(input)
-    input.to_i.between?(1, 9) && !taken?(input)
+    input_to_i(input).between?(1, 9) && !taken?(input)
   end
   
-  def update(input, token)
-    position(input) == token
+  def update(input, player)
+    @cells[input.to_i - 1] = player.token
   end
 end
