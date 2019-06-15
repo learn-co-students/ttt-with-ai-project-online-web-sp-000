@@ -1,7 +1,7 @@
 require 'pry'
 
 class Board
- attr_accessor :cells
+ attr_accessor :cells, :token
   
   def reset!
     @cells = Array.new(9, " ")
@@ -40,7 +40,10 @@ class Board
   end
   
   def valid_move?(input)
-    binding.pry
-    input.between?(0, 8) while !taken?(input)
+    input.to_i.between?(1, 9) && !taken?(input)
+  end
+  
+  def update(input, token)
+    position(input) == token
   end
 end
