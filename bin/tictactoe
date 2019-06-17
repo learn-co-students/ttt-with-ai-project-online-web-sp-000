@@ -1,3 +1,45 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+end_of_game = ""
+until end_of_game == "quit"
+  puts "Welcome To TicTacToe"
+  puts "For a completely automated game enter '0':"
+  puts "For a 1 player game enter '1':"
+  puts "For a 2 player game enter '2':"
+  puts "To quit type 'quit':"
+
+  game_type = gets.strip
+
+  if game_type == "quit"
+    break
+  end
+
+  puts "If user 'X' should go first then please enter 'X':"
+  puts "Or if user 'O' shoud go first then please enter 'O':"
+
+  first_player = gets.strip
+  if first_player == "X"
+    second_player = "O"
+  else
+    second_player = "X"
+  end
+
+  player_1 = nil
+  player_2 = nil
+  board = Board.new
+
+  if(game_type.to_i == 0)
+    player_1 = Players::Computer.new(first_player)
+    player_2 = Players::Computer.new(second_player)
+  elsif(game_type.to_i == 1)
+    player_1 = Players::Human.new(first_player)
+    player_2 = Players::Computer.new(second_player)
+  else
+    player_1 = Players::Human.new(first_player)
+    player_2 = Players::Human.new(second_player)
+  end
+
+  game = Game.new(player_1, player_2, board)
+  game.play
+end
