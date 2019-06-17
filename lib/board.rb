@@ -37,11 +37,14 @@ class Board
   end
   def valid_move?(position)
     # returns true for user input between 1 - 9 that is not taken
-    move = position.to_i - 1
-    !taken?(move) and move < 9 and move > 0
+    #move = position.to_i - 1
+    !taken?(position.to_i) && position.to_i > 0 && position.to_i <= 9
   end
-  def update
+  def update(input, player)
     # updates the cells in the board with the player token according to the input
+    move = input.to_i - 1
+    self.cells[move] = player.token
   end
 end
+
 #binding.pry
