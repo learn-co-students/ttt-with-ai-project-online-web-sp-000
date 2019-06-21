@@ -17,9 +17,8 @@ class Board
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
   end
 
-  def position(space, character)
-
-   @cells[space] = character
+  def position(integer)
+    @cells[integer.to_i - 1]
   end
 
  def full?
@@ -41,20 +40,18 @@ class Board
  end
 
  def taken?(integer)
-  if @cells[integer.to_i] == "X" || @cells[integer.to_i] == "O"
+  if @cells[integer.to_i - 1] == "X" || @cells[integer.to_i - 1] == "O"
    true
  else
    false
   end
  end
 
- def valid_move?(index)
-  if (index < 0 || index > 8)
-    false
-  elsif position_taken?(index)
-    false
-  else
-    true
-  end
+ def valid_move?(position)
+   !taken?(position) && position.to_i >0 && position.to_i <=9
+ end
+
+ def update(position, player)
+   @cells[position.to_i - 1] = player.token
  end
 end
