@@ -2,7 +2,7 @@ require 'pry'
 
 class Game
 
-  attr_accessor :board, :player_1, :player_2
+  attr_accessor :board, :player_1, :player_2, :winner
 
   WIN_COMBINATIONS = [
   [0, 1, 2],
