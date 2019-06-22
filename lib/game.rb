@@ -1,3 +1,5 @@
+require 'pry'
+
 class Game
 
   attr_accessor :board, :player_1, :player_2
@@ -19,6 +21,9 @@ class Game
    @board = board
   end
 
+  def position(integer)
+    @cells[integer.to_i - 1]
+  end
 
 
 
@@ -30,12 +35,63 @@ class Game
     end
   end
 
-  #def won?
-  #WIN_COMBINATIONS.detect{|combo| @board[combo[0]] == @board[combo[1]] &&
-    #@board[combo[1]] == @board[combo[2]] && position_taken?(combo[0])}
-#end
+  def position_taken?(integer)
+   if @board.cells[integer] == " " || @board.cells[integer] == "" || @board.cells[integer] == nil
+    false
+  elsif @board.cells[integer] == "X" || @board.cells[integer] == "O"
+    true
+   end
+  end
+
+
 
   def won?
-    WIN_COMBINATIONS.detect{|combo| @board[combo[0]] == @board[combo[1]] && @board[combo[1]] == @board[combo[2]] && position_taken?(combo[0])}
+    WIN_COMBINATIONS.detect{|combo|
+      @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]] && position_taken?(combo[0])}
+  end
+
+  def full?
+   if @board.cells.include?(' ') || @board.cells.include?('')
+    return false
+   else
+    return true
+   end
+  end
+
+  def draw?
+   if !won? && full?
+    return true
+   else won?
+    return false
+   end
+  end
+
+  def over?
+   if draw? || full? || won?
+    true
+   else
+    false
+   end
+  end
+
+  def winner
+    win_combo = won?
+   if win_combo
+    @board.cells[win_combo[0]]
+   else
+    nil
+   end
+  end
+
+  def turn
+   puts "Please enter 1-9:"
+   user_input = gets.strip
+   index = position(integer)
+   if valid_move?(position)
+    move(index, current_player)
+   else
+    turn
+   end
+    display_board
   end
 end
