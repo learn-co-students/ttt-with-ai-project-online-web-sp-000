@@ -21,8 +21,8 @@ class Game
    @board = board
   end
 
-  def position(integer)
-    @cells[integer.to_i - 1]
+  def update_position(integer)
+    @board.cells[integer.to_i - 1] = current_player.token
   end
 
 
@@ -85,13 +85,24 @@ class Game
 
   def turn
    puts "Please enter 1-9:"
-   user_input = gets.strip
-   index = position(user_input)
-   if valid_move?(position)
-    move(index, current_player)
+   user_input = current_player.move(@board)
+   if @board.valid_move?(user_input)
+     index = update_position(user_input)
    else
     turn
    end
-    display_board
+  end
+
+  def play
+    until over?
+     turn
+    end
+    if winner == "X"
+     puts "Congratulations X!"
+    elsif winner == "O"
+     puts "Congratulations O!"
+    else
+     puts "Cat's Game!"
+    end
   end
 end
