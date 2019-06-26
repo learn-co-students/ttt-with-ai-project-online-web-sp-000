@@ -1,3 +1,25 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to TIC TAC TOE"
+puts "Please enter a 0, 1, 2 for the number of players you want to have."
+type = gets.strip
+case type
+  when "0"
+    player_1 = Players::Computer.new("X")
+    player_2 = Players::Computer.new("O")
+  when "1"
+    player_1 = Players::Human.new("X")
+    player_2 = Players::Computer.new("O")
+  when "2"
+    player_1 = Players::Human.new("X")
+    player_2 = Players::Human.new("O")
+end
+game = Game.new(player_1, player_2)
+input = ""
+while input != "exit"
+  game.play
+  puts "Type exit to quit or any other key to continue"
+  input = gets.strip
+end
