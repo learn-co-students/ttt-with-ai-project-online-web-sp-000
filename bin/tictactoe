@@ -2,13 +2,27 @@
 
 require_relative '../config/environment'
 
+def prompt
  puts "Welcome to Tic Tac Toe!"
  puts "How many players?"
- puts "Type 0 for the computer to play itself."
- puts "Type 1 to play the computer."
- puts "Type 2 to play a friend."
+ puts "\tType 0 for the computer to play itself."
+ puts "\tType 1 to play the computer."
+ puts "\tType 2 to play a friend."
+end
 
- input = gets.chomp
+def begin_game(input)
+   case input
+     when "0"
+       Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
+     when "1"
+       set_one_player_game
+     when "2"
+       puts "Player one is 'X' \nPlayer two is 'O'"
+       game = Game.new
+       game.board.display
+       game.play
+   end
+end
 
  def set_one_player_game
    puts "Choose your token. Type X or O"
@@ -20,14 +34,20 @@ require_relative '../config/environment'
    end
  end
 
- case input
-   when "0"
-     Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
-   when "1"
-     set_one_player_game
-   when "2"
-     puts "Player one is 'X' \nPlayer two is 'O'"
-     game = Game.new
-     game.board.display
-     game.play
+ def replay
+   puts "Do you want to play again? \t Y/N"
+   replaying = gets.chomp
+   if replaying == "Y"
+     start
+   else
+   end
  end
+
+def start
+  prompt
+  input = gets.chomp
+  begin_game(input)
+  replay
+end
+
+start
