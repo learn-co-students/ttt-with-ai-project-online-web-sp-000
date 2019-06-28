@@ -1,4 +1,6 @@
+
 require 'pry'
+
 class Board
   attr_accessor :cells
 
@@ -48,7 +50,6 @@ def update(input,player)
   # binding.pry
   @cells[index] = player.token
 end
-
 
 
 end
