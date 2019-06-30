@@ -46,10 +46,10 @@ module Players
       end
 
       def move(board)
-        if (best_move(board) != nil) #case for a defensive move or to finish the game
-          best_move(board)
-        elsif (board.cells[4] == " ") #case to always pick middle if it is blank
+        if (board.cells[4] == " ") #case to always pick middle if it is blank
           return "5"
+        elsif (best_move(board) != nil) #case for a defensive move or to finish the game
+          best_move(board)
         elsif (corner(board) != nil)
           self.corner(board) #case to pick a corner section
         else
