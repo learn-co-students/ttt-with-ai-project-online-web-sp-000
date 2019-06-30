@@ -23,7 +23,7 @@ class Game
   end
 
   def won?
-  	#runs over WIN_COMBINATIONS to check board cells for a winning combo, where wining combo includes all X's or all O's (no blanks)
+#runs over WIN_COMBINATIONS to check board cells for a winning combo, where winning combo includes all X's or all O's (no blanks)
     WIN_COMBINATIONS.detect {|win| @board.cells[win[0]] != " " && @board.cells[win[0]] == @board.cells[win[1]] && @board.cells[win[1]] == @board.cells[win[2]]}
   end
 
@@ -36,9 +36,9 @@ class Game
   end
 
   def winner
-    #returns X when X won
-    #returns O when O won --> if self.won? is true, it returns the winning combination so I'm looking at the index to pull the value at that winning index ( => "X" or "O")
-    #returns nil when no winner --> if self.won? is falsey, then it will return nil
+                #returns X when X won
+                #returns O when O won --> if self.won? is true, it returns the winning combination so I'm looking at the index to pull the value at that winning index ( => "X" or "O")
+                #returns nil when no winner --> if self.won? is falsey, then it will return nil
     self.won? ? @board.cells[self.won?[0]] : nil
   end
 
@@ -46,12 +46,8 @@ class Game
     self.board.turn_count.even? ? player = "player_1" : player = "player_2"
 
     input = self.send(player).move(self.board)
-    if self.board.valid_move?(input)
-      self.board.update(input, send(player))
-    else
-      puts "Try Again."
-      input = self.send(player).move(self.board)
-    end
+
+    self.board.valid_move?(input) ? self.board.update(input, send(player)) : input = self.send(player).move(self.board)
   end
 
   def play
@@ -59,8 +55,8 @@ class Game
     until self.over?
       self.turn
       self.board.display
-      puts "\n"
     end
+
 
     if self.draw?
       puts "Cat's Game!"
