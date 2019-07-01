@@ -27,11 +27,25 @@ WIN_COMBINATIONS = [
 
   def won?
     WIN_COMBINATIONS.each do |combo|
-      # if (board.cells[combo[0]],board.cells[combo[1]],board.cells[combo[2]]).all?("X") || (board.cells[combo[0]],board.cells[combo[1]],board.cells[combo[2]]).all?("O")
-      #   return combo
-      # end
+      if [board.cells[combo[0]],board.cells[combo[1]],board.cells[combo[2]]].all?("X") || [board.cells[combo[0]],board.cells[combo[1]],board.cells[combo[2]]].all?("O")
+        return combo
+      end
     end
     return false
+  end
+
+  def draw?
+    !board.cells.include?(" ") && !won? ? true : false
+  end
+
+  def over?
+    !board.cells.include?(" ")
+  end
+
+  def winner
+    if won?
+      board.cells[won?[0]]
+    end
   end
 
 
