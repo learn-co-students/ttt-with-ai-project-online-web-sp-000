@@ -1,3 +1,4 @@
+require 'pry'
 class Game
   attr_accessor :board, :player_1, :player_2
 
@@ -23,6 +24,17 @@ WIN_COMBINATIONS = [
   def current_player
     @board.turn_count % 2 == 0 ? player_1 : player_2
   end
+
+  def won?
+    WIN_COMBINATIONS.each do |combo|
+      # if (board.cells[combo[0]],board.cells[combo[1]],board.cells[combo[2]]).all?("X") || (board.cells[combo[0]],board.cells[combo[1]],board.cells[combo[2]]).all?("O")
+      #   return combo
+      # end
+    end
+    return false
+  end
+
+
 
 
 end
