@@ -48,6 +48,10 @@ WIN_COMBINATIONS = [
     end
   end
 
+  def turn
+
+  end
+
 
 
 
