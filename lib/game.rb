@@ -49,8 +49,27 @@ WIN_COMBINATIONS = [
   end
 
   def turn
+    puts "Choose a square"
+    input = current_player.move(board)
+    if board.valid_move?(input)
+      board.update(input,current_player)
+    else turn
+    end
+  end
+
+  def play
+    while !over? && !won? && !draw?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    end
+    if draw?
+      puts "Cat's Game!"
+    end
 
   end
+
 
 
 
