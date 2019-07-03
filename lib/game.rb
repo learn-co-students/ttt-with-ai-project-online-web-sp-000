@@ -49,7 +49,7 @@ WIN_COMBINATIONS = [
   end
 
   def turn
-    puts "Choose a square"
+    puts "#{current_player} Choose a square"
     input = current_player.move(board)
     if board.valid_move?(input)
       board.update(input,current_player)
@@ -67,11 +67,6 @@ WIN_COMBINATIONS = [
     if draw?
       puts "Cat's Game!"
     end
-
   end
-
-
-
-
 
 end
