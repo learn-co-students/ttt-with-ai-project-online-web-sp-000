@@ -49,8 +49,14 @@ WIN_COMBINATIONS = [
   end
 
   def turn
-    board.display
     puts "#{current_player.token} Choose a square (1-9)"
+    puts " 1 | 2 | 3 "
+    puts "------------"
+    puts " 4 | 5 | 6 "
+    puts "------------"
+    puts " 7 | 8 | 9  "
+    puts ""
+    board.display
     input = current_player.move(board)
     if board.valid_move?(input)
       board.update(input,current_player)
