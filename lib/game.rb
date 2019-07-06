@@ -111,8 +111,8 @@ class Game
    end
 
    def turn
+     puts "Your turn #{current_player.token}"
      puts "Please enter a number 1-9:"
-
      input = current_player.move(@board)
      until @board.valid_move?(input)
        puts "Please enter a number 1-9:"
