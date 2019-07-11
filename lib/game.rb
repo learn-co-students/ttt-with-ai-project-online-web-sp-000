@@ -64,17 +64,44 @@ class Game
     end
   end
 
+  def self.start
+    puts "How many are playing? 0, 1, 2"
+    input = gets.strip
+    player_1 = nil
+    player_2 = nil
 
+    if input == "0"
+      player_1 = Players::Computer.new("O")
+      player_2 = Players::Computer.new("X")
+      Game.new(player_1, player_2).play
 
+    elsif input == "1"
+      puts "Would you like to be 'X' or 'O'?"
+      input = gets.strip
+      if input == "X"
+        player_1 = Players::Human.new("X")
+        player_2 = Players::Human.new("O")
+      else
+        player_1 = Players::Human.new("X")
+        player_2 = Players::Human.new("O")
+      end
+      Game.new(player_1, player_2).play
 
+    elsif input == "2"
+      puts "You decide who goes first then type: 'X'"
+      input = gets.strip
+      if input == "X"
+        player_1 = Players::Human.new("X")
+        player_2 = Players::Human.new("O")
+      else
+        player_1 = Players::Human.new("X")
+        player_2 = Player::Human.new("O")
+      end
+      Game.new(player_1, player_2).play
 
+    end
 
-
-
-
-
-
-
+  end
 
 
 end
