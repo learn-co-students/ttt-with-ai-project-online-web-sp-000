@@ -64,6 +64,49 @@ class Game
     end
   end
 
+  def play_single
+    while over? == false
+
+      if board.turn_count.even?
+        turn
+      else
+        input = Random.rand(-1...9)
+        if board.valid_move?(input)
+          board.update(input, current_player)
+          board.display
+          play_single
+        else
+          play_single
+        end
+      end
+
+    end
+    if draw? == true
+      puts "Cat's Game!"
+    else
+      puts "Congratulations #{winner}!"
+    end
+  end
+
+  def play_computers
+    while over? == false
+      input = Random.rand(-1...9)
+      if board.valid_move?(input)
+        board.update(input, current_player)
+        board.display
+        sleep(1)
+        play_computers
+      else
+        play_computers
+      end
+    end
+    if draw? == true
+      puts "Cat's Game!"
+    else
+      puts "Congratulations #{winner}!"
+    end
+  end
+
   def self.start
     puts "How many are playing? 0, 1, 2"
     input = gets.strip
@@ -73,7 +116,7 @@ class Game
     if input == "0"
       player_1 = Players::Computer.new("O")
       player_2 = Players::Computer.new("X")
-      Game.new(player_1, player_2).play
+      Game.new(player_1, player_2).play_computers
 
     elsif input == "1"
       puts "Would you like to be 'X' or 'O'?"
@@ -85,7 +128,7 @@ class Game
         player_1 = Players::Human.new("X")
         player_2 = Players::Human.new("O")
       end
-      Game.new(player_1, player_2).play
+      Game.new(player_1, player_2).play_single
 
     elsif input == "2"
       puts "You decide who goes first then type: 'X'"
