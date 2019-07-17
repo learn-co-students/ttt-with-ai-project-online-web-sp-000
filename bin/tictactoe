@@ -1,3 +1,39 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def game_with_ai
+
+puts "Welcome to Command Line Tic Tac Toe. Hope you enjoy the game cause it was hard to figure out how to get here:-)!"
+
+puts "What type of game would you like to play? Player mode:
+
+0 - Computer vs Computer
+1 - You vs Computer
+2 - You vs a Friend "
+
+player_mode = gets.strip
+
+if player_mode == "1"
+  puts "Would you like to go fist? [y/ n]"
+  if gets.strip == "y"
+      Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
+    else   Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new).play
+    end
+
+  elsif player_mode == "0"
+    Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
+
+
+  elsif player_mode == "2"
+    Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new).play
+  end
+
+  puts "Would like to play again? [y/ n]"
+
+  end
+
+ game_with_ai until gets.strip == "n"
+
+#lala = Game.new
+#lala.play
