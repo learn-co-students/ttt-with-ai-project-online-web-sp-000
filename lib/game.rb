@@ -48,14 +48,15 @@ class Game
     player = current_player
     current_move = player.move(@board)    #calls Human Class #move method
     if !@board.valid_move?(current_move)  #if not a valid move
+      puts "That's not a valid move. Pick an available number please.\n\n"
       return turn                         #turn again
     else
       puts "Turn: #{@board.turn_count+1}\n"
       @board.display
       @board.update(current_move, player)
-      puts "#{player.token} moved #{current_move}"
+      puts "#{player.token} moved to position #{current_move}"
       @board.display
-      puts "\n\n"
+      puts "\n"                           #for spacing in CLI
     end
   end
 
@@ -65,6 +66,37 @@ class Game
       puts "Congratulations #{winner}!"    #Congratulations winner with mass assignment
     elsif draw?
       puts "Cat's Game!"                                      #prints "Cat\'s Game!" on a draw
+    end
+  end
+
+  def start
+    puts "Welcome to Command Line Tic Tac Toe!\n\n"
+    puts "What type of game would you like to play? Please choose a game mode:"
+    puts "Type 0 - You vs. Computer"
+    puts "Type 1 - You vs. Human"
+    puts "Type 2 - Computer vs. Computer"
+
+    game_mode = gets.strip
+    if game_mode == "0"
+      puts "Do you want to go first? (y/n)"
+      if gets.strip == "y"
+        Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
+      else
+        Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new).play
+      end
+    end
+
+    if game_mode == "1"
+      #puts "Do you want to go first? (y/n)"                      #Not necessary when playing a human
+      if gets.strip == "y"
+        Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new).play
+      else
+        Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new).play
+      end
+    end
+
+    if game_mode == "2"
+      Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
     end
   end
 end
