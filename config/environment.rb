@@ -1,4 +1,4 @@
-require 'bundler'
+require 'bundler'       #requires our bundler for...
 Bundler.require
 
-require_all 'lib'
+require_all 'lib'       #requires all libraries
