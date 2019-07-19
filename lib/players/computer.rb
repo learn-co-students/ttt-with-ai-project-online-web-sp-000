@@ -1,6 +1,6 @@
 module Players                        #define module Players
   class Computer < Player             #Computer inherits from Player class. Used nested module NAMESPACING here for Computer inside modules Players
-    def move(board)                   #returns a valid position for the computer to move. Hard-coded
+    def move(board)                   #returns a valid position for the computer to move. Hard-coded condition base algorithm
       if board.cells[4] == " "        #trys center first
         "5"
       elsif board.cells[0] == " "     #trys corners next
@@ -11,7 +11,7 @@ module Players                        #define module Players
         "7"
       elsif board.cells[8] == " "
         "9"
-      elsif board.cells[1] == " "     #trys others next
+      elsif board.cells[1] == " "     #trys middles next
         "2"
       elsif board.cells[3] == " "
         "4"

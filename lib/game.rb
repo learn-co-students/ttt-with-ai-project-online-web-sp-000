@@ -79,7 +79,7 @@ class Game
     game_mode = gets.strip
     if game_mode == "0"
       puts "Do you want to go first? (y/n)"
-      if gets.strip == "y"
+      if gets.strip.downcase == "y"
         Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
       else
         Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new).play
