@@ -1,7 +1,6 @@
 require 'pry'
-
+#Game class is the main model of the application and represents a singular instance of a Tic-tac-toe session.
 class Game
-
   attr_accessor :board, :player_1, :player_2           #provides access to the board, player_1, player_2
 
   WIN_COMBINATIONS = [            #Defined class Constant array
@@ -45,8 +44,27 @@ class Game
   def winner
     board.cells[won?[0]] if won?        #return X when X won and vice versa
   end
-
   def turn
+    player = current_player
+    current_move = player.move(@board)    #calls Human Class #move method
+    if !@board.valid_move?(current_move)  #if not a valid move
+      return turn                         #turn again
+    else
+      puts "Turn: #{@board.turn_count+1}\n"
+      @board.display
+      @board.update(current_move, player)
+      puts "#{player.token} moved #{current_move}"
+      @board.display
+      puts "\n\n"
+    end
+  end
 
+  def play                                #asks for players input on a turn of the game
+    turn until over?                        #checks if game is over after every turn (logically if not won? or draw? not over) look at #over? method
+    if won?                               #stops playing if someone has won
+      puts "Congratulations #{winner}!"    #Congratulations winner with mass assignment
+    elsif draw?
+      puts "Cat's Game!"                                      #prints "Cat\'s Game!" on a draw
+    end
   end
 end
