@@ -11,6 +11,14 @@ def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"
   # binding.pry
 end
 
+def current_player
+  if board.turn_count % 2 == 0
+    @player_1
+  else
+    @player_2
+  end
+end
+
 def display_board
     puts " #{@board[0]} | #{@board[1]} | #{@board[2]} "
     puts "-----------"
@@ -54,16 +62,6 @@ def won?
         position_taken?(combo[0]) && @board[combo[0]] == @board[combo[1]] && @board[combo[1]]  == @board[combo[2]]
       end
   end
-def current_player
-  if turn_count % 2 == 0
-    "X"
-  else
-    "O"
-  end
-end
-#
-
-
 def draw?
   full? && !won?
 end
