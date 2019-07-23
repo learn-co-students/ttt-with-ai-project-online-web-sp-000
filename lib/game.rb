@@ -20,21 +20,9 @@ end
 def move(index, player)
   @board[index] = player
 end
-def position_taken?(index)
-  @board[index] == "X" || @board[index] == "O"
-end
-def valid_move?(index)
-  !position_taken?(index) && index.between?(0, 8)
-end
-def turn_count
-  @count = 0
-  @board.each do |space|
-    if space == "X" || space == "O"
-      @count += 1
-    end
-  end
-  @count
-end
+
+
+
 def turn
   puts "Please enter 1-9:"
   input = gets.strip
@@ -70,11 +58,7 @@ def current_player
   end
 end
 #
-def full?
-  @board.all? do |space|
-    space == "X" || space == "O"
-  end
-end
+
 
 def draw?
   full? && !won?
