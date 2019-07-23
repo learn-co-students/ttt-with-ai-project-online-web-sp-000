@@ -60,7 +60,7 @@ class Board
   end
   #is it valid
    def valid_move?(input)
-    if taken?(input) == false && input.to_i.between?(1,9)
+    if taken?(input.to_i) == false && input.to_i.between?(1,9)
     true
     else
     false
