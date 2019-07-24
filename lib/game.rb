@@ -4,13 +4,28 @@ class Game
 
 attr_accessor :board, :player_1, :player_2
 
-def new_game
-  puts "Welcome to Tic Tac Toe!  Would you like to play a 0, 1, or 2 player game?"
+def self.new_game
+  puts "Welcome to Tic Tac Toe!"
+  puts "Would you like to play a 0, 1, or 2 player game?"
   input = gets.strip.to_i
+  puts "If you would like to go first and be player X, enter (I Will), if not, enter (Them)."
+  first_player = gets.strip
    if input == 0
-     Self.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
-   elsif input == 1
-     Self.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+     self.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
+   elsif input == 1 && first_player == "I Will"
+     self.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
+   elsif input == 1 && first_player == "Them"
+     self.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new).play
+   elsif input == 2 && first_player == "I Will"
+     self.new(Players::Human.new("X"), Players::Human.new("O"), Board.new).play
+   end
+   puts "Would you like to play again? (Y or N)"
+     if gets.strip == "Y"
+       new_game
+     else
+       puts "Goodbye, thank you for playing!"
+   end
+ end
 
 
 def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
