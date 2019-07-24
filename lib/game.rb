@@ -36,14 +36,15 @@ end
 
 
 def turn
-  puts "Please enter 1-9:"
-  input = gets.strip
-  index = input_to_index(input)
-  if valid_move?(index)
-    move(index, current_player)
-  else turn
-  end
-  display_board
+  puts "Please enter a number 1-9:"
+    @user_input = current_player.move(@board)
+    if @board.valid_move?(@user_input)
+      @board.update(@user_input, current_player)
+    else puts "Please enter a number 1-9:"
+      @board.display
+      turn
+    end
+    @board.display
 end
 
 def play
@@ -59,21 +60,26 @@ end
 
 def won?
       WIN_COMBINATIONS.detect do |combo|
-        position_taken?(combo[0]) && @board[combo[0]] == @board[combo[1]] && @board[combo[1]]  == @board[combo[2]]
+        board.taken?(combo[0] + 1) && board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]]  == board.cells[combo[2]]
+
       end
+
   end
+# binding.pry
 def draw?
-  full? && !won?
+  board.full? && !won?
 end
 
 def over?
-  won? || full? || draw?
+  won? || board.full? || draw?
 end
 
 def winner
-    if won?
-       @board[won?[1]]
-    end
+   if won?
+    combination = won?
+    @board.cells[combination[0]]
+      #  binding.pry
+   end
 end
 
 
