@@ -4,6 +4,15 @@ class Game
 
 attr_accessor :board, :player_1, :player_2
 
+def new_game
+  puts "Welcome to Tic Tac Toe!  Would you like to play a 0, 1, or 2 player game?"
+  input = gets.strip.to_i
+   if input == 0
+     Self.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+   elsif input == 1
+     Self.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+
+
 def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
   @board = board
   @player_1 = player_1
