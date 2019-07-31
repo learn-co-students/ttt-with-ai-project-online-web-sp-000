@@ -1,5 +1,4 @@
 class Board
-  require 'pry'
   attr_accessor :cells
 
   def initialize
