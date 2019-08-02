@@ -1,3 +1,31 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def start
+puts "Hello, what kind of game would you like to play?
+0, 1 or 2 players? (Type 0, 1 or 2)"
+game_type = gets.strip
+
+case game_type
+
+when game_type == "0"
+Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
+
+when game_type == "1"
+puts "Choose your token, X or O?"
+token_choice = gets.strip
+  if token_choice == "X"
+computer_token == "O"
+else
+computer_token == "X'
+(Players::Human.new(token_choice), Players::Computer.new(computer_token)).play
+
+
+when game_type == "2"
+end
+end
+
+start
+
+
