@@ -12,12 +12,15 @@ module Players
     def move(board)
      
     case board.turn_count
-        when 0 #if player 1, on 1st turn always try go in a corner
+        when 0 #if computer is player 1, on 1st turn always try go in a corner
           [1,3,7,9].sample.to_s
         
-        when 1 #if player 2, if player 1 has taken a corner on first move, choose the centre, otherwise choose randomly from free spaces
+        when 1 #if computer is player 2, if player 1 has taken a corner on first move, choose the centre, or if centre has been taken, choose a corner otherwise choose randomly from free spaces
           if [1,3,7,9].any?{|corner| board.taken?(corner)}
           "5"
+          elsif
+          board.taken?(5)
+          [1,3,7,9].sample.to_s
           else 
              random = rand(1..9).to_s
              until !board.taken?(random)
@@ -26,14 +29,18 @@ module Players
              random
        end
         
-        when 2 #if player 1, on 2nd turn try to go in the centre, otherwise choose somewhere random
+        when 2 #if computer is player 1, on 2nd turn try to go in the centre, otherwise choose somewhere random
           if board.taken?(5)
             rand(1..9).to_s
           else "5"
           end
         
-        else #choose a random space
-          rand(1..9).to_s
+        else #choose a random free space
+           random = rand(1..9).to_s
+             until !board.taken?(random)
+               random = rand(1..9).to_s
+             end
+             random
       end
     end
     
