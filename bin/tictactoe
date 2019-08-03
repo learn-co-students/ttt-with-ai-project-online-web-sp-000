@@ -9,8 +9,6 @@ puts "Hello, what kind of game would you like to play?
 game_type = gets.strip
 
 
-
-
 case game_type
 when "0"
 Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
@@ -40,6 +38,9 @@ again = gets.strip
 end
 
 start
+
+
+
 
 
 
