@@ -19,7 +19,8 @@ module Players
         if [1,3,7,9].any?{|corner| board.taken?(corner)}
           "5"
         else 
-          rand(1..9).to_s
+          free_spots = [1..9].collect{|position| !board.taken?(position)}
+          free_spots.sample.to_s
          end
         
         when 2 #if player 1, on 2nd turn try to go in the centre, otherwise choose somewhere random
