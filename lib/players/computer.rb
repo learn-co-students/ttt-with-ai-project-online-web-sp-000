@@ -48,6 +48,11 @@ module Players
           [6,8].sample.to_s
         end
             
+           #when 3 Your second X should be placed on an edge, not a corner, unless you need to block your opponent from getting three in a row
+           
+           #when 4 
+           #if move 2 was a corner and move three is a corner, Place your third X in the last empty corner. or if move two was an edge,If your opponent puts down an O in the corner that's not next to your X, you can use your third X to block their move and automatically win with your fourth X.
+            
         else #choose a random free space
            random = rand(1..9).to_s
              until !board.taken?(random)
@@ -56,11 +61,6 @@ module Players
              random
       end
     end
-    
+    end
   end
-   
-   
-    #if other player has two in a row pick the third one
-    
-end
 
