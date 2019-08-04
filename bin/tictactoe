@@ -5,7 +5,7 @@ require_relative '../config/environment'
 def start
 
 puts "Hello, what kind of game would you like to play?
-0, 1 or 2 players? (Type 0, 1 or 2)"
+0, 1 or 2 players? or Wargames? (Type 0, 1, 2 or wargames)"
 game_type = gets.strip
 
 
@@ -25,6 +25,16 @@ Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
 when "2"
 puts "Whoever wants to be X, goes first!"
 Game.new(Players::Human.new("X"), Players::Human.new("O")).play
+
+when "wargames"
+numbers_of_draws = 0
+100.times {
+  Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
+    if Game.draw?
+    number_of_draws += 1
+    end
+    }
+puts "The computer drew against itself #{number_of_draws} times out of 100."
 end
 
 puts "Would you like you play again? Y/N?"

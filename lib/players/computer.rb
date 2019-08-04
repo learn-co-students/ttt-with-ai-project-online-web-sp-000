@@ -18,6 +18,10 @@ module Players
         when 1 #if computer is player 2, if player 1 has taken a corner on first move, choose the centre, or if centre has been taken, choose a corner otherwise choose randomly from free spaces
           if [1,3,7,9].any?{|corner| board.taken?(corner)}
           "5"
+<<<<<<< HEAD
+=======
+          #add an elsif for if the centre has been taken, choose a corner!
+>>>>>>> ddadd7b1c50fe02c88b3fc382317eb417b403125
           elsif
           board.taken?(5)
           [1,3,7,9].sample.to_s
