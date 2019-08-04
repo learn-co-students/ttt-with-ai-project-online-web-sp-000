@@ -26,16 +26,22 @@ when "2"
 puts "Whoever wants to be X, goes first!"
 Game.new(Players::Human.new("X"), Players::Human.new("O")).play
 
+
 when "wargames"
-numbers_of_draws = 0
-100.times {
-  Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
-    if Game.draw?
-    number_of_draws += 1
-    end
-    }
-puts "The computer drew against itself #{number_of_draws} times out of 100."
+Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
+puts "This feature isn't quite ready yet!"
 end
+
+
+#numbers_of_draws = 0
+#100.times {
+ # Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
+   # if Game.draw?
+   ## number_of_draws += 1
+   # end
+   # }
+#puts "The computer drew against itself #{number_of_draws} times out of #100##."
+#end
 
 puts "Would you like you play again? Y/N?"
 again = gets.strip
@@ -48,11 +54,6 @@ again = gets.strip
 end
 
 start
-
-
-
-
-
 
 
 
