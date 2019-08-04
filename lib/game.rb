@@ -72,6 +72,11 @@ class Game
     @@draw_count
   end
   
+  def self.draw_count=(i)
+    @@draw_count= (i)
+  end
+    
+  
   def play
     turn until over? == true
     if won?

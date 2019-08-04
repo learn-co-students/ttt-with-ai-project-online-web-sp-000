@@ -32,6 +32,7 @@ numbers_of_draws = 1
 100.times do Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
  end
 puts "The computer drew against itself #{Game.draw_count} times out of 100."
+Game.draw_count = 0
 end
 
 
