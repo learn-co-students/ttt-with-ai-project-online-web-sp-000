@@ -38,15 +38,16 @@ module Players
               "3"
           elsif board.taken?(5) && @first_move == "9"
               "1"
-          else
-             choice = [2,4,6,8].sample.to_s #needs amending so its not touching first move
-             until !board.taken?(choice)
-             choice = [2,4,6,8].sample.to_s
-            end
-            choice
-          end
+          elsif @first_move == "1"
+          [6,8].sample.to_s
+          elsif @first_move == "3"
+          [4,8].sample.to_s
+          elsif @first_move == "7"
+          [2,6].sample.to_s
+          else #if first_ move was "9"
+          [6,8].sample.to_s
+        end
             
-        
         else #choose a random free space
            random = rand(1..9).to_s
              until !board.taken?(random)
