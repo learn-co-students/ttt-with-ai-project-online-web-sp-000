@@ -1,7 +1,7 @@
 require "pry"
 class Game
   
-  attr_accessor :board, :player_1, :player_2, :input
+  attr_accessor :board, :player_1, :player_2, :input, :draw_count
   
   def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board = Board.new)
     @board = board
@@ -66,6 +66,11 @@ class Game
     end
   end
   
+  @@draw_count = 0
+  
+  def self.draw_count
+    @@draw_count
+  end
   
   def play
     turn until over? == true
@@ -74,6 +79,7 @@ class Game
       @board.display
     elsif draw?
       puts "Cat's Game!"
+      @@draw_count += 1
       @board.display
     end
   end

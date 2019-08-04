@@ -28,20 +28,13 @@ Game.new(Players::Human.new("X"), Players::Human.new("O")).play
 
 
 when "wargames"
-Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
-puts "This feature isn't quite ready yet!"
+numbers_of_draws = 1
+100.times do Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
+ end
+puts "The computer drew against itself #{Game.draw_count} times out of 100."
 end
 
 
-#numbers_of_draws = 0
-#100.times {
- # Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
-   # if Game.draw?
-   ## number_of_draws += 1
-   # end
-   # }
-#puts "The computer drew against itself #{number_of_draws} times out of #100##."
-#end
 
 puts "Would you like you play again? Y/N?"
 again = gets.strip
