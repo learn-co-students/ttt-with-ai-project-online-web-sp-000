@@ -37,7 +37,8 @@ user_request = ""
   elsif user_request == "exit"
   end
 
-  if user_request != "exit"
+  if user_request == "exit"
+  elsif user_request == '0' || user_request == '1' || user_request == '2'
     current_game.play
   end
 
