@@ -52,6 +52,7 @@ until user_request == "N" || user_request == "n" do
 
   end
   puts "Play again? Y/N"
+  current_game = ""
 end
 
 # ruby bin/tictactoe
