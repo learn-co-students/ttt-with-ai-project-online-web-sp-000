@@ -10,7 +10,7 @@ puts "Enter '2' to play againt your friend."
 puts "Enter 'exit' to exit program"
 
 user_request = ""
-until user_request == "N" || user_request == "n" do
+# until user_request == "N" || user_request == "n" do
   user_request = gets.strip
 
   if user_request == '0'
@@ -55,6 +55,6 @@ until user_request == "N" || user_request == "n" do
   current_game = ""
   user_request = gets.strip
 
-end
+# end
 
 # ruby bin/tictactoe
