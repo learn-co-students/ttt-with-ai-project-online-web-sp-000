@@ -88,7 +88,7 @@ class Game
     user_input = self.current_player.move(self.board)
     if self.board.valid_move?(user_input)
       board.update(user_input, self.current_player)
-      board.display
+      board.display  
     else
       self.current_player.move(self.board)
     end

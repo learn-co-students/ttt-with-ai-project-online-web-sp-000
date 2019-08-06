@@ -36,7 +36,10 @@ user_request = ""
     current_game = Game.new(player_1, player_2, Board.new)
   elsif user_request == "exit"
   end
+
+  if user_request != "exit"
     current_game.play
+  end
 
 
 # ruby bin/tictactoe
