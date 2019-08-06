@@ -36,11 +36,7 @@ user_request = ""
     current_game = Game.new(player_1, player_2, Board.new)
   elsif user_request == "exit"
   end
-  current_game.board.display
-  binding.pry
-  until current_game.over? do
     current_game.play
-  end
 
 
 # ruby bin/tictactoe
