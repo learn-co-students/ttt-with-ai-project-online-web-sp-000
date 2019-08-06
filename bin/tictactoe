@@ -2,6 +2,10 @@
 
 require_relative '../config/environment'
 
+user_request = ""
+
+until user_request == "exit" do
+
 puts "Welcome to Tic-Tac-Toe!"
 puts "What game would you like to play?"
 puts "Enter '0' to have AI go head to head."
@@ -9,8 +13,6 @@ puts "Enter '1' to play against the computer."
 puts "Enter '2' to play againt your friend."
 puts "Enter 'exit' to exit program"
 
-user_request = ""
-# until user_request == "N" || user_request == "n" do
   user_request = gets.strip
 
   if user_request == '0'
@@ -49,12 +51,7 @@ user_request = ""
     ## exits ##
   elsif user_request == '0' || user_request == '1' || user_request == '2'
     current_game.play
-
   end
-  puts "Play again? Y/N"
-  current_game = ""
-  user_request = gets.strip
-
-# end
+end
 
 # ruby bin/tictactoe
