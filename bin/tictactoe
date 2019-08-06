@@ -4,14 +4,18 @@ require_relative '../config/environment'
 
 user_request = ""
 
-until user_request == "exit" do
+until user_request == "exit" || user_request == "n" || user_request == "N"do
 
+puts ""
 puts "Welcome to Tic-Tac-Toe!"
-puts "What game would you like to play?"
+puts ""
 puts "Enter '0' to have AI go head to head."
 puts "Enter '1' to play against the computer."
 puts "Enter '2' to play againt your friend."
+puts "Enter 'wargames' to have AI go head to head more than once."
 puts "Enter 'exit' to exit program"
+puts ""
+
 
   user_request = gets.strip
 
@@ -50,19 +54,37 @@ puts "Enter 'exit' to exit program"
 
     current_game.play
 
+  elsif user_request == "wargames"
+    puts "Play ____ games AI head to head."
+    puts "How many games?"
+    games_input = gets.strip
+    games = games_input.to_i
+
+    winners = []
+    games.times do
+      player_1 = Players::Computer.new("X")
+      player_2 = Players::Computer.new("O")
+      current_game = Game.new(player_1, player_2, Board.new)
+
+      current_game.play
+      winners << current_game.winner
+    end
+    x_wins = winners.count("X")
+    o_wins = winners.count("O")
+    cat_games = winners.count(nil)
+    puts "#{x_wins} wins for 'X'"
+    puts "#{o_wins} wins for 'O'"
+    puts "#{cat_games} cat's games"
+
   elsif user_request == "exit"
+
   end
 
-  if user_request == "exit"
-    ## exits ##
-  # elsif user_request == '0' || user_request == '1' || user_request == '2'
-  #   current_game.play
-  # elsif user_request == 'wargames'
-  #   10.times do
-  #     current_game.play
-  #   end
-  #
-  # end
+  puts ""
+  puts "Play again? Y/N"
+  user_request = gets.strip
+
+
 end
 
 # ruby bin/tictactoe
