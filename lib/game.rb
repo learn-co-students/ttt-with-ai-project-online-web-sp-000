@@ -31,9 +31,12 @@ class Game
   end
 
   def won?
-    return WIN_COMBINATIONS unless self.board.full? and 
-    WIN_COMBINATIONS.each do |winning_array|
-    self.board[0]
+    WIN_COMBINATIONS.each do |array|
+      first array[0]
+      second = array[1]
+      third = array[2]
+      (self.board[first] && self.board[second] && self.board[third]) == "X"
+      puts array
     end
   end
 
