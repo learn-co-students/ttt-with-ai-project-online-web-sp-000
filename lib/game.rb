@@ -22,7 +22,7 @@ class Game
   end
   
   def current_player 
-    turn = self.board.turn_count
+    turn = @board.turn_count
     if turn.even?
       player_1
     else 
@@ -31,13 +31,44 @@ class Game
   end
 
   def won?
-    WIN_COMBINATIONS.each do |array|
-      first array[0]
-      second = array[1]
-      third = array[2]
-      (self.board[first] && self.board[second] && self.board[third]) == "X"
-      puts array
+    WIN_COMBINATIONS.detect do |win_array|
+      @board.cells[win_array[0]] == @board.cells[win_array[1]] &&
+      @board.cells[win_array[1]] == @board.cells[win_array[2]] &&
+      @board.taken?(win_array[0])
     end
   end
+  
+  def draw?
+    @board.full? && !self.won?
+  end
+  
+  def over?
+    self.won? || self.draw?
+  end
 
+  def winner
+    winner = self.won?
+    @board.cells[winner[0]] if winner != nil
+  end
+  
+  def turn 
+    puts "Please, enter 1 - 9!"
+    position = current_player.move(@board)
+      if @board.valid_move?(position) == true
+        @board.update(position,current_player)
+      else  
+        turn 
+      end
+  end
+  
+  def play 
+    self.turn until self.over?
+    if self.draw?
+      puts "draw" 
+    else
+      puts "The winner is "
+    end
+  end
+  
 end
+
