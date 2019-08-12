@@ -51,10 +51,9 @@ class Board
   end
 
   def update(user_input, player)
-    #position = user_input.to_i
-    #position -= 1
-    #@cells[position] = player.token
-    position(user_input) = player.token
+    position = user_input.to_i
+    position -= 1
+    @cells[position] = player.token
   end
 
 end

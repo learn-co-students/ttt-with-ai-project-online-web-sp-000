@@ -2,6 +2,7 @@ class Game
 
   
   attr_accessor :board, :player_1, :player_2
+   
 
   WIN_COMBINATIONS = [
     [0,1,2],
@@ -34,39 +35,41 @@ class Game
     WIN_COMBINATIONS.detect do |win_array|
       @board.cells[win_array[0]] == @board.cells[win_array[1]] &&
       @board.cells[win_array[1]] == @board.cells[win_array[2]] &&
-      @board.taken?(win_array[0])
+      @board.cells[win_array[0]] != " "
     end
   end
   
   def draw?
-    @board.full? && !self.won?
+    @board.full? && !won?
   end
   
   def over?
-    self.won? || self.draw?
+    won? || draw?
   end
 
   def winner
-    winner = self.won?
+    winner = won?
     @board.cells[winner[0]] if winner != nil
   end
   
   def turn 
-    puts "Please, enter 1 - 9!"
+    puts "Please, choose a position between 1 - 9 and press Enter:"
     position = current_player.move(@board)
       if @board.valid_move?(position) == true
         @board.update(position,current_player)
+        @board.display
       else  
+        puts "This move in not valid."
         turn 
       end
   end
   
   def play 
-    self.turn until self.over?
-    if self.draw?
-      puts "draw" 
+    turn until over?
+    if draw?
+      puts "Cat's Game!"
     else
-      puts "The winner is "
+      puts "Congratulations #{winner}!"
     end
   end
   
