@@ -1,3 +1,64 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Hello, welcome to your Tic Tac Toe game."
+puts ""
+
+def play_mode_choice
+  puts "Choose your play mode:"
+  puts "--------------------------------------------------------"
+  puts " Play against someone else: type [1]"
+  puts " Play against the computer: type [2]"
+  puts " Watch the computer play against itself: type [3]"
+  puts " Exit game: type [4]"
+  puts "--------------------------------------------------------"
+  puts "Type your choice and press Enter"
+end
+
+def one_player_style
+  puts "Would you like to take the first turn? [Y/N]"
+  input = gets.strip 
+      if input == "Y" || input == "YES" || input == "Yes" || input == "yes"
+        one_player = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board=Board.new)
+      elsif input == "N" || input == "NO" || input == "No" || input == "no"
+        one_player = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board=Board.new)
+      end
+    one_player.play
+end
+
+def game_style
+  play_mode_choice
+  choice = gets.to_i 
+  
+    if choice == 1
+      puts "One human against another one. player 1, X, starts. The board is ready."
+      two_players = Game.new
+      two_players.play
+      game_style
+      
+    elsif choice == 2
+      puts "One human against a computer. The board is ready!"
+      one_player_style
+      game_style
+      
+    elsif choice == 3
+      puts "Let the machines fight!"
+      computer = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board=Board.new)
+      computer.play
+      game_style
+      
+    elsif choice == nil || choice == " " || choice <= 0 || choice > 9
+      puts "This is not valid choice"
+      game_style
+      
+    elsif choice == 4
+      puts "Goodbye! Thank you for playing."
+      
+    else 
+      puts "This is not valid choice"
+      game_style
+    end
+end
+
+game_style
