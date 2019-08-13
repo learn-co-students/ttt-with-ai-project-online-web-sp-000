@@ -2,13 +2,30 @@
 
 require_relative '../config/environment'
 
-Game.start
 
-puts "Play again? y/n:"
-input = gets.strip.upcase
-while input != "N"
-  Game.start
-  puts "Play again? y/n:"
-  input = gets.strip.upcase
-end
-exit
+#class Tictactoe
+
+  puts "Welcome to Tic Tac Toe!"
+  game = Game.new
+  until game.won?
+    game.play
+  end
+
+  def game.start
+    puts "How would you like to play?"
+    puts "0 = Computer vs Computer"
+    puts "1 = Player vs Computer"
+    puts "2 = Player vs Player"
+    puts "Please select a number (0,1,2) "
+    input = gets.strip.to_i
+  end
+
+  def play_again
+    puts "Do you want to play again? (Y/N)"
+    again = gets.strip.upcase
+    if again == "Y"
+      game = Game.new
+    else again == "N"
+      puts "Thanks for playing!"
+
+  end
