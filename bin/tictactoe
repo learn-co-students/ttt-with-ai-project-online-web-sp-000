@@ -3,8 +3,6 @@
 require_relative '../config/environment'
 
 
-#class Tictactoe
-
   puts "Welcome to Tic Tac Toe!"
   game = Game.new
   until game.won?
