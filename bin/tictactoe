@@ -1,15 +1,11 @@
 #!/usr/bin/env ruby
-
+require 'pry'
 require_relative '../config/environment'
 
 
   puts "Welcome to Tic Tac Toe!"
-  game = Game.new
-  until game.won?
-    game.play
-  end
 
-  def player_type
+  def start
     puts "How would you like to play?"
     puts "0 = Computer vs Computer"
     puts "1 = Player vs Computer"
@@ -18,6 +14,12 @@ require_relative '../config/environment'
     player_type = gets.strip.to_i
   end
 
+  game = Game.new
+  until game.won?
+    game.play
+  end
+
+  def player_type
   if player_type == 0
     game = game.new(Players::Computer.new("X"), Players::Computer.new("O"), board = Board.new)
   elsif player_type == 1
@@ -26,10 +28,9 @@ require_relative '../config/environment'
     until ["X", "O"].include?(token_select) do
       token_select = gets.strip.upcase
     end
-
-    game = (Players::Computer.new(token_select), Players::Human.new(token_select=="X" ? "O" : "X"), board = Board.new)
+    game = game.new(Players::Computer.new(token_select), Players::Human.new(token_select=="X" ? "O" : "X"), board = Board.new)
   else player_type == 2
-    game = (Players::Human.new("X"), Players::Human.new("O"), board = Board.new)
+    game = game.new(Players::Human.new("X"), Players::Human.new("O"), board = Board.new)
   end
 
   def play_again
@@ -39,4 +40,6 @@ require_relative '../config/environment'
       game = Game.new
     else again == "N"
       puts "Thanks for playing!"
+    end
   end
+end
