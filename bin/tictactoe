@@ -5,41 +5,41 @@ require_relative '../config/environment'
 
   puts "Welcome to Tic Tac Toe!"
 
-  def start
     puts "How would you like to play?"
     puts "0 = Computer vs Computer"
     puts "1 = Player vs Computer"
     puts "2 = Player vs Player"
     puts "Please select a number (0,1,2) "
-    player_type = gets.strip.to_i
-  end
+    user_input = gets.strip.to_i
 
+
+if user_input == 0
+  game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), board = Board.new).play
+elsif user_input == 1
+  puts "Choose token for Player (X or O)"
+   token = ""
+   token = "X" :
+  if user_input_2 == "X"
+  game = Game.new(Players::Computer.new("O"), Players::Human.new("X"), board = Board.new)
+else user_input == 2
+  game = Game.new(Players::Human.new("X"), Players::Human.new("O"), board = Board.new)
+  end
+end
+
+
+def play_again
+  puts "Do you want to play again? (Y/N)"
+  again = gets.strip.upcase
+  if again == "Y"
+    game = Game.new
+  else again == "N"
+    puts "Thanks for playing!"
+  end
+end
+
+def gameType
   game = Game.new
   until game.won?
     game.play
-  end
-
-  def player_type
-  if player_type == 0
-    game = game.new(Players::Computer.new("X"), Players::Computer.new("O"), board = Board.new)
-  elsif player_type == 1
-    puts "Choose token for Player (X or O)"
-    token_select = ""
-    until ["X", "O"].include?(token_select) do
-      token_select = gets.strip.upcase
-    end
-    game = game.new(Players::Computer.new(token_select), Players::Human.new(token_select=="X" ? "O" : "X"), board = Board.new)
-  else player_type == 2
-    game = game.new(Players::Human.new("X"), Players::Human.new("O"), board = Board.new)
-  end
-
-  def play_again
-    puts "Do you want to play again? (Y/N)"
-    again = gets.strip.upcase
-    if again == "Y"
-      game = Game.new
-    else again == "N"
-      puts "Thanks for playing!"
-    end
   end
 end
