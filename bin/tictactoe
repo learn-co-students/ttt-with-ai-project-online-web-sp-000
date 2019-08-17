@@ -1,3 +1,90 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+user_request = ""
+
+until user_request == "exit" || user_request == "n" || user_request == "N"do
+
+puts ""
+puts "Welcome to Tic-Tac-Toe!"
+puts ""
+puts "Enter '0' to have AI go head to head."
+puts "Enter '1' to play against the computer."
+puts "Enter '2' to play againt your friend."
+puts "Enter 'wargames' to have AI go head to head more than once."
+puts "Enter 'exit' to exit program"
+puts ""
+
+
+  user_request = gets.strip
+
+  if user_request == '0'
+    puts "You chose AI head to head."
+    player_1 = Players::Computer.new("X")
+    player_2 = Players::Computer.new("O")
+    current_game = Game.new(player_1, player_2, Board.new)
+
+    current_game.play
+
+  elsif  user_request == '1'
+    puts "You chose play against computer."
+    puts "Would you like to be 'X' or 'O'?"
+    player_choice = gets.strip
+
+    if player_choice == "X" || player_choice == "x"
+      player_1 = Players::Human.new("X")
+      player_2 = Players::Computer.new("O")
+
+    elsif player_choice == "O" || player_choice == "o"
+      player_1 = Players::Computer.new("X")
+      player_2 = Players::Human.new("O")
+
+    end
+
+    current_game = Game.new(player_1, player_2, Board.new)
+
+    current_game.play
+
+  elsif user_request == '2'
+    puts "You chose play against your friend."
+    player_1 = Players::Human.new("X")
+    player_2 = Players::Human.new("O")
+    current_game = Game.new(player_1, player_2, Board.new)
+
+    current_game.play
+
+  elsif user_request == "wargames"
+    puts "Play ____ games AI head to head."
+    puts "How many games?"
+    games_input = gets.strip
+    games = games_input.to_i
+
+    winners = []
+    games.times do
+      player_1 = Players::Computer.new("X")
+      player_2 = Players::Computer.new("O")
+      current_game = Game.new(player_1, player_2, Board.new)
+
+      current_game.play
+      winners << current_game.winner
+    end
+    x_wins = winners.count("X")
+    o_wins = winners.count("O")
+    cat_games = winners.count(nil)
+    puts "#{x_wins} wins for 'X'"
+    puts "#{o_wins} wins for 'O'"
+    puts "#{cat_games} cat's games"
+
+  elsif user_request == "exit"
+
+  end
+
+  puts ""
+  puts "Play again? Y/N"
+  user_request = gets.strip
+
+
+end
+
+# ruby bin/tictactoe
