@@ -1,3 +1,41 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+#Game.run
+puts "Welcome to Tic-Tac-Toe with AI (easy mode)"
+puts "How do you want to play?"
+puts "Enter '0' for computer vs. computer."
+puts "Enter '1' for player vs. computer."
+puts "Enter '2' for player vs. player."
+
+  players = gets.strip.to_i
+  until players == 0 || players == 1 || players == 2
+    puts "Please enter '0', '1', or '2'."
+    players = gets.strip.to_i
+  end
+
+puts "Should player 1 use 'X' or 'O'?"
+
+  token = gets.strip
+  until token == "X" || token == "O"
+    puts "Please enter 'X' or 'O'."
+    token = gets.strip
+  end
+  token == "X" ? other_token = "O" : other_token = "X"
+  
+puts "You selected #{players.to_s} human player(s), starting with '#{token}'."
+
+  case players
+    when 0
+      player_1 = Players::Computer.new(token)
+      player_2 = Players::Computer.new(other_token)
+    when 1
+      player_1 = Players::Human.new(token)
+      player_2 = Players::Computer.new(other_token)
+    when 2
+      player_1 = Players::Human.new(token)
+      player_2 = Players::Human.new(other_token)
+  end
+
+Game.new(player_1, player_2).play
