@@ -33,12 +33,12 @@ class Board
 
   def turn_count
     counter = 0
-    @cells.each { |place| counter +=1 if place !=" "  }
+    @cells.each { |location| counter +=1 if location !=" "  }
     counter
   end
 
-  def taken?(spot)
-    position(spot) != " "
+  def taken?(location)
+    position(location) != " "
   end
 
   def valid_move?(move)
