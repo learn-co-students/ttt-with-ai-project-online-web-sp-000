@@ -27,14 +27,15 @@ class Game
       #     return winning_combo
       #   end }
       #   return false}
-      answer = []
       WIN_COMBINATIONS.each do |combo|
         result = []
-        combo.each { |j| result << @board.cells[j] }
-        answer << result
-        break if result.all?{ |ele| ele == "X" } || result.all?{ |ele|  ele == "O"}
+        combo.each { |index| result << @board.cells[index] }
+        result
+        if result.all?{ |space| space == "X" } || result.all?{ |space|  space == "O"}
+            return combo
         end
-        answer.last.all?{ |ele| ele == "X" } || answer.last.all?{ |ele|  ele == "O"}
+      end
+      return false
   end
 
     def draw?
