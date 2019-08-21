@@ -82,13 +82,5 @@ class TicTacToe
       new_game.play
   end
 
-  def wargames
-    counter = 0
-    ai_v_ai.do.100 times
-      counter +=1 if x wins
-    if counter > 0
-      puts "your ai is stoopid"
-
-  end
 
 end
