@@ -2,6 +2,7 @@ def start
   puts "Welcome to Tic Tac Toe!"
   puts "How many players?"
   puts "0, 1 , 2"
+  end
   input
   select_mode
 end
@@ -19,7 +20,6 @@ def select_mode(input)
   end
 end
 
-def input(user_input)
+def input
     input = gets
 end
-  
