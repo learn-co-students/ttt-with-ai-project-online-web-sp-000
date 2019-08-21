@@ -27,6 +27,7 @@ class Game
       #     return winning_combo
       #   end }
       #   return false}
+<<<<<<< HEAD
       WIN_COMBINATIONS.each do |combo|
         result = []
         combo.each { |index| result << @board.cells[index] }
@@ -36,6 +37,16 @@ class Game
         end
       end
       return false
+=======
+      answer = []
+      WIN_COMBINATIONS.each do |combo|
+        result = []
+        combo.each { |j| result << @board.cells[j] }
+        answer << result
+        break if result.all?{ |ele| ele == "X" } || result.all?{ |ele|  ele == "O"}
+        end
+        answer.last.all?{ |ele| ele == "X" } || answer.last.all?{ |ele|  ele == "O"}
+>>>>>>> 65d9c718e44eea4da8c5c086a42870935e6f0f15
   end
 
     def draw?
