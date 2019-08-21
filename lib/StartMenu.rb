@@ -1,20 +1,25 @@
+require 'pry'
 class TicTacToe
+  attr_reader :game_mode, :token
+
   def initialize
-    @token = []
+    @game_mode = nil
+    @token = nil
   end
 
   def start
     puts "Welcome to Tic Tac Toe!"
-    user_input = get_user_input
-    select_mode(user_input)
+    get_user_input
+    select_mode
   end
 
-  def select_mode(input)
-    if input == 0
+  def select_mode
+    #binding.pry
+    if @game_mode == '0'
       ai_v_ai
-    elsif input == 1
+    elsif @game_mode == '1'
       single_player
-    elsif input == 2
+    elsif @game_mode == '2'
       two_player
     else
       start
@@ -24,8 +29,7 @@ class TicTacToe
   def get_user_input
       puts "Pease select how many players"
       puts "0, 1, 2 "
-      user_input = gets
-      user_input.to_i
+      @game_mode = gets.chomp
   end
 
   def ai_v_ai
@@ -36,29 +40,55 @@ class TicTacToe
   end
 
   def single_player
-    puts "which token would you like? X or O"
-    token = gets.chomp.upcase
-    computer_token(token)
+    puts "Please enter which token you would like to be! X or O?"
+    @token = gets.chomp.upcase
+    computer_token(@token)
   end
 
   def computer_token(token)
       if token == "X"
         player = Players::Human.new("X")
-        computer = Players::Computer.new("O")
+        comp = Players::Computer.new("O")
 
       elsif token == "O"
         player = Players::Human.new("O")
-        computer = Player::Computer.new("X")
+        comp = Player::Computer.new("X")
+      elsif token == "EXIT"
+        exit
       else
         puts "Please choose X or O"
         single_player
       end
+      new_game = Game.new(player,comp)
+      new_game.play
   end
 
   def two_player
-    puts "which token would you like? X or O"
+    puts "Please enter which token you would like to be! X or O?"
     token = gets.chomp.upcase
-    token = "X"? player_1="X" : player_2="X"
+    if token == "X"
+      player_1 = Players::Human.new(token)
+      player_2 = Players::Human.new("O")
+    elsif token == "O"
+      player_1 = Players::Human.new(token)
+      player_2 = Players::Human.new("X")
+    elsif token == "EXIT"
+      exit
+    else
+      puts "Not valid input"
+      two_player
+    end
+      new_game = Game.new(player_1, player_2)
+      new_game.play
+  end
+
+  def wargames
+    counter = 0
+    ai_v_ai.do.100 times
+      counter +=1 if x wins
+    if counter > 0
+      puts "your ai is stoopid"
+
   end
 
 end

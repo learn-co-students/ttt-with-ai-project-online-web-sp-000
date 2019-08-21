@@ -2,4 +2,5 @@
 
 require_relative '../config/environment'
 
-start
+new_game = TicTacToe.new
+new_game.start
