@@ -13,7 +13,7 @@ class Game
   [6,4,2]
   ]
 
-  def initialize(player_1, player_2, board)
+  def initialize(player_1 = Human.new("X"),player_2 = Human.new("O"),board = Board.new)
     @player_1 = player_1
     @player_2 = player_2
     @board = board 
