@@ -17,7 +17,25 @@ class Board
     puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
   end
 
-  def position 
+  def position(user_input)
+    input = user_input
+    self.cells[input.to_i-1]
+  end
 
+
+  def full?
+    cells.all? {|index| index == "X" || index == "O"}
+  end
+
+  def turn_count #Returns the amount of turns
+    cells.count {|cell| cell == "X" || cell == "O"}
+  end
+
+  def taken?(position)
+    self.cells[position.to_i-1] == "X" || self.cells[position.to_i-1] == "O"
+  end
+
+  def valid_move?(position)
+    
   end
 end
