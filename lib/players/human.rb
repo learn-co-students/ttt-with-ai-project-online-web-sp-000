@@ -1,8 +1,10 @@
-class Human < Player
+module Players
+  class Human < Player
 
-  def move
-    input = gets.chomp
-    input 
+    def move(board)
+      input = gets.strip
+      input
+    end
+
   end
-
 end
