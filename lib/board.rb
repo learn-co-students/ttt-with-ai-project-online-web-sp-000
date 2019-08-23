@@ -9,6 +9,10 @@ class Board
     reset!
   end
 
+  def empty?
+    cells == [" ", " "," ", " "," ", " "," ", " ", " "]
+  end
+
   def display
       puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
       puts "-----------"

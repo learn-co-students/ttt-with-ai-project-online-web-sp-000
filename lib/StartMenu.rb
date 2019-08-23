@@ -1,4 +1,4 @@
-require 'pry'
+  require 'pry'
 class TicTacToe
   attr_reader :game_mode, :token
 
@@ -52,7 +52,7 @@ class TicTacToe
 
       elsif token == "O"
         player = Players::Human.new("O")
-        comp = Player::Computer.new("X")
+        comp = Players::Computer.new("X")
       elsif token == "EXIT"
         exit
       else

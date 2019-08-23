@@ -71,10 +71,12 @@ class Game
     end
 
     def turn
-      input = current_player.move(@board)
+      input = current_player.move(@board).to_s
       if @board.valid_move?(input)
         @board.update(input,current_player)
         @board.display
+      elsif input.downcase == "exit"
+        exit
       else
         turn
       end

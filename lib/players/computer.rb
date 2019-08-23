@@ -2,10 +2,69 @@ module Players
 
   class Computer < Player
     def move(board)
-      input = board.cells.index(" ")
-      input +=1
-      input.to_s
+      if board.empty?
+        openers
+      elsif board.cells[4] == " "
+        5
+      elsif list = can_i_win(board)
+        choose_best_space_from_list(board,list)
+      elsif list = should_i_block(board)
+        choose_best_space_from_list(board,list)
+      else
+        choose_next_space
+      end
     end
 
+    def can_i_win(board)
+      p "I am here -  all might"
+      WIN_COMBINATIONS.each do |combo|
+        list = []
+        p combo, "something else"
+        combo.each do |space|
+          if board.cells[space] == @token
+            list << space
+            #add space with my token onto a list <<space
+          end
+        end
+        if list.length == 2
+          p list
+          return combo
+        end
+      end
+      return false
+    end
+
+    def choose_best_space_from_list(board,list)
+        list.detect{|space| board.cells[space] == " "}
+    end
+
+    def should_i_block(board)
+      WIN_COMBINATIONS.each do |combo|
+        list = []
+        combo.each do |space|
+          if board.cells[space] != @token && board.cells[space] != " "
+            list << space
+          end
+        end
+        if list.length == 2
+          return combo
+        end
+      end
+      return false
+    end
+
+
+    def choose_next_space
+      input = board.cells.index(" ")
+      input +=1
+    end
+
+    def get_corners
+      [1,3,6,9]
+    end
+
+    def choose_openers(board)
+      get_corners.sample
+    end
   end
 end
