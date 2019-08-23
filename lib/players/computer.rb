@@ -2,14 +2,18 @@ module Players
 
   class Computer < Player
     def move(board)
+      win_list = can_i_win(board)
+      block_list = should_i_block(board)
+      p win_list
+      p block_list
       if board.empty?
         openers
       elsif board.cells[4] == " "
         5
-      elsif list = can_i_win(board)
-        choose_best_space_from_list(board,list)
-      elsif list = should_i_block(board)
-        choose_best_space_from_list(board,list)
+      elsif win_list
+        choose_best_space_from_list(board,win_list)
+      elsif block_list
+        choose_best_space_from_list(board,block_list)
       else
         choose_next_space
       end
