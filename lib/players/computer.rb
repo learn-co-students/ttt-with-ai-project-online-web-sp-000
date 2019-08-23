@@ -1,4 +1,3 @@
-require 'pry'
 module Players
 
   class Computer < Player
@@ -9,12 +8,9 @@ module Players
         openers
       elsif board.cells[4] == " "
         return 5
-        #binding.pry
       elsif win_list
-        #binding.pry
         choose_best_space_from_list(board,win_list)
       elsif block_list
-        #binding.pry
         choose_best_space_from_list(board,block_list)
       else
         choose_next_space
