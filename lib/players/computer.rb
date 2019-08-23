@@ -10,7 +10,7 @@ module Players
         openers
       elsif board.cells[4] == " "
         5
-      elsif win_list
+      elsif win_list.length > 0
         choose_best_space_from_list(board,win_list)
       elsif block_list
         choose_best_space_from_list(board,block_list)
@@ -21,21 +21,16 @@ module Players
 
     def can_i_win(board)
       p "I am here -  all might"
-      WIN_COMBINATIONS.each do |combo|
+      WIN_COMBINATIONS.detect do |combo|
         list = []
         p combo, "something else"
         combo.each do |space|
           if board.cells[space] == @token
             list << space
-            #add space with my token onto a list <<space
           end
         end
-        if list.length == 2
-          p list
-          return combo
-        end
+        list.length == 2
       end
-      return false
     end
 
     def choose_best_space_from_list(board,list)
