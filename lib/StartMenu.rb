@@ -42,10 +42,10 @@ class TicTacToe
   def single_player
     puts "Please enter which token you would like to be! X or O?"
     @token = gets.chomp.upcase
-    computer_token(@token)
+    set_player_token(@token)
   end
 
-  def computer_token(token)
+  def set_player_token(token)
       if token == "X"
         player = Players::Human.new("X")
         comp = Players::Computer.new("O")

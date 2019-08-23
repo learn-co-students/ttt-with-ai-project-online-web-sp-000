@@ -29,14 +29,6 @@ class Game
         end
       end
       return false
-
-      # WIN_COMBINATIONS.each do |combo|
-      #   if board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[0]] == board.cells[combo[2]] && board.cells[combo[0]] =! " "
-      #     return true
-      #   else
-      #     return false
-      #   end
-      # end
     end
 
     def draw?
@@ -58,7 +50,7 @@ class Game
         combo.each { |j| result << @board.cells[j] }
         answer << result
         break if xwin?(result) || owin?(result)
-        end
+      end
       answer.last[0]
     end
 
