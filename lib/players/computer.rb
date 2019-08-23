@@ -54,9 +54,8 @@ module Players
         end
         if list.length == 2
           return combo
-
         else
-          list = []
+          list = nil
         end
       end
       return false
