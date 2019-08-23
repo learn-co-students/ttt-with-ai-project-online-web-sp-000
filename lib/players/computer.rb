@@ -5,7 +5,7 @@ module Players
       win_list = can_i_win(board)
       block_list = should_i_block(board)
       if board.empty?
-        openers
+        choose_openers(board)
       elsif board.cells[4] == " "
         return 5
       elsif win_list
@@ -13,7 +13,7 @@ module Players
       elsif block_list
         choose_best_space_from_list(board,block_list)
       else
-        choose_next_space
+        choose_next_space(board)
       end
     end
 
@@ -36,7 +36,7 @@ module Players
 
     def choose_best_space_from_list(board,list)
       if list != nil
-        return list.detect{|space| board.cells[space] == " "} +1
+        return list.detect{|space| board.cells[space] == " "}+1
       end
         return false
     end
