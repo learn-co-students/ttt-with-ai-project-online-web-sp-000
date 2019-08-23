@@ -1,3 +1,4 @@
+require 'pry'
 module Players
 
   class Computer < Player
@@ -7,13 +8,16 @@ module Players
       if board.empty?
         openers
       elsif board.cells[4] == " "
-        5
+        return 5
+        #binding.pry
       elsif win_list
+        #binding.pry
         choose_best_space_from_list(board,win_list)
       elsif block_list
+        #binding.pry
         choose_best_space_from_list(board,block_list)
       else
-        choose_next_space(board)
+        choose_next_space
       end
     end
 
@@ -28,14 +32,17 @@ module Players
             list << space
           end
         end
-        list.length == 2
+        if list.length == 2
+        return combo
+        end
       end
     end
 
     def choose_best_space_from_list(board,list)
       if list != nil
-        list.detect{|space| board.cells[space] == " "} +1
+        return list.detect{|space| board.cells[space] == " "} +1
       end
+        return false
     end
 
     def should_i_block(board)
@@ -51,11 +58,13 @@ module Players
         end
         if list.length == 2
           return combo
+
+        else
+          list = []
         end
       end
       return false
     end
-
 
     def choose_next_space(board)
       input = board.cells.index(" ")
