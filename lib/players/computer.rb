@@ -8,9 +8,9 @@ module Players
         choose_openers(board)
       elsif board.cells[4] == " "
         return 5
-      elsif win_list
+      elsif win_list == true
         choose_best_space_from_list(board,win_list)
-      elsif block_list
+      elsif block_list == true
         choose_best_space_from_list(board,block_list)
       else
         choose_next_space(board)
