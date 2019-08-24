@@ -31,13 +31,14 @@ module Players
           end
         end
         if list.length == 2
-        return combo
+          return combo
         end
       end
+        return false
     end
 
     def choose_best_space_from_list(board,list)
-      if list != nil
+      if list.length > 0
         return list.detect{|space| board.cells[space] == " "}+1
       end
         return false
