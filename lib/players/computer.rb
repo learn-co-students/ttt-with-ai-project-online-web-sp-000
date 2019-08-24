@@ -1,3 +1,5 @@
+require 'pry'
+
 module Players
 
   class Computer < Player
@@ -42,16 +44,16 @@ module Players
     end
 
     def should_i_block(board)
-      WIN_COMBINATIONS.each do |combo|
+      WIN_COMBINATIONS.detect do |combo|
         list = []
         combo.each do |space|
           if board.cells[space] == @token
             break
-          end
-          if board.cells[space] != @token && board.cells[space] != " "
+          elsif board.cells[space] != @token && board.cells[space] != " "
             list << space
           end
         end
+        binding.pry
         if list.length == 2
           return combo
         else
