@@ -2,7 +2,7 @@ class Board
   attr_accessor :cells
 
   def initialize
-    self.cells = (Array.new(9, " "))
+    reset!
   end
 
   def reset!
@@ -17,30 +17,22 @@ class Board
     puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
   end
 
-  def position(user_input)
-    input = user_input
-    self.cells[input.to_i-1]
+  def position(input)
+    cells[input.to_i-1]
   end
-
 
   def full?
-    cells.all? {|index| index == "X" || index == "O"}
+    cells.all? do |character|
+      if character == "X" || character == "O"
+        true
+      else
+        false
+      end
+    end
   end
 
-  def turn_count #Returns the amount of turns
-    cells.count {|cell| cell == "X" || cell == "O"}
-  end
+  def board_count
 
-  def taken?(position)
-    self.cells[position.to_i-1] == "X" || self.cells[position.to_i-1] == "O"
-  end
-
-  def valid_move?(position)
-    !taken?(position) && position.to_i >0 && position.to_i <=9
-  end
-
-  def update(position, player)
-    self.cells[position.to_i-1] = player.token
   end
 
 end
