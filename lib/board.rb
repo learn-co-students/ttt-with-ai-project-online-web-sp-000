@@ -32,7 +32,7 @@ class Board
   end
 
   def board_count
-
+    cells.count {|character| character == "X" || character == "O"}
   end
 
 end
