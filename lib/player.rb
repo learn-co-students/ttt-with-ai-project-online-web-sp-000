@@ -7,3 +7,13 @@ class Player
 
 
 end
+
+
+#!/usr/bin/env ruby
+#require_relative '../config/environment'
+
+#{}"Welcome to Tic-tac-toe!"
+
+
+#game = Game.new
+#game.start
