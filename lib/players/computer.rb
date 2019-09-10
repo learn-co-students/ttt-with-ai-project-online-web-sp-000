@@ -1,24 +1,16 @@
 module Players
   class Computer < Player
     def move (board)
-      if !board.taken?("1")
-        "1"
-      elsif !board.taken?("2")
-        "2"
-      elsif !board.taken?("3")
-        "3"
-      elsif !board.taken?("4")
-        "4"
-      elsif !board.taken?("5")
-        "5"
-      elsif !board.taken?("6")
-        "6"
-      elsif !board.taken?("7")
-        "7"
-      elsif !board.taken?("8")
-        "8"
-      elsif !board.taken?("9")
-        "9"
+      if board.turn_count == 0
+        ["1", "3", "5", "7", "9"].sample
+      elsif board.turn_count == 1
+        if board.taken?("5")
+          ["1", "3", "7", "9"]
+        else
+          "5"
+        end
+      else
+        rand(1..9)
       end
     end
   end

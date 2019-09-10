@@ -72,8 +72,26 @@ class Game
    if over? || won? || draw?
      if won?
        puts "Congratulations #{winner}!"
+       puts "Would you like to play again? (Y or N)"
+       input = gets.strip
+       until input == "Y" || input == "N"
+         puts "Please enter either Y or N"
+         input = gets.strip
+       end
+       if input == "Y"
+         Game.start
+       end
      else
        puts "Cat's Game!"
+       puts "Would you like to play again? (Y or N)"
+       input = gets.strip
+       until input == "Y" || input == "N"
+         puts "Please enter either Y or N"
+         input = gets.strip
+       end
+       if input == "Y"
+         Game.start
+       end
      end
    else
      turn
@@ -81,21 +99,41 @@ class Game
    end
   end
 
-  def start
+  def self.start
     puts "Hey what's up! Ready to play some Tic-tac-toe?"
     puts "What type of game would you like to play? (0, 1, or 2 players)"
     player_count = gets.strip
-    puts "Who should go 1st and get to play as X? (Human or Computer)"
-    first_player = gets.strip
+    until player_count == "0" || player_count == "1" || player_count == "2"
+      puts "Please enter a number between 0-2"
+      player_count = gets.strip
+    end
     if player_count == "0"
+      puts "Who should go 1st and get to play as X? (Computer1 or Computer2)"
+      first_player = gets.strip
+      until first_player == "Computer1" || first_player == "Computer2"
+        puts "Please enter either Computer1 or Computer2"
+        first_player = gets.strip
+      end
       game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
     elsif player_count == "1"
+      puts "Who should go 1st and get to play as X? (Human or Computer)"
+      first_player = gets.strip
+      until first_player == "Human" || first_player == "Computer"
+        puts "Please enter either Human or Computer"
+        first_player = gets.strip
+      end
       if first_player == "Human"
         game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
       else
         game = Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new)
       end
     else
+      puts "Who should go 1st and get to play as X? (Human1 or Human2)"
+      first_player = gets.strip
+      until first_player == "Human1" || first_player == "Human2"
+        puts "Please enter either Human1 or Human2"
+        first_player = gets.strip
+      end
       game = Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new)
     end
     game.play

@@ -2,5 +2,4 @@
 
 require_relative '../config/environment'
 
-new_game = Game.new
-new_game.start
+Game.start
