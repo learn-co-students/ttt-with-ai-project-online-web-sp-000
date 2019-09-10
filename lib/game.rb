@@ -1,3 +1,5 @@
+require "pry"
+
 class Game
   attr_accessor :player_1, :player_2, :board
 
@@ -57,7 +59,7 @@ class Game
   end
 
   def turn
-   value = self.current_player.move(self.board)
+   value = current_player.move(self.board)
    if self.board.valid_move?(value)
      self.board.update(value, current_player)
    else
@@ -66,6 +68,7 @@ class Game
   end
 
   def play
+   self.board.display
    if over? || won? || draw?
      if won?
        puts "Congratulations #{winner}!"
@@ -76,5 +79,25 @@ class Game
      turn
      play
    end
+  end
+
+  def start
+    puts "Hey what's up! Ready to play some Tic-tac-toe?"
+    puts "What type of game would you like to play? (0, 1, or 2 players)"
+    player_count = gets.strip
+    puts "Who should go 1st and get to play as X? (Human or Computer)"
+    first_player = gets.strip
+    if player_count == "0"
+      game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+    elsif player_count == "1"
+      if first_player == "Human"
+        game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+      else
+        game = Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new)
+      end
+    else
+      game = Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new)
+    end
+    game.play
   end
 end
