@@ -72,26 +72,8 @@ class Game
    if over? || won? || draw?
      if won?
        puts "Congratulations #{winner}!"
-       puts "Would you like to play again? (Y or N)"
-       input = gets.strip
-       until input == "Y" || input == "N"
-         puts "Please enter either Y or N"
-         input = gets.strip
-       end
-       if input == "Y"
-         Game.start
-       end
      else
        puts "Cat's Game!"
-       puts "Would you like to play again? (Y or N)"
-       input = gets.strip
-       until input == "Y" || input == "N"
-         puts "Please enter either Y or N"
-         input = gets.strip
-       end
-       if input == "Y"
-         Game.start
-       end
      end
    else
      turn
@@ -137,5 +119,14 @@ class Game
       game = Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new)
     end
     game.play
+    puts "Would you like to play again? (Y or N)"
+    input = gets.strip
+    until input == "Y" || input == "N"
+      puts "Please enter either Y or N"
+      input = gets.strip
+    end
+    if input == "Y"
+      Game.start
+    end
   end
 end

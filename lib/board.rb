@@ -5,6 +5,10 @@ class Board
     self.reset!
   end
 
+  def self.copy_constructor (cells)
+    @cells = cells
+  end
+
   def reset!
     self.cells = [" "," "," "," "," "," "," "," "," "]
   end
