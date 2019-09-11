@@ -72,8 +72,10 @@ class Game
    if over? || won? || draw?
      if won?
        puts "Congratulations #{winner}!"
+       winner
      else
        puts "Cat's Game!"
+       "draw"
      end
    else
      turn
@@ -83,10 +85,10 @@ class Game
 
   def self.start
     puts "Hey what's up! Ready to play some Tic-tac-toe?"
-    puts "What type of game would you like to play? (0, 1, or 2 players)"
+    puts "What type of game would you like to play? (0, 1, 2 players, or WARGAMES)"
     player_count = gets.strip
-    until player_count == "0" || player_count == "1" || player_count == "2"
-      puts "Please enter a number between 0-2"
+    until player_count == "0" || player_count == "1" || player_count == "2" || player_count == "WARGAMES"
+      puts "Please enter a number between 0-2 or WARGAMES"
       player_count = gets.strip
     end
     if player_count == "0"
@@ -97,6 +99,7 @@ class Game
         first_player = gets.strip
       end
       game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+      game.play
     elsif player_count == "1"
       puts "Who should go 1st and get to play as X? (Human or Computer)"
       first_player = gets.strip
@@ -109,7 +112,8 @@ class Game
       else
         game = Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new)
       end
-    else
+      game.play
+    elsif player_count == "2"
       puts "Who should go 1st and get to play as X? (Human1 or Human2)"
       first_player = gets.strip
       until first_player == "Human1" || first_player == "Human2"
@@ -117,8 +121,29 @@ class Game
         first_player = gets.strip
       end
       game = Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new)
+      game.play
+    else
+      counter = 1
+      amount_of_times_x_won = 0
+      amount_of_times_o_won = 0
+      amount_of_times_draw = 0
+      while counter < 101
+        game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+        decision = ""
+        decision = game.play
+        if decision == "X"
+          amount_of_times_x_won += 1
+        elsif decision == "O"
+          amount_of_times_o_won += 1
+        else
+          amount_of_times_draw += 1
+        end
+        counter += 1
+      end
+      puts "Amount of times X won: #{amount_of_times_x_won}"
+      puts "Amount of times O won: #{amount_of_times_o_won}"
+      puts "Amount of times draw: #{amount_of_times_draw}"
     end
-    game.play
     puts "Would you like to play again? (Y or N)"
     input = gets.strip
     until input == "Y" || input == "N"
