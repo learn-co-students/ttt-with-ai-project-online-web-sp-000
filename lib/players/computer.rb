@@ -23,6 +23,9 @@ module Players
         else
           "5"
         end
+
+      elsif board.turn_count == 3 && (board.position(1) == board.position(9) || board.position(3) == board.position(7))
+        "2"
       else
         winner = can_win_next_turn?(board.cells)
         other_player_winner = other_player_can_win_next_turn?(board.cells)
