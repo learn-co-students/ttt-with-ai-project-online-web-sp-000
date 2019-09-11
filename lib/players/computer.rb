@@ -23,7 +23,6 @@ module Players
         else
           "5"
         end
-
       elsif board.turn_count == 3 && (board.position(1) == board.position(9) || board.position(3) == board.position(7))
         "2"
       else
