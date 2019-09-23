@@ -101,8 +101,8 @@ class Game
   end
   
   def reset_game
-    @player_1 = Human.new("X")  
-    @player_2 = Human.new("O")
+    @player_1 = Players::Human.new("X")  
+    @player_2 = Players::Human.new("O")
     @board.reset!
   end
  
@@ -122,9 +122,9 @@ class Game
   
   def play_two_ai
     puts "Enjoy the game between 2 Computers"
-      @player_1 = Computer.new("X")
+      @player_1 = Players::Computer.new("X")
       @player_1.board = self.board
-      @player_2 = Computer.new("O")
+      @player_2 = Players::Computer.new("O")
       @player_2.board = self.board
       self.play
       self.again?
@@ -134,10 +134,10 @@ class Game
     puts "Choose your side: X or O"
       side = gets.chomp
       if side == "X"
-        @player_2 = Computer.new("O")
+        @player_2 = Players::Computer.new("O")
         @player_2.board = self.board
       elsif side == "O"
-        @player_1 = Computer.new("X")
+        @player_1 = Players::Computer.new("X")
         @player_1.board = self.board
       else
         puts "Invalid entry. Game restarting..."
