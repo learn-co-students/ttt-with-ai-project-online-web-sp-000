@@ -34,7 +34,7 @@ class Board
 
   def taken?(position)
     position = position.to_i
-    position-=1
+    position -= 1
     !(@cells[position].nil? || @cells[position] == " ")
   end
 

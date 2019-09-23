@@ -37,11 +37,10 @@ class Game
   end
 
   def won?
-    WIN_COMBINATIONS.each do |combination|   #[0,1,2] which is board range (0-8)
+    WIN_COMBINATIONS.each do |combination|
         if @board.cells[combination[0]] == @board.cells[combination[1]] &&
           @board.cells[combination[1]] == @board.cells[combination[2]] &&
           @board.taken?(combination[0]+1)
-          #Need to +1, because #taken? rspec test is working off user_input range (1-9)
           return combination
         end
       end
@@ -77,9 +76,8 @@ class Game
     @board.display_intro
     puts "#GAMEBOARD#"
     @board.display
-    puts "###########"
     puts "It's #{self.current_player.token}'s turn. Please enter location:"
-    x = self.current_player.move
+    x = self.current_player.move(board)
     if @board.valid_move?(x)
       @board.update(x,current_player)
     else
@@ -95,9 +93,8 @@ class Game
     end
     if self.won?
      puts "Congratulations #{self.winner}!"
-     puts "###########"
      @board.display
-     puts "#GAME OVER#"
+     puts "GAME OVER"
      elsif self.draw?
      puts "Cat's Game!"
     end
@@ -157,7 +154,7 @@ class Game
       self.again?
   end
 
-  def start  ###engage CLI 
+  def start  
     puts "Welcome to Tic Tac Toe - 3 versions"
     puts "Enter number of players: (0-2)"
     answer = gets.chomp
