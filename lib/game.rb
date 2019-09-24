@@ -69,15 +69,17 @@ attr_accessor :board, :player_1, :player_2
 
   def play_again?
     puts "Do you want to play again? (Y/N)"
-    reply = gets.strip.uppercase
+    reply = gets.strip.upcase
   if reply == "Y"
       game = Game.new
+      game.start
     elsif reply == "N"
       puts "Thanks for playing!"
     else
       puts "Invalid entry. Please answer with Y or N"
       self.play_again?
     end
+  end
 
   def start
     puts "How would you like to play?"
@@ -100,9 +102,9 @@ attr_accessor :board, :player_1, :player_2
 
       elsif gametype == "2"
         Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new).play
-
-      play_again?
       end
+
+      self.play_again?
+
     end
   end
-end
