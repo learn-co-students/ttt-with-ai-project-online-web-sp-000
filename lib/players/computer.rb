@@ -12,11 +12,12 @@ module Players
         move = "#{number}"
         
       elsif board_oi.turn_count == 3
+      [[0, 1, 2], [1, 4, 7], [2, 5, 8], [0, 3, 6], [3, 4, 5], [6, 7, 8], [0, 4, 8], [2, 4, 6]]
         Game::WIN_COMBINATIONS.each do |combo|
           array = []
-          combo.each do {|i| array << board_oi.position(i)}
+          combo.each {|i| array << board_oi.position(i)}
           if array.count("X") == 2 && array.count(" ") == 1
-            number = combo.detect{detect{|i| !board_oi.taken?(i)}
+            number = combo.detect {|i| !board_oi.taken?(i)}
             move = "#{number}"
           end
         end
