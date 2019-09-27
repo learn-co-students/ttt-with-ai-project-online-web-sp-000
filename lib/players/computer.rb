@@ -13,13 +13,10 @@ module Players
         
       elsif board_oi.turn_count == 3
         Game::WIN_COMBINATIONS.each do |combo|
-          if board_oi.position(combo[0]) == board_oi.position(combo[1]) && board_oi.position(combo[0]) == "X"
-            move = "#{combo[2]}"
-          elsif board_oi.position(combo[0]) == board_oi.position(combo[2]) && board_oi.position(combo[0]) == "X"
-            move = "#{combo[1]}"
-          elsif board_oi.position(combo[2]) == board_oi.position(combo[1]) && board_oi.position(combo[2]) == "X"
-            move = "#{combo[0]}"
-          end
+          combo.select 
+          move = "#{combo[2]}" if (board_oi.position(combo[0]) == board_oi.position(combo[1]) && board_oi.position(combo[0]) == "X")
+          move = "#{combo[1]}" if (board_oi.position(combo[0]) == board_oi.position(combo[2]) && board_oi.position(combo[0]) == "X")
+          move = "#{combo[0]}" if (board_oi.position(combo[2]) == board_oi.position(combo[1]) && board_oi.position(combo[2]) == "X")
           if move == nil
             number = [1, 3, 7, 9].detect{|i| !board_oi.taken?(i)}
             move = "#{number}"
