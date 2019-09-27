@@ -25,13 +25,13 @@ module Players
             move = "#{number}"
           end
         end
-      elsif board
+      elsif board_oi.turn_count == 4 || board_oi.turn_count == 6 || board_oi.turn_count == 8
         Game::WIN_COMBINATIONS.each do |combo|
-          if board_oi.position(combo[0]) == board_oi.position(combo[1]) && board_oi.position(combo[0]) == "X"
+          if board_oi.position(combo[0]) == board_oi.position(combo[1]) && board_oi.position(combo[0]) == "O"
             move = "#{combo[2]}"
-          elsif board_oi.position(combo[0]) == board_oi.position(combo[2]) && board_oi.position(combo[0]) == "X"
+          elsif board_oi.position(combo[0]) == board_oi.position(combo[2]) && board_oi.position(combo[0]) == "O"
             move = "#{combo[1]}"
-          elsif board_oi.position(combo[2]) == board_oi.position(combo[1]) && board_oi.position(combo[2]) == "X"
+          elsif board_oi.position(combo[2]) == board_oi.position(combo[1]) && board_oi.position(combo[2]) == "O"
             move = "#{combo[0]}"
           end
           if move == nil
