@@ -27,18 +27,18 @@ module Players
         end
       elsif board_oi.turn_count == 4 || board_oi.turn_count == 6 || board_oi.turn_count == 8
         Game::WIN_COMBINATIONS.each do |combo|
-          if board_oi.position(combo[0]) == board_oi.position(combo[1]) && board_oi.position(combo[0]) == "X" && board_oi.position(combo[2]) == " "
+          if board_oi.position(combo[0]) == "X" && board_oi.position(combo[1]) == "X" && board_oi.position(combo[2]) == " "
             move = "#{combo[2]}"
-          elsif board_oi.position(combo[0]) == board_oi.position(combo[2]) && board_oi.position(combo[0]) == "X" && board_oi.position(combo[1]) == " "
+          elsif board_oi.position(combo[0]) == "X" && board_oi.position(combo[2]) == "X" && board_oi.position(combo[1]) == " "
             move = "#{combo[1]}"
-          elsif board_oi.position(combo[2]) == board_oi.position(combo[1]) && board_oi.position(combo[2]) == "X" && board_oi.position(combo[0]) == " "
+          elsif board_oi.position(combo[1]) == "X" && board_oi.position(combo[2]) == "X" && board_oi.position(combo[0]) == " "
             move = "#{combo[0]}"
           end
-          if board_oi.position(combo[0]) == board_oi.position(combo[1]) && board_oi.position(combo[0]) == "O" && board_oi.position(combo[2]) == " "
+          if board_oi.position(combo[0]) == "O" && board_oi.position(combo[1]) == "O" && board_oi.position(combo[2]) == " "
             move = "#{combo[2]}"
-          elsif board_oi.position(combo[0]) == board_oi.position(combo[2]) && board_oi.position(combo[0]) == "O" && board_oi.position(combo[1]) == " "
+          elsif board_oi.position(combo[0]) == "O" && board_oi.position(combo[2]) == "O" && board_oi.position(combo[1]) == " "
             move = "#{combo[1]}"
-          elsif board_oi.position(combo[2]) == board_oi.position(combo[1]) && board_oi.position(combo[2]) == "O" && board_oi.position(combo[0]) == " "
+          elsif board_oi.position(combo[1]) == "O" && board_oi.position(combo[2]) == "O" && board_oi.position(combo[0]) == " "
             move = "#{combo[0]}"
           end
           if move == nil
