@@ -2,11 +2,49 @@
 
 require_relative '../config/environment'
 
+input = nil
+
+def start_game(input, player = 1)
+  if input == 0
+    newGame = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+  elsif input == 1 && player == 2
+    newGame = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+  elsif input == 1 && player == 1
+    newGame = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+  elsif input == 2
+    newGame = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+    
+end
+
+def wargame
+  10.times do
+    newGame = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+  end
+end
+
+def ask_players
+  puts "Welcome to Tic Tac Toe"
+  puts "How many players are playing? 0, 1 or 2?"
+  input = gets.strip
+  if input != 0 || input != 1 || input != 2 || input != "wargame"
+    ask_players
+  elsif input == 1
+    puts "Would you like to be player 1 (X) or player 2 (O)?"
+    player = gets.strip.to_i
+    if player != 1 or player != 2
+      puts "Not a valid number"
+      ask_players
+    else
+      start_game(
+    end
+  else
+    start_game(input)
+  end
+end
 
 
-puts "Welcome to Tic Tac Toe"
-puts "How many players are playing? 1 or 2?"
 
+if input 
 #newGame = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
 #newGame = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
 newGame = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
