@@ -2,8 +2,6 @@
 
 require_relative '../config/environment'
 
-input = nil
-
 def start_game(input, player = 1)
   if input == 0
     newGame = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
@@ -12,42 +10,52 @@ def start_game(input, player = 1)
   elsif input == 1 && player == 1
     newGame = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
   elsif input == 2
-    newGame = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
-    
+    newGame = Game.new(Players::Human.new("X"), Players::Human.new("O"))
+  end
+  newGame.play
+  play_again?
 end
 
 def wargame
   10.times do
     newGame = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+    newGame.play
   end
 end
 
-def ask_players
+def greetings
   puts "Welcome to Tic Tac Toe"
+end
+
+def player_input
   puts "How many players are playing? 0, 1 or 2?"
-  input = gets.strip
-  if input != 0 || input != 1 || input != 2 || input != "wargame"
-    ask_players
-  elsif input == 1
-    puts "Would you like to be player 1 (X) or player 2 (O)?"
+  player_input = gets.strip
+  if player_input.to_i == 0
+    start_game(0)
+  elsif player_input.to_i == 2
+    start_game(2)
+  elsif player_input.to_i == 1
+    puts "Would you like to be player 1 (x) or 2 (O) - Anything not player 2, defaults to player 1"
     player = gets.strip.to_i
-    if player != 1 or player != 2
-      puts "Not a valid number"
-      ask_players
+    if player == 2
+      start_game(1, 2)
     else
-      start_game(
+      start_game(1)
     end
-  else
-    start_game(input)
+  elsif player_input == "wargame"
+    wargame
   end
 end
 
-
-
-if input 
-#newGame = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
-#newGame = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
-newGame = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
-
-newGame.play
-
+def play_again?
+  puts "Would you like to play again? Y/N"
+  input = gets.strip
+  if input == "Y"
+    player_input
+  else
+    puts "Good Bye!"
+  end
+end  
+  
+greetings
+player_input
