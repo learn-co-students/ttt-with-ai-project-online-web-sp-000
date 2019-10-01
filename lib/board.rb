@@ -1,4 +1,5 @@
 class Board
+  
   attr_accessor :cells
 
   def reset
@@ -7,6 +8,7 @@ class Board
   
   
   def initialize
+    @cells
     reset
   end
   
