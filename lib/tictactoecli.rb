@@ -6,7 +6,6 @@ class TicTacToeCLI
    
   puts "Welcome to Ultimate Tic Tac Toe!  Do you want to play against a human, a computer, or nobody?"
     first_input = gets.strip 
-        
     
     if first_input.downcase == "human"
       game = Game.new 
@@ -20,7 +19,6 @@ class TicTacToeCLI
         end 
     elsif first_input.downcase == "nobody"
       game = Game.new(Players::Computer.new("X"), Players::Computer.new("O")) 
-     
         until game.over?
           game.play 
         end 
