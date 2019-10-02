@@ -1,7 +1,5 @@
-require "pry"
-
 class Game < Board
- 
+    
     
   attr_accessor :board, :player_1, :player_2
   
@@ -35,6 +33,7 @@ class Game < Board
     
   def draw? 
      !won? && @board.full?
+       
   end 
   
   def over?
@@ -48,18 +47,33 @@ class Game < Board
   end 
  
   def turn
-    position = self.current_player.move(input )
-    @board.update(position, self.current_player)
+   if !draw?
+    puts "Please enter a number 1-9:"
+    @user_input = current_player.move(@board)
+    if @board.valid_move?(@user_input)
+      @board.update(@user_input, current_player)
+    else puts "Please enter a number 1-9:"
+      @board.display
+      turn
+    end
     @board.display
+   end 
     
-   
-    
-  end 
- 
- 
- 
- 
- 
- 
-  
 end 
+    
+ 
+  def play
+    while !over?
+      @board.display()
+        turn
+    end
+     self.draw? ? puts("Cat's Game!") : puts("Congratulations #{winner()}!")
+     @board.display()
+   end
+ 
+ 
+ 
+ 
+ 
+end
+
