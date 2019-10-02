@@ -52,7 +52,7 @@ class Game < Board
     @user_input = current_player.move(@board)
     if @board.valid_move?(@user_input)
       @board.update(@user_input, current_player)
-    else puts "Please enter a number 1-9:"
+    else puts "Can't do that!  Try again."
       @board.display
       turn
     end

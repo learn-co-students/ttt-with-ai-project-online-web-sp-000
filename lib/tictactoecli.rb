@@ -1,4 +1,5 @@
  
+require 'pry'
 class TicTacToeCLI 
   
   def call  
@@ -9,54 +10,35 @@ class TicTacToeCLI
     
     if first_input.downcase == "human"
       game = Game.new 
-        until game.won?
+        until game.over?
           game.play 
         end 
     elsif first_input.downcase == "computer"
       game = Game.new(Players::Human.new("X"), Players::Computer.new("O")) 
-          until game.won?
-            game.play 
-          end 
-      elsif first_input.downcase == "nobody"
-      game = Game.new(Players::Computer.new("X"), Players::Computer.new("O")) 
-        until game.won?
+        until game.over?
           game.play 
         end 
-      else call 
+    elsif first_input.downcase == "nobody"
+      game = Game.new(Players::Computer.new("X"), Players::Computer.new("O")) 
+     
+        until game.over?
+          game.play 
+        end 
+     
+     # .times do 
+    #  game.play 
+     # sleep 5
+    #  end 
+    else call 
     end 
-=begin 
-      
-    first_input = gets.strip 
-    if first_input == "human"
-      
-      game = Game.new
-      until game.won?
-        game.play
-      end 
-      elsif "computer"
-      game = Game.new(Players::Human.new("X"), Players::Computer.new("O")) 
-      until game.won?
-        game.play 
-      end 
-    end 
-      
-   # elsif input == "computer"
-   #   game = Game.new(Players::Human.new("X"), player_2 = Players::Human.new("O"))
-   #    until game.won?
-   #   game.play 
-   #  end 
-   #  end 
-=end 
     if game.over?
       puts "Would you like to play again? Y or N"
       input = gets.strip 
-      if input == "Y" || input == "y"
-        call 
-      else 
-        puts "Thanks for playing.  Goodbye."
-      end 
+        if input == "Y" || input == "y"
+          call 
+        else 
+          puts "Thanks for playing.  Goodbye."
+        end 
     end 
   end
-
-
 end 
