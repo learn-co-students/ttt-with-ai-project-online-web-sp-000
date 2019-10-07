@@ -32,7 +32,15 @@ class Board
     self.cells.count("X") + self.cells.count("O")
   end
   
-  def taken?
+  def taken?(position)
+   self.cells[position.to_i-1] == "X" || self.cells[position.to_i-1] == "O"
+    end
     
-  end
+    def valid_move?(position)
+      position.to_i >= 1 && position.to_i <= 9 && !taken?(position)
+    end
+    
+    def update(position, player)
+      self.cells[position.to_i-1] = player.token
+    end
 end
