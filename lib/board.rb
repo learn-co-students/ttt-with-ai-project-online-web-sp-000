@@ -19,13 +19,20 @@ class Board
     p " #{self.cells[6]} | #{self.cells[7]} | #{self.cells[8]} "
   end
   
-  def position(input)
-    input = gets.strip
-    converted = input.to_i - 1 
-    if converted != (0..9)
-      nil
-    else
-      p "#{self.cells[converted]}"
-    end
+  def position(user_input)
+    converted_input = user_input.to_i-1
+    self.cells[converted_input]
+  end
+  
+  def full?
+    self.cells.all? {|cell| cell == "X" || cell == "O"}
+  end
+  
+  def turn_count
+    self.cells.count("X") + self.cells.count("O")
+  end
+  
+  def taken?
+    
   end
 end
