@@ -68,6 +68,7 @@ class Game
         @board.display
         turn
       end
+      @board.display
     end
     
     def play
