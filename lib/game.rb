@@ -49,10 +49,21 @@ class Game
     player = current_player
     current_move = player.move(@board)
     
-    if @board.valid_move?(current_move)
-       @board.update(current_move, player)
-    else 
-      turn
-    end
+      if @board.valid_move?(current_move)
+         @board.update(current_move, player)
+      else 
+        turn
+      end
   end
+  
+  def play
+    player = current_player
+    current_move = player.move(@board)
+    
+      while  self.over?(current_move) do
+        
+      
+   end 
+  
+  
  end
