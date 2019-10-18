@@ -57,13 +57,19 @@ class Game
   end
   
   def play
-    player = current_player
-    current_move = player.move(@board)
-    
-      while  self.over?(current_move) do
-        
-      
-   end 
-  
+    while !self.over?
+    self.turn
+    end
+    if self.won?
+     puts "Congratulations #{self.winner}!"
+     puts "###########"
+     @board.display
+     puts "#GAME OVER#"
+     elsif self.draw?
+     puts "Cat's Game!"
+     @board.display
+     puts "#GAME OVER#"
+    end
+  end
   
  end
