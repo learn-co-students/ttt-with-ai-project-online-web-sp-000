@@ -46,55 +46,13 @@ class Game
    end
    
   def turn
-    puts "It's now #{current_player.token}'s turn."
-    input = current_player.move(board, input).to_i
-    if board.valid_move?(input.to_s)
-      board.update(input, current_player)
-      system('clear')
-      puts "Game #{@counter}" if @wargame
-      board.display
-    elsif input.between?(1, 9) == false
-      puts "That is an invalid move"
-      turn
-    else
-      puts "Whoops! Looks like that position is taken"
+    player = current_player
+    current_move = player.move(@board)
+    
+    if @board.valid_move?(current_move)
+       @board.update(current_move, player)
+    else 
       turn
     end
   end
-  def play
-    board.reset!
-    system('clear')
-    puts "Game #{@counter}" if @wargame
-    board.display
-    until over?
-      turn
-    end
-    if draw?
-      puts "WINNER: NONE"
-    elsif won?
-      puts "WINNER: #{winner}"
-    end
-  end
-  def wargames
-    @counter = 0
-    x = 0
-    o = 0
-    draw = 0
-    until @counter == 100
-      @counter += 1
-      play
-      if draw?
-        draw += 1
-      elsif winner == "X"
-        x += 1
-      elsif winner == "O"
-        o += 1
-      end
-      sleep(@timer*1.5)
-      @timer -= (@timer/3)
-    end
-    puts "This round had #{x} wins for X, #{o} wins for O, and #{draw} draws."
-    puts "A STRANGE GAME. THE ONLY WINNING MOVE IS NOT TO PLAY."
-    puts "HOW ABOUT A NICE GAME OF CHESS?"
-  end
-end
+ end
