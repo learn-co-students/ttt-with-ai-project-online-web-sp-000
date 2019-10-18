@@ -71,7 +71,7 @@ class Game
         else
             @board.display
             puts ""
-            puts "Cats Game!"
+            puts "Cat's Game!"
             return self.winner
         end
     end
