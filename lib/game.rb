@@ -54,22 +54,25 @@ class Game
       else 
         turn
       end
+
   end
   
-  def play
-    while !self.over?
-    self.turn
+ def play
+        while !self.over?
+            @board.display
+            puts ""
+            self.turn
+        end
+        if self.won?
+            @board.display
+            puts ""
+            puts "Congratulations #{winner}!"
+            return self.winner
+        else
+            @board.display
+            puts ""
+            puts "Cats Game!"
+            return self.winner
+        end
     end
-    if self.won?
-     puts "Congratulations #{self.winner}!"
-     puts "###########"
-     @board.display
-     puts "#GAME OVER#"
-     elsif self.draw?
-     puts "Cat's Game!"
-     @board.display
-     puts "#GAME OVER#"
-    end
-  end
-  
- end
+end
