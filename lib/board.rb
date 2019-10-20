@@ -38,8 +38,8 @@ class Board
     count
   end
 
-  def taken?(move)
-    if position(move) == "X" || position(move) == "O"
+  def taken?(input)
+    if position(input) == "X" || position(input) == "O"
       true
     else
       false

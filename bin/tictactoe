@@ -7,9 +7,30 @@ puts "What kind of game do you want to play?"
 puts "To play Computer vs. Computer, enter 0."
 puts "To play against the computer, enter 1."
 puts "To play against a friend, enter 2."
-input = gets.chomp
-case input
+number_of_players = gets.chomp
+case number_of_players
 when "0"
-  player_1 = computer.player.new("X")
-  player_2 = computer.player.new("O")
+  game = Game.new(player_1 = Players::Computer.new("X"), player_2= player_2 = Players::Computer.new("O"), board = Board.new)
+  game.play
+when "1"
+  puts "Who should go first, the computer or human?"
+  first_player = gets.chomp
+    if first_player.downcase == "computer"
+      player_1 = Players::Computer.new("X")
+      player_2 = Players::Human.new("O")
+    else
+      player_1 = Players::Human.new("X")
+      player_2 = Players::Computer.new("O")
+    end
+    game = Game.new(player_1, player_2, board = Board.new)
+    game.play
+when "2"
+  puts "Who should go first?"
+  player_1 = gets.chomp
+  player_1 = Players::Human.new("X")
+  puts "Who is player two?"
+  player_2 = gets.chomp
+  player_2 = Players::Human.new("O")
+  game = Game.new(player_1, player_2, board = Board.new)
+  game.play
 end

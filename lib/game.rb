@@ -58,12 +58,14 @@ attr_accessor :board, :player_1, :player_2
 
   def turn
     player = current_player
-    current_move = player.move(player.token)
-    if !board.valid_move?(current_move)
-      current_move =player.move(player.token)
+    current_move = player.move(@board)
+    if !board.valid_move?(current_move) #is this where the issue is?
+      turn
     else
-      board.update(current_move, current_player)
+      @board.display
+      @board.update(current_move, player)
     end
+      @board.display
   end
 
   def play
