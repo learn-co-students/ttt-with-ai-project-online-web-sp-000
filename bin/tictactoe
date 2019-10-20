@@ -1,3 +1,10 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+#greets users 
+#prompts users for game type
+#asks user who should go first/be X
+#uses input to initialize Game with appropriate player types and token values
+#when game is over, prompt user if they'd like to play again, allow to choose a new config and go again or exit
+#You can implement this logic within the bin/tictactoe directly or encapsulate it within Game via a method like #start and simply evoke that method in the CLI. There is no wrong way to implement code that works.
