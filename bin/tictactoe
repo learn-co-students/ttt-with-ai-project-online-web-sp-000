@@ -1,3 +1,30 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def game_time
+  puts "Welcome to Tic-Tac-Toe!"
+  puts "Will you be playing with 0, 1, or 2 players?"
+
+  user_value = gets.strip
+
+  if user_value.to_i == 0
+    Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
+  elsif user_value.to_i == 1
+    puts "Do you want to start first? Enter 'yes' or 'no' to continue."
+    user_choice = gets.strip
+    if user_choice == 'yes' || user_choice == 'Yes'
+      Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
+    else
+      Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new).play
+    end
+
+  elsif user_choice.to_i == 2
+    Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new).play
+  end
+
+  puts "That was fun! Want to play another round? Enter 'yes' or 'no' to continue."
+
+end
+
+game_time until gets.strip == 'no'
