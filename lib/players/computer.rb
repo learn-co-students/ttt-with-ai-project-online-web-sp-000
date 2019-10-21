@@ -4,4 +4,12 @@
     #avoids infinite loop 
     #we recommend building something that's a more colloquial or condition-based algorithm.
    
-  
+module Players
+  class Computer < Player
+    
+    def move(input)
+     @board.valid_move?(input)
+    end
+    
+  end
+end

@@ -48,7 +48,6 @@ class Game
       position_1 = @board.cells[win_index_1]
       position_2 = @board.cells[win_index_2]
       position_3 = @board.cells[win_index_3]
-          
 
     if position_1 == "X" && position_2 == "X" && position_3 == "X" 
         return win_combination
@@ -73,17 +72,29 @@ class Game
   end
   
   def winner
-    # if won?
-    #   win_index_1 = win_combination[0]
-      # position_1 = @board.cells[win_index_1]
-    #checks #won? method 
-    #if #won?, returns value of that cell 
+    if winner = won?
+      the_winner = @board.cells[winner.first]
   end
+end
+
   
   def turn
-   
+   player = current_player.move(@board)
+   if !@board.valid_move?(player)
+     turn
+   elsif @board.update(player, current_player)
+   end
   end
 
-
+  def play
+    until over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+  end
+  end
   
 end
