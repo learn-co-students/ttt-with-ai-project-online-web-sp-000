@@ -1,4 +1,8 @@
 class Game
+  attr_accessor :board, :player_1, :player_2
+  
+  def initialize
+  end
   
   WIN_COMBINATIONS = [
      [0, 1, 2],
@@ -11,6 +15,17 @@ class Game
     [2, 4, 6]
     ]
   
+  def board
+    board = []
+  end
+  
+  def player_1
+    @player_1
+  end
+  
+  def player_2
+    @player_2
+  end
   #main model of app
   #represents a singular instance of tic tac toe session:
     #game has one board through board property
