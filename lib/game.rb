@@ -1,7 +1,10 @@
 class Game
   attr_accessor :board, :player_1, :player_2
   
-  def initialize
+  def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board = Board.new)
+    @board = board
+    @player_1 = player_1
+    @player_2 = player_2
   end
   
   WIN_COMBINATIONS = [
@@ -25,6 +28,10 @@ class Game
   
   def player_2
     @player_2
+  end
+  
+  def current_player
+    
   end
   #main model of app
   #represents a singular instance of tic tac toe session:
