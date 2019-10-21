@@ -54,10 +54,9 @@ class Game
         return win_combination
     elsif position_1 == "O" && position_2 == "O" && position_3 == "O"
         return win_combination
-    else 
-      false
       end
     end
+    false
   end
   
   
@@ -70,7 +69,21 @@ class Game
       true
     else
       false
+    end
   end
-end
+  
+  def winner
+    # if won?
+    #   win_index_1 = win_combination[0]
+      # position_1 = @board.cells[win_index_1]
+    #checks #won? method 
+    #if #won?, returns value of that cell 
+  end
+  
+  def turn
+   
+  end
+
+
   
 end
