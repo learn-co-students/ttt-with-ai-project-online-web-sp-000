@@ -1,7 +1,7 @@
 class Game
   attr_accessor :board, :player_1, :player_2
   
-  def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board = Board.new)
+  def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
     @board = board
     @player_1 = player_1
     @player_2 = player_2
@@ -19,7 +19,7 @@ class Game
     ]
   
   def board
-    board = []
+    board = @board
   end
   
   def player_1
@@ -31,8 +31,13 @@ class Game
   end
   
   def current_player
-    
+     if board.turn_count.even?
+       "X"
+    else 
+       "O"
   end
+  end
+  
   #main model of app
   #represents a singular instance of tic tac toe session:
     #game has one board through board property
