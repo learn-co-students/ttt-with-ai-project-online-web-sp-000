@@ -1,3 +1,4 @@
+require 'pry'
 class Game
   attr_accessor :board, :player_1, :player_2
   
@@ -32,16 +33,44 @@ class Game
   
   def current_player
      if board.turn_count.even?
-       "X"
+      @player_1
     else 
-       "O"
+     @player_2
   end
   end
   
-  #main model of app
-  #represents a singular instance of tic tac toe session:
-    #game has one board through board property
-    #game has two Players stored in player_1 & player_2
-  #Board & Player don't directly relate to Game but collaborate through arguments
-  #provides basic game runtime and logic(see tests)
+  def won?
+    WIN_COMBINATIONS.each do |win_combination|
+      win_index_1 = win_combination[0]
+      win_index_2 = win_combination[1]
+      win_index_3 = win_combination[2]
+          
+      position_1 = @board.cells[win_index_1]
+      position_2 = @board.cells[win_index_2]
+      position_3 = @board.cells[win_index_3]
+          
+
+    if position_1 == "X" && position_2 == "X" && position_3 == "X" 
+        return win_combination
+    elsif position_1 == "O" && position_2 == "O" && position_3 == "O"
+        return win_combination
+    else 
+      false
+      end
+    end
+  end
+  
+  
+  def draw?
+    @board.full? && !won?
+  end
+  
+  def over?
+    if won? || draw?
+      true
+    else
+      false
+  end
+end
+  
 end
