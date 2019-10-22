@@ -8,14 +8,32 @@ require 'pry'
 module Players
   class Computer < Player
     
+    move = nil
+  
     def move(board)
-     move = nil
-     #if bottom left isnt taken, move, else take top left
-     #if top left isn't taken, move, else take bottom right
-     #if bottom right isn't taken, move, else take top right
-     #
-     
+      
+    end
+
+    def center
+      if !@board.taken?("5")
+        move = "X"
+    end
   end
     
-  end
+    def corner
+      
+    end
+    
+    def middle_end
+      
+    end
+    
+    def block
+      
+    end
+    
+    def winning_move
+      
+    end
+end
 end
