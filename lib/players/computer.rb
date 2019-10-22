@@ -8,32 +8,13 @@ require 'pry'
 module Players
   class Computer < Player
     
-    move = nil
-  
-    def move(board)
-      
-    end
-
-    def center
-      if !@board.taken?("5")
-        move = "X"
-    end
-  end
     
-    def corner
-      
-    end
-    
-    def middle_end
-      
-    end
-    
-    def block
-      
-    end
-    
-    def winning_move
-      
-    end
+   def move(board)
+     index = rand(1..10)
+     if !board.taken?(index)
+       move = index.to_s
+   end
+ end
+   
 end
 end
