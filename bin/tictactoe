@@ -2,6 +2,22 @@
 
 require_relative '../config/environment'
 
+
+puts "Hi, welcome to Tic Tac Toe!" 
+    
+display_board(board)
+
+puts "Would you like to play yourself, play with another person, or play the computer?
+puts "Where would you like to go? Enter a number between 1-9"
+
+game = Game.new
+    game.play
+    
+user_input = gets.strip
+index = position(input)
+
+move(board, index)
+
 #greets users 
 #prompts users for game type
 #asks user who should go first/be X
