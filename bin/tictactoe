@@ -4,23 +4,46 @@ require_relative '../config/environment'
 
 
 puts "Hi, welcome to Tic Tac Toe!" 
+puts "Which game mode would you like to play?
+      1 - You v. a Friend
+      2- You v. Computer
+      3- Computer v. Computer"
+
+  mode_chosen = gets.strip
+
+  if mode_chosen == "1"
+      game = Game.new(Players::Human.new("X"), Players::Human.new("0"), Board.new)
+      game.play
+    end
+  
+  if mode_chosen == "2"
+    puts "Do you want to go first? y/n"
+    input = gets.strip
+    if input == "y"
+      game = Game.new(Players::Human.new("X"), Players::Computer.new("0"), Board.new)
+      game.play
+    elsif input == "n"
+      game = Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new).play
+    end
+    end
     
-display_board(board)
+  
+if game.over?
+  puts "Would you like to play again? Y/N"
+  input = gets.downcase.strip
+  if input == "y"
+   #go back to line 7
+  else exit
+end
+end
 
-puts "Would you like to play yourself, play with another person, or play the computer?
-puts "Where would you like to go? Enter a number between 1-9"
 
-game = Game.new
-    game.play
-    
-user_input = gets.strip
-index = position(input)
+  
 
-move(board, index)
+#problem 1: how to set up game with human or computer
+#problem 2: how to initialize game after player enters first move
+#problem 3: how to loop back to line 7 if game is over
+  
 
-#greets users 
-#prompts users for game type
-#asks user who should go first/be X
-#uses input to initialize Game with appropriate player types and token values
-#when game is over, prompt user if they'd like to play again, allow to choose a new config and go again or exit
+
 #You can implement this logic within the bin/tictactoe directly or encapsulate it within Game via a method like #start and simply evoke that method in the CLI. There is no wrong way to implement code that works.

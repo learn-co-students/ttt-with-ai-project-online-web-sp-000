@@ -73,7 +73,7 @@ class Game
   
   def winner
     if winner = won?
-      the_winner = @board.cells[winner.first]
+      @board.cells[winner.first]
   end
 end
 
