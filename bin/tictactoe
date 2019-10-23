@@ -3,16 +3,18 @@
 require_relative '../config/environment'
 
 
-puts "Hi, welcome to Tic Tac Toe!" 
-puts "Which game mode would you like to play?
+def game_go
+  puts "Hi, welcome to Tic Tac Toe!" 
+  puts "Which game mode would you like to play?
       1 - You v. a Friend
       2- You v. Computer
       3- Computer v. Computer"
 
   mode_chosen = gets.strip
 
+
   if mode_chosen == "1"
-      game = Game.new(Players::Human.new("X"), Players::Human.new("0"), Board.new)
+      game = Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new)
       game.play
     end
   
@@ -20,30 +22,24 @@ puts "Which game mode would you like to play?
     puts "Do you want to go first? y/n"
     input = gets.strip
     if input == "y"
-      game = Game.new(Players::Human.new("X"), Players::Computer.new("0"), Board.new)
+      game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
       game.play
     elsif input == "n"
       game = Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new).play
     end
     end
     
+ if mode_chosen == "3"
+    Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
+  end
   
-if game.over?
-  puts "Would you like to play again? Y/N"
-  input = gets.downcase.strip
-  if input == "y"
-   #go back to line 7
-  else exit
+puts "Would you like to play again? y/n"
+game_go until gets.strip == "n"
 end
-end
-
-
   
+game_go 
 
-#problem 1: how to set up game with human or computer
-#problem 2: how to initialize game after player enters first move
-#problem 3: how to loop back to line 7 if game is over
+
+#problem 1: not running because method not called
+#problem 2: not playing correctly--stuck on gathering input
   
-
-
-#You can implement this logic within the bin/tictactoe directly or encapsulate it within Game via a method like #start and simply evoke that method in the CLI. There is no wrong way to implement code that works.

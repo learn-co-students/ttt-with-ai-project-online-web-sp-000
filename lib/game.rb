@@ -79,12 +79,19 @@ end
 
   
   def turn
-   player = current_player.move(@board)
-   if !@board.valid_move?(player)
-     turn
-   elsif @board.update(player, current_player)
-   end
+  player = current_player
+  current_move = player.move(@board)
+  if !@board.valid_move?(current_move) #if it's not a valid move, try again
+    turn
+  else #if it is a valid move
+    puts "Turn: #{@board.turn_count+1}\n"
+    @board.display
+    @board.update(current_move, player)
+    puts "#{player.token} moved #{current_move}"
+    @board.display
   end
+  end
+  
 
   def play
     until over?
