@@ -18,7 +18,6 @@ class Board
   end
   
   def position(user_input)
-    return nil unless valid_move?(user_input)
     @cells[Integer(user_input) - 1 ]
   end
   
@@ -30,19 +29,23 @@ class Board
     cells.count{ |item|  item != " " }  
   end
   
-  def taken?(postion)
-    "" != position(position)
+  def taken?(user_input)
+    " " != position(user_input)
   end
   
   def valid_move?(user_input)
-    position = Integer(user_input)
-    position > 0 && position < 10
+    begin
+      int_move = Integer(user_input) 
+    rescue
+      false
+    else
+      int_move.between?(1,9) && !taken?(int_move)
+    end
   end
   
-  def update(move, player_token)
-    return false unless valid_move?
-    return false unless taken?
-    @cells[Integer(move) - 1 ] = player_token
+  def update(move, player)
+    return false unless valid_move?(move)
+    @cells[Integer(move) - 1 ] = player.token
   end
   
 end
