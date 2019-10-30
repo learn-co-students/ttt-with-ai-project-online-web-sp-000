@@ -20,6 +20,12 @@ class Game
   end
   
   def won?
+    WIN_COMBINATIONS.collect do |combo|
+      if board.position(combo[0]) == board.position(combo[1]) && board.position(combo[1]) == board.position(combo[2])
+        combo
+      else
+        nil
+      end
   end
 
   def draw?
