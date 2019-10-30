@@ -16,8 +16,7 @@ class Game
   end
   
   def current_player
-    binding.pry
-    board.turn_count
+    @board.turn_count.even? ? @player_1 : @player_2
   end
   
   def won?
