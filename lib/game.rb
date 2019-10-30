@@ -40,6 +40,24 @@ class Game
   end
   
   def turn
+    curr_player = self.current_player
+    move = "-1"
+    until @board.valid_move?(move)
+      move = curr_player.move(@board)
+    end
+    @board.update(move, curr_player)
+  end
+  
+  def play
+    until self.over?
+      @display.display
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end
   end
 
 end
