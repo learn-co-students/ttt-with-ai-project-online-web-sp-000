@@ -1,7 +1,8 @@
 module Players
   class Computer < Player
-    def initialize
-      @move_pool = ["1","2","3","4","5","6","7","8","9"].scramble
+    def initialize(token)
+      super
+      @move_pool = ["1","2","3","4","5","6","7","8","9"].shuffle
     end
     def move(board)
       current_move = "-5"
