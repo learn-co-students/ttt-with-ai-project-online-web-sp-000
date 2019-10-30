@@ -22,7 +22,7 @@ class Board
   end
   
   def full?
-    @cells.none?{ |cell|  cell == " " }
+    @cells.none?{ |cell| cell == " " }
   end
   
   def turn_count

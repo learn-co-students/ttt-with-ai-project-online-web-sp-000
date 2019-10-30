@@ -16,6 +16,8 @@ class Game
   end
   
   def current_player
+    binding.pry
+    board.turn_count
   end
   
   def won?
