@@ -20,21 +20,26 @@ class Game
   end
   
   def won?
-    WIN_COMBINATIONS.collect do |combo|
-      if board.position(combo[0]) == board.position(combo[1]) && board.position(combo[1]) == board.position(combo[2])
-        combo
-      else
-        nil
-      end
+    cells = @board.cells
+    WIN_COMBINATIONS.detect do |item|
+      cells[item[0]] != " " && cells[item[0]] == cells[item[1]] && cells[item[1]] == cells[item[2]]
+    end
   end
 
   def draw?
+    board.full? && !self.won?
   end
   
   def over?
+    self.draw? || self.won?
   end
   
   def winner
+    combo = self.won?
+    @board.cells[combo[0]] if combo
+  end
+  
+  def turn
   end
 
 end
