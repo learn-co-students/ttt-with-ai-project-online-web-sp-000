@@ -6,6 +6,7 @@ player_count = gets.strip
 case player_count
 when "0"
   game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), board = Board.new)
+  game.play
 when "1"
   raise "NOT IMPLIMENTED"
 when "2"

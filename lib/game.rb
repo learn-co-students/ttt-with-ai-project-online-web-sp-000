@@ -54,6 +54,7 @@ class Game
       turn
     end
     if won?
+      @display.display
       puts "Congratulations #{winner}!"
     elsif draw?
       puts "Cat's Game!"
