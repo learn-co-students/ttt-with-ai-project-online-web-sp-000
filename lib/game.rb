@@ -50,15 +50,17 @@ class Game
   
   def play
     until self.over?
-      @display.display
+      @board.display
       turn
+      system "clear" 
     end
     if won?
-      @display.display
+      @board.display
       puts "Congratulations #{winner}!"
     elsif draw?
       puts "Cat's Game!"
     end
+    board.cells
   end
 
 end
