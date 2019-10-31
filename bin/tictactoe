@@ -1,3 +1,15 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+puts "Starting Game Choose players 0, 1, 2"
+player_count = gets.strip
+case player_count
+when "0"
+  game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), board = Board.new)
+when "1"
+  raise "NOT IMPLIMENTED"
+when "2"
+  raise "NOT IMPLIMENTED"
+else
+  puts "Invalid Number"
+end
