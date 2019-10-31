@@ -54,8 +54,8 @@ class Game
       turn
       system "clear" 
     end
+    @board.display
     if won?
-      @board.display
       puts "Congratulations #{winner}!"
     elsif draw?
       puts "Cat's Game!"

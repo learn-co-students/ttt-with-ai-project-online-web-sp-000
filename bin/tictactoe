@@ -8,9 +8,11 @@ when "0"
   game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), board = Board.new)
   game.play
 when "1"
-  raise "NOT IMPLIMENTED"
+  game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), board = Board.new)
+  game.play
 when "2"
-  raise "NOT IMPLIMENTED"
+    game = Game.new(Players::Human.new("X"), Players::Human.new("O"), board = Board.new)
+    game.play
 else
   puts "Invalid Number"
 end
