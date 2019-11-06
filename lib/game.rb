@@ -1,5 +1,6 @@
 class Game
-        WIN_COMBINATIONS = [
+  attr_accessor :board, :player_1, :player_2
+      WIN_COMBINATIONS = [
       [0, 1, 2],
       [3, 4, 5],
       [6, 7, 8],
@@ -9,18 +10,16 @@ class Game
       [1, 4, 7],
       [2, 5, 8]
       ]
-    attr_accessor :board, :player_1, :player_2
-    def initialize
-      
-      @board = board || Array.new(9, " ")
+
+    def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+      @board = board
       @player_1 = player_1
       @player_2 = player_2
     end
 
     def current_player
-      @board.count % 2 == 0 ? "X" : "O"
+      @board.turn_count % 2 == 0 ? @player_1 : @player_2
     end
-
 
     def won?
       WIN_COMBINATIONS.each do |win_combo|
@@ -28,21 +27,22 @@ class Game
       index_2 = win_combo[1]
       index_3 = win_combo[2]
 
-      element_1 = @board[index_1]
-      element_2 = @board[index_2]
-      element_3 = @board[index_3]
+      element_1 = @cells[index_1]
+      element_2 = @cells[index_2]
+      element_3 = @cells[index_3]
 
       if element_1 == "X" && element_2 == "X" && element_3 == "X" || element_1 == "O" && element_2 == "O" && element_3 == "O"
         return win_combo
       end
     end
-      @board.any? == "X" || @board.any? == "O"
+      @cells.any? == "X" || @cells.any? == "O"
     end
 
 
     def winner
-      if win_combo = won?
-        return @board[win_combo[0]]
+      if winning_combo = won?
+      @winner = @board.cells[winning_combo.first]
+
       end
     end
 
@@ -55,15 +55,15 @@ class Game
     end
 
     def play
-    until over?
-      turn
+      until over?
+        turn
+      end
+      if won?
+        puts "Congratulations #{winner}!"
+      elsif draw?
+        puts "Cat's Game!"
+      end
     end
-    if won?
-      puts "Congratulations #{winner}!"
-    elsif draw?
-      puts "Cat's Game!"
-    end
-  end
 
 
     def start
