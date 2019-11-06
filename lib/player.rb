@@ -7,5 +7,6 @@ class Player
   end
 
   def move
+    
   end
 end

@@ -21,23 +21,14 @@ class Game
       @board.turn_count % 2 == 0 ? @player_1 : @player_2
     end
 
+
     def won?
-      WIN_COMBINATIONS.each do |win_combo|
-      index_1 = win_combo[0]
-      index_2 = win_combo[1]
-      index_3 = win_combo[2]
-
-      element_1 = @cells[index_1]
-      element_2 = @cells[index_2]
-      element_3 = @cells[index_3]
-
-      if element_1 == "X" && element_2 == "X" && element_3 == "X" || element_1 == "O" && element_2 == "O" && element_3 == "O"
-        return win_combo
+      WIN_COMBINATIONS.detect do |combo|
+      @board.cells[combo[0]] == @board.cells[combo[1]] &&
+      @board.cells[combo[1]] == @board.cells[combo[2]] &&
+      @board.taken?(combo[0]+1)
       end
     end
-      @cells.any? == "X" || @cells.any? == "O"
-    end
-
 
     def winner
       if win_combo = won?
@@ -47,11 +38,11 @@ class Game
     end
 
     def draw?
-      !won? && full?
+      !won? && @board.full?
     end
 
     def over?
-      won? || draw? || full?
+      won? || draw?
     end
 
     def play
@@ -65,14 +56,17 @@ class Game
       end
     end
 
-
-    def start
-    end
-
-    def play
-    end
-
     def turn
+      player = current_player
+      current_move = player.move(@board)
+      if !@board.valid_move?(current_move)
+        turn
+      else
+        puts "Turn: #{@board.turn_count+1}"
+        @board.display
+        @board.update(current_move, player)
+        puts "#{player.token} moved #{current_move}"
+        @board.display
+      end
     end
-
 end
