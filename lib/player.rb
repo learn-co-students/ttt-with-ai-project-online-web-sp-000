@@ -5,8 +5,4 @@ class Player
   def initialize(token)
     @token = token
   end
-
-  def move
-    
-  end
 end
