@@ -81,9 +81,9 @@ end
   def turn
   player = current_player
   current_move = player.move(@board)
-  if !@board.valid_move?(current_move) #if it's not a valid move, try again
+  if !@board.valid_move?(current_move) 
     turn
-  else #if it is a valid move
+  else 
     puts "Turn: #{@board.turn_count+1}\n"
     @board.display
     @board.update(current_move, player)
