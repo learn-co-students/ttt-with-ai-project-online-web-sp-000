@@ -1,3 +1,4 @@
+require "pry"
 class Game
   attr_accessor :board, :player_1, :player_2
       WIN_COMBINATIONS = [
@@ -33,7 +34,6 @@ class Game
     def winner
       if win_combo = won?
       @winner = @board.cells[win_combo.first]
-
       end
     end
 
@@ -55,7 +55,7 @@ class Game
         puts "Cat's Game!"
       end
     end
-
+    
     def turn
       player = current_player
       current_move = player.move(@board)
