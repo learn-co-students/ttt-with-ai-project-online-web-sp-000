@@ -60,7 +60,7 @@ require_relative '../config/environment'
 
           #  prompt
 
-
+          game = Game.new
 
            until game.won? || game.draw?
            game.play
