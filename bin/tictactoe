@@ -1,3 +1,45 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+def game_go
+  puts "Hi, welcome to Tic Tac Toe!" 
+  puts "Which game mode would you like to play?
+      1 - You v. a Friend
+      2- You v. Computer
+      3- Computer v. Computer"
+
+  mode_chosen = gets.strip
+
+
+  if mode_chosen == "1"
+      game = Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new)
+      game.play
+    end
+  
+  if mode_chosen == "2"
+    puts "Do you want to go first? y/n"
+    input = gets.strip
+    if input == "y"
+      game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+      game.play
+    elsif input == "n"
+      game = Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new).play
+    end
+    end
+    
+ if mode_chosen == "3"
+    Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
+  end
+  
+puts "Would you like to play again? y/n"
+game_go until gets.strip == "n"
+end
+  
+game_go 
+
+
+#problem 1: not running because method not called
+#problem 2: not playing correctly--stuck on gathering input
+  
