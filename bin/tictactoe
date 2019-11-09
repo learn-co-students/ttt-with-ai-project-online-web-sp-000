@@ -1,3 +1,65 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+  def prompt
+  puts "Hi, Welcome to Tic Tac Toe!!"
+  puts "What kind of game would you like to play?
+           For one player, type 1,\n
+           for two players, type 2,\n
+           to watch the computer, play press 0"
+  end
+    input = ""
+    until input == "1" || input == "2" || input == "0"
+      prompt
+      input = gets.strip
+    end
+    if input == "1"
+      puts "Which token would you like to be? X or O"
+            input_token = gets.strip
+          if input_token.downcase == "x"
+                  player_2 = Players::Human.new(token = "X")
+                  player_1 = Players::Computer.new(token = "O")
+          else
+                  player_2 = Players::Human.new(token = "O")
+                  player_1 = Players::Computer.new(token = "X")
+          end
+        game = Game.new(player_1, player_2, board = Board.new)
+          until game.won? || game.draw?
+            game.play
+              end
+    end
+    if input == "0"
+        game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+        until game.won? || game.draw?
+        game.play
+        end
+    end
+
+    if input == "2"
+      puts "Which token would you like to be? X or O"
+            input_token = gets.strip
+            if input_token.downcase == "x"
+                  player_1 = Players::Human.new(token = "X")
+                  player_2 = Players::Human.new(token = "O")
+           else
+                  player_1 = Players::Human.new(token = "O")
+                  player_2 = Players::Human.new(token = "X")
+           end
+            game = Game.new
+          until game.won? || game.draw?
+              game.play
+          end
+    end
+
+
+        play_again = ""
+        until play_again.downcase == "n" || play_again.downcase == "no"
+               puts "Would you like to play again?"
+                    play_again = gets.strip
+               play_again.downcase == "y" || play_again.downcase == "yes"
+            game = Game.new
+           until game.won? || game.draw?
+           game.play
+           end
+        end

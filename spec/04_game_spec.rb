@@ -1,3 +1,4 @@
+require "pry"
 require 'spec_helper'
 
 describe 'Game' do
@@ -55,7 +56,7 @@ describe 'Game' do
 
     it 'defaults to two human players, X and O, with an empty board' do
       game = Game.new
-
+      # binding.pry
       expect(game.player_1).to be_a(Players::Human)
       expect(game.player_1.token).to eq("X")
 
