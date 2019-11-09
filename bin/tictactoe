@@ -17,17 +17,23 @@ require_relative '../config/environment'
     if input == "1"
       puts "Which token would you like to be? X or O"
             input_token = gets.strip
-            if input_token.downcase == "x"
+          if input_token.downcase == "x"
                   player_2 = Players::Human.new(token = "X")
                   player_1 = Players::Computer.new(token = "O")
-           else
+          else
                   player_2 = Players::Human.new(token = "O")
                   player_1 = Players::Computer.new(token = "X")
-            end
+          end
         game = Game.new(player_1, player_2, board = Board.new)
+          until game.won? || game.draw?
+            game.play
+              end
     end
     if input == "0"
         game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+        until game.won? || game.draw?
+        game.play
+        end
     end
 
     if input == "2"
@@ -40,16 +46,17 @@ require_relative '../config/environment'
                   player_1 = Players::Human.new(token = "O")
                   player_2 = Players::Human.new(token = "X")
            end
-        game = Game.new
+            game = Game.new
+          until game.won? || game.draw?
+              game.play
+          end
     end
-        until game.won? || game.draw?
-          game.play
-        end
+
 
         play_again = ""
         until play_again.downcase == "n" || play_again.downcase == "no"
                puts "Would you like to play again?"
-               play_again = gets.strip
+                    play_again = gets.strip
                play_again.downcase == "y" || play_again.downcase == "yes"
             game = Game.new
            until game.won? || game.draw?
