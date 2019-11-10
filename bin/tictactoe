@@ -1,3 +1,41 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+def start
+  puts "Welcome to Tic Tac Toe!"
+  puts "Please enter the number of players (0-2):"
+  input = gets.chomp
+
+    if input == "0"
+    game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new('O'), board = Board.new).play
+
+    elsif input == "1"
+      puts "Which token would you like to be? X or O?"
+      input_token = gets.strip
+      if input_token == "X"
+        game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new).play
+      elsif input_token == "O"
+        game = Game.new(player_1 = Players::Human.new("O"), player_2 = Players::Computer.new("X"), board = Board.new).play
+      else
+        puts "Incorrect token entered. Please try again. Restarting game."
+        start
+      end
+
+    elsif input == "2"
+      puts "Which token would you like to be? X or O?"
+      input_token = gets.strip
+      if input_token == "X"
+      game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new).play
+      elsif input_token == "O"
+      game = Game.new(player_1 = Players::Human.new("O"), player_2 = Players::Human.new("X"), board = Board.new).play
+    else
+      puts "Invalid entry, restarting game"
+        start
+      end
+    else
+      puts "Invalid entry. Please try again. Restarting game."
+      start
+    end
+  puts "Do you want to play another round? Enter Y or N?"
+end
+  start until gets.strip == 'N'
