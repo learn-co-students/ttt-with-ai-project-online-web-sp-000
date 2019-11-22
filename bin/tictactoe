@@ -1,3 +1,61 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def start_game(input, player = 1)
+  if input == 0
+    newGame = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+  elsif input == 1 && player == 2
+    newGame = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+  elsif input == 1 && player == 1
+    newGame = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+  elsif input == 2
+    newGame = Game.new(Players::Human.new("X"), Players::Human.new("O"))
+  end
+  newGame.play
+  play_again?
+end
+
+def wargame
+  10.times do
+    newGame = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+    newGame.play
+  end
+end
+
+def greetings
+  puts "Welcome to Tic Tac Toe"
+end
+
+def player_input
+  puts "How many players are playing? 0, 1 or 2?"
+  player_input = gets.strip
+  if player_input.to_i == 0
+    start_game(0)
+  elsif player_input.to_i == 2
+    start_game(2)
+  elsif player_input.to_i == 1
+    puts "Would you like to be player 1 (x) or 2 (O) - Anything not player 2, defaults to player 1"
+    player = gets.strip.to_i
+    if player == 2
+      start_game(1, 2)
+    else
+      start_game(1)
+    end
+  elsif player_input == "wargame"
+    wargame
+  end
+end
+
+def play_again?
+  puts "Would you like to play again? Y/N"
+  input = gets.strip
+  if input == "Y"
+    player_input
+  else
+    puts "Good Bye!"
+  end
+end  
+  
+greetings
+player_input
