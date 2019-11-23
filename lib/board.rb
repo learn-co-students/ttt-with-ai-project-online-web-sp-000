@@ -23,4 +23,35 @@ class  Board
 
   end
 
+  def position(gets)
+    self.cells[gets.strip.to_i - 1]
+  end
+
+  def full?
+    self.cells.all? {|position| position != " "}
+  end
+
+  def turn_count
+    turns = self.cells.select {|position| position != " "}
+    turns.length
+  end
+
+  def taken?(position)
+
+    if self.cells[position.to_i - 1].upcase == "X" || self.cells[position.to_i - 1].upcase == "O"
+      true
+    else
+      false
+    end
+  end
+
+  def valid_move?(position)
+
+    if self.taken?(position) || position == "invalid"
+      false
+    else
+      true
+    end
+  end
+
 end
