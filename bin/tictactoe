@@ -8,28 +8,28 @@ puts 'What kind of game would you like to play? (0, 1, or 2 player). Type "N" if
 
 response = gets.strip
 
-while response != "N"
+# while response != "N"
 
-  if response.to_i < 1
+if response.to_i < 1
 
-    ai_game = Game.new
-    ai_game.play
+  ai_game = Game.new
+  ai_game.play
 
-  else
-    game_board = Board.new
-    player_1 = Players::Human.new("X")
+else
+  game_board = Board.new
+  player_1 = Players::Human.new("X")
 
-    if response == 1
-      one_player_game = Game.new(player_1, game_board)
-      one_player_game.play
-    elsif response == 2
-      player_2 = Players::Human.new("X")
-      two_player_game = Game.new(player_1, player_2, game_board)
-      two_player_game.play
-    end
+  if response.to_i == 1
+    one_player_game = Game.new(player_1, game_board)
+    one_player_game.play
+  elsif response.to_i == 2
+    player_2 = Players::Human.new("X")
+    two_player_game = Game.new(player_1, player_2, game_board)
+    two_player_game.play
   end
-
-  puts "Would you like to player again?"
-  response = gets.strip
-
 end
+
+#   puts "Would you like to player again?"
+#   response = gets.strip
+#
+# end

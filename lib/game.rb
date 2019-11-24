@@ -91,12 +91,19 @@ class Game
 
     current_player_turn = self.current_player
     position = current_player_turn.move(@board)
-    if @board.valid_move?(position)
-      position
-    else
+    # if @board.valid_move?(position)
+    #   position
+    # else
+    #   current_player_turn.move(@board)
+    # end
+    # @board.update(position, current_player)
+
+    if !@board.valid_move?(position)
       current_player_turn.move(@board)
+    else
+      @board.update(position, current_player)      
     end
-    @board.update(position, current_player)
+
 
   end
 
