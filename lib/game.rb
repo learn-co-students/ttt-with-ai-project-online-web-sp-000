@@ -37,18 +37,21 @@ class Game
     winning_combo = []
     WIN_COMBINATIONS.each do |combo|
       if @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]]
-        winning_combo << combo[0]
-        winning_combo << combo[1]
-        winning_combo << combo[2]
+        if @board.cells[combo[0]] != " "
+          winning_combo = combo
+        end
       end
     end
 
     if winning_combo.empty?
-      false
+      result = false
     else
-      winning_combo
+      result = winning_combo
     end
+    result
+
   end
+
 
   def draw?
 
@@ -73,15 +76,13 @@ class Game
   def winner
 
     winning_combo = self.won?
+
     if self.won?
       winning_player = @board.cells[winning_combo[0]]
-    end
-
-    if winning_player == "X" || winning_player == "O"
-      winning_player
     else
-      nil
+      winning_player = nil
     end
+    winning_player
 
   end
 
@@ -104,9 +105,11 @@ class Game
 
     while !self.over?
       self.turn
+    end
 
     if self.won?
-      puts "Congratulations #{self.winner.token}!"
+      winning_player = self.winner
+      puts "Congratulations #{winning_player}!"
     end
 
     if self.draw?
@@ -114,8 +117,5 @@ class Game
     end
 
   end
-
-
-
 
 end
