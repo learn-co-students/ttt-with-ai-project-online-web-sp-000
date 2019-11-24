@@ -12,6 +12,8 @@ class Players::Computer < Player
     end
     valid_moves
 
+    valid_moves.sample
+
   end
 
 end
