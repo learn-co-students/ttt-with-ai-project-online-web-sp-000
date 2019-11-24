@@ -88,8 +88,8 @@ class Game
 
   def turn
 
+    self.current_player
     
-
   end
 
 
