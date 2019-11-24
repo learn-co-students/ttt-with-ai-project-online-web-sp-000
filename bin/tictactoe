@@ -19,11 +19,13 @@ while response != "N"
     game_board = Board.new
     player_1 = Players::Human.new("X")
 
-    if gets.strip == 1
-      Game.new(player_1, game_board)
-    elsif gets.strip == 2
+    if response == 1
+      one_player_game = Game.new(player_1, game_board)
+      one_player_game.play
+    elsif response == 2
       player_2 = Players::Human.new("X")
-      Game.new(player_1, player_2, game_board)
+      two_player_game = Game.new(player_1, player_2, game_board)
+      two_player_game.play
     end
   end
 
