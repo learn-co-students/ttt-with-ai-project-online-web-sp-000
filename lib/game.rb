@@ -2,7 +2,7 @@ class Game
 
   attr_accessor :player_1, :player_2, :board
 
-  WIN_COMBINATIONS = []
+  WIN_COMBINATIONS = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [6,4,2]]
 
   def initialize(player_1=nil, player_2=nil, board=nil)
     if player_1 == nil
@@ -31,5 +31,68 @@ class Game
     next_turn.odd? ? @player_1 : @player_2
 
   end
+
+  def won?
+
+    winning_combo = []
+    WIN_COMBINATIONS.each do |combo|
+      if @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]]
+        winning_combo << combo[0]
+        winning_combo << combo[1]
+        winning_combo << combo[2]
+      end
+    end
+
+    if winning_combo.empty?
+      false
+    else
+      winning_combo
+    end
+  end
+
+  def draw?
+
+    if !self.won? && @board.full?
+      true
+    else
+      false
+    end
+
+  end
+
+  def over?
+
+    if self.won? || self.draw?
+      true
+    else
+      false
+    end
+
+  end
+
+  def winner
+
+    winning_combo = self.won?
+    if self.won?
+      winning_player = @board.cells[winning_combo[0]]
+    end
+
+    if winning_player == "X" || winning_player == "O"
+      winning_player
+    else
+      nil
+    end
+
+  end
+
+
+  def turn
+
+    
+
+  end
+
+
+
 
 end
