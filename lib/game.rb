@@ -88,8 +88,30 @@ class Game
 
   def turn
 
-    self.current_player
-    
+    current_player_turn = self.current_player
+    position = current_player_turn.move(@board)
+    if @board.valid_move?(position)
+      position
+    else
+      current_player_turn.move(@board)
+    end
+    @board.update(position, current_player)
+
+  end
+
+
+  def play
+
+    self.turn
+    self.over?
+    if self.won?
+      puts "Congratulations #{self.winner}!"
+    end
+
+    if self.draw?
+      puts "Cat's Game!"
+    end
+
   end
 
 

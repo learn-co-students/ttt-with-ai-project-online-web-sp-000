@@ -10,7 +10,6 @@ class Players::Computer < Player
         valid_moves << position.to_s.strip
       end
     end
-    binding.pry
     valid_moves
 
   end
