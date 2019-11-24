@@ -102,10 +102,11 @@ class Game
 
   def play
 
-    self.turn
-    self.over?
+    while !self.over?
+      self.turn
+
     if self.won?
-      puts "Congratulations #{self.winner}!"
+      puts "Congratulations #{self.winner.token}!"
     end
 
     if self.draw?
