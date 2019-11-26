@@ -28,6 +28,7 @@ class Game
   def current_player
 
     next_turn = @board.turn_count + 1
+    binding.pry
     next_turn.odd? ? @player_1 : @player_2
 
   end
@@ -114,6 +115,7 @@ class Game
 
     while !self.over?
       self.turn
+      @board.display
     end
 
     if self.won?

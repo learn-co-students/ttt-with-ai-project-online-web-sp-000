@@ -21,10 +21,12 @@ else
 
   if response.to_i == 1
     one_player_game = Game.new(player_1, game_board)
+    game_board.display
     one_player_game.play
   elsif response.to_i == 2
     player_2 = Players::Human.new("X")
     two_player_game = Game.new(player_1, player_2, game_board)
+    game_board.display
     two_player_game.play
   end
 end
