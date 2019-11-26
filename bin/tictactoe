@@ -13,6 +13,8 @@ response = gets.strip
 if response.to_i < 1
 
   ai_game = Game.new
+  ai_game.player_1 = Players::Computer.new("X")
+  ai_game.player_2 = Players::Computer.new("O")
   ai_game.play
 
 else
@@ -20,11 +22,12 @@ else
   player_1 = Players::Human.new("X")
 
   if response.to_i == 1
-    one_player_game = Game.new(player_1, game_board)
+    player_2 = Players::Computer.new("O")
+    one_player_game = Game.new(player_1, player_2, game_board)
     game_board.display
     one_player_game.play
   elsif response.to_i == 2
-    player_2 = Players::Human.new("X")
+    player_2 = Players::Human.new("O")
     two_player_game = Game.new(player_1, player_2, game_board)
     game_board.display
     two_player_game.play
