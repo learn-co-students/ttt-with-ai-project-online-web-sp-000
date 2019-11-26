@@ -91,6 +91,7 @@ class Game
 
     current_player_turn = self.current_player
     puts "It's Player #{current_player_turn.token}'s turn"
+    puts "Where would you like to move (1-9)?"
     puts "\n\n"
     position = current_player_turn.move(@board)
 
