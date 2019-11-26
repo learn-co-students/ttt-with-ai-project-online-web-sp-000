@@ -18,11 +18,31 @@ response = gets.strip
 if response.to_i < 1
 
   ai_game = Game.new
-  puts "Ah yes! Computer vs Computer! Curious to see the result!"
-  puts "\n\n"
   ai_game.player_1 = Players::Computer.new("X")
   ai_game.player_2 = Players::Computer.new("O")
-  ai_game.play
+
+  puts "Would you like to play wargames? (Y/N)"
+
+  wargames = gets.strip
+
+  if wargames.upcase == "Y"
+    x_won = 0
+    o_won = 0
+    for game_number in 1..100
+      ai_game.play
+      if ai_game.winner == "X"
+        x_won += 1
+      elsif ai_game.winner == "O"
+        o_won += 1
+      end
+    end
+
+    puts "Player X won #{x_won} times!"
+    puts "Player O won #{o_won} times!"
+  else
+    puts "Ok! No wargames. Just Computer vs Computer! One game will decide the winner. Curious to see the result!"
+    ai_game.play
+  end
 
 else
   game_board = Board.new
