@@ -90,6 +90,8 @@ class Game
   def turn
 
     current_player_turn = self.current_player
+    puts "It's Player #{current_player_turn.token}'s turn"
+    puts "\n\n"
     position = current_player_turn.move(@board)
 
     # if @board.valid_move?(position)
@@ -115,6 +117,7 @@ class Game
     while !self.over?
       self.turn
       @board.display
+      puts "\n\n"
     end
 
     if self.won?

@@ -4,7 +4,12 @@ require_relative '../config/environment'
 
 puts "Welcome to Tic-Tac-Toe"
 
-puts 'What kind of game would you like to play? (0, 1, or 2 player). Type "N" if you do not want to play?'
+puts 'What kind of game would you like to play?'
+puts '0) AI'
+puts '1) One player'
+puts '2) Two player'
+puts '3) Exit'
+puts "\n\n"
 
 response = gets.strip
 
@@ -13,6 +18,8 @@ response = gets.strip
 if response.to_i < 1
 
   ai_game = Game.new
+  puts "Ah yes! Computer vs Computer! Curious to see the result!"
+  puts "\n\n"
   ai_game.player_1 = Players::Computer.new("X")
   ai_game.player_2 = Players::Computer.new("O")
   ai_game.play
@@ -24,13 +31,23 @@ else
   if response.to_i == 1
     player_2 = Players::Computer.new("O")
     one_player_game = Game.new(player_1, player_2, game_board)
+    puts "Great! Let's get this 1 player game started!"
+    puts "Player 1, you are up first!"
+    puts "\n\n"
     game_board.display
     one_player_game.play
   elsif response.to_i == 2
     player_2 = Players::Human.new("O")
     two_player_game = Game.new(player_1, player_2, game_board)
+    puts "The more the merrier! Let's see this 2 player battle!"
+    puts "Player 1, you are up first!"
+    puts "\n\n"
     game_board.display
     two_player_game.play
+  elsif response.to_i == 3
+    puts "Play again soon! Goodbye!"
+  else
+    puts "Invalid option chosen. Please choose again."
   end
 end
 
