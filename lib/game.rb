@@ -97,6 +97,7 @@ class Game
 
     if !@board.valid_move?(position)
       puts "Sorry. The last move was invalid because position is already taken. Please select another position (1-9)."
+      puts "Please press any key to continue."
       current_player_turn.move(@board)
     else
       @board.update(position, current_player)
