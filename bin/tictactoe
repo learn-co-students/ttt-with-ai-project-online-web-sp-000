@@ -12,7 +12,7 @@ def game_play_options
 end
 
 
-puts "Welcome to Tic-Tac-Toe"
+puts "Welcome to Tic-Tac-Toe!\n\n"
 
 game_play_options
 
@@ -50,10 +50,16 @@ while response.to_i != 3
 
       puts "Player X won #{x_won} times!"
       puts "Player O won #{o_won} times!"
+      puts "\n\n"
     else
       puts "Ok! No wargames. Just Computer vs Computer! One game will decide the winner. Curious to see the result!"
       ai_game.play
+      puts "\n\n"
     end
+
+    game_play_options
+
+    response = gets.strip
 
   elsif response.to_i == 1 || response.to_i == 2
     game_board = Board.new
@@ -63,10 +69,10 @@ while response.to_i != 3
       player_2 = Players::Computer.new("O")
       one_player_game = Game.new(player_1, player_2, game_board)
       puts "Great! Let's get this 1 player game started!"
-      puts "Player 1, you are up first!"
-      puts "\n\n"
+      puts "Player 1, you are up first!\n\n"
       game_board.display
       one_player_game.play
+      puts "\n\n"
     elsif response.to_i == 2
       player_2 = Players::Human.new("O")
       two_player_game = Game.new(player_1, player_2, game_board)
@@ -75,6 +81,7 @@ while response.to_i != 3
       puts "\n\n"
       game_board.display
       two_player_game.play
+      puts "\n\n"      
     end
 
     game_play_options
