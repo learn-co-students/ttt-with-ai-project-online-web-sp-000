@@ -1,3 +1,92 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def game_play_options
+  puts 'What kind of game would you like to play?'
+  puts '0) AI'
+  puts '1) One player'
+  puts '2) Two player'
+  puts '3) Exit'
+  puts "\n\n"
+end
+
+
+puts "Welcome to Tic-Tac-Toe!\n\n"
+
+game_play_options
+
+response = gets.strip
+
+while ![0, 1, 2, 3].include?(response.to_i)
+  puts "Sorry. Your last choice was invalid.\n\n"
+  game_play_options
+  response = gets.strip
+end
+
+while response.to_i != 3
+
+  if response.to_i == 0
+
+    ai_game = Game.new
+    ai_game.player_1 = Players::Computer.new("X")
+    ai_game.player_2 = Players::Computer.new("O")
+
+    puts "Would you like to play wargames? (Y/N)"
+
+    wargames = gets.strip
+
+    if wargames.upcase == "Y"
+      x_won = 0
+      o_won = 0
+      for game_number in 1..100
+        ai_game.play
+        if ai_game.winner == "X"
+          x_won += 1
+        elsif ai_game.winner == "O"
+          o_won += 1
+        end
+      end
+
+      puts "Player X won #{x_won} times!"
+      puts "Player O won #{o_won} times!"
+      puts "\n\n"
+    else
+      puts "Ok! No wargames. Just Computer vs Computer! One game will decide the winner. Curious to see the result!"
+      ai_game.play
+      puts "\n\n"
+    end
+
+  elsif response.to_i == 1 || response.to_i == 2
+    game_board = Board.new
+    player_1 = Players::Human.new("X")
+
+    if response.to_i == 1
+      player_2 = Players::Computer.new("O")
+      one_player_game = Game.new(player_1, player_2, game_board)
+      puts "Great! Let's get this 1 player game started!"
+      puts "Player 1, you are up first!\n\n"
+      game_board.display
+      one_player_game.play
+      puts "\n\n"
+    elsif response.to_i == 2
+      player_2 = Players::Human.new("O")
+      two_player_game = Game.new(player_1, player_2, game_board)
+      puts "The more the merrier! Let's see this 2 player battle!"
+      puts "Player 1, you are up first!"
+      puts "\n\n"
+      game_board.display
+      two_player_game.play
+      puts "\n\n"
+    end
+
+  end
+  game_play_options
+
+  response = gets.strip
+
+end
+
+if response.to_i == 3
+  puts "Play again soon! Goodbye!"
+end
