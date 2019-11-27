@@ -95,21 +95,12 @@ class Game
     puts "\n\n"
     position = current_player_turn.move(@board)
 
-    # if @board.valid_move?(position)
-    #   position
-    # else
-    #   current_player_turn.move(@board)
-    # end
-    # @board.update(position, current_player)
-
     if !@board.valid_move?(position)
+      puts "Sorry. The last move was invalid because position is already taken. Please select another position (1-9)."
       current_player_turn.move(@board)
     else
       @board.update(position, current_player)
-      position
     end
-
-
   end
 
 
