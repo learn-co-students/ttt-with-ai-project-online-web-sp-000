@@ -6,7 +6,7 @@ class Board
   attr_accessor :cells
 
   def initialize
-    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    reset!
   end
 
   def reset!
@@ -70,7 +70,7 @@ class Board
   def update(position, token = "X")
     #  updates the cells in the board with the player token according to the input
     if !taken?
-      
+
   end
 
 end
