@@ -28,4 +28,9 @@ class Board
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
   end
 
+  def position(token)
+    # takes in user input and returns the value of the board cell
+    @cells[token] 
+  end
+
 end
