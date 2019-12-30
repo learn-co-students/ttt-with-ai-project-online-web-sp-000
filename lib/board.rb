@@ -46,11 +46,25 @@ class Board
     cell_count.count
   end
 
-  def taken?
+  def taken?(index)
     # returns true if the position is X or O
     # returns false if the position is empty or blank
+    index = index.to_i
+    if @cells[index-1] == "X" || @cells[index-1] == "O"
+      true
+    else
+      false
+    end
+  end
 
-
+  def valid_move?(position)
+    # returns true for user input between 1-9 that is not taken
+    position = position.to_i
+    if position.between?(1, 9) && !taken?(position)
+      true
+    else
+      false
+    end
   end
 
 end
