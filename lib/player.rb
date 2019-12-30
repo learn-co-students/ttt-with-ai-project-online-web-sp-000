@@ -7,7 +7,6 @@ class Player
 
   def initialize(token)
     @token = token
-    # token.freeze
   end
 
 end
