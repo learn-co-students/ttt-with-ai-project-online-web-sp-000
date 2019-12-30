@@ -16,11 +16,6 @@ class Board
 
   def display
     # prints the board
-    # expect(output).to include(" X | X | X ")
-    # expect(output).to include("-----------")
-    # expect(output).to include(" X | O | O ")
-    # expect(output).to include("-----------")
-    # expect(output).to include(" X | O | O ")
     puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
     puts "-----------"
     puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
@@ -28,9 +23,16 @@ class Board
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
   end
 
-  def position(token)
+  def position(number)
     # takes in user input and returns the value of the board cell
-    @cells[token] 
+    number = number.to_i
+    @cells[number -1]
+  end
+
+  def full?
+    # returns true for full board
+    # else board empty or game in-progress = false
+    @cells.all?{|cell| cell == "X" || cell =="O"}
   end
 
 end
