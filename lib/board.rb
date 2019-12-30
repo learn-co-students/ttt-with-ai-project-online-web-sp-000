@@ -48,11 +48,9 @@ class Board
 
   def taken?
     # returns true if the position is X or O
-    if @cells.position(number).include?("X") || @cells.position(number).include?("O")
-      true
-    else
-      false 
-    end
+    # returns false if the position is empty or blank
+
+
   end
 
 end
