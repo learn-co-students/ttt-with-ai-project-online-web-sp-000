@@ -43,7 +43,16 @@ class Board
         cell_count << cell
       end
     end
-    cell_count.count 
+    cell_count.count
+  end
+
+  def taken?
+    # returns true if the position is X or O
+    if @cells.position(number).include?("X") || @cells.position(number).include?("O")
+      true
+    else
+      false 
+    end
   end
 
 end
