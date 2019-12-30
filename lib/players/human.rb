@@ -3,7 +3,7 @@ module Players
 
       def move(board)
         # asks the player for input and returns it
-        # binding.pry
+        puts "Please enter your selection:"
         user_input = gets.strip
       end
 
