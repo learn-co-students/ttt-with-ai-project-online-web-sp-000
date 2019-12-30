@@ -35,4 +35,15 @@ class Board
     @cells.all?{|cell| cell == "X" || cell =="O"}
   end
 
+  def turn_count
+    # returns the amount of turns based on cell value
+    cell_count = []
+    @cells.each do |cell|
+      if cell == "X" || cell == "O"
+        cell_count << cell
+      end
+    end
+    cell_count.count 
+  end
+
 end
