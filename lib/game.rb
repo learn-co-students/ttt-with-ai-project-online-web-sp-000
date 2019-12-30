@@ -3,6 +3,8 @@
 # 2. Create a domain model with multiple relating and collaborating objects.
 
 class Game
+  attr_accessor :board, :player_1, :player_2
+
   WIN_COMBINATIONS = [
      [0, 1, 2],
      [3, 4, 5],
@@ -14,7 +16,20 @@ class Game
      [6, 4, 2]
    ]
 
-   def board
-     binding.pry 
-   end
+  
 end
+
+=begin
+describe 'initialize' do
+  it 'accepts 2 players and a board' do
+    board = Board.new
+    player_1 = Player.new("X")
+    player_2 = Player.new("O")
+
+    game = Game.new(player_1, player_2, board)
+
+    expect(game.player_1).to eq(player_1)
+    expect(game.player_2).to eq(player_2)
+    expect(game.board).to eq(board)
+  end
+=end
