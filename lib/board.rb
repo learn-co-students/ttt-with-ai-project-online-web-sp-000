@@ -6,7 +6,26 @@ class Board
   attr_accessor :cells
 
   def initialize
-    @cells = [] 
+    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+  end
+
+  def reset!
+    # resets the state of the cells in the board = (new array, 9 cells)
+    @cells = Array.new(9, " ")
+  end
+
+  def display
+    # prints the board
+    # expect(output).to include(" X | X | X ")
+    # expect(output).to include("-----------")
+    # expect(output).to include(" X | O | O ")
+    # expect(output).to include("-----------")
+    # expect(output).to include(" X | O | O ")
+    puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
+    puts "-----------"
+    puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
+    puts "-----------"
+    puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
   end
 
 end
