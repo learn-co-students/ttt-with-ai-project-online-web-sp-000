@@ -67,7 +67,7 @@ class Board
     end
   end
 
-  def update(position, player = "X")
+  def update(position, player)
     #  updates the cells in the board with the player token according to the input
     @cells[position.to_i-1] = player.token # stands for either 'X' or 'O'
   end
