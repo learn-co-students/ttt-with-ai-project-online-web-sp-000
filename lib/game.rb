@@ -29,20 +29,63 @@ class Game
      # returns the correct player, X, for the third move
      @board.turn_count.even? ? player_1 : player_2
    end
+   
+   def won?
+     WIN_COMBINATIONS.detect do |win_combo|
+       if (@board.cells[win_combo[0]] == "X" && @board.cells[win_combo[1]] == "X" && @board.cells[win_combo[2]] == "X") || 
+         (@board.cells[win_combo[0]] == "O" && @board.cells[win_combo[1]] == "O" && @board.cells[win_combo[2]] == "O")
+         win_combo
+       else 
+         false 
+       end 
+     end 
+   end 
+   
+   def draw?
+     if !won? && @board.full? 
+       true 
+     else 
+       false 
+     end 
+   end 
+   
+   def over?
+     if draw? || won? 
+       true 
+     else 
+       false 
+     end 
+   end 
 
 end
 
-=begin
-describe 'initialize' do
-  it 'accepts 2 players and a board' do
-    board = Board.new
-    player_1 = Player.new("X")
-    player_2 = Player.new("O")
+# =begin 
+# describe '#won?' do
+#     it 'returns false for a draw' do
+#       game = Game.new
+#       game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
 
-    game = Game.new(player_1, player_2, board)
+#       expect(game.won?).to be_falsey
+#     end
 
-    expect(game.player_1).to eq(player_1)
-    expect(game.player_2).to eq(player_2)
-    expect(game.board).to eq(board)
-  end
-=end
+#     it 'returns the correct winning combination in the case of a win' do
+#       game = Game.new
+#       game.board.cells = ["X", "O", "X",
+#                           "O", "O", "X",
+#                           "O", "X", "X"]
+
+#       expect(game.won?).to contain_exactly(2, 5, 8)
+#     end
+
+#     it "isn't hard-coded" do
+#       game = Game.new
+#       game.board.cells = ["O", "O", "O",
+#                           "X", "X", " ",
+#                           " ", " ", "X"]
+
+#       expect(game.won?).to contain_exactly(0, 1, 2)
+#     end
+#   end
+#   =end 
+
+
