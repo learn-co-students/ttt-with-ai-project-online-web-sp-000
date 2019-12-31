@@ -56,6 +56,11 @@ class Game
        false 
      end 
    end 
+   
+   def winner 
+     # returns X when X won 
+     binding.pry 
+   end 
 
 end
 
