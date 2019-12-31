@@ -3,7 +3,7 @@
 # 2. Create a domain model with multiple relating and collaborating objects.
 
 class Game
-  #extend Players::Human
+  # extend Players::Human
   attr_accessor :board, :player_1, :player_2
 
   WIN_COMBINATIONS = [
@@ -23,6 +23,11 @@ class Game
      @board = board
      @player_1 = player_1
      @player_2 = player_2
+   end
+
+   def current_player
+     # returns the correct player, X, for the third move
+     @board.turn_count.even? ? player_1 : player_2
    end
 
 end
