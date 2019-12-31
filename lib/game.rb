@@ -58,8 +58,13 @@ class Game
    end 
    
    def winner 
-     # returns X when X won 
-     binding.pry 
+     if won?
+       @board.cells[won?[0]]
+     end 
+     # binding.pry 
+   end 
+   
+   def turn 
    end 
 
 end
