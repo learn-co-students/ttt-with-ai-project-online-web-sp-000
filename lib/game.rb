@@ -72,6 +72,7 @@ class Game
        current_player
        @board.display
      else
+       puts "Invalid input."
        turn
      end
    end
