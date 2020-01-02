@@ -29,73 +29,51 @@ class Game
      # returns the correct player, X, for the third move
      @board.turn_count.even? ? player_1 : player_2
    end
-   
+
    def won?
      WIN_COMBINATIONS.detect do |win_combo|
-       if (@board.cells[win_combo[0]] == "X" && @board.cells[win_combo[1]] == "X" && @board.cells[win_combo[2]] == "X") || 
+       if (@board.cells[win_combo[0]] == "X" && @board.cells[win_combo[1]] == "X" && @board.cells[win_combo[2]] == "X") ||
          (@board.cells[win_combo[0]] == "O" && @board.cells[win_combo[1]] == "O" && @board.cells[win_combo[2]] == "O")
          win_combo
-       else 
-         false 
-       end 
-     end 
-   end 
-   
+       else
+         false
+       end
+     end
+   end
+
    def draw?
-     if !won? && @board.full? 
-       true 
-     else 
-       false 
-     end 
-   end 
-   
+     if !won? && @board.full?
+       true
+     else
+       false
+     end
+   end
+
    def over?
-     if draw? || won? 
-       true 
-     else 
-       false 
-     end 
-   end 
-   
-   def winner 
+     if draw? || won?
+       true
+     else
+       false
+     end
+   end
+
+   def winner
      if won?
        @board.cells[won?[0]]
-     end 
-     # binding.pry 
-   end 
-   
-   def turn 
-   end 
+     end
+     # binding.pry
+   end
+
+   def turn
+    #  makes valid moves
+    #  asks for input again after a failed validation
+    # changes to player_2 after the first turn
+     if @board.valid_move?(current_player.move(board))
+       current_player
+       @board.display
+     else
+       turn
+     end
+   end
 
 end
-
-# =begin 
-# describe '#won?' do
-#     it 'returns false for a draw' do
-#       game = Game.new
-#       game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
-
-#       expect(game.won?).to be_falsey
-#     end
-
-#     it 'returns the correct winning combination in the case of a win' do
-#       game = Game.new
-#       game.board.cells = ["X", "O", "X",
-#                           "O", "O", "X",
-#                           "O", "X", "X"]
-
-#       expect(game.won?).to contain_exactly(2, 5, 8)
-#     end
-
-#     it "isn't hard-coded" do
-#       game = Game.new
-#       game.board.cells = ["O", "O", "O",
-#                           "X", "X", " ",
-#                           " ", " ", "X"]
-
-#       expect(game.won?).to contain_exactly(0, 1, 2)
-#     end
-#   end
-#   =end 
-
-
