@@ -68,13 +68,15 @@ class Game
     #  makes valid moves
     #  asks for input again after a failed validation
     # changes to player_2 after the first turn
-     if @board.valid_move?(current_player.move(board))
-       current_player
-       @board.display
-     else
-       puts "Invalid input."
-       turn
-     end
+    player_move = current_player.move(board)
+    binding.pry
+    if @board.valid_move?(player_move)
+      current_player
+      @board.display
+    else
+      puts "Invalid input."
+      turn
+    end
    end
 
 end
