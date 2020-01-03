@@ -69,14 +69,17 @@ class Game
     #  asks for input again after a failed validation
     # changes to player_2 after the first turn
     player_move = current_player.move(board)
-    binding.pry
+    #binding.pry
     if @board.valid_move?(player_move)
-      current_player
+      #binding.pry
+      board.update(player_move, current_player)
       @board.display
     else
       puts "Invalid input."
       turn
     end
    end
+
+   
 
 end
