@@ -23,10 +23,10 @@ class Board
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
   end
 
-  def position(number)
+  def position(input)
     # takes in user input and returns the value of the board cell
-    number = number.to_i
-    @cells[number -1]
+    input = input.to_i
+    @cells[input -1]
   end
 
   def full?
