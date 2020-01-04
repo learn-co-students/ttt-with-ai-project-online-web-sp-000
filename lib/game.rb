@@ -111,7 +111,8 @@ class Game
      case user_input
      when '0'
        # 0 player
-       Game.new(Computer.move)
+       binding.pry
+       Players::Computer.new
      when '1'
        # 1 player
      when '2'
