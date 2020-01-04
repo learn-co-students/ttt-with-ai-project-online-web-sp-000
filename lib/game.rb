@@ -103,8 +103,22 @@ class Game
      # and allow them to choose configuration for the game as described above
      # if user no more play then exit the program
      puts "Welcome to Tic Tac Toe W/ AI!"
-     puts "What type of game will you choose: (0) (1) or (2) player"
-     user_input = gets.strip
+     puts "What type of game will you choose: '0', '1', or '2' players."
+     puts "Who will go first and be 'X'?"
+     puts "Type 'exit' to end the game."
 
+     user_input = gets.strip.downcase
+     case user_input
+     when '0'
+       # 0 player
+     when '1'
+       # 1 player
+     when '2'
+       # 2 player
+     when 'X'
+       # user chooses to go first and be X
+     when 'exit'
+       # exit the program
+     end 
    end
 end
