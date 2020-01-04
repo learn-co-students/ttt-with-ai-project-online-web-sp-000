@@ -93,15 +93,18 @@ class Game
      end
    end
 
-end
+   def start
+     # greet with message
+     # prompt the player for what type of game to play: 0, 1 or 2 player
+     # ask the user for who should go first and be 'X'
+     # use the input to correctly initialize the game with appropriate player
+     # types and token values
+     # when game is over prompt the user if they would like to play again
+     # and allow them to choose configuration for the game as described above
+     # if user no more play then exit the program
+     puts "Welcome to Tic Tac Toe W/ AI!"
+     puts "What type of game will you choose: (0) (1) or (2) player"
+     user_input = gets.strip
 
-# describe 'play' do
-#   it 'asks for players input on a turn of the game' do
-#     game = Game.new
-#     allow($stdout).to receive(:puts)
-#     allow(game).to receive(:over?).and_return(false, true)
-#
-#     expect(game.player_1).to receive(:gets).at_least(:once).and_return("1")
-#
-#     game.play
-#   end
+   end
+end

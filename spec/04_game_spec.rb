@@ -346,6 +346,12 @@ describe 'Game' do
     end
   end
 
-  describe 'start' do
-  end
+  # describe 'start' do
+  #   it 'greets the user at the start of the game' do
+  #     game = Game.new
+  #     allow($stdout).to receive(:puts)
+  #
+  #     expect($stdout).to receive(:puts).with("Welcome to Tic Tac Toe W/ AI!")
+  #   end
+  # end
 end
