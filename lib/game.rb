@@ -111,6 +111,7 @@ class Game
      case user_input
      when '0'
        # 0 player
+       Game.new(Computer.move)
      when '1'
        # 1 player
      when '2'
@@ -119,6 +120,8 @@ class Game
        # user chooses to go first and be X
      when 'exit'
        # exit the program
-     end 
+     else
+       start
+     end
    end
 end
