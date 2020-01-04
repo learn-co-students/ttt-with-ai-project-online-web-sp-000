@@ -1,3 +1,61 @@
 #!/usr/bin/env ruby
-
 require_relative '../config/environment'
+
+puts '~~~~~~~~~~~~~~~~~~~~~~~'
+puts 'Welcome to Tic Tac Toe!'
+puts '~~~~~~~~~~~~~~~~~~~~~~~'
+puts 'please select a game:'
+puts '0. AIs Fight!'
+puts '1. Beat the Computer!'
+puts '2. Multiplayer'
+puts '~~~~~~~~~~~~~~~~~~~~~~~'
+puts ':::::::::::::::::::::::'
+puts '~~~~~~~~~~~~~~~~~~~~~~~'
+
+:game
+
+def choose_game_type
+	case gets.strip
+		when '0'
+			game = Game.new(Players::Computer.new('X'), Players::Computer.new('O'))
+		when '1'
+			puts 'Should you be first or second Player? (1/2)?'
+			case gets.strip
+				when '1' || '1st' || 'first' || 'First'
+					game = Game.new(Players::Human.new('X'), Players::Computer.new('O'))
+				when '2' || '2nd' || 'second' || 'Second'
+					game = Game.new(Players::Computer.new('X'), Players::Human.new('O'))
+				else
+					puts 'Wrong input, try again!'
+					choose_game_type
+			end
+		when '2'
+			game = Game.new(Players::Human.new('X'), Players::Human.new('O'))
+		else
+			puts 'Wrong input, try again!'
+			choose_game_type
+	end
+
+	game
+end
+
+def ttt
+	game = choose_game_type
+	game.play
+	end_game
+end
+
+def end_game
+	puts 'Do you want to play again? (Y/N)?'
+	case gets.strip
+		when 'y' || 'Y' || 'yes' || 'Yes'
+			ttt
+		when 'n' || 'N' || 'no' || 'No'
+			puts 'see you soon!'
+		else
+			puts 'only asnwer Y or N'
+			end_game
+	end
+end
+
+ttt
