@@ -8,14 +8,11 @@ module Players
       # move is up
       # to you but it must be capable of returning a valid move at some
       # point.
-      # binding.pry
-      #if board.cells[4] == " "
-        #return "5"
       board.cells.each_with_index do |cell, index|
         if cell == " "
           return "#{index+1}"
         end
-      end 
+      end
     end
 
   end
