@@ -2,16 +2,14 @@ class Game
 	attr_accessor :board, :player_1, :player_2
 
 	WIN_COMBINATIONS = [
-	  [0,1,2], # Top row
-	  [3,4,5], # Middle row
-	  [6,7,8],
-
-	  [0,3,6],
-	  [1,4,7],
-	  [2,5,8],
-
-	  [0,4,8],
-	  [2,4,6]
+		["1", "2", "3"],
+		["4", "5", "6"], # Top row
+		["7", "8", "9"], # Middle row
+		["1", "4", "7"],
+		["2", "5", "8"],
+		["3", "6", "9"],
+		["1", "5", "9"],
+		["3", "5", "7"]
 	]
 
 	def self.WIN_COMBINATIONS
@@ -31,11 +29,11 @@ class Game
 	def won?
 		WIN_COMBINATIONS.find {|win|
 			win.all? {|position| 
-				self.board.cells[position] == self.player_1.token
+				self.board.cells[position.to_i - 1] == self.player_1.token
 			}
 		} || WIN_COMBINATIONS.find {|win|
 			win.all? {|position| 
-				self.board.cells[position] == self.player_2.token
+				self.board.cells[position.to_i - 1] == self.player_2.token
 			}
 		}
 		# puts "after out was: #{out.inspect}"
@@ -54,7 +52,7 @@ class Game
 	end
 
 	def winner
-		won? ? board.cells[won?[0]] : nil
+		won? ? board.cells[won?[0].to_i-1] : nil
 	end
 
 	def turn 

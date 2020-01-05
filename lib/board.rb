@@ -44,7 +44,7 @@ class Board
 	end
 
 	def taken?(position)
-		cells[position.to_i - 1] != " "
+		@cells[position.to_i - 1] != " "
 	end
 
 	def valid_move?(position)
