@@ -106,23 +106,35 @@ class Game
      puts "What type of game will you choose: '0', '1', or '2' players."
      puts "Who will go first and be 'X'?"
      puts "Type 'exit' to end the game."
-
      user_input = gets.strip.downcase
-     case user_input
+     case user_input.to_s
      when '0'
        # 0 player
-       binding.pry
-       Players::Computer.new
+       computer_player1 = Players::Computer.new("X")
+       computer_player2 = Players::Computer.new("O")
+       Game.new(computer_player1, computer_player2)
      when '1'
        # 1 player
+       player_choice(user_input)
+       Game.new(play)
      when '2'
        # 2 player
-     when 'X'
-       # user chooses to go first and be X
+       Game.new(player_1, player_2)
      when 'exit'
        # exit the program
+       puts "Goodbye, Thanks for playing!"
      else
        start
+     end
+   end
+
+   def player_choice(input)
+     puts "Enter you player: X or O:"
+     input = gets.strip.downcase
+     if input == "X".downcase
+       input = player_1.token
+     else
+       input = player_2.token
      end
    end
 end

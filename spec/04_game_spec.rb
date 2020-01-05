@@ -341,7 +341,6 @@ describe 'Game' do
       expect(game.player_1).to receive(:gets).and_return("7")
 
       expect($stdout).to receive(:puts).with("Congratulations X!")
-
       game.play
     end
   end
