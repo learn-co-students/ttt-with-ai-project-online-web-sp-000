@@ -60,7 +60,6 @@ end
 def ttt
 	welcome
 	game = choose_game_type
-	binding.pry
 	game.play unless !game
 	end_game
 end
