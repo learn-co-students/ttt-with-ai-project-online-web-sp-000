@@ -115,7 +115,6 @@ class Game
        Game.new(computer_player1, computer_player2)
      when '1'
        # 1 player
-       player_choice(user_input)
        Game.new(play)
      when '2'
        # 2 player
@@ -125,16 +124,6 @@ class Game
        puts "Goodbye, Thanks for playing!"
      else
        start
-     end
-   end
-
-   def player_choice(input)
-     puts "Enter you player: X or O:"
-     input = gets.strip.downcase
-     if input == "X".downcase
-       input = player_1.token
-     else
-       input = player_2.token
      end
    end
 end
