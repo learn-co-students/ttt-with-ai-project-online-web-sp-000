@@ -29,15 +29,15 @@ class Game
 	end
 
 	def won?
-		WIN_COMBINATIONS.find do |win|
-			# puts "win was: #{win.inspect}"
+		WIN_COMBINATIONS.find {|win|
 			win.all? {|position| 
 				self.board.cells[position] == self.player_1.token
-			} || 
-			win.all? {|position| 
-				self.board.cells[position]  == self.player_2.token
 			}
-		end
+		} || WIN_COMBINATIONS.find {|win|
+			win.all? {|position| 
+				self.board.cells[position] == self.player_2.token
+			}
+		}
 		# puts "after out was: #{out.inspect}"
 	end
 
@@ -73,7 +73,8 @@ class Game
   		self.board.display
   		turn
   	end
-  	puts "Congratulations #{winner}!" if won?
+  	self.board.display
+  	puts "Player '#{winner}' WON! Congratultions!!" if won?
   	puts "Cat\'s Game!" if draw?
   end
 end

@@ -1,18 +1,20 @@
 #!/usr/bin/env ruby
 require_relative '../config/environment'
 
-puts '~~~~~~~~~~~~~~~~~~~~~~~'
-puts 'Welcome to Tic Tac Toe!'
-puts '~~~~~~~~~~~~~~~~~~~~~~~'
-puts 'please select a game:'
-puts '0. AIs Fight!'
-puts '1. Beat the Computer!'
-puts '2. Multiplayer'
-puts '~~~~~~~~~~~~~~~~~~~~~~~'
-puts ':::::::::::::::::::::::'
-puts '~~~~~~~~~~~~~~~~~~~~~~~'
-
 :game
+
+def welcome
+	puts '~~~~~~~~~~~~~~~~~~~~~~~'
+	puts 'Welcome to Tic Tac Toe!'
+	puts '~~~~~~~~~~~~~~~~~~~~~~~'
+	puts 'please select a game:'
+	puts '0. AIs Fight!'
+	puts '1. Beat the Computer!'
+	puts '2. Multiplayer'
+	puts '~~~~~~~~~~~~~~~~~~~~~~~'
+	puts ':::::::::::::::::::::::'
+	puts '~~~~~~~~~~~~~~~~~~~~~~~'
+end
 
 def choose_game_type
 	case gets.strip
@@ -40,6 +42,7 @@ def choose_game_type
 end
 
 def ttt
+	welcome
 	game = choose_game_type
 	game.play
 	end_game

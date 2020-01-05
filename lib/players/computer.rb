@@ -8,55 +8,49 @@ module Players
     def move(board)
     	@board = board
     	puts "Computer '#{self.token}' move:"
-    	ai
-    end
-
-    def ai
-    	if board.turn_count < 4
-    		best_start
-    	else
-    		win
-    	end
+    	puts "pc move: #{win + 1}"
+    	"#{win + 1}"
     end
 
     def win
-    	#win body
-    	best_defence
+    	move = fill_triple(self.token) || fill_triple(ostile_token)
+    	binding.pry
+    	if !move
+    		move = best_position
+    	end
+    	move
     end
 
-    def best_defence
-    	puts ostile_win_combos.inspect
+    def fill_triple(token)
+    	possible_moves = []
+    	occupied_win_combos(token).each_with_index {|combo, i| 
+    		if combo.size > 1 
+    			possible_moves << WIN_COMBINATIONS[i] - combo
+    		end
+    	}
+    	possible_moves.size == 0 ? false : possible_moves.sample[0]
     end
 
-    def best_attack
-
-    end
-
-    def ostile_win_combos
+    def occupied_win_combos(token)
     	WIN_COMBINATIONS.map {|combo| 
-    		combo.select {|position| 
-    			# binding.pry 
-    			ostile?(position)
+    		combo.select {|position|
+    			true if board.cells[position] == token
     		}
     	}
     end
 
-    def ostile?(position)
-    	if board.cells[position] != self.token  &&
-    	   board.cells[position] != ' ' &&
-    	   board.cells[position] != ''
-    		true
-    	end
+    def ostile_token
+    	self.token == 'X' ? 'O' : 'X'
     end
 
 
-    def best_start
-    	starter_move = '5' 
+    def best_position
+    	starter_move = 4 
     	if board.taken?(starter_move)
-    		corners = ['1','3','7','9']
+    		corners = [0,2,6,8]
     		while corners.size > 1
     			corner = corners.sample
-    			if board.valid_move?(corner)
+    			if board.valid_move?(corner + 1)
     				starter_move = corner
     				break
     			end
