@@ -8,7 +8,6 @@ module Players
     def move(board)
     	@board = board
     	puts "Computer '#{self.token}' move:"
-    	puts "pc move:"
     	win
     end
 
@@ -21,7 +20,6 @@ module Players
     		move = best_position
     		# binding.pry
     	end
-    	puts "move:::: #{move}"
     	move
     end
 

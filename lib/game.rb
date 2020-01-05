@@ -1,5 +1,5 @@
 class Game
-	attr_accessor :board, :player_1, :player_2
+	attr_accessor :board, :player_1, :player_2, :wins
 
 	WIN_COMBINATIONS = [
 		["1", "2", "3"],
@@ -17,6 +17,7 @@ class Game
 	end
 
 	def initialize(player_1 = Players::Human.new('X'), player_2 = Players::Human.new('O'), board = Board.new)
+		@wins = 0
 		@board = board
 		@player_1 = player_1
 		@player_2 = player_2
@@ -72,7 +73,10 @@ class Game
   		turn
   	end
   	self.board.display
-  	puts "Player '#{winner}' WON! Congratultions!!" if won?
+  	if won?
+  		@wins =+ 1
+  		puts "Player '#{winner}' WON! Congratultions!!" 
+  	end
   	puts "Cat\'s Game!" if draw?
   end
 end
