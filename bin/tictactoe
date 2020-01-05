@@ -1,3 +1,80 @@
 #!/usr/bin/env ruby
-
 require_relative '../config/environment'
+
+:game
+
+def welcome
+	puts ''
+	puts ''
+	puts '~~~~~~~~~~~~~~~~~~~~~~~'
+	puts 'Welcome to Tic Tac Toe!'
+	puts '~~~~~~~~~~~~~~~~~~~~~~~'
+	puts ''
+	puts 'please select a game:'
+	puts ''
+	puts '0. AIs Fight!'
+	puts '1. Beat the Computer!'
+	puts '2. Multiplayer'
+	puts ''
+	puts '~~~~~~~~~~~~~~~~~~~~~~~'
+	puts ':::::::::::::::::::::::'
+	puts '~~~~~~~~~~~~~~~~~~~~~~~'
+	puts ''
+end
+
+def choose_game_type
+	case gets.strip
+		when '0'
+			game = Game.new(Players::Computer.new('X'), Players::Computer.new('O'))
+		when '1'
+			puts 'Should you be first or second Player? (1/2)?'
+			case gets.strip
+				when '1'
+					game = Game.new(Players::Human.new('X'), Players::Computer.new('O'))
+				when '2'
+					game = Game.new(Players::Computer.new('X'), Players::Human.new('O'))
+				else
+					puts 'Wrong input, try again!'
+					choose_game_type
+			end
+		when '2'
+			game = Game.new(Players::Human.new('X'), Players::Human.new('O'))
+		when 'wargame'
+			game = Game.new(Players::Computer.new('X'), Players::Computer.new('O'))
+			100.times { game.play }
+			puts '~~~~~~~~~~~~~~~~~~~~~~~'
+			puts '~~~~~~ WARGAMES! ~~~~~~'
+			puts "  the game was won.."
+			puts "      ..#{game.wins} times!"
+			puts '~~~~~~~~~~~~~~~~~~~~~~~'
+			puts '~~~~~~~~~~~~~~~~~~~~~~~'
+			nil
+		else
+			puts 'Wrong input, try again!'
+			choose_game_type
+	end
+
+	game
+end
+
+def ttt
+	welcome
+	game = choose_game_type
+	game.play unless !game
+	end_game
+end
+
+def end_game
+	puts 'Do you want to play again? (y/n)?'
+	case gets.strip
+		when 'y'
+			ttt
+		when 'n'
+			puts 'see you soon!'
+		else
+			puts 'only asnwer "y" or "n".'
+			end_game
+	end
+end
+
+ttt
