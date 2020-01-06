@@ -124,7 +124,6 @@ class Game
    def game_menu
      puts "Welcome to Tic Tac Toe W/ AI!"
      puts "What type of game will you choose: '0', '1', or '2' players."
-     puts "Who will go first and be 'X'?"
      puts "Type 'exit' to end the game."
    end
 
@@ -148,4 +147,5 @@ class Game
      human_player2 = Players::Human.new("O")
      Game.new(human_player1, human_player2, Board.new).play
    end
+
 end
