@@ -101,10 +101,7 @@ class Game
      # when game is over prompt the user if they would like to play again
      # and allow them to choose configuration for the game as described above
      # if user no more play then exit the program
-     puts "Welcome to Tic Tac Toe W/ AI!"
-     puts "What type of game will you choose: '0', '1', or '2' players."
-     puts "Who will go first and be 'X'?"
-     puts "Type 'exit' to end the game."
+     game_menu
      user_input = gets.strip.downcase
      case user_input.to_s
      when '0'
@@ -124,6 +121,13 @@ class Game
      end
    end
 
+   def game_menu
+     puts "Welcome to Tic Tac Toe W/ AI!"
+     puts "What type of game will you choose: '0', '1', or '2' players."
+     puts "Who will go first and be 'X'?"
+     puts "Type 'exit' to end the game."
+   end
+
    def computer_vs_computer
      computer_player1 = Players::Computer.new("X")
      computer_player2 = Players::Computer.new("O")
@@ -137,7 +141,7 @@ class Game
      else
        Game.new(Players::Computer.new("O"), Players::Human.new("X"), Board.new).play
      end
-   end 
+   end
 
    def player_vs_player
      human_player1 = Players::Human.new("X")
