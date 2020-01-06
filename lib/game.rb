@@ -109,27 +109,39 @@ class Game
      case user_input.to_s
      when '0'
        # 0 player
-       computer_player1 = Players::Computer.new("X")
-       computer_player2 = Players::Computer.new("O")
-       Game.new(computer_player1, computer_player2, Board.new).play
+       computer_vs_computer
      when '1'
        # 1 player
-       puts "Who will go first and be 'X'? (Type 'y' for 1st, 'n' for 2nd)"
-       if gets.strip.downcase == 'y'
-         Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
-       else
-         Game.new(Players::Computer.new("O"), Players::Human.new("X"), Board.new).play
-       end
+       player_vs_computer
      when '2'
        # 2 player
-       human_player1 = Players::Human.new("X")
-       human_player2 = Players::Human.new("O")
-       Game.new(human_player1, human_player2, Board.new).play
+       player_vs_player
      when 'exit'
        # exit the program
        puts "Goodbye, Thanks for playing!"
      else
        start
      end
+   end
+
+   def computer_vs_computer
+     computer_player1 = Players::Computer.new("X")
+     computer_player2 = Players::Computer.new("O")
+     Game.new(computer_player1, computer_player2, Board.new).play
+   end
+
+   def player_vs_computer
+     puts "Who will go first and be 'X'? (Type 'y' for 1st, 'n' for 2nd)"
+     if gets.strip.downcase == 'y'
+       Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
+     else
+       Game.new(Players::Computer.new("O"), Players::Human.new("X"), Board.new).play
+     end
+   end 
+
+   def player_vs_player
+     human_player1 = Players::Human.new("X")
+     human_player2 = Players::Human.new("O")
+     Game.new(human_player1, human_player2, Board.new).play
    end
 end
