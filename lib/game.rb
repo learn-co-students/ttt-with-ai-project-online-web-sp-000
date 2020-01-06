@@ -123,7 +123,10 @@ class Game
 
    def game_menu
      puts "Welcome to Tic Tac Toe W/ AI!"
-     puts "What type of game will you choose: '0', '1', or '2' players."
+     puts "What type of game will you choose:
+          - 0 (computer vs computer)
+          - 1 (player vs computer)
+          - 2 (player vs player)"
      puts "Type 'exit' to end the game."
    end
 
