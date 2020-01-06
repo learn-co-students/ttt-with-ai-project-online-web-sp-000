@@ -69,7 +69,6 @@ class Game
     #  asks for input again after a failed validation
     # changes to player_2 after the first turn
     player_move = current_player.move(board)
-    #binding.pry
     if @board.valid_move?(player_move)
       #binding.pry
       board.update(player_move, current_player)
@@ -112,13 +111,20 @@ class Game
        # 0 player
        computer_player1 = Players::Computer.new("X")
        computer_player2 = Players::Computer.new("O")
-       Game.new(computer_player1, computer_player2)
+       Game.new(computer_player1, computer_player2, Board.new).play
      when '1'
        # 1 player
-       Game.new(play)
+       puts "Who will go first and be 'X'? (Type 'y' for 1st, 'n' for 2nd)"
+       if gets.strip.downcase == 'y'
+         Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
+       else
+         Game.new(Players::Computer.new("O"), Players::Human.new("X"), Board.new).play
+       end
      when '2'
        # 2 player
-       Game.new(player_1, player_2)
+       human_player1 = Players::Human.new("X")
+       human_player2 = Players::Human.new("O")
+       Game.new(human_player1, human_player2, Board.new).play
      when 'exit'
        # exit the program
        puts "Goodbye, Thanks for playing!"
