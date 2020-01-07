@@ -2,11 +2,11 @@ module Players
   class Computer < Player
 
     def move(board)
-    # binding.pry
+     binding.pry
   #  player = game.current_player
   #  pmove = player.move(board)
-    unless game.over?(board) || !valid_move?(board)
-      return board.position
+#    unless game.over?(board) || !valid_move?(board)
+#      return board.position
 
 
 #    if board.valid_move?(board)
