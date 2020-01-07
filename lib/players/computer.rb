@@ -12,7 +12,7 @@ module Players
 #    if board.valid_move?(board)
 #    board.update(input, player)
 #    end
-  end
+#  end
 end
 
   end
