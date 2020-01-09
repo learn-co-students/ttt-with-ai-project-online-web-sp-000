@@ -48,6 +48,7 @@ class Game
 
     def turn
         #puts "Player #{current_player}, enter a position from 1-9: "
+        #binding.pry
         input = current_player.move(@board)
         if @board.valid_move?(input)
             @board.update(input, current_player)
