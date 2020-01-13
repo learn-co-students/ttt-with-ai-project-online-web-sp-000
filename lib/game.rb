@@ -1,7 +1,7 @@
 
 class Game
 
-#  extend Players::computer
+
   attr_accessor :board, :player_1, :player_2, :cells, :winner
   WIN_COMBINATIONS = [  [0,1,2], #Top ROW
   [0,3,6],
@@ -13,7 +13,6 @@ class Game
   [6,7,8]]
 
   def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
-  #  super
     @player_1 = player_1
     @player_2 = player_2
     @board = board
@@ -56,7 +55,6 @@ class Game
   end
 
   def winner
-  #  binding.pry
   if win_combo = won?
     @winner = @board.cells[win_combo.first]
       end
@@ -65,14 +63,16 @@ class Game
 
 
     def turn
-      #binding.pry
+        #binding.pry
       player = current_player
-      pmove = player.move(board)
+      pmove = player.move(@board.cells)
 
       if board.valid_move?(pmove)
             board.update(pmove, player)
+            board.display
       else
         turn
+        puts "Next Player's turn"
         end
       end
 
@@ -87,6 +87,41 @@ class Game
     puts "Cat's Game!"
       end
     end
+
+    def start
+        puts "Welcome to TicTacToe"
+        puts "Would you like to play with 0, 1 or 2 players?"
+        players_count = gets.strip
+        puts "Who should go first?"
+        first_player = gets.strip
+
+        board.display
+
+      if players_count == "0" && first_player == "1" || first_player == "2"
+            Game.new(Players::Computer.new("X"), Players::Computer.new("O"), board = Board.new)
+            puts "Computer vs. Computer"
+
+      elsif players_count == "1" && first_player == "1"
+            Game.new(Players::Human.new("X"), Players::Computer.new("O"), board = Board.new)
+             puts "You go first"
+
+      elsif players_count == "1" && first_player == "2"
+            Game.new(Players::Computer.new("X"), Players::Human.new("O"), board = Board.new)
+            puts "Computer goes first"
+
+      elsif players_count == "2" && first_player == "1"
+          Game.new(Players::Human.new("X"), Players::Computer.new("O"), board = Board.new)
+          puts "Player 1 goes first"
+
+      elsif players_count =="2" && first_player == "2"
+          Game.new(Players::Human.new("O"), Players::Computer.new("X"), board = Board.new)
+          puts "Player 2 goes first"
+        end
+
+        play
+          end
+      
+
 
 
 

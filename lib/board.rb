@@ -1,5 +1,5 @@
 class Board
-  attr_accessor :cells
+  attr_accessor :cells, :board
 
   def initialize
   #  token == "X" || token == "O"
@@ -17,6 +17,7 @@ class Board
   puts "-----------"
   puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
   end
+
 
 
   def position(input)

@@ -3,12 +3,17 @@ module Players
 
     attr_reader :cells, :token, :board
 
+    def input_to_index(input)
+      input.to_i - 1
+    end
+
     def move(board)
-    #  binding.pry
+    # binding.pry
     puts "Please enter 1-9:"
     user_input = gets.strip
-    #.to_i
     user_input
+   #answer = input_to_index(user_input)
+
     end
 
   end
