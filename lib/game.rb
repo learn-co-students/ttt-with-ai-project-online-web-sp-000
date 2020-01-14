@@ -97,30 +97,42 @@ class Game
 
         board.display
 
+
       if players_count == "0" && first_player == "1" || first_player == "2"
-            Game.new(Players::Computer.new("X"), Players::Computer.new("O"), board = Board.new)
+          @player_1 = Players::Computer.new("X")
+          @player_2 = Players::Computer.new("O")
+        #    Game.new(Players::Computer.new("X"), Players::Computer.new("O"), board = Board.new)
             puts "Computer vs. Computer"
 
       elsif players_count == "1" && first_player == "1"
-            Game.new(Players::Human.new("X"), Players::Computer.new("O"), board = Board.new)
+        @player_1 = Players::Human.new("X")
+        @player_2 = Players::Computer.new("O")
              puts "You go first"
 
       elsif players_count == "1" && first_player == "2"
-            Game.new(Players::Computer.new("X"), Players::Human.new("O"), board = Board.new)
+        @player_1 = Players::Computer.new("X")
+        @player_2 = Players::Human.new("O")
             puts "Computer goes first"
 
       elsif players_count == "2" && first_player == "1"
-          Game.new(Players::Human.new("X"), Players::Computer.new("O"), board = Board.new)
+          Game.new(Players::Human.new("X"), Players::Human.new("O"), board = Board.new)
           puts "Player 1 goes first"
 
       elsif players_count =="2" && first_player == "2"
-          Game.new(Players::Human.new("O"), Players::Computer.new("X"), board = Board.new)
+          Game.new(Players::Human.new("O"), Players::Human.new("X"), board = Board.new)
           puts "Player 2 goes first"
         end
 
         play
+        if over?
+          puts "Would you like to play again?"
+          answer = gets.strip
+          if answer == "yes" || answer == "Yes"
+          start
           end
-      
+        end
+        end
+
 
 
 
