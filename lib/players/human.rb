@@ -1,7 +1,7 @@
 module Players
   class Human < Player
 
-    attr_reader :cells, :token, :board
+    # attr_reader :cells, :token, :board
 
     def input_to_index(input)
       input.to_i - 1
