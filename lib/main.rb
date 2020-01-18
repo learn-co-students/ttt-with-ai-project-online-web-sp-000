@@ -5,5 +5,4 @@ require_relative 'players/computer.rb'
 require_relative 'players/human.rb'
 
 game = Game.new
-game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
-p game.draw?
+game.play
