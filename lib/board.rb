@@ -40,6 +40,6 @@ class Board
     end
 
     def valid_move?(input)
-        input.to_i > 0 && input.to_i < 9 && taken?(input) == false
+        input.to_i.between?(1, 9) && !taken?(input)
     end
 end
