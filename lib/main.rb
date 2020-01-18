@@ -5,4 +5,4 @@ require_relative 'players/computer.rb'
 require_relative 'players/human.rb'
 
 game = Game.new
-game.play
+puts game.won?
