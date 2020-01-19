@@ -7,12 +7,18 @@ module Players
                 opp = "X"
             end
 
-            if(win_position(board, token) != nil)#win
+            # p winningMoves(board, token).length
+            #p fork(board)
+
+            if(winningMoves(board, token).length > 0)#win
                 puts("Win")
-                win_position(board, token)
-            elsif(win_position(board, opp) != nil)#block
+                winningMoves(board, token)[0]
+            elsif(winningMoves(board, opp).length > 0)#block
                 puts("Block")
-                win_position(board, opp)
+                winningMoves(board, opp)[0]
+            elsif(fork(board) != nil)
+                puts("Fork")
+                (fork(board) + 1).to_s
             elsif(board.cells[4] == " ")#center
                 puts("Center")
                 "5"
@@ -33,20 +39,20 @@ module Players
         # Empty corner: The player plays in a corner square.
         # Empty side:
 
-        def win_position(board, token)
-            returnValue = nil
+        def winningMoves(board, token)
+            wm = []
             Game::WIN_COMBINATIONS.each do |cmb|
                 if(board.cells[cmb[0]] == token && board.cells[cmb[1]] == token && board.cells[cmb[2]] == " ")
-                    returnValue = (cmb[2]+1).to_s
+                    wm << (cmb[2]+1).to_s
                 end
                 if(board.cells[cmb[0]] == " " && board.cells[cmb[1]] == token && board.cells[cmb[2]] == token)
-                    returnValue = (cmb[0]+1).to_s
+                    wm << (cmb[0]+1).to_s
                 end
                 if(board.cells[cmb[0]] == token && board.cells[cmb[1]] == " " && board.cells[cmb[2]] == token)
-                    returnValue = (cmb[1]+1).to_s
+                    wm << (cmb[1]+1).to_s
                 end
             end
-            returnValue
+            wm
         end
 
         def first_open_space(board)
@@ -65,6 +71,29 @@ module Players
                 end
             }
             open_indexes.sample. + 1
+        end
+
+        def open_indexes(board)
+            open_indexes = []
+            board.cells.each_with_index {|value, index|
+                if(value == " ")
+                    open_indexes << index
+                end
+            }
+            open_indexes
+        end
+
+        def fork(board)
+            fork_play = nil
+            oi = open_indexes(board)
+            oi.each{|play_index| 
+                board.cells[play_index] = token
+                if(winningMoves(board, token).length > 1)
+                    fork_play = play_index
+                end
+                board.cells[play_index] = " "
+            }
+            fork_play
         end
         
     end
