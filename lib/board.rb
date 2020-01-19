@@ -22,9 +22,7 @@ class Board
     end
 
     def update(input, player)
-        if(valid_move?(input))
-            cells[input.to_i-1] = player.token
-        end
+        cells[input.to_i-1] = player.token
     end
 
     def full?
@@ -32,11 +30,11 @@ class Board
     end
 
     def turn_count
-        @cells.find_all{|cell| cell != " "}.length
+        @cells.count{|cell| cell != " "}
     end
 
     def taken?(input)
-        position(input) == "X" || position(input) == "O"
+        !(position(input) == " ")
     end
 
     def valid_move?(input)

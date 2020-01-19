@@ -37,26 +37,37 @@ class Game
             self.board.cells[won?[0]]
         end
     end
-
+    
     def turn
+        #get input from player
+        #if input is valid make move
+        #else, ask for input again
+
         input = current_player.move(self.board)
-        if self.board.valid_move?(input)
+        if(self.board.valid_move?(input))
             self.board.update(input, current_player)
-        else puts "Please enter a number 1-9:"
+            puts ""
             self.board.display
+            puts ""
+        else
+            puts ""
+            puts "Incorrect move."
+            puts ""
+            self.board.display
+            puts ""
             turn
         end
-        
-        self.board.display
+
     end
 
     def play
-        turn until over?
-        if won?
-          puts "Congratulations #{winner}!"
-        elsif draw?
-          puts "Cat's Game!"
+        while !over?
+            turn
         end
+        if won?
+            puts "Congratulations #{winner}!"
+        else
+            puts "Cat's Game!"
+        end      
     end
-
 end
