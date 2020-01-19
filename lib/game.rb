@@ -39,11 +39,8 @@ class Game
     end
     
     def turn
-        #get input from player
-        #if input is valid make move
-        #else, ask for input again
-
         input = current_player.move(self.board)
+        
         if(self.board.valid_move?(input))
             self.board.update(input, current_player)
             puts ""
