@@ -50,12 +50,14 @@ class Game
     move = self.current_player.move(@board)
     if @board.valid_move?(move)
       @board.update(move, self.current_player)
+      @board.display
     else
       self.turn
     end
   end
 
   def play
+    @board.display
     until self.over?
       self.turn
     end
