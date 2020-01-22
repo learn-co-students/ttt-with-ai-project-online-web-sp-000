@@ -27,4 +27,4 @@ def start
 end
 
 #input = gets.chomp.downcase
-start until gets.strip.downcase == "n"
+start until gets.chomp.downcase == "n"
