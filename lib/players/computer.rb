@@ -20,6 +20,7 @@ module Players
       elsif board.cells[8] == " "
         "9"
       end
+
     end
   end
 end
