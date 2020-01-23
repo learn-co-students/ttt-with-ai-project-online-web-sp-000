@@ -1,3 +1,5 @@
+require 'pry'
+
 class Board
 
   attr_accessor :cells
@@ -32,8 +34,9 @@ class Board
 
   # When you update the appropriate index in the cells, you will set it equal
   # to the token of the player object by calling the #token method on the player.
+  # updates the cells in the board with the player token according to the input
   def update(position, player)
-
+    self.cells[position.to_i-1] = player.token
   end
 
   def full?
@@ -58,16 +61,21 @@ class Board
 
   # returns true if the position is X or O
   # returns false if the position is empty or blank
-  def taken?(index)
-    if @cells[index] == " " || @cells[index] == "" @cells[index] == nil
+  def taken?(input)
+    index = input.to_i-1
+    if @cells[index] == " " || @cells[index] == "" || @cells[index] == nil
       return false
     else @cells[index] == "X" || @cells[index] == "O"
       return true
     end
   end
 
-  def valid_move?
-
+  # returns true for user input between 1-9 that is not taken
+  def valid_move?(input)
+    index = input.to_i-1
+    if index.between?(0,8) && !taken?(input)
+      return true
+    end
   end
 
 
