@@ -37,15 +37,33 @@ class Board
   end
 
   def full?
-    
+    @cells.all? { |full| full == "X" || full == "O"}
   end
 
+  # returns the amount of turns based on cell value
   def turn_count
-
+    # use each to iterate over the elements of the board
+    # to check if that element is an X or O and increment counter by 1
+    # return value of each is the original array
+    counter = 0
+    @cells.each do |space_count|
+      if space_count == "X" || space_count == "O"
+          counter += 1
+          puts "#{space_count}"
+          # return counter
+      end
+    end
+    counter
   end
 
-  def taken?
-
+  # returns true if the position is X or O
+  # returns false if the position is empty or blank
+  def taken?(index)
+    if @cells[index] == " " || @cells[index] == "" @cells[index] == nil
+      return false
+    else @cells[index] == "X" || @cells[index] == "O"
+      return true
+    end
   end
 
   def valid_move?
