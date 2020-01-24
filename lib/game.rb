@@ -42,4 +42,47 @@ class Game
     board.full? && !won? ? true : false
   end
 
+  # returns true for a draw
+  # returns true for a won game
+  # returns false for an in-progress game
+  def over?
+    self.won? || self.draw?
+  end
+
+  # returns X when X won; returns O when O won; returns nil when no winner
+  # won? returns [0, 4, 8]
+  def winner
+    if won?
+      return board.cells[won?[0]]
+    end
+  end
+
+  # makes a valid move
+  # asks for input again after a failed validation
+  # changes to player 2 after the first turn
+  def turn
+    selection = self.current_player.move(board)
+    if @board.valid_move?(selection)
+      @board.update(selection, current_player)
+    else
+      puts "Invalid move. Try again."
+      self.turn
+    end
+  end
+
+  # asks for players input on a turn of the game
+  # checks if the game is over after every turn
+  # checks if the game is won after every turn
+  # checks if the game is a draw after every turn
+  # stops playing if someone has won
+  # plays the first turn of the game
+  # plays the first few turns of the game
+  # congratulates the winner X; congratulates the winner O
+  # stops playing in a draw; prints "Cat\'s Game!" on a draw
+  # plays through an entire game
+
+  def play
+    
+  end
+
 end
