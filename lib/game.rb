@@ -23,4 +23,24 @@ class Game
     @board.display
   end
 
+  # returns the correct player, X, for the third move
+  def current_player
+    board.turn_count.even? ? player_1 : player_2
+  end
+
+  # returns false for a draw
+  # returns the correct winning combination in the case of a win
+  def won?
+    if !WIN_COMBINATIONS
+      return false
+    end
+    WIN_COMBINATIONS.to_a
+  end
+
+  # returns true for a draw; false for a won game
+  # returns false for an in-progress game
+  def draw?
+    board.full? && !won? ? true : false
+  end
+
 end
