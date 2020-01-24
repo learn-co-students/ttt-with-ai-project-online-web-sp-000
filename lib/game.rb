@@ -31,10 +31,11 @@ class Game
   # returns false for a draw
   # returns the correct winning combination in the case of a win
   def won?
-    if !WIN_COMBINATIONS
-      return false
-    end
-    WIN_COMBINATIONS.to_a
+    WIN_COMBINATIONS.find do |winning|
+          board.cells[winning[0]] == board.cells[winning[1]]
+          && board.cells[winning[1]] == board.cells[winning[2]]
+          && board.cells[winning[0]] != " "
+        end
   end
 
   # returns true for a draw; false for a won game
