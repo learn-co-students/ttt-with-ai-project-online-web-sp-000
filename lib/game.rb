@@ -36,8 +36,8 @@ class Game
     end
   end
 
-  # returns true for a draw; false for a won game
-  # returns false for an in-progress game
+  # returns true for a draw
+  # returns false for a won game and false for an in-progress game
   def draw?
     board.full? && !won? ? true : false
   end
@@ -82,7 +82,17 @@ class Game
   # plays through an entire game
 
   def play
-    
+    # after every turn, check this... since #over checks won and draw i can exclude them
+    until over? do
+      self.turn
+    end
+    if self.won?
+      puts "Congratulations #{self.winner}!"
+    else self.draw?
+      puts "Cat's Game!"
+    end
+
   end
 
+# class end
 end
