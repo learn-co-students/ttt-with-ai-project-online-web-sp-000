@@ -7,10 +7,12 @@ module Players
     # the move the computer wants to make in the form of a 1-9 string.
     # How the computer decides to make that move is up to you
     # but it must be capable of returning a valid move at some point.
-    # def move(board)
-    #   input = gets.chomp
-    #   input
-    # end
+    def move(board)
+      turn_tracker = game.board.turn
+        if self.token == "X"
+          return "5"
+        end
+    end
 
   end
 
