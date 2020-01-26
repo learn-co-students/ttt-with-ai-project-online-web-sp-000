@@ -98,9 +98,10 @@ class Game
 
   # game between 2 computers
   def ai_game
-    @player_1 = Computer.new("X")
+    puts "we made it!"
+    @player_1 = Players::Computer.new("X")
     @player_1.board = self.board
-    @player_2 = Computer.new("O")
+    @player_2 = Players::Computer.new("O")
     @player_2.board = self.board
     self.play
     self.play_again?
@@ -111,16 +112,17 @@ class Game
     puts "Would you like to go first? (Y/N)"
       input = gets.chomp
       if input == "Y" || input == "y"
-        # @player_1 = Human.new("X")
-        @player_2 = Computer.new("O")
+        puts "Great, pick a number between 1-9"
+        @player_2 = Players::Computer.new("O")
         @player_2.board = self.board
       elsif input == "N" || input == "n"
-        @player_1 = Computer.new("X")
+        puts "How gracious of you. You will now be defeated."
+        @player_1 = Players::Computer.new("X")
         @player_1.board = self.board
       else
         puts "Not a valid entry."
-        self.play
       end
+    self.play
   end
 
   # game between 2 humans

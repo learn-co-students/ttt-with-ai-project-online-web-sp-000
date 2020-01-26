@@ -23,17 +23,26 @@ module Players
     # if the computer has 2 neighboring tokens on the board, it should choose the 3rd spot to win
     def move(board)
       # binding.pry
+      # board.cells.turn
       # x = @cells.count("X")
       # o = @cells.count("O")
       #
-      # turn_tracker = @cells.x_o_count
+      turn_tracker = @board.turn_count
         # if the computer goes first (token "X") it should choose the middle
         if self.token == "X"
-          return "5"
-        # elsif self.token == "O"
-        #   return ""
-        end
-
+          if turn_tracker == 0
+            return "5"
+          # check the corners, pick an empty one.
+            elsif turn_tracker == 2
+              if !@board.taken?("1")
+              # || !@board.taken?("3") || !@board.taken?("7") || !@board.taken?("9")
+              # @board.cells.each do |X|
+                return "1"
+              end
+            abort "kill the game for now..."
+          end
+          end
+        
     end
 
 
