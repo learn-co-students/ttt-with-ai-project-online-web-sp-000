@@ -91,8 +91,10 @@ class Game
     end
     if self.won?
       puts "Congratulations #{self.winner}!"
+      self.play_again?
     else self.draw?
       puts "Cat's Game!"
+      self.play_again?
     end
   end
 
@@ -137,7 +139,7 @@ class Game
   # If the user doesn't want to play again, exit the program.
   def play_again?
     answer = gets.chomp
-    if over?
+    if over? || draw?
       puts "Play again? (Y/N)"
       if answer == Y || answer == "y"
         Board.reset!
