@@ -1,3 +1,7 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+# run in IDE with `ruby bin/tictactoe`
+Game.new.begin_game
