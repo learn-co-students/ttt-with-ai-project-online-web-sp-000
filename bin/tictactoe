@@ -1,3 +1,36 @@
 #!/usr/bin/env ruby
 
+require'irb
 require_relative '../config/environment'
+IRB.start
+
+def start
+  puts "Welcome to Tic-Tac-Toe|"
+  puts "How would you play"
+
+  O-Computer vs Computer
+  1-You vs Computer
+  2-You vs Friend
+
+  user_input=gets.chomp
+
+  if user_input==0
+    Game.new(player_1=Players::Human.new("X"), player_2=Players::Computer.new("O"), Board.new).play
+  end
+
+  elsif user_input==1
+    puts "Do you want to go first? Yes or No"
+    if user_input=="Yes"
+      Game.new(player_1=Players::Human.new("X"), player_2=Computer::Human.new("O"), Board.new).play
+    elsif user_input=="No"
+      Game.new(player_1=Players::Human.new("X"), player_2=Computer::Human.new("O"), Board.new).play
+    end
+
+  elsif user_input==2
+    Game.new(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new).play
+  end
+end
+
+"Do you want quit? Yes or No"
+
+user_input until=="No"
