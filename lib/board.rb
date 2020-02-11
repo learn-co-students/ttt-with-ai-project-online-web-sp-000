@@ -29,10 +29,19 @@ class Board
         cells.count{|cell| cell != " "}
     end
 
-    def taken?
-        # if the position is taken with and X or O then return true
-
+    def taken?(index)
+        cells[index.to_i - 1] != " "
     end
+
+    def valid_move?(index)
+        int = index.to_i 
+        !taken?(int) && int.between?(1,9)
+    end
+
+    def update(input, player)
+        cells[input.to_i - 1] = player.token
+    end
+
 end 
 
 # board = Board.new
