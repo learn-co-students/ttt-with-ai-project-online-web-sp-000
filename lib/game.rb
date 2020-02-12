@@ -25,8 +25,37 @@ class Game
     end
 
     def draw?
-        # board.cells.full? && won?
-        # binding.pry
+        board.full? && !won?
+    end
+
+    def over?
+        won? || draw?
+    end
+    
+    def winner
+        if combo = won?
+            board.cells[combo[0]] 
+        end   
+    end
+
+    def turn
+        input = current_player.move(board).to_i 
+
+        if board.valid_move?(input)
+            board.update(input, current_player)
+        elsif input.between?(1, 9) == false
+            turn
+        end
+    end
+
+    def play 
+        turn until over?
+        
+        if winner
+            puts "Congratulations #{winner}!"
+        else 
+            puts "Cat's Game!"
+        end
     end
 
 end
