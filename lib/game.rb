@@ -12,7 +12,7 @@ class Game
       @player_2 = Players::Human.new("O")
     end 
     if(board)
-      @board = board 
+      @board = board   
     else 
       @board = Board.new 
     end 
@@ -23,12 +23,19 @@ class Game
     [0, 4, 8], [2, 4, 6]
   ]
   def current_player 
-    @board.turn_count.even? ? "O" : "X"
+    @board.turn_count.even? ? @player_1 : @player_2 
   end 
   def board 
     @board 
   end 
   def won? 
+    WIN_COMBINATIONS.any? do |combo|
+      if @board.taken?(combo[0]) && @board[combo[0]] == @board[combo[1]] && @board[combo[1]] == @board[combo[2]]
+        return combo
+      else 
+        false 
+      end 
+    end
   end 
   def winner 
   end 
@@ -55,14 +62,6 @@ end
 #       turn
 #     end
 #     display_board
-#   end
-
-#   def won?
-#     WIN_COMBINATIONS.any? do |combo|
-#       if position_taken?(combo[0]) && @board[combo[0]] == @board[combo[1]] && @board[combo[1]] == @board[combo[2]]
-#         return combo
-#       end
-#     end
 #   end
 
 #   def draw?
