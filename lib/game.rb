@@ -47,7 +47,7 @@ class Game
     if won?
       @board.cells[won?[0]]
     else 
-      return nil
+      nil
     end 
   end 
   def start 
@@ -59,8 +59,7 @@ class Game
   def turn 
     puts "Please enter a number (1-9):"
     user_input = gets.strip
-    index = input_to_index(user_input)
-    if valid_move?(index)
+    if @board.valid_move?(user_input)
       token = current_player
       move(index, token)
     else
