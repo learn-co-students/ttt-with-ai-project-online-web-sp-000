@@ -17,11 +17,13 @@ class Board
     space.to_i - 1
   end 
   def update(str, token)
-    idx = position(str)
-    
-    @cells[idx] = token 
+    if(valid_move?(str))
+      idx = position(str)
+      @cells[idx] = token 
+    end 
   end 
   def token(token)
+    #call token method on player in move method (???)
   end 
   def full?
     @cells.all? {|square| square != " "} 
