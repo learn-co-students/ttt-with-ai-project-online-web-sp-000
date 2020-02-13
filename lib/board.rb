@@ -18,10 +18,8 @@ class Board
     @cells[idx]
   end 
   def update(str, player)
-    if(valid_move?(str))
-      idx = str.to_i - 1 
-      @cells[idx] = player.token 
-    end 
+    idx = str.to_i - 1 
+    @cells[idx] = player.token 
   end 
   def full?
     @cells.all? {|square| square != " "} 
