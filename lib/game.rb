@@ -29,21 +29,20 @@ class Game
     @board 
   end 
   def draw?
-    @board.cells.full? && !won?
+    @board.full? && !won?
   end
   def won? 
     WIN_COMBINATIONS.any? do |combo|
-      if @board.cells.taken?(combo[0]) && @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]]
-      return combo
+      if @board.taken?(combo[0]) && @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]]
+        return combo
       else
         return false 
       end
     end 
   end 
   def winner
-   if combo = won?
+   if won?
      @board.cells[combo[0]]
-    end
     else 
       return nil
     end 
