@@ -23,9 +23,6 @@ class Board
       @cells[idx] = player.token 
     end 
   end 
-  def token(token)
-    #call token method on player in move method (???)
-  end 
   def full?
     @cells.all? {|square| square != " "} 
   end 
@@ -41,3 +38,4 @@ class Board
     !taken?(str) && num.between?(0, 8)
   end 
 end 
+
