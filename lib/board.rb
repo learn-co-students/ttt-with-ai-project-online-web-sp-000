@@ -16,8 +16,10 @@ class Board
   def position(space)
     space.to_i - 1
   end 
-  def update(position, token)
+  def update(str, token)
+    idx = position(str)
     
+    @cells[idx] = token 
   end 
   def token(token)
   end 
@@ -27,62 +29,57 @@ class Board
   def turn_count
     @cells.count{|square| square != " " }
   end 
-  def taken?(idx)
+  def taken?(str)
+    idx = position(str)
     @cells[idx] != " "
   end 
-  def valid_move?
+  def valid_move?(str)
+    idx = position(str)
+    !taken?(idx) && idx.between?(0, 8)
   end 
 end 
 
-  def move(index, token)
-    @board[index] = token
-  end
+#   def current_player
+#     turn_count.even? ? "X" : "O"
+#   end
 
-  def valid_move?(index)
-    !position_taken?(index) && index.between?(0,8)
-  end
+#   def turn
+#     puts "Please enter a number (1-9):"
+#     user_input = gets.strip
+#     index = input_to_index(user_input)
+#     if valid_move?(index)
+#       token = current_player
+#       move(index, token)
+#     else
+#       turn
+#     end
+#     display_board
+#   end
 
-  def current_player
-    turn_count.even? ? "X" : "O"
-  end
+#   def won?
+#     WIN_COMBINATIONS.any? do |combo|
+#       if position_taken?(combo[0]) && @board[combo[0]] == @board[combo[1]] && @board[combo[1]] == @board[combo[2]]
+#         return combo
+#       end
+#     end
+#   end
 
-  def turn
-    puts "Please enter a number (1-9):"
-    user_input = gets.strip
-    index = input_to_index(user_input)
-    if valid_move?(index)
-      token = current_player
-      move(index, token)
-    else
-      turn
-    end
-    display_board
-  end
+#   def draw?
+#     full? && !won?
+#   end
 
-  def won?
-    WIN_COMBINATIONS.any? do |combo|
-      if position_taken?(combo[0]) && @board[combo[0]] == @board[combo[1]] && @board[combo[1]] == @board[combo[2]]
-        return combo
-      end
-    end
-  end
+#   def over?
+#     won? || draw?
+#   end
 
-  def draw?
-    full? && !won?
-  end
+#   def winner
+#     if combo = won?
+#       @board[combo[0]]
+#     end
+#   end
 
-  def over?
-    won? || draw?
-  end
-
-  def winner
-    if combo = won?
-      @board[combo[0]]
-    end
-  end
-
-  def play
-    turn until over?
-    puts winner ? "Congratulations #{winner}!" : "Cat's Game!"
-  end
-end
+#   def play
+#     turn until over?
+#     puts winner ? "Congratulations #{winner}!" : "Cat's Game!"
+#   end
+# end
