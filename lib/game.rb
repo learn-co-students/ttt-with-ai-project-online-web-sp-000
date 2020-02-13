@@ -1,3 +1,5 @@
+require 'pry'
+
 class Game
   attr_accessor :player_1, :player_2, :board
   def initialize(player1=nil, player2=nil, board=nil)
@@ -33,16 +35,17 @@ class Game
   end
   def won? 
     WIN_COMBINATIONS.any? do |combo|
-      if @board.taken?(combo[0]) && @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]]
+      if (@board.taken?(combo[0]) && @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]])
         return combo
-      else
-        return false 
       end
-    end 
+      if !combo 
+        return false 
+      end 
+    end
   end 
   def winner
-   if won?
-     @board.cells[combo[0]]
+    if won?
+      @board.cells[won?[0]]
     else 
       return nil
     end 
@@ -69,5 +72,3 @@ class Game
     won? || draw?
   end
 end 
-# describe '#won?' do [] not working for object 
-#     
