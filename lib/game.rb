@@ -60,8 +60,7 @@ class Game
     puts "Please enter a number (1-9):"
     user_input = gets.strip
     if @board.valid_move?(user_input)
-      token = current_player
-      move(index, token)
+      current_player.move(@board)
     else
       turn
     end
