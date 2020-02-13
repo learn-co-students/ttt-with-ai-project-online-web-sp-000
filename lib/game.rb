@@ -24,18 +24,22 @@ class Game
     [0, 3, 6], [1, 4, 7], [2, 5, 8],
     [0, 4, 8], [2, 4, 6]
   ]
+  
   def current_player 
     @board.turn_count.even? ? @player_1 : @player_2 
   end 
+  
   def board 
     @board 
   end 
+  
   def draw?
     @board.full? && !won?
   end
+  
   def won? 
     WIN_COMBINATIONS.any? do |combo|
-      if (@board.taken?(combo[0]) && @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]])
+      if (@board.taken?(combo[0] + 1) && @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]])
         return combo
       end
       if !combo 
@@ -50,21 +54,23 @@ class Game
       nil
     end 
   end 
+  
   def start 
-  end 
+  end
+  
   def play
     turn until over?
     puts winner ? "Congratulations #{winner}!" : "Cat's Game!"
   end
+  
   def turn 
-    puts "Please enter a number (1-9):"
-    user_input = gets.strip
-    if @board.valid_move?(user_input)
-      @board.update(user_input, current_player)
+    current_move = current_player.move(@board)
+    if @board.valid_move?(current_move)
+      @board.update(current_move, current_player)
     else
       turn
     end
-    display_board
+    @board.display
   end 
   def over?
     won? || draw?

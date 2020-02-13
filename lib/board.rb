@@ -28,8 +28,7 @@ class Board
     @cells.count{|square| square != " " }
   end 
   def taken?(str)
-    idx = position(str)
-    idx != " "
+    position(str) != " " && position(str) != ""
   end 
   def valid_move?(str)
     num = str.to_i - 1 
