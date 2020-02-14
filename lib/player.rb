@@ -17,8 +17,9 @@ class Player
       game = Game.new(player1)
       game.play 
     elsif input == "2" 
-      puts "Great! You are Player 1, with token O." 
+      puts "Great! You are Player 1, with token X." 
       player1 = Players::Human.new("X") 
+      puts "Player 2 has token O."
       player2 = Players::Human.new("O") 
       game = Game.new(player1, player2) 
       game.play 

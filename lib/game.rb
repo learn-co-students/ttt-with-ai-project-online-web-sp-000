@@ -64,6 +64,7 @@ class Game
   end
   
   def turn 
+    @board.display 
     current_move = current_player.move(@board)
     if @board.valid_move?(current_move)
       @board.update(current_move, current_player)
