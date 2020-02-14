@@ -5,7 +5,19 @@ module Players
     def move(board)
       #if corners not taken claim corner 
       #else claim middle 
-      if !(board.taken?(1))
+      if(board.(1) == self.token && board.(3) == self.token)
+        "2"
+      elsif (board.position(1) == self.token && board.(7) == self.token)
+        "4"
+      elsif (board.(1) == self.token && board.(9) == self.token)
+        "5" 
+      elsif (board.(3) == self.token && board.(9) == self.token)
+        "6"
+      elsif (board.(7) == self.token && board.position(9) == self.token)
+        "8"
+      elsif (board.position(3) == self.token && board.position(7) == self.token)
+        "5"
+      elsif !(board.taken?(1))
         "1" 
       elsif !(board.taken?(3))
         "3"
