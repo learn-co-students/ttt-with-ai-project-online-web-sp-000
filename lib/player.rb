@@ -1,9 +1,11 @@
+require_relative './game.rb'
+
 class Player 
   attr_reader :token 
   def initialize(token)
     @token = token 
   end 
-  def assign_players  
+  def self.assign_players  
     puts "Would you like to play a 0 player (computer player) game, 1 player game, or 2 player game? Or, type 'exit' to exit." 
     input = gets.strip 
     if input == "0"
