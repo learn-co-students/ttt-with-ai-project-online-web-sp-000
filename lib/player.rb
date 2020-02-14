@@ -13,13 +13,13 @@ class Player
       game.play 
     elsif input == "1"
       puts "Great! You are Player 1, with token X." 
-      player1 = Player.new("X") 
+      player1 = Players::Human.new("X") 
       game = Game.new(player1)
       game.play 
     elsif input == "2" 
       puts "Great! You are Player 1, with token O." 
-      player1 = Player.new("X") 
-      player2 = Player.new("O") 
+      player1 = Players::Human.new("X") 
+      player2 = Players::Human.new("O") 
       game = Game.new(player1, player2) 
       game.play 
     elsif input == "exit"

@@ -6,12 +6,12 @@ class Game
     if(player1)
       @player_1 = player1
     else 
-      @player_1 = Players::Human.new("X") 
+      @player_1 = Players::Computer.new("X") 
     end 
     if(player2)
       @player_2 = player2
     else 
-      @player_2 = Players::Human.new("O")
+      @player_2 = Players::Computer.new("O")
     end 
     if(board)
       @board = board   
