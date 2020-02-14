@@ -10,6 +10,6 @@ module Players
   end 
 end 
 
-corners in idx = [0, 2, 6, 8]
-middle = 4 
-leftovers = 1, 3, 5, 7 
+# corners in idx = [0, 2, 6, 8]
+# middle = 4 
+# leftovers = 1, 3, 5, 7 

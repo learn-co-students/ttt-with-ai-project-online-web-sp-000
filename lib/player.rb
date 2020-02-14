@@ -4,7 +4,7 @@ class Player
     @token = token 
   end 
   def assign_players  
-    puts "Would you like to play a 0 player (computer player) game, 1 player game, or 2 player game? Or, type "exit" to exit." 
+    puts "Would you like to play a 0 player (computer player) game, 1 player game, or 2 player game? Or, type 'exit' to exit." 
     input = gets.strip 
     if input == "0"
       game = Game.new
