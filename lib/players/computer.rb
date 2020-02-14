@@ -3,17 +3,15 @@ require_relative '../player.rb'
 module Players 
   class Computer < Player 
     def move(board)
-      #if corners not taken claim corner 
-      #else claim middle 
-      if(board.(1) == self.token && board.(3) == self.token)
+      if (board.position(1) == self.token && board.position(3) == self.token)
         "2"
-      elsif (board.position(1) == self.token && board.(7) == self.token)
+      elsif (board.position(1) == self.token && board.position(7) == self.token)
         "4"
-      elsif (board.(1) == self.token && board.(9) == self.token)
+      elsif (board.position(1) == self.token && board.position(9) == self.token)
         "5" 
-      elsif (board.(3) == self.token && board.(9) == self.token)
+      elsif (board.position(3) == self.token && board.position(9) == self.token)
         "6"
-      elsif (board.(7) == self.token && board.position(9) == self.token)
+      elsif (board.position(7) == self.token && board.position(9) == self.token)
         "8"
       elsif (board.position(3) == self.token && board.position(7) == self.token)
         "5"
