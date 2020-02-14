@@ -9,19 +9,19 @@ class Player
     puts "Would you like to play a 0 player (computer player) game, 1 player game, or 2 player game? Or, type 'exit' to exit." 
     input = gets.strip 
     if input == "0"
-      game = Game.new
+      player1 = Players::Computer.new("X")
+      player2 = Players::Computer.new("O")
+      game = Game.new(player1, player2)
       game.play 
     elsif input == "1"
-      puts "Great! You are Player 1, with token X." 
-      player1 = Players::Human.new("X") 
+      puts "Great! You are Player 2, with token O." 
+      player1 = Players::Computer.new("X") 
       game = Game.new(player1)
       game.play 
     elsif input == "2" 
       puts "Great! You are Player 1, with token X." 
-      player1 = Players::Human.new("X") 
       puts "Player 2 has token O."
-      player2 = Players::Human.new("O") 
-      game = Game.new(player1, player2) 
+      game = Game.new 
       game.play 
     elsif input == "exit"
       exit 
