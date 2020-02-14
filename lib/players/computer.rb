@@ -5,23 +5,31 @@ module Players
     def move(board)
       #if corners not taken claim corner 
       #else claim middle 
-      #
+      if !(board.taken?(1))
+        "1" 
+      elsif !(board.taken?(3))
+        "3"
+      elsif !(board.taken?(7))
+        "7" 
+      elsif !(board.taken?(9))
+        "9"
+      elsif !(board.taken?(5))
+        "5"
+      elsif !(board.taken?(2))
+        "2"
+      elsif !(board.taken?(4))
+        "4"
+      elsif !(board.taken?(6))
+        "6"
+      elsif !(board.taken?(8))
+        "8" 
+      end 
     end
-    def valid?(idx)
-      @board(idx) != "" && @board(idx) != " "
-    end 
   end 
 end 
-
-# corners in idx = [0, 2, 6, 8]
-# middle = 4 
-# leftovers = 1, 3, 5, 7 
-# def turn 
-#     current_move = current_player.move(@board)
-#     if @board.valid_move?(current_move)
-#       @board.update(current_move, current_player)
-#     else
-#       turn
-#     end
-#     @board.display
-#   end 
+# def taken?(str)
+#   position(str) != " " && position(str) != ""
+# end
+# corners in str = [1, 3, 7, 9]
+# middle str = 5 
+# leftovers str = [2, 4, 6, 8]
