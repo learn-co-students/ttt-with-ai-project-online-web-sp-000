@@ -1,3 +1,4 @@
+require 'pry'
 class Board 
     attr_accessor :cells 
 
@@ -30,6 +31,7 @@ class Board
       end 
 
       def taken?(position)
-        !(@cells[position.to_i] == " ")
+        (@cells[position.to_i - 1] == "X") || (@cells[position.to_i - 1] == "O")
       end 
+      
 end 
