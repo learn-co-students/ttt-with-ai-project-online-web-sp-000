@@ -65,14 +65,14 @@ class Game
         end
       end
 
-      def play(board)
-        until over?(board)
-            turn(board)
+    def play
+    turn until over?
+        if won?
+        puts board.display
+        puts "Congratulations #{winner}!"
+        elsif draw?
+        puts board.display
+        puts "Cat's Game!"
         end
-    
-        if winner(board) == nil
-            puts "Cat's Game!"
-        else
-            puts "Congratulations #{winner(board)}!"
-        end
+    end
 end 
