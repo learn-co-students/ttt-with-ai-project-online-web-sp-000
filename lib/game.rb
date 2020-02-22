@@ -61,6 +61,7 @@ class Game
   end
 
   def turn
+    puts "Hi"
     @board.display #display the board
     attempted_move = self.current_player.move(@board) #assign the attempted move to the current player
 

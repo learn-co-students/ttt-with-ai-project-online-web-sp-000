@@ -6,16 +6,9 @@ require_relative '../lib/player.rb'
 
 
 puts "Hello, welcome to ttt!"
-puts "How many players do you have? - 0,1, or 2"
-  input_0 = gets.to_i
+Player.assign_players
 
-puts "Who should go first and be X?"
-  input_1 = gets
-  player_1.token = "X"
-  player_2.token = "Y"
-  Game.new(board,input_1,player)
-
-
+=begin
       def play_again?
         loop do
           print "Would you like to play again? Y/N"
@@ -35,3 +28,4 @@ puts "Who should go first and be X?"
 begin
   run_game
 end while play_again?
+=end 
