@@ -1,3 +1,37 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+require_relative '../lib/player.rb'
+
+
+
+puts "Hello, welcome to ttt!"
+puts "How many players do you have? - 0,1, or 2"
+  input_0 = gets.to_i
+
+puts "Who should go first and be X?"
+  input_1 = gets
+  player_1.token = "X"
+  player_2.token = "Y"
+  Game.new(board,input_1,player)
+
+
+      def play_again?
+        loop do
+          print "Would you like to play again? Y/N"
+          again = gets.chomp.capitalize
+
+          case (again)
+          when 'N'
+            return false
+          when 'Y'
+            return true
+          else
+            puts "Huh? I don't know what that means."
+          end
+        end
+      end
+
+begin
+  run_game
+end while play_again?
