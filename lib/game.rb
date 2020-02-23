@@ -60,8 +60,10 @@ class Game
       end
   end
 
+#the powerhouse methods of this game are play and turn
+
   def turn
-    puts "Hi"
+    puts "Before Move..."
     @board.display #display the board
     attempted_move = self.current_player.move(@board) #assign the attempted move to the current player
 
@@ -70,12 +72,12 @@ class Game
     else
       turn #run through THIS method (not board's turn method) again if not a valid move
     end
+    puts "After Move..."
     @board.display #display board again to indicate the updated move
   end
 
   def play
     turn until over?
-
     if over?
       if won?
         puts "Congratulations #{winner}!"
