@@ -1,70 +1,70 @@
 require 'spec_helper'
 
 describe 'Game' do
-  # describe '::WIN_COMBINATIONS' do
-  #   it 'defines a constant WIN_COMBINATIONS with arrays for each win combination' do
-  #     expect(Game::WIN_COMBINATIONS).to include_array([0,1,2])
-  #     expect(Game::WIN_COMBINATIONS).to include_array([3,4,5])
-  #     expect(Game::WIN_COMBINATIONS).to include_array([6,7,8])
-  #     expect(Game::WIN_COMBINATIONS).to include_array([0,3,6])
-  #     expect(Game::WIN_COMBINATIONS).to include_array([1,4,7])
-  #     expect(Game::WIN_COMBINATIONS).to include_array([2,5,8])
-  #     expect(Game::WIN_COMBINATIONS).to include_array([0,4,8])
-  #     expect(Game::WIN_COMBINATIONS).to include_array([6,4,2])
-  #   end
-  # end
+  describe '::WIN_COMBINATIONS' do
+    it 'defines a constant WIN_COMBINATIONS with arrays for each win combination' do
+      expect(Game::WIN_COMBINATIONS).to include_array([0,1,2])
+      expect(Game::WIN_COMBINATIONS).to include_array([3,4,5])
+      expect(Game::WIN_COMBINATIONS).to include_array([6,7,8])
+      expect(Game::WIN_COMBINATIONS).to include_array([0,3,6])
+      expect(Game::WIN_COMBINATIONS).to include_array([1,4,7])
+      expect(Game::WIN_COMBINATIONS).to include_array([2,5,8])
+      expect(Game::WIN_COMBINATIONS).to include_array([0,4,8])
+      expect(Game::WIN_COMBINATIONS).to include_array([6,4,2])
+    end
+  end
 
-  # describe '#board' do
-  #   it 'provides access to the board' do
-  #     game = Game.new
-  #     game.board = []
-  #     expect(game.board).to eq([])
-  #   end
-  # end
+  describe '#board' do
+    it 'provides access to the board' do
+      game = Game.new
+      game.board = []
+      expect(game.board).to eq([])
+    end
+  end
 
-  # describe '#player_1' do
-  #   it 'provides access to player_1' do
-  #     game = Game.new
-  #     player_1 = Player.new("X")
-  #     game.player_1 = player_1
-  #     expect(game.player_1).to eq(player_1)
-  #   end
-  # end
+  describe '#player_1' do
+    it 'provides access to player_1' do
+      game = Game.new
+      player_1 = Player.new("X")
+      game.player_1 = player_1
+      expect(game.player_1).to eq(player_1)
+    end
+  end
 
-  # describe '#player_2' do
-  #   it 'provides access to player_2' do
-  #     game = Game.new
-  #     player_2 = Player.new("X")
-  #     game.player_2 = player_2
-  #     expect(game.player_2).to eq(player_2)
-  #   end
-  # end
+  describe '#player_2' do
+    it 'provides access to player_2' do
+      game = Game.new
+      player_2 = Player.new("X")
+      game.player_2 = player_2
+      expect(game.player_2).to eq(player_2)
+    end
+  end
 
-  # describe 'initialize' do
-  #   it 'accepts 2 players and a board' do
-  #     board = Board.new
-  #     player_1 = Player.new("X")
-  #     player_2 = Player.new("O")
+  describe 'initialize' do
+    it 'accepts 2 players and a board' do
+      board = Board.new
+      player_1 = Player.new("X")
+      player_2 = Player.new("O")
 
-  #     game = Game.new(player_1, player_2, board)
+      game = Game.new(player_1, player_2, board)
 
-  #     expect(game.player_1).to eq(player_1)
-  #     expect(game.player_2).to eq(player_2)
-  #     expect(game.board).to eq(board)
-  #   end
+      expect(game.player_1).to eq(player_1)
+      expect(game.player_2).to eq(player_2)
+      expect(game.board).to eq(board)
+    end
 
-  #   it 'defaults to two human players, X and O, with an empty board' do
-  #     game = Game.new
+    it 'defaults to two human players, X and O, with an empty board' do
+      game = Game.new
 
-  #     expect(game.player_1).to be_a(Players::Human)
-  #     expect(game.player_1.token).to eq("X")
+      expect(game.player_1).to be_a(Players::Human)
+      expect(game.player_1.token).to eq("X")
 
-  #     expect(game.player_2).to be_a(Players::Human)
-  #     expect(game.player_2.token).to eq("O")
+      expect(game.player_2).to be_a(Players::Human)
+      expect(game.player_2.token).to eq("O")
 
-  #     expect(game.board.cells).to match_array(Array.new(9, " "))
-  #   end
-  # end
+      expect(game.board.cells).to match_array(Array.new(9, " "))
+    end
+  end
 
   describe '#current_player' do
     it 'returns the correct player, X, for the third move' do
