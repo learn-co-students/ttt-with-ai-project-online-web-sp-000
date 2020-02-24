@@ -35,7 +35,6 @@ class Game
     false
   end
 
-
   def draw?
     return false if board.cells.include?(" ")
     return false if won?
@@ -48,9 +47,14 @@ class Game
     false
   end
 
-
-# def winner
-# end
+  def winner
+    winning_combo = won?
+    return nil unless winning_combo
+    pos = winning_combo[0]
+    tokens_on_board = board.cells
+    token = tokens_on_board[pos]
+    return token
+  end
 
 # def start
 # end

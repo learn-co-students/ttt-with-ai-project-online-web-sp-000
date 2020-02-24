@@ -148,28 +148,32 @@ describe 'Game' do
     end
   end
 
-  # describe '#winner' do
-  #   it 'returns X when X won' do
-  #     game = Game.new
-  #     game.board.cells = ["X", " ", " ", " ", "X", " ", " ", " ", "X"]
+  describe '#winner' do
+    it 'returns X when X won' do
+      game = Game.new
+      game.board.cells = ["X", " ", " ",
+                          " ", "X", " ",
+                          " ", " ", "X"]
 
-  #     expect(game.winner).to eq("X")
-  #   end
+      expect(game.winner).to eq("X")
+    end
 
-  #   it 'returns O when O won' do
-  #     game = Game.new
-  #     game.board.cells = ["X", "O", " ", " ", "O", " ", " ", "O", "X"]
+    it 'returns O when O won' do
+      game = Game.new
+      game.board.cells = ["X", "O", " ",
+                          " ", "O", " ",
+                          " ", "O", "X"]
 
-  #     expect(game.winner).to eq("O")
-  #   end
+      expect(game.winner).to eq("O")
+    end
 
-  #   it 'returns nil when no winner' do
-  #     game = Game.new
-  #     game.board.cells = ["X", "O", " ", " ", " ", " ", " ", "O", "X"]
+    it 'returns nil when no winner' do
+      game = Game.new
+      game.board.cells = ["X", "O", " ", " ", " ", " ", " ", "O", "X"]
 
-  #     expect(game.winner).to be_nil
-  #   end
-  # end
+      expect(game.winner).to be_nil
+    end
+  end
 
   # describe 'turn' do
   #   it 'makes valid moves' do
