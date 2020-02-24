@@ -1,5 +1,5 @@
 require 'pry'
-class Game 
+class Game
   attr_accessor :board, :player_1, :player_2
 
   WIN_COMBINATIONS = [
@@ -41,12 +41,13 @@ class Game
     return false if won?
     true
   end
-#returns true for a draw
-#return false for a won game
 
+  def over?
+    return true if draw?
+    return true if won?
+    false
+  end
 
-#returns false for a draw( if no WIN_COMBINATIONS)
-#returns the correct winning combination in the case of a win
 
 # def winner
 # end
