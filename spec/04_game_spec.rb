@@ -102,28 +102,28 @@ describe 'Game' do
     end
   end
 
-  # describe '#draw?' do
-  #   it 'returns true for a draw' do
-  #     game = Game.new
-  #     game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
+  describe '#draw?' do
+    it 'returns true for a draw' do
+      game = Game.new
+      game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
 
-  #     expect(game.draw?).to be_truthy
-  #   end
+      expect(game.draw?).to be_truthy
+    end
 
-  #   it 'returns false for a won game' do
-  #     game = Game.new
-  #     game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "O", "X"]
+    it 'returns false for a won game' do
+      game = Game.new
+      game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "O", "X"]
 
-  #     expect(game.draw?).to be_falsey
-  #   end
+      expect(game.draw?).to be_falsey
+    end
 
-  #   it 'returns false for an in-progress game' do
-  #     game = Game.new
-  #     game.board.cells = ["X", " ", "X", " ", "X", " ", "O", "O", "X"]
+    it 'returns false for an in-progress game' do
+      game = Game.new
+      game.board.cells = ["X", " ", "X", " ", "X", " ", "O", "O", "X"]
 
-  #     expect(game.draw?).to be_falsey
-  #   end
-  # end
+      expect(game.draw?).to be_falsey
+    end
+  end
 
   # describe '#over?' do
   #   it 'returns true for a draw' do

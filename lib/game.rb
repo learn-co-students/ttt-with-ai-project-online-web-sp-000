@@ -35,11 +35,12 @@ class Game
     false
   end
 
-# def turn_count
-# end
 
-# def draw?
-# end
+  def draw?
+    return false if board.cells.include?(" ")
+    return false if won?
+    true
+  end
 #returns true for a draw
 #return false for a won game
 
