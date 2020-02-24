@@ -1,6 +1,6 @@
 require 'pry'
 class Game
-  attr_accessor :board, :player_1, :player_2
+  attr_accessor :board, :player_1, :player_2, :turn_number
 
   WIN_COMBINATIONS = [
       [0, 1, 2],
@@ -17,11 +17,15 @@ class Game
     @board = board
     @player_1 = player_1
     @player_2 = player_2
+    @turn_number = 1
   end
 
   def current_player
-    # TODO: What logic do we need here?
-    @player_1
+    if turn_number.odd?
+      player_1
+    else
+      player_2
+    end
   end
 
   def won?
@@ -63,8 +67,12 @@ class Game
 # end
 
   def turn
-    current_move = player_1.move(board)
+    # Make sure current_player keeps track of whose turn it is
+    current_move = current_player.move(board)
     valid_move = board.valid_move?(current_move)
-    turn unless valid_move
+    return turn unless valid_move
+
+    # We have a valid move, so change whose turn it is
+    @turn_number += 1
   end
 end
