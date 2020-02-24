@@ -1,4 +1,5 @@
 require 'pry'
+
 class Game
   attr_accessor :board, :player_1, :player_2, :turn_number
 
@@ -60,19 +61,30 @@ class Game
     return token
   end
 
-# def start
-# end
-
-# def play
-# end
-
   def turn
-    # Make sure current_player keeps track of whose turn it is
     current_move = current_player.move(board)
     valid_move = board.valid_move?(current_move)
     return turn unless valid_move
-
-    # We have a valid move, so change whose turn it is
     @turn_number += 1
   end
+
+  def play
+    if !over?
+    turn
+    
+
+  end
+  #asks for players input on a turn of the game
+  #checks if the game is over after every turn'
+  #plays the first turn of the game
+  #'plays the first few turns of the game'
+  #checks if the game is won after every turn'
+  #'checks if the game is a draw after every turn
+  #'stops playing if someone has won'
+  #'congratulates the winner X or O'
+  #'prints "Cat\'s Game!" on a draw'
+  #'plays through an entire game'
+
+
+
 end
