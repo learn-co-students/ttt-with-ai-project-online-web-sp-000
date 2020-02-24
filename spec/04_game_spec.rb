@@ -75,32 +75,32 @@ describe 'Game' do
     end
   end
 
-  # describe '#won?' do
-  #   it 'returns false for a draw' do
-  #     game = Game.new
-  #     game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
+  describe '#won?' do
+    it 'returns false for a draw' do
+      game = Game.new
+      game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
 
-  #     expect(game.won?).to be_falsey
-  #   end
+      expect(game.won?).to be_falsey
+    end
 
-  #   it 'returns the correct winning combination in the case of a win' do
-  #     game = Game.new
-  #     game.board.cells = ["X", "O", "X",
-  #                         "O", "O", "X",
-  #                         "O", "X", "X"]
+    it 'returns the correct winning combination in the case of a win' do
+      game = Game.new
+      game.board.cells = ["X", "O", "X",
+                          "O", "O", "X",
+                          "O", "X", "X"]
 
-  #     expect(game.won?).to contain_exactly(2, 5, 8)
-  #   end
+      expect(game.won?).to contain_exactly(2, 5, 8)
+    end
 
-  #   it "isn't hard-coded" do
-  #     game = Game.new
-  #     game.board.cells = ["O", "O", "O",
-  #                         "X", "X", " ",
-  #                         " ", " ", "X"]
+    it "isn't hard-coded" do
+      game = Game.new
+      game.board.cells = ["O", "O", "O",
+                          "X", "X", " ",
+                          " ", " ", "X"]
 
-  #     expect(game.won?).to contain_exactly(0, 1, 2)
-  #   end
-  # end
+      expect(game.won?).to contain_exactly(0, 1, 2)
+    end
+  end
 
   # describe '#draw?' do
   #   it 'returns true for a draw' do

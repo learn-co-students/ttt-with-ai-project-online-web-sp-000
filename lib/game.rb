@@ -24,7 +24,17 @@ class Game
     @player_1
   end
 
-  #Game class represents a singular instance of a Tic-tac-toe session.
+  def won?
+    WIN_COMBINATIONS.each do |win_combo|
+      cell_values_for_combo = win_combo.map { |pos| @board.cells[pos] } # ["X", "X", "X"]
+      # Check if all of them are the same token for this combo.
+      if [["X", "X", "X"], ["O", "O", "O"]].include? cell_values_for_combo
+        return win_combo
+      end
+    end
+    false
+  end
+
 # def turn_count
 # end
 
