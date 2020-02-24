@@ -175,25 +175,26 @@ describe 'Game' do
     end
   end
 
-  # describe 'turn' do
-  #   it 'makes valid moves' do
-  #     game = Game.new
-  #     allow($stdout).to receive(:puts)
+  describe 'turn' do
+    it 'makes valid moves' do
+      # it asks players to make moves on the board
+      game = Game.new
+      allow($stdout).to receive(:puts)
 
-  #     expect(game.player_1).to receive(:gets).and_return("1")
+      expect(game.player_1).to receive(:gets).and_return("1")
 
-  #     game.turn
-  #   end
+      game.turn
+    end
 
-  #   it 'asks for input again after a failed validation' do
-  #     game = Game.new
-  #     allow($stdout).to receive(:puts)
+    it 'asks for input again after a failed validation' do
+      game = Game.new
+      allow($stdout).to receive(:puts)
 
-  #     expect(game.player_1).to receive(:gets).and_return("invalid")
-  #     expect(game.player_1).to receive(:gets).and_return("1")
+      expect(game.player_1).to receive(:gets).and_return("invalid")
+      expect(game.player_1).to receive(:gets).and_return("1")
 
-  #     game.turn
-  #   end
+      game.turn
+    end
 
   #   it 'changes to player 2 after the first turn' do
   #     game = Game.new
@@ -205,7 +206,7 @@ describe 'Game' do
   #     game.turn
   #     game.turn
   #   end
-  # end
+  end
 
   # describe 'play' do
   #   it 'asks for players input on a turn of the game' do
