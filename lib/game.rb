@@ -65,6 +65,7 @@ class Game
     current_move = current_player.move(board)
     valid_move = board.valid_move?(current_move)
     return turn unless valid_move
+    board.update(current_move, current_player)
     @turn_number += 1
   end
 
