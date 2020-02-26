@@ -11,3 +11,8 @@ require_relative '../config/environment'
 # Use the input to correctly initialize a Game with the appropriate player types and token values.
 # When the game is over, the CLI should prompt the user if they would like to play again and allow them to choose a new configuration for the game as described above. If the user doesn't want to play again, exit the program.
 # You can implement this logic within the bin/tictactoe directly or encapsulate it within Game via a method like #start and simply evoke that method in the CLI. There is no wrong way to implement code that works.
+
+player_one = Players::Human.new('X')
+player_two = Players::Computer.new('O')
+game = Game.new(player_one, player_two)
+game.play
