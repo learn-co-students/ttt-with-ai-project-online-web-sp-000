@@ -1,13 +1,13 @@
 class Board
 
-    attr_accessor :cells
+    attr_accessor :cells  
 
     def initialize
         reset!
     end
 
     def reset!
-       @cells = Array.new(9, " ") 
+       @cells = Array.new(9, " ")
     end
 
     def display
@@ -15,7 +15,7 @@ class Board
         puts "-----------"
         puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
         puts "-----------"
-        puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "  
+        puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
     end
 
     def position(input)
@@ -23,14 +23,14 @@ class Board
     end
 
     def full?
-      cells.all? {|token| token == "O" || token == "X"}  
+      cells.all? {|token| token == "O" || token == "X"}
     end
 
     def turn_count
        cells.count { |token| token == "X" || token == "O"}
     end
 
-    def taken?(input) 
+    def taken?(input)
         if position(input) == "X"
             return true
         elsif position(input) == "O"
@@ -50,7 +50,7 @@ class Board
         cells[input.to_i - 1] = player.token
     end
 
- 
+
 end
 
 
