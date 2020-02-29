@@ -2,42 +2,23 @@
 
 require_relative '../config/environment'
 
-
-
-
-def start
-    game = Game.new
-    cli.kind_of_game
+def welcome
+  puts "Welcome to AI TicTacToe!"
 end
 
-start
-
-puts "Welcome to TicTacTo with AI!"
-
-def start
-    game = Game.new
-    kind_of_game
-    game.play
+def game_type
+  prompt = TTY::Prompt.new
+  prompt.select("What kind of game would you like to play?", %w(0_player 1_player 2_player))
 end
 
-
-@prompt.select("What kind of game do you want to play?:", %w(zero_player, player_1, player_2))
-
-def player_1_game
-    player_one = Players::Human.new('X')
-    player_two = Players::Computer.new('O')
-    game = Game.new(player_one, player_two)
-    game.play
+def start_game
 end
 
+def play_again?
+  prompt = TTY::Prompt.new
+  prompt.select("Would you like to play a new game?", %w(Yes No))
+end
 
-
-
-# The requirements of your CLI are as follows, free for you to implement however you see fit as we provide no tests against the CLI.
-
-# Greet the user with a message.
-# Prompt the user for what kind of game they want to play, 0,1, or 2 player.
-# Ask the user for who should go first and be "X".
-# Use the input to correctly initialize a Game with the appropriate player types and token values.
-# When the game is over, the CLI should prompt the user if they would like to play again and allow them to choose a new configuration for the game as described above. If the user doesn't want to play again, exit the program.
-# You can implement this logic within the bin/tictactoe directly or encapsulate it within Game via a method like #start and simply evoke that method in the CLI. There is no wrong way to implement code that works.
+welcome
+puts game_type
+puts play_again?
