@@ -1,3 +1,38 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def welcome
+  puts "Welcome to AI TicTacToe!"
+end
+
+def game_type
+  prompt = TTY::Prompt.new
+  prompt.select("What kind of game would you like to play?", %w(0_player 1_player 2_player))
+end
+
+def start_game(type_of_game)
+  if type_of_game == "0_player"
+    game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+  elsif type_of_game == "1_player"
+    game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+  elsif type_of_game == "2_player"
+    game = Game.new(Players::Human.new("X"), Players::Human.new("O"))
+  end
+  game.play
+end
+
+def play_again?
+  prompt = TTY::Prompt.new
+  prompt.select("Would you like to play a new game?", %w(Yes No))
+end
+
+welcome
+
+loop do
+  type_of_game = game_type
+  start_game(type_of_game)
+  if play_again? == "No"
+    break
+  end
+end
