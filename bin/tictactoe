@@ -12,7 +12,14 @@ def game_type
 end
 
 def start_game(type_of_game)
-
+  if type_of_game == "0_player"
+    game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+  elsif type_of_game == "1_player"
+    game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+  elsif type_of_game == "2_player"
+    game = Game.new(Players::Human.new("X"), Players::Human.new("O"))
+  end
+  game.play
 end
 
 def play_again?

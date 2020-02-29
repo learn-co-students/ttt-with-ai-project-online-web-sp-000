@@ -19,7 +19,6 @@ class Game
     @player_1 = player_1
     @player_2 = player_2
     @turn_number = 1
-    @prompt = TTY::Prompt.new
   end
 
   def current_player
