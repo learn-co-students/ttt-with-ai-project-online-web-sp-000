@@ -11,7 +11,8 @@ def game_type
   prompt.select("What kind of game would you like to play?", %w(0_player 1_player 2_player))
 end
 
-def start_game
+def start_game(type_of_game)
+
 end
 
 def play_again?
@@ -20,5 +21,11 @@ def play_again?
 end
 
 welcome
-puts game_type
-puts play_again?
+
+loop do
+  type_of_game = game_type
+  start_game(type_of_game)
+  if play_again? == "No"
+    break
+  end
+end
