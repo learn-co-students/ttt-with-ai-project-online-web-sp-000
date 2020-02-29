@@ -19,6 +19,7 @@ class Game
     @player_1 = player_1
     @player_2 = player_2
     @turn_number = 1
+    @prompt = TTY::Prompt.new
   end
 
   def current_player
@@ -82,15 +83,6 @@ class Game
     end
 
   end
-  #asks for players input on a turn of the game
-  #checks if the game is over after every turn'
-  #plays the first turn of the game
-  #'plays the first few turns of the game'
-  #checks if the game is won after every turn'
-  #'checks if the game is a draw after every turn
-  #'stops playing if someone has won'
-  #'congratulates the winner X or O'
-  #'prints "Cat\'s Game!" on a draw'
-  #'plays through an entire game'
+
 
 end
