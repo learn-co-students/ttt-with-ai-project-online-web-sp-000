@@ -12,6 +12,4 @@ class CLI
     def kind_of_game
         @prompt.select("What kind of game would you like to play?", %w( 0_player, 1_player, 2_player))
     end
-
-
 end
