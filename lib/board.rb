@@ -41,7 +41,7 @@ class Board
   end
 
   def valid_move?(num)
-    position(num) == " "
+    !taken?(num)
   end
 
   def turn_count
