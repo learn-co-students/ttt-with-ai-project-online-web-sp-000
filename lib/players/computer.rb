@@ -40,17 +40,33 @@ module Players
         end
       end
 
-      # If a corner is taken, take edge next to it, if available
+      # If a corner is taken, take corner opposite
+      CORNERS.each_with_index do |corner,i|
+        if board.taken?(corner)
+          case i
+          when "1"
+            return CORNERS[3] if board.valid_move?(CORNERS[3])
+          when "3"
+            return CORNERS[2] if board.valid_move?(CORNERS[2])
+          when "7"
+            return CORNERS[1] if board.valid_move?(CORNERS[1])
+          when "9"
+            return CORNERS[0] if board.valid_move?(CORNERS[0])
+          end
+        end
+      end
+
+      # Take middle
+      if board.position("5") == " " && self.token == "O"
+        return "5"
+      end
+
+      # Take edge next to taken corner
       CORNERS.each_with_index do |corner,i|
         if board.taken?(corner)
           return EDGES[i][0] if board.valid_move?(EDGES[i][0])
           return EDGES[i][1] if board.valid_move?(EDGES[i][1])
         end
-      end
-
-      # If O, take middle
-      if board.position("5") == " " && self.token == "O"
-        return "5"
       end
 
       # Take available corner
