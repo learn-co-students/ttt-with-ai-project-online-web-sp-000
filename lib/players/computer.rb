@@ -26,7 +26,21 @@ module Players
    ]
 
     def move(board)
-      # If win combo is 2/3 full, either block or win
+      # If you can win, win
+      WIN_COMBINATIONS.each do |combo|
+        if board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[0]] == self.token
+          input = (combo[2] + 1).to_s
+          return input if board.valid_move?(input)
+        elsif board.cells[combo[0]] == board.cells[combo[2]] && board.cells[combo[0]] == self.token
+          input = (combo[1] + 1).to_s
+          return input if board.valid_move?(input)
+        elsif board.cells[combo[1]] == board.cells[combo[2]] && board.cells[combo[2]] == self.token
+          input = (combo[0] + 1).to_s
+          return input if board.valid_move?(input)
+        end
+      end
+
+      # If you can block, block
       WIN_COMBINATIONS.each do |combo|
         if board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[0]] != " "
           input = (combo[2] + 1).to_s
@@ -41,9 +55,9 @@ module Players
       end
 
       # If a corner is taken, take corner opposite
-      CORNERS.each_with_index do |corner,i|
+      CORNERS.each do |corner|
         if board.taken?(corner)
-          case i
+          case corner
           when "1"
             return CORNERS[3] if board.valid_move?(CORNERS[3])
           when "3"
@@ -61,17 +75,19 @@ module Players
         return "5"
       end
 
+
+
+      # Take available corner
+      CORNERS.each do |corner|
+        return corner if board.valid_move?(corner)
+      end
+
       # Take edge next to taken corner
       CORNERS.each_with_index do |corner,i|
         if board.taken?(corner)
           return EDGES[i][0] if board.valid_move?(EDGES[i][0])
           return EDGES[i][1] if board.valid_move?(EDGES[i][1])
         end
-      end
-
-      # Take available corner
-      CORNERS.each do |corner|
-        return corner if board.valid_move?(corner)
       end
 
       # Take next possible spot if nothing above triggers
