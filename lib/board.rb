@@ -11,12 +11,29 @@ class Board
 		self.cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
 	end
 
+	def potato
+		puts "potato"
+	end
+	
+	def self.instruction_board
+		puts " 1 | 2 | 3 "
+		puts "-----------"
+		puts " 4 | 5 | 6 "
+		puts "-----------"
+		puts " 7 | 8 | 9 "
+	end
+
 	def display
-		puts " #{@cells[0]} | #{@cells[01]} | #{@cells[2]} "
+		puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
 		puts "-----------"
 		puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
 		puts "-----------"
 		puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
+	end
+
+	def input_to_index(input)
+		index = input.to_i - 1
+		index
 	end
 
 	def position(input)
@@ -44,9 +61,7 @@ class Board
 	end
 
 	def update(pos, player)
-		if valid_move?(pos)
-			index = pos.to_i - 1
-			@cells[index] = player.token
-		end
+		index = pos.to_i - 1
+		@cells[index] = player.token
 	end
 end

@@ -1,3 +1,67 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def game_start
+	puts "Howdy. How you wanna play?"
+	puts "Hit 1 for one-player"
+	puts "Hit 2 for two-player"
+	puts "Hit 0 for a robot duel to the death"
+
+	game_mode = gets.strip
+	while game_mode != "0" && game_mode != "1" && game_mode != "2"
+		puts "Please enter 0, 1, or 2"
+		game_mode = gets.strip
+	end
+	
+	if game_mode == "0"  
+		player_1 = Players::Computer.new("X")
+		player_2 = Players::Computer.new("O")
+	
+	elsif game_mode == "1"  
+		puts "Who should go first and be 'X'?"
+		puts "Hit 1 to go first and be X, or 2 to go second and be O"
+		first = gets.strip
+		while first != "1" && first != "2"
+			puts "Please enter 1 or 2"
+			first = gets.strip
+		end
+
+		if first == "1"
+			player_1 = Players::Human.new("X")
+			player_2 = Players::Computer.new("O")
+		elsif first == "2"
+			player_1 = Players::Computer.new("X")
+			player_2 = Players::Human.new("O")
+		end
+		Board.instruction_board
+	elsif game_mode == "2"
+		player_1 = Players::Human.new("X")
+		player_2 = Players::Human.new("O")
+		Board.instruction_board
+	end
+
+	game = Game.new(player_1, player_2)
+	game.play
+	play_again?
+end
+
+def play_again?
+	puts "Play again? (y/n)"
+	input = gets.strip
+
+	while input != "y" && input != "n"
+		puts "Please enter 'y' or 'n'"
+		input = gets.strip
+	end
+
+	if input == "y"
+		game_start
+	elsif input == "n"
+		puts "suit yourself"
+	end
+end
+
+game_start
+
+

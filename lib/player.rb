@@ -4,8 +4,4 @@ class Player
 	def initialize(token)
 		@token = token
 	end
-
-	def bark
-		puts "ARF"
-	end
 end
