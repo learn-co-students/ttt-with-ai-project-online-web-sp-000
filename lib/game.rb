@@ -52,11 +52,10 @@ class Game
       puts "Please enter 1-9:"
       input = self.current_player.move(input)
       while board.valid_move?(input) == false do
-      #    puts "Please enter 1-9:"
-      #    input = gets.chomp.to_i
-      #    board.valid_move?(input)
+         puts "Please enter 1-9:"
+         input = gets.chomp.to_i
+         board.valid_move?(input)
       end
        board.update(input, self.current_player)
-       board
     end
   end
