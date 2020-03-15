@@ -1,4 +1,6 @@
+require 'pry'
 class Game
+  attr_accessor :board, :player_1, :player_2
 
   WIN_COMBINATIONS = [
     [0,1,2],
@@ -10,4 +12,39 @@ class Game
     [0,4,8],
     [2,4,6]]
 
+    def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board=Board.new)
+      @board = board
+      @player_1 = player_1
+      @player_2 = player_2
+    end
+
+    def current_player
+      board.turn_count % 2 == 0 ?  @player_1 : @player_2
+    end
+
+    def won?
+      WIN_COMBINATIONS.each do |win_comb|
+        moves = board.cells
+        if [moves[win_comb[0]], moves[win_comb[1]], moves[win_comb[2]]].all? {|i| i == moves[win_comb[0]]} && board.taken?(win_comb[0] + 1)
+          return win_comb
+        end
+      end
+      false
+    end
+
+    def draw?
+      board.full? && !won?
+    end
+
+    def over?
+      if draw? || won?
+        true
+      end
+    end
+
+    def winner
+      if won?
+        board.cells[won?[0]]
+      end
+    end
   end

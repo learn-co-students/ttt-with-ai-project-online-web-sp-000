@@ -4,7 +4,7 @@ class Board
   attr_accessor :cells
 
   def initialize
-    @cells = cells
+    @cells = []
     reset!
   end
 
@@ -39,7 +39,9 @@ class Board
   end
 
   def taken?(input)
-    position(input) != " " ? true : false
+    # input = index.to_i + 1
+    #position(input) != ( " " || "" || nil ) ? true : false
+    !(position(input).nil? || position(input) == ( " " ))
   end
 
   def valid_move?(input)
