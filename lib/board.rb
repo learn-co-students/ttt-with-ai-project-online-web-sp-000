@@ -51,7 +51,4 @@ class Board
    index = input.to_i - 1
    @cells[index] = player.token
  end
-
-
-
 end
