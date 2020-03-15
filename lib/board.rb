@@ -49,7 +49,7 @@ class Board
     index.to_i.between?(0,8) && !taken?(input)
  end
 
- def update (input, player)
+ def update(input, player)
    index = input.to_i - 1
    @cells[index] = player.token
  end

@@ -47,6 +47,16 @@ class Game
         board.cells[won?[0]]
       end
     end
-    def turn
+
+    def self.turn
+      puts "Please enter 1-9:"
+       input = gets.chomp.to_i
+       while board.valid_move?(input) == false do
+         puts "Please enter 1-9:"
+         input = gets.chomp.to_i
+         board.valid_move?(input)
+       end
+       board.update(input, player)
+       board
     end
   end
