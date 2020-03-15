@@ -47,4 +47,6 @@ class Game
         board.cells[won?[0]]
       end
     end
+    def turn
+    end
   end
