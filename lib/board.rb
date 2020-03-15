@@ -26,7 +26,6 @@ class Board
   end
 
   def update (position, object)
-    object = player.token
     position = object if !self.taken?
   end
 

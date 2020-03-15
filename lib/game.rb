@@ -48,15 +48,15 @@ class Game
       end
     end
 
-    def self.turn
+    def turn
       puts "Please enter 1-9:"
-       input = gets.chomp.to_i
-       while board.valid_move?(input) == false do
-         puts "Please enter 1-9:"
-         input = gets.chomp.to_i
-         board.valid_move?(input)
-       end
-       board.update(input, player)
+      input = self.current_player.move(input)
+      while board.valid_move?(input) == false do
+      #    puts "Please enter 1-9:"
+      #    input = gets.chomp.to_i
+      #    board.valid_move?(input)
+      end
+       board.update(input, self.current_player.token)
        board
     end
   end
