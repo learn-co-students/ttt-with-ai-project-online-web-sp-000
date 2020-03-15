@@ -53,9 +53,20 @@ class Game
       input = self.current_player.move(input)
       while board.valid_move?(input) == false do
          puts "Please enter 1-9:"
-         input = gets.chomp.to_i
+         input = self.current_player.move(input)
          board.valid_move?(input)
       end
        board.update(input, self.current_player)
+    end
+
+    def play
+      until over? do
+        turn
+      end
+      if draw?
+        puts "Cat's Game!"
+      else
+        puts "Congratulations #{winner}!"
+      end
     end
   end
