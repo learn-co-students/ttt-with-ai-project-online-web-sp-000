@@ -1,11 +1,9 @@
 
-class Players < Player
-  class Human < Players
+class Player::Human < Player
 
     def move(input)
       puts "What's your move bro?"
       input = gets.chomp
       input
     end
-  end
 end

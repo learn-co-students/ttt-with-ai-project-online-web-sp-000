@@ -38,7 +38,6 @@ class Board
   end
 
   def taken?(input)
-    # input = index.to_i + 1
     #position(input) != ( " " || "" || nil ) ? true : false
     !(position(input).nil? || position(input) == ( " " ))
   end
