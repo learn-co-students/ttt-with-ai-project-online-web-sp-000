@@ -7,7 +7,7 @@ class Player::Computer < Player
       if d == " "
         move << "#{i}"
       end
-      # binding.pry
+      while
     end
     move[rand(move.length)]
   end
