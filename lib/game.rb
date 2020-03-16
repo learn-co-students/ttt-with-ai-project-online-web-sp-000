@@ -1,6 +1,6 @@
 require 'pry'
 class Game
-  attr_accessor :board, :player_1, :player_2, :timer
+  attr_accessor :board, :player_1, :player_2, :timer, :counter
 
   WIN_COMBINATIONS = [
     [0,1,2],
@@ -49,14 +49,14 @@ class Game
     end
 
     def turn
-      puts "Please enter 1-9:"
-      input = self.current_player.move(input)
+      puts "Player #{current_player.token}, please enter 1-9:"
+      input = self.current_player.move(board)
       while board.valid_move?(input) == false do
          puts "Please enter 1-9:"
-         input = self.current_player.move(input)
+         input = current_player.move(board)
          board.valid_move?(input)
       end
-       board.update(input, self.current_player)
+       board.update(input, current_player)
        puts self.board
     end
 
@@ -64,7 +64,7 @@ class Game
       board.reset!
       until over? do
         turn
-        puts board
+        board.display
       end
       if draw?
         puts "Cat's Game!"
@@ -73,14 +73,15 @@ class Game
       end
     end
     def wargames
-      @couner = 0
+      @counter = 0
       x = 0
       o = 0
       draw = 0
-      until @counter = 100
+      until @counter == 100
         @counter += 1
-        player_1 = Player::Computer.new("X")
-        player_2 = Player::Computer.new("O")
+        # binding.pry
+        # player_1 = Player::Computer.new("X")
+        # player_2 = Player::Computer.new("O")
         play
         if draw?
           draw +=1
@@ -95,34 +96,37 @@ class Game
         sleep(@timer*2)
         @timer -= (@timer/3)
       end
-      puts "We had #{x} wins for X and #{o} wind for O and #{draw} draws!"
+      puts "Played #{@counter} times."
+      puts "We had #{x} wins for X and #{o} wins for O and #{draw} draws!"
       puts "A STRANGE GAME. THE ONLY WINNING MOVE IS NOT TO PLAY."
       puts "HOW ABOUT A NICE GAME OF CHESS?"
     end
 
-    def start
-      puts "Welcome to Tic Tac Toe!"
-      puts "Would you like to play 0, 1, or 2 player mode?"
-      input = gets.chomp.to_i
-      if input == 0
-        self.wargames
-      elsif input == 1
-        puts "Would you like to be X or O?"
-        input = gets.chomp
-        if input == "X"
-          player_1=Player::Human.new("X")
-          player_2 = Player::Computer.new("O")
-          play
-        elsif input == "O"
-          player_1=Player::Human.new("O")
-          player_2 = Player::Computer.new("X")
-          play
-        end
-      elsif "WARGAMES!"
-        self.wargames
-      else
-        play
-      end
-    end
+    # def start
+    #   puts "Welcome to Tic Tac Toe!"
+    #   puts "Would you like to play 0, 1, or 2 player mode?"
+    #   input = gets.chomp.to_i
+    #   if input == nil || input > 2
+    #     start
+    #   elsif input == 0
+    #     wargames
+    #   elsif input == 1
+    #     puts "Would you like to be X or O?"
+    #     input = gets.chomp
+    #     if input == "X" || "x"
+    #       player_1=Player::Human.new("X")
+    #       player_2 = Player::Computer.new("O")
+    #       play
+    #     elsif input == "O" || "o"
+    #       player_1=Player::Human.new("O")
+    #       player_2 = Player::Computer.new("X")
+    #       play
+    #     end
+    #   elsif input == "WARGAMES!"
+    #     wargames
+    #   else
+    #     play
+    #   end
+    # end
 
   end

@@ -1,7 +1,7 @@
 
 class Player::Human < Player
 
-    def move(input)
+    def move(board, timer = 0)
       puts "What's your move bro?"
       input = gets.chomp
       input
