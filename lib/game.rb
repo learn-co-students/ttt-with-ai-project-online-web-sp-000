@@ -52,7 +52,7 @@ class Game
       puts "Player #{current_player.token}, please enter 1-9:"
       input = self.current_player.move(board)
       while board.valid_move?(input) == false do
-         puts "Please enter 1-9:"
+         puts "C'mon Duuude! Pay attention!"
          input = current_player.move(board)
          board.valid_move?(input)
       end
@@ -99,32 +99,4 @@ class Game
       puts "A STRANGE GAME. THE ONLY WINNING MOVE IS NOT TO PLAY."
       puts "HOW ABOUT A NICE GAME OF CHESS?"
     end
-
-    # def start
-    #   puts "Welcome to Tic Tac Toe!"
-    #   puts "Would you like to play 0, 1, or 2 player mode?"
-    #   input = gets.chomp.to_i
-    #   if input == nil || input > 2
-    #     start
-    #   elsif input == 0
-    #     wargames
-    #   elsif input == 1
-    #     puts "Would you like to be X or O?"
-    #     input = gets.chomp
-    #     if input == "X" || "x"
-    #       player_1=Player::Human.new("X")
-    #       player_2 = Player::Computer.new("O")
-    #       play
-    #     elsif input == "O" || "o"
-    #       player_1=Player::Human.new("O")
-    #       player_2 = Player::Computer.new("X")
-    #       play
-    #     end
-    #   elsif input == "WARGAMES!"
-    #     wargames
-    #   else
-    #     play
-    #   end
-    # end
-
   end

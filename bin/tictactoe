@@ -6,28 +6,28 @@ def start
   puts "Welcome to Tic Tac Toe!"
   puts "Would you like to play 0, 1, or 2 player mode?"
   input = gets.chomp.to_i
-  if input == nil || input > 2
+  if input == nil #|| input >2 && input < 666
     start
   elsif input == 0
     player_1 = Player::Computer.new("X")
     player_2 = Player::Computer.new("O")
     game = Game.new(player_1, player_2)
-    game.wargames
-  elsif input == 1
+    game.play
+  elsif input.to_i == 1
     puts "Would you like to be X or O?"
     input = gets.chomp
-    if input == "X" || "x"
+    if input == "X" || input == "x"
       player_1=Player::Human.new("X")
       player_2 = Player::Computer.new("O")
       game = Game.new(player_1, player_2)
       game.play
-    elsif input == "O" || "o"
+    elsif input == "O" || input == "o"
       player_1=Player::Human.new("O")
       player_2 = Player::Computer.new("X")
       game = Game.new(player_1, player_2)
       game.play
     end
-  elsif input == "WARGAMES!"
+  elsif input >= 3
     player_1 = Player::Computer.new("X")
     player_2 = Player::Computer.new("O")
     game = Game.new(player_1, player_2)
