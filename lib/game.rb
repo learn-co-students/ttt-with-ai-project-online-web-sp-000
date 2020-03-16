@@ -93,8 +93,6 @@ class Game
           o += 1
           puts "O Wins!"
         end
-        sleep(@timer*2)
-        @timer -= (@timer/3)
       end
       puts "Played #{@counter} times."
       puts "We had #{x} wins for X and #{o} wins for O and #{draw} draws!"

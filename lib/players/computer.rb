@@ -3,8 +3,11 @@ class Player::Computer < Player
     # binding.pry
     timer <= 0 ? @timer = 0.01 : @timer = timer
     move = []
-    board.cells.select {|c| c == " "}.each.with_index(1) do |d, i|
-      move << "#{i}"
+    board.cells.each.with_index(1) do |d, i|
+      if d == " "
+        move << "#{i}"
+      end
+      # binding.pry
     end
     move[rand(move.length)]
   end
