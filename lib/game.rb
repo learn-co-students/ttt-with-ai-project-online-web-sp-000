@@ -79,6 +79,7 @@ class Game
       draw = 0
       until @counter == 100
         @counter += 1
+        board.reset!
         play
         if draw?
           draw +=1
