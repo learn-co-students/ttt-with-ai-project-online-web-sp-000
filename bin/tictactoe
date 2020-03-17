@@ -22,7 +22,6 @@ def start
       game = Game.new(player_1, player_2)
       game.play
     elsif input == "O" || input == "o"
-    elsif input == "O" || "o"
       player_1=Players::Human.new("O")
       player_2 = Players::Computer.new("X")
       game = Game.new(player_1, player_2)
