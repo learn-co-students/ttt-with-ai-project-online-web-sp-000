@@ -23,6 +23,8 @@ class Players < Player
           #binding.pry
           when win != nil
             win
+          when corners(board) != nil
+            corners[rand(corners.length)]
           when win == nil
             move[rand(move.length)]
         end
@@ -34,6 +36,12 @@ class Players < Player
           end
           if win_row != nil
             win_move = win_row.find {|x| x == " "}
+        end
+      end
+      def corners(board)
+        corners = ("1", "3", "7", "9")
+        corners.each do |c|
+        c  if board[c] == " "
         end
       end
   end
