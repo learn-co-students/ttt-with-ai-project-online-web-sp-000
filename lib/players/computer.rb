@@ -23,7 +23,7 @@ class Players < Player
           #binding.pry
           when win != nil
             win
-          when win = nil
+          when win == nil
             move[rand(move.length)]
         end
       end
