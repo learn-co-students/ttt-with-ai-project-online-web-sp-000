@@ -22,12 +22,14 @@ def start
       game = Game.new(player_1, player_2)
       game.play
     elsif input == "O" || input == "o"
+    elsif input == "O" || "o"
       player_1=Player::Human.new("O")
       player_2 = Player::Computer.new("X")
       game = Game.new(player_1, player_2)
       game.play
     end
   elsif input >= 3
+  # elsif input == "WARGAMES!"
     player_1 = Player::Computer.new("X")
     player_2 = Player::Computer.new("O")
     game = Game.new(player_1, player_2)

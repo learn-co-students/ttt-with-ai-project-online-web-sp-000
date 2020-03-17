@@ -79,9 +79,6 @@ class Game
       draw = 0
       until @counter == 100
         @counter += 1
-        # binding.pry
-        # player_1 = Player::Computer.new("X")
-        # player_2 = Player::Computer.new("O")
         play
         if draw?
           draw +=1
