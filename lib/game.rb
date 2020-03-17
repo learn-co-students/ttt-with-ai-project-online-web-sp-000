@@ -12,7 +12,7 @@ class Game
     [0,4,8],
     [2,4,6]]
 
-    def initialize(player_1 = Player::Human.new("X"), player_2 = Player::Human.new("O"), board = Board.new)
+    def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
       @board = board
       @player_1 = player_1
       @player_2 = player_2
@@ -61,7 +61,6 @@ class Game
     end
 
     def play
-      board.reset!
       until over? do
         turn
         board.display
@@ -72,6 +71,7 @@ class Game
         puts "Congratulations #{winner}!"
       end
     end
+
     def wargames
       @counter = 0
       x = 0

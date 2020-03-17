@@ -1,4 +1,5 @@
-class Player::Computer < Player
+class Players < Player
+  class Computer < Players
   WIN_COMBINATIONS = [
     [0,1,2],
     [3,4,5],
@@ -32,3 +33,4 @@ class Player::Computer < Player
       win = win_comb.select {|x| x == " "} if win_comb[0] == token && (win_comb[1] == token || win_comb[2] == token) || (win_comb[1] == token && win_comb[2] == token)
     end
   end
+end
