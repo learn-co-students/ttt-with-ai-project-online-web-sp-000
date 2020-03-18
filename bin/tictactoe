@@ -2,4 +2,13 @@
 
 require_relative '../config/environment'
 
-Game.new.play
+puts "Welcome to Tic Tac Toe!"
+puts "Please choose the number of human players."
+players = ""
+while !players.match(/(0|1|2)/)
+  puts "Enter 0, 1, or 2."
+  players = gets.chomp
+end
+puts "You have chosen #{players} player(s)."
+players == "0" ? (game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))) : players == "1" ? (game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))) : players == "2" ? (game = Game.new) : nil
+game.play

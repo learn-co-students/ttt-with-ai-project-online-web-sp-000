@@ -49,18 +49,22 @@ class Game
   end
 
   def turn
+    puts "Please enter 1-9:"
     position = current_player.move(@board)
-    @board.valid_move?(position) ? @board.update(position, current_player) : turn
+    if !@board.valid_move?(position)
+      turn
+    else
+      @board.update(position, current_player)
+      puts "\n\n"
+    end
   end
 
   def play
-    puts "Welcome to Tic Tac Toe!"
-    puts "Please choose the number of players."
-    puts "Enter 0, 1, or 2."
-    #players = gets
-    #puts "You have chosen #{players} players."
+
     while !over?
+      #puts "Please enter 1-9:"
       turn
+      @board.display
     end
 
     (winner == "X") ? (puts "Congratulations X!") : (winner == "O") ? (puts "Congratulations O!") : (puts "Cat's Game!")
