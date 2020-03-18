@@ -14,7 +14,6 @@ class Players < Player
 
       def move (board, timer = 0)
         @board = board
-        # binding.pry
         timer <= 0 ? @timer = 0.01 : @timer = timer
         move = []
         board.cells.each.with_index(1) do |d, i|
@@ -24,49 +23,57 @@ class Players < Player
         end
         case
           when win != nil
-            binding.pry
-            win + 1
+            input = win + 1
           when block != nil
-            binding.pry
-            block + 1
+            input = block + 1
           when center?
-            binding.pry
-            input = 5
-          when corners != nil
-            binding.pry
-            corner[rand(corners.length) + 1]
-          # when win == nil
-          #
-          #   move[rand(move.length)]
+            input = "5"
+          when opposing_corner != nil && board.taken?(opposing_corner) == false
+            input = opposing_corner
+          else
+            input = move[rand(move.length)]
         end
       end
 
       def win
-        win_row = WIN_COMBINATIONS.each do |win_comb|
-          win_comb[0] == self.token && (win_comb[1] == self.token || win_comb[2] == self.token) || (win_comb[1] == self.token && win_comb[2] == self.token)
+        win_row = WIN_COMBINATIONS.find do |win_comb|
+          board.cells[win_comb[0]] == token && (board.cells[win_comb[1]] == token || board.cells[win_comb[2]] == token) || (board.cells[win_comb[1]] == token && board.cells[win_comb[2]] == token)
           end
           if win_row != nil
-            win_move = win_row.find {|x| x == " "}
+            win_move = win_row.find {|x| board.cells[x] == " "}
         end
       end
       def corners
-        corners = ["1", "3", "7", "9"]
-        corner = corners.find{|c| c ==" "}
+        corners = [1, 3, 7, 9]
+        corners.find {|c| board.cells[c] == " "}
       end
       def center?
         board.cells[4] == " "
       end
       def block
-        win_row = WIN_COMBINATIONS.each do |win_comb|
-          win_comb[0] == not_i && (win_comb[1] == not_i || win_comb[2] == not_i) || (win_comb[1] == not_i && win_comb[2] == not_i)
+        win_row = WIN_COMBINATIONS.find do |win_comb|
+          board.cells[win_comb[0]]== not_i && (board.cells[win_comb[1]] == not_i || board.cells[win_comb[2]] == not_i) || (board.cells[win_comb[1]] == not_i && board.cells[win_comb[2]] == not_i)
           end
           if win_row != nil
-            win_move = win_row.find {|x| x == " "}
+            win_move = win_row.find {|x| board.cells[x] == " "}
           end
         end
         def not_i
           token == "X" ? "O" : "X"
         end
-
+        def opposing_corner
+          case
+          when board.taken?(1) && !board.taken?(9)
+            9
+          when board.taken?(9) && !board.taken?(1)
+            1
+          when board.taken?(3) && !board.taken?(7)
+            7
+          when board.taken?(7) && !board.taken?(3)
+            3
+          else
+            nil
+          end
+        end
   end
 end
