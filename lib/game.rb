@@ -54,6 +54,11 @@ class Game
   end
 
   def play
+    puts "Welcome to Tic Tac Toe!"
+    puts "Please choose the number of players."
+    puts "Enter 0, 1, or 2."
+    #players = gets
+    #puts "You have chosen #{players} players."
     while !over?
       turn
     end

@@ -1,5 +1,3 @@
-require 'player'
-
 module Players
   class Human < Player
     def move(board)
