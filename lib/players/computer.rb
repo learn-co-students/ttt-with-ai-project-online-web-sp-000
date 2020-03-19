@@ -3,7 +3,7 @@ module Players
   class Computer < Player
     def move(board)
       #input = gets
-      position = 0
+      position = nil
       while 0
         position = pick_position(board, @token)
         break if !board.taken?(position)
@@ -18,23 +18,34 @@ module Players
         cell == "X" ? x_positions << i : cell == "O" ? o_positions << i : nil
       end
 
-      #define computer and opponent
+      #define computer and opponent (potentially other computer)
       token == "X" ? (me = x_positions && opponent = o_positions) : (me = o_positions && opponent = x_positions )
 
       #pick winning or non-losing position:
       #look at all win combos . if only one value remains, and if it's free, go there. otherwise, skip.
       #look at all lose combos . if only one value remains, and if it's free, go there. otherwise, skip.
+      position = strategy(board, me)
+      return position if position
+
+      position = strategy(board, opponent)
+      return position if position
+
+      position = rand(9) + 1
+      puts position #confirmed o chooses random - can't detect win position but can block
+      #todo reproduce: open app, enter 1, 1, 2, 6; confirm block with open app, enter 1, 1, 2, 4
+      #random might choose win occasionally, but puts shows that random is chosen instead of intentionally choosing win position
+      !board.taken?(5) ? 5 : position
+
+    end
+
+    def strategy(board, positions)
       Game::WIN_COMBINATIONS.each do |combo|
-        win_array = (combo - me) #full array means far from winning; array.length==1 means close to winning
-        do_not_lose_array = (combo - opponent)
 
-        return (win_array[0]+1) if (win_array.length == 1 && !board.taken?(win_array[0]+1)) #set position to winning move - prioritizes winning
-        return (do_not_lose_array[0]+1) if (do_not_lose_array.length == 1 && !board.taken?(do_not_lose_array[0]+1)) #set position to prevent loss
+        array = (combo - positions) #full array means far from winning; array.length==1 means close to winning
 
+        return (array[0]+1) if (array.length == 1 && !board.taken?(array[0]+1)) #set position to winning move or non-losing move, in that order
       end
-
-      !board.taken?(5) ? 5 : (rand(9) + 1)
-
+      nil
     end
 
   end
