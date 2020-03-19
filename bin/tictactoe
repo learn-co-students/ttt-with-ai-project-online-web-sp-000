@@ -5,7 +5,7 @@ require_relative '../config/environment'
 puts "Welcome to Tic Tac Toe!"
 puts "Please choose the number of human players."
 players = ""
-while !players.match(/(0|1|2)/)
+while !players.match(/^(0|1|2)$/)
   puts "Enter 0, 1, or 2."
   players = gets.chomp
 end
