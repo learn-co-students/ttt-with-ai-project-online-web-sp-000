@@ -14,7 +14,11 @@ class Game
     @board.cells.each do |element|
       element == "X" ? x_count = x_count + 1 : element == "O" ? o_count = o_count + 1 : nil
     end
-    x_count > o_count ? @player_2 : @player_1
+    return @player_2 if @player_1.token == "X" && x_count > o_count
+    return @player_1 if @player_1.token == "X" && x_count == o_count
+    return @player_1 if @player_2.token == "X" && x_count > o_count
+    return @player_2 if @player_2.token == "X" && x_count == o_count
+
   end
 
   def won?
@@ -63,7 +67,6 @@ class Game
   def play
 
     while !over?
-      #puts "Please enter 1-9:"
       turn
       @board.display
     end

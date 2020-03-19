@@ -1,4 +1,3 @@
-#require '../game'
 module Players
   class Computer < Player
     def move(board)
@@ -41,9 +40,11 @@ module Players
     def strategy(board, positions)
       Game::WIN_COMBINATIONS.each do |combo|
 
-        array = (combo - positions) #full array means far from winning; array.length==1 means close to winning
+        #full array means far from winning; array.length==1 means close to winning
+        array = (combo - positions)
 
-        return (array[0]+1) if (array.length == 1 && !board.taken?(array[0]+1)) #set position to winning move or non-losing move, in that order
+        #set position to winning move or non-losing move, in that order
+        return (array[0]+1) if (array.length == 1 && !board.taken?(array[0]+1))
       end
       nil
     end
