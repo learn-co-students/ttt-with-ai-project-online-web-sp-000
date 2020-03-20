@@ -18,21 +18,24 @@ module Players
       end
 
       #define computer and opponent (potentially other computer)
-      token == "X" ? (me = x_positions && opponent = o_positions) : (me = o_positions && opponent = x_positions )
+      if token == "X"
+        me = x_positions
+        opponent = o_positions
+      else
+        me = o_positions
+        opponent = x_positions
+      end
 
-      #pick winning or non-losing position:
       #look at all win combos . if only one value remains, and if it's free, go there. otherwise, skip.
-      #look at all lose combos . if only one value remains, and if it's free, go there. otherwise, skip.
       position = strategy(board, me)
       return position if position
 
+      #look at all lose combos . if only one value remains, and if it's free, go there. otherwise, skip.
       position = strategy(board, opponent)
       return position if position
 
       position = rand(9) + 1
-      puts position #confirmed o chooses random - can't detect win position but can block
-      #todo reproduce: open app, enter 1, 1, 2, 6; confirm block with open app, enter 1, 1, 2, 4
-      #random might choose win occasionally, but puts shows that random is chosen instead of intentionally choosing win position
+
       !board.taken?(5) ? 5 : position
 
     end
