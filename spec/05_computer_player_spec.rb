@@ -5,9 +5,9 @@ describe 'Players::Computer' do
     expect(Players::Computer.ancestors).to include(Player)
   end
 
-  describe '#move' do
+   describe '#move' do
     it 'returns a valid position for the computer to move' do
-      computer = Players::Computer.new("X")
+       computer = Players::Computer.new("X")
       board = Board.new
 
       valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
@@ -15,6 +15,6 @@ describe 'Players::Computer' do
       computer_move = computer.move(board)
 
       expect(valid_moves).to include(computer_move)
-    end
-  end
+   end
+ end
 end
