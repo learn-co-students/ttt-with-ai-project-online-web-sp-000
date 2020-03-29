@@ -1,3 +1,41 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def start 
+  puts "Hello! Welcome to Tic Tac Toe :)"
+  puts "What kind of game would you like to play (0, 1, or 2)"
+  total_players = gets.chomp.to_i
+  puts "Who should go first as player X? Player 1 or Player 2?"
+  first_player = gets.chomp.downcase
+
+  if total_players == 0 && first_player == "player 1"
+    new_game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+    puts "Game starting..."
+    new_game.play
+  elsif total_players == 0 && first_player == "player 2"
+    new_game = Game.new(Players::Computer.new("O"), Players::Computer.new("X"))
+    puts "Game starting..."
+    new_game.play
+  elsif total_players == 1 && first_player == "player 1"
+    new_game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+    puts "Game starting..."
+    new_game.play
+  elsif total_players == 1 && first_player == "player 2"
+    new_game = Game.new(Players::Human.new("O"), Players::Computer.new("X"))
+    puts "Game starting..."
+    new_game.play
+  elsif total_players == 2 && first_player == "player 1"
+    new_game = Game.new(Players::Human.new("X"), Players::Human.new("O"))
+    puts "Game starting..."
+    new_game.play
+  elsif total_players == 2 && first_player == "player 2"
+    new_game = Game.new(Players::Human.new("O"), Players::Human.new("X"))
+    puts "Game starting..."
+    new_game.play
+  else
+    abort "Invalid entry. Please try again"
+  end
+end
+
+start
