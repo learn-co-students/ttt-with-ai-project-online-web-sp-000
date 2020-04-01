@@ -1,3 +1,52 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+require_relative '../lib/game'
+require_relative '../lib/board'
+require_relative '../lib/player'
+require_relative '../lib/players/computer'
+require_relative '../lib/players/human'
+
+include Players
+
+
+puts "Hello Friend, fancy a game of Tic-tac-toe?"
+player_count = -1
+while !(0 <= player_count && player_count <= 2)
+  puts "Pick Number of Human Players (0-2):"
+  player_count = gets.strip
+  if player_count.match(/\D/) == nil
+    player_count = player_count.to_i
+  else
+    player_count = -1
+  end
+end
+
+if player_count == 1
+  player_team = ""
+  while !(player_team == "X" || player_team == "O")
+    puts "Pick your Team (X/O):"
+    player_team = gets.strip
+  end
+end
+
+if player_count == 2
+  player_1 = Human.new("X")
+  player_2 = Human.new("O")
+elsif player_count == 1
+  if player_team == "X"
+    player_1 = Human.new("X")
+    player_2 = Computer.new("O")
+  else
+    player_1 = Computer.new("X")
+    player_2 = Human.new("O")
+  end
+else
+  player_1 = Computer.new("X")
+  player_2 = Computer.new("O")
+end
+
+puts "play time"
+board = Board.new()
+g = Game.new(player_1, player_2, board)
+g.play()
