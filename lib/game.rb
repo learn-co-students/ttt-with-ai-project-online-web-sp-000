@@ -119,7 +119,6 @@
 # #     puts "Cat's Game!"
 # #   end
 # # end
-
 class Game
   attr_accessor :player_1, :player_2, :board
 
