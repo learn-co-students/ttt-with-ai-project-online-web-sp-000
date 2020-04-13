@@ -48,4 +48,27 @@ class Board
     cells[index] = player.token
   end
 
+  #def cells_with_index
+    #iterate over the cells array
+    #if a cell is unoccupied, then change the value of that cell to the index itself.
+  #  cell_array = cells.each_with_index.collect do |cell, index|
+  #    if cell == "" || cell == " "
+  #      cell = index
+  #    elsif cell == "X" || cell == "O"
+  #      cell
+  #    end
+  #  end
+  #  cell_array
+  #end
+
+  def available_spots
+    available_spots = []
+    cells.each_with_index do |cell, index|
+      if cell == " " || cell == ""
+        available_spots << index + 1
+      end
+    end
+    available_spots
+  end
+
 end
