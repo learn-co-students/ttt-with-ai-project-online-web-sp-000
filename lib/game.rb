@@ -40,6 +40,7 @@ class Game
     # binding.pry
     player = current_player
     current_move = player.move(board)
+    # binding.pry
     if board.valid_move?(current_move)
       board.update(current_move, player)
     else
