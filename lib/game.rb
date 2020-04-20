@@ -1,3 +1,5 @@
+require 'pry'
+
 class Game
 
   attr_accessor :board, :player_1, :player_2
@@ -35,14 +37,14 @@ class Game
   end
 
   def turn
-    if !@board.valid_move?
-      @board.position
+    # binding.pry
+    player = current_player
+    current_move = player.move(board)
+    if board.valid_move?(current_move)
+      board.update(current_move, player)
     else
-      current_player
+      turn
     end
-    # makes valid moves
-    # asks for input again after a failed one
-    # change to p2 after first turn
   end
 
   def play
