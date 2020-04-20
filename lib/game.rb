@@ -35,10 +35,25 @@ class Game
   end
 
   def turn
-    @board.valid_move?(input)
+    if !@board.valid_move?
+      @board.position
+    else
+      current_player
+    end
+    # makes valid moves
+    # asks for input again after a failed one
+    # change to p2 after first turn
   end
 
   def play
+    turn until over?
+    if draw?
+    	puts "Cat's Game!"
+    elsif winner == "X"
+    	puts "Congratulations X!"
+    elsif winner == "O"
+    	puts "Congratulations O!"
+    end
   end
 
 end
