@@ -1,3 +1,9 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Hello, welcome to Tic Tac Toe!"
+game = Game.new
+until game.won?
+  game.play
+end
