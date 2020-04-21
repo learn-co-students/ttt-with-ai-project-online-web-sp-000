@@ -10,6 +10,7 @@ module Players
     def next_move(board)
       computer_move = board.cells.index { |cell| cell == " " }
       computer_move += 1
+      computer_move.to_s
       # binding.pry
     end
 
