@@ -1,3 +1,53 @@
 #!/usr/bin/env ruby
-
+# right now this is done procedurally - would look much cleaner using OOP.
 require_relative '../config/environment'
+#welcome players and ask them how many players there are
+def lets_play
+  puts "Let's play Tic-tac-toe!"
+  puts "How many players are there? (0, 1, 2 player)"
+  input = gets.strip
+  #have 2 computers play
+  if input == "0"
+    puts "Let's watch two AIs play"
+    game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+    game.play
+  #play against the computer - ask player what token and turn order they'd like
+  elsif input == "1"
+    token = nil
+    until token == "X" || token == "O"
+      puts "Would you like to be X or O?"
+      token = gets.strip.upcase
+    end
+  #determine computer token
+    computer_token = nil
+    if token == "X"
+      computer_token = "O"
+    else
+      computer_token = "X"
+    end
+
+    puts "Would you like to go first (y/n)?"
+    order = gets.strip
+    order_i = nil
+    if order[0] == "y" || order[0] == "Y"
+      order_i = 1
+    else
+      order_i = 2
+    end
+    if order_i == 1
+      game = Game.new(Players::Human.new(token), Players::Computer.new(computer_token))
+      game.play
+    else
+      game = Game.new(Players::Computer.new(computer_token), Players::Human.new(token))
+      game.play
+    end
+#2 humans playing
+  elsif input == "2"
+    game = Game.new
+    game.play
+  else
+    lets_play
+  end
+end
+
+lets_play
