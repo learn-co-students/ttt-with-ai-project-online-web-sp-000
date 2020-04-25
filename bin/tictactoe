@@ -1,3 +1,25 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic Tac Toe"
+
+def start
+  Game.game_type
+  puts "Would you like to play again? y/n"
+  again = gets.strip
+  if again == "y"
+    start
+  end
+end
+
+start
+
+
+
+
+  
+
+
+
+

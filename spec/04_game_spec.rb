@@ -3,9 +3,9 @@ require 'spec_helper'
 describe 'Game' do
   describe '::WIN_COMBINATIONS' do
     it 'defines a constant WIN_COMBINATIONS with arrays for each win combination' do
-      expect(Game::WIN_COMBINATIONS).to include_array([0,1,2])
       expect(Game::WIN_COMBINATIONS).to include_array([3,4,5])
       expect(Game::WIN_COMBINATIONS).to include_array([6,7,8])
+      expect(Game::WIN_COMBINATIONS).to include_array([0,1,2])
       expect(Game::WIN_COMBINATIONS).to include_array([0,3,6])
       expect(Game::WIN_COMBINATIONS).to include_array([1,4,7])
       expect(Game::WIN_COMBINATIONS).to include_array([2,5,8])
