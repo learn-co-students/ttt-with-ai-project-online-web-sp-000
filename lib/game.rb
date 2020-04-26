@@ -78,7 +78,7 @@ class Game
 
   def turn
     #input = ""
-    puts("Please enter 1-9:")
+    puts("Player #{current_player.token} please enter 1-9:")
     index = @board.input_to_index(current_player.move(@board))
     #binding.pry
     if @board.valid_move?(index+1)
