@@ -23,7 +23,7 @@ class Board
   end 
   
   def full?
-    cells.all? {|cell| cell == "X" || cell == "O"} #if all cells are Xs or Os define full
+    cells.all? {|cell| cell == "X" || cell == "O"}
   end 
   
   def turn_count

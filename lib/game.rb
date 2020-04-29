@@ -59,6 +59,7 @@ class Game
     elsif draw?
       puts "Cat's Game!"
     end 
-  end #defining logic in bin/tictactoe
+  end
 end 
 
+#defining logic in bin/tictactoe
