@@ -1,3 +1,50 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+# Greet the user with a message.
+# Prompt the user for what kind of game they want to play, 0,1, or 2 player.
+# Ask the user for who should go first and be "X".
+# Use the input to correctly initialize a Game with the appropriate player types and token values.
+# When the game is over, the CLI should prompt the user if they would like to play again and allow them to choose a new configuration for the game as described above. If the user doesn't want to play again, exit the program.
+
+# def start_game
+    puts "Welcome to Tic Tac Toe!"
+    puts "What kind of game would you like to play? Please make a choice by typing 0, 1, or 2:
+
+    0 - Computer versus computer
+    1 - You versus computer
+    2 - You versus another person"
+
+    player_mode = gets.strip
+    
+    if player_mode == "0"
+        Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
+    elsif player_mode == "1"
+        puts "Do you want to go first? Enter 'y' for yes or 'n' for no."
+        if gets.strip == "y"
+            Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
+        else
+            Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new).play
+        end
+    elsif player_mode == "2"
+        Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new).play
+    end
+
+    puts "Would you like to play again? Enter 'y' for yes or 'n' for no."
+    if gets.strip == "y"
+        Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new).play
+    end
+
+    # game = Game.new
+    # game.play until game.won?
+    # if game.won?
+    #     puts "Would you like to play again? Please type yes or no."
+    # end
+    # user_response = gets.strip
+    # if user_response == "yes" || user_response == "Yes" || user_response == "YES"
+    #     game.play
+    # elsif user_response == "no" || user_response == "No" || user_response == "NO"
+    #     puts "Thanks for playing!"
+    # end
+# end
