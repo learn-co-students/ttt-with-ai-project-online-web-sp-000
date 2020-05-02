@@ -22,7 +22,7 @@ class Game
   
   def won?
     WIN_COMBINATIONS.detect {|win_combo_array| 
-      board.cells[win_combo_array[0]] == board.cells[win_combo_array[1]] && board.cells[win_combo_array[1]] == board.cells[win_combo_array[2]] && board.taken?(win_combo_array[0])}
+      board.cells[win_combo_array[0]] == board.cells[win_combo_array[1]] && board.cells[win_combo_array[1]] == board.cells[win_combo_array[2]] && board.taken?(win_combo_array[0]+1)}
   end
 
   def draw?
@@ -43,13 +43,8 @@ class Game
   
   def turn
     puts "Please enter 1-9:"
-    
-    input = gets
-    index = input.to_i - 1
-    
-    if board.valid_move?(index)
-      move(index, current_player)
-      display_board
+    if board.valid_move?(player_1.move(board.cells))
+      board.update(player_1.move(board.cells), player_1)
     else
       turn
     end
