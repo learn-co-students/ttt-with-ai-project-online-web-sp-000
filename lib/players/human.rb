@@ -1,7 +1,7 @@
 module Players
   class Human < Player
     def move(board)
-      board
+      input = gets
     end
   end
 end

@@ -60,11 +60,8 @@ class Board
   end
   
   def update(input, player)
-    if turn_count % 2 == 0
-      "X"
-    else
-      "O"
-    end
+    input = input.to_i - 1
+    @cells[input] = player.token
   end
   
   
