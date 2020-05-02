@@ -21,7 +21,6 @@ class Game
   end
   
   def won?
-    binding.pry
     WIN_COMBINATIONS.detect {|win_combo_array| 
       board.cells[win_combo_array[0]] == board.cells[win_combo_array[1]] && board.cells[win_combo_array[1]] == board.cells[win_combo_array[2]] && board.taken?(win_combo_array[0])}
   end
@@ -35,8 +34,8 @@ class Game
   end
   
   def winner
-    if won? && over?
-      board[won?[0]]
+    if won?
+      board.cells[won?[0]]
     else
       nil
     end
