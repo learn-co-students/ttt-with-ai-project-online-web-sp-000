@@ -40,10 +40,11 @@ class Game
   end
   
   def turn
+    puts "Please enter 1-9:"
     current_move = current_player.move(board)
     if board.valid_move?(current_move)
-      board.display
       board.update(current_move, current_player)
+      board.display
     else
       turn
     end
@@ -61,7 +62,9 @@ class Game
   end
   
   def start
-    
+    puts "Welcome to Tic Tac Toe"
+    puts "Please enter the choice of your play"
+    play
   end
   
 end
