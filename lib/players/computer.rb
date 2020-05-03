@@ -1,16 +1,13 @@
-module Computer
+module Players
   class Computer < Player
     def move(board)
-      i = 0
-      indexes = []
+      n = true
       valid_moves = ["1","2","3","4","5","6","7","8"]
-      if !(indexes.include? i)
-        computer_move = valid_move[i]
-        i += 1
-      else
+      i = 0
+      while n
+        return move = valid_moves[i]
         i += 1
       end
     end
   end
-  
-  @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+end
