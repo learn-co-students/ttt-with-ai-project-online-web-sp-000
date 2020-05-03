@@ -1,7 +1,5 @@
 class Game
   
-  #extend Players::Human
-  #extend Players::Computer
   attr_accessor :player_1, :player_2, :board
   
   WIN_COMBINATIONS = [[0,1,2], [3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
@@ -42,9 +40,10 @@ class Game
   end
   
   def turn
-    puts "Please enter 1-9:"
-    if board.valid_move?(player_1.move(board.cells))
-      board.update(player_1.move(board.cells), player_1)
+    current_move = current_player.move(board)
+    if board.valid_move?(current_move)
+      board.display
+      board.update(current_move, current_player)
     else
       turn
     end
@@ -59,6 +58,9 @@ class Game
     elsif draw?
       puts "Cat's Game!"
     end
+  end
+  
+  def start
   end
   
 end
