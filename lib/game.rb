@@ -63,7 +63,6 @@ class Game
   
   def start
     puts "Welcome to Tic Tac Toe"
-    puts "Please enter the choice of your play"
     play
   end
   
