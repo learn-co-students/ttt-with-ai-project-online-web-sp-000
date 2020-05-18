@@ -2,4 +2,6 @@
 
 require_relative '../config/environment'
 
-Hi! Welcome to Command Line Tic Tac Toe! Please add your input.
+puts "Hi! Welcome to Command Line Tic Tac Toe!"
+
+Game.start

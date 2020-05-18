@@ -72,18 +72,60 @@ class Game
     if board.valid_move?(move) #if move is valid
       board.update(move, current_player)
       board.display
+      puts "#{current_player.token} entered to slot #{move}."
     else
       turn
     end
   end
 
   def play
-    until over? #over checks draw? and checks won?
+    while !over? #over checks draw? and checks won?
       turn
     end
     if draw? == true
       puts "Cat's Game!"
-    else puts "Congratulations #{winner}!"
+    else
+      puts "Congratulations #{winner}!"
+      board.display
+    end
+    puts "Would you like to play again? (y/n)"
+    input = gets.chomp
+    if input == "y"
+      Game.start
+    end
+  end
+
+  def self.start
+    puts "How many players? Choose from 0, 1 or 2."
+    input = gets.strip
+    player_1 = nil
+    player_2 = nil
+    if input == "0" #both are computers
+      player_1 = Players::Computer.new("X")
+      player_2 = Players:: Computer.new("O")
+      Game.new(player_1, player_2).play
+    elsif input == "1"
+      puts "Do you want to be first player or second player? First will be assigned to X. Choose either 1 or 2."
+      player_order = gets.strip
+      if player_order == "1"
+        player_1 = Players::Human.new("X")
+        player_2 = Players::Computer.new("O")
+      else
+        player_1 = Players::Computer.new("X")
+        player_2 = Players::Human.new("O")
+      end
+      Game.new(player_1, player_2).play
+    elsif input == "2"
+      puts "Do you want to be first player or second player? First will be assigned to X. Choose either 1 or 2."
+      player_order = gets.strip
+      if player_order == "1"
+        player_1 = Players::Human.new("X")
+        player_2 = Players::Human.new("O")
+      else
+        player_1 = Players::Human.new("X")
+        player_2 = Players::Human.new("O")
+      end
+      Game.new(player_1, player_2).play
     end
   end
 
