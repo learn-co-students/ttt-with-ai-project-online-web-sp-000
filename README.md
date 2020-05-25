@@ -11,7 +11,7 @@ The goal of this project is to build a version of Tic-tac-toe with 0-, 1-, and 2
   - A 2-player game has two human players.
 
 You'll be implementing Tic-tac-toe using multiple objects that relate and collaborate, including separate classes for human players and computer players. The computer player class will have some sort of artificial intelligence or logic to make move decisions. Finally, you'll wrap all of this up in a CLI.
-
+change
 > **BE CAREFUL** While you _might_ be able to re-use some of your code that worked in previous labs, the expectations in _this_ lab are higher! This is true to real-life development as well: as our programs get more sophisticated, the code we used to rely on is no longer appropriate.
 
 ## Working together
