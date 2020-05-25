@@ -1,7 +1,6 @@
 require 'pry'
 class Game
   attr_accessor :player_1, :player_2, :board
-
   WIN_COMBINATIONS = [
     [0,1,2],
     [3,4,5],
@@ -12,6 +11,7 @@ class Game
     [0,4,8],
     [2,4,6]
   ]
+
   def initialize(player_1=nil, player_2=nil, board=nil)
       @player_1 = player_1 == nil ? Players::Human.new("X") : player_1
       @player_2 = player_2 == nil ? Players::Human.new("O") : player_2
@@ -48,10 +48,8 @@ class Game
 
   def turn
     position = current_player.move(@board)
-    
     if @board.valid_move?(position) == true
       @board.update(position, current_player)
-    
     else
       until @board.valid_move?(position) == true
         position = current_player.move(@board)
@@ -60,14 +58,16 @@ class Game
   end
   
   def play
-    playing = true
-    turn
-    until playing == false
-      turn
-      if over? || won?
-        playing = false
+    running = true
+    while running == true
+      if over? == false
+        turn
+      else
+        running = false
       end
     end
-  
   end
+  
+  
+  
 end
