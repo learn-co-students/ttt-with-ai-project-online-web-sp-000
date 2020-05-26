@@ -21,14 +21,27 @@ class Game
   def current_player
     (@board.turn_count + 1) % 2 == 0 ? @player_2 : @player_1
   end
+  
+  # def won?
+  #   WIN_COMBINATIONS.find do |combo|
+  #     if @board.cells[combo[0]] == @board.cells[combo[1]] &&
+  #       @board.cells[combo[0]] == @board.cells[combo[2]]
+  #       return true
+  #     else
+  #       next
+  #     end
+  #     # binding.pry
+  #   end
+  #   false
+  # end
 
   def won?
     WIN_COMBINATIONS.each do |combo|
       tokens = combo.map {|position| @board.cells[position]}
-      if tokens.all? {|t| t == "X"} || tokens.all? {|t| t == "O"}
+      if tokens.all? {|t| t == "X"} or tokens.all? {|t| t == "O"}
         return combo
-      else
-        next
+      # else
+      #   next
       end
     end
     false
@@ -58,12 +71,20 @@ class Game
   end
   
   def play
+    # binding.pry
     running = true
+    
     while running == true
-      if over? == false
-        turn
-      else
+      if over?
         running = false
+        if won?
+          # binding.pry
+          puts "Congratulations #{winner}!"
+        elsif draw?
+          puts "Cat's Game!"
+        end
+      else
+        turn
       end
     end
   end
