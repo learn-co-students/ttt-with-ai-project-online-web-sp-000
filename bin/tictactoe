@@ -1,3 +1,50 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+    def greeting
+        puts "Hello, player!"
+    end 
+    greeting
+    
+    def game_over
+       puts "Thanks for playing."
+    end 
+
+    def wargames
+        100.times do 
+            Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O")).play
+        end 
+        # binding.pry
+    end 
+    # wargames
+    def num_of_players
+        puts "How many people will be playing?"
+        user_input = gets.chomp.to_i
+            case user_input
+                when 0
+                    puts "You should probably figure out how games work, buddy."
+                when 1
+                    puts "Would you like to be X or O? Who would you want to go first?"
+                    choice = gets.chomp
+                    if choice == "X"
+                        Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O")).play
+                    elsif choice == "O"
+                        Game.new(player_1 = Players::Human.new("O"), player_2 = Players::Computer.new("X")).play
+                    end 
+                when 2 
+                    puts "Would you like to be X or O? Who would you want to go first?"
+                    choice = gets.chomp
+                    if choice == "X"
+                        Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O")).play
+                    elsif choice == "O"
+                        Game.new(player_1 = Players::Human.new("O"), player_2 = Players::Computer.new("X")).play 
+                    end                
+            end 
+            puts "Game over! Would you like to play again?"
+            play_again = gets.chomp 
+            play_again == 'Yes' ? num_of_players : game_over
+        
+    end 
+    num_of_players
+
