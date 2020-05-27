@@ -13,6 +13,11 @@ module Players
     
     
     def move(board)
+      # free_spots = board.cells.find {|c| c == " "}
+      board.cells.find {|c| c == " "}
+      # binding.pry
+      
+      
       # 1 check for any one move wins
       # def can_win?(board)
       # 2 check for blocking one move wins
@@ -29,7 +34,7 @@ module Players
       # def can_corner?(board)
       # 8 take empty side
       # def side_available?(board)
-      "1"
+      # "1"
 
     end
     
@@ -100,17 +105,17 @@ module Players
     
   end
 end
-opp_corner_pass = [
-  "O", " ", " ",
-  " ", " ", " ",
-  "O", " ", " "
-  ]
+# opp_corner_pass = [
+#   "O", " ", " ",
+#   " ", " ", " ",
+#   "O", " ", " "
+#   ]
 
 
 
-b = Board.new
-b.cells = opp_corner_pass
-p1 = Players::Computer.new("X")
-p2 = Players::Computer.new("O")
+# b = Board.new
+# b.cells = opp_corner_pass
+# p1 = Players::Computer.new("X")
+# p2 = Players::Computer.new("O")
 
-binding.pry
+# binding.pry

@@ -1,4 +1,5 @@
 require 'pry'
+# require_relative './players/human.rb'
 class Game
   attr_accessor :player_1, :player_2, :board
   WIN_COMBINATIONS = [
@@ -22,19 +23,6 @@ class Game
     (@board.turn_count + 1) % 2 == 0 ? @player_2 : @player_1
   end
   
-  # def won?
-  #   WIN_COMBINATIONS.find do |combo|
-  #     if @board.cells[combo[0]] == @board.cells[combo[1]] &&
-  #       @board.cells[combo[0]] == @board.cells[combo[2]]
-  #       return true
-  #     else
-  #       next
-  #     end
-  #     # binding.pry
-  #   end
-  #   false
-  # end
-
   def won?
     WIN_COMBINATIONS.each do |combo|
       tokens = combo.map {|position| @board.cells[position]}
@@ -83,10 +71,60 @@ class Game
         end
       else
         turn
+        @board.display
       end
+    end
+  end
+  
+  def self.start
+    game_running = true
+    count = 0
+    while game_running
+      puts "Tic Tac Toe"
+      puts "Would you like a:"
+      puts "  (0) player game"
+      puts "  (1) player game"
+      puts "  (2) player game"
+      puts "  exit"
+      count ++ 1
+      answer = gets
+    
+      if answer == "exit"
+        puts "Goodbye"
+        game_running = false
+        
+      elsif answer.to_i == 0 
+        puts "Zero Player Game Chosen"
+        game = Game.new(
+            Players::Computer.new("X"),
+            Players::Computer.new("O"),
+            Board.new
+          )
+        game.play
+        
+      elsif answer.to_i == 1
+        puts "One Player Game Chosen"
+        game = self.new(
+            Players::Human.new("X"),
+            Players::Computer.new("O"),
+            Board.new
+        )
+        game.play
+        
+      elsif answer.to_i == 2
+        puts "Two PLayer Game Chosen"
+        game = self.new()
+        game.play
+        puts ""
+      
+      else
+        puts "error"
+      end
+      
     end
   end
   
   
   
 end
+# binding.pry
