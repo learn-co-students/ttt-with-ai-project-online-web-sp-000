@@ -60,19 +60,6 @@ module Players
     # end
     
     
-    # 6 take corner opposite opponent corner
-    # returns false if no opportunities
-    # return position if exists
-    def can_opposite_corner?(board)
-      # Are there open corners?
-      open_corners = CORNERS.find_all do |corner|
-        board.taken?(corner) == false ? corner : next
-      end
-      
-      # are open corners opposite opponent
-      
-    end
-    
     # ============== TESTED WORKING ==================
     
     # 5 take center if open
@@ -80,6 +67,26 @@ module Players
     # return center if valid
     def can_take_center?(board)
       board.taken?(5) ? false : true
+    end
+    
+    # 6 take corner opposite opponent corner
+    # returns false if no opportunities
+    # return position if exists
+    def can_opposite_corner?(board)
+      # Are there open corners?
+      CORNERS.find_all do |corner|
+        # is corner taken?
+        if board.taken?(corner) == false
+          # if not check opposite
+          op_corner = OPPOSITE_CORNERS[corner]
+          
+          if board.taken?(op_corner) && board.position(op_corner) != self.token
+            corner
+          else
+            next
+          end
+        end
+      end
     end
     
     # 7 take an empty corner
