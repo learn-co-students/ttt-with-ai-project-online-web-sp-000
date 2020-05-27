@@ -71,9 +71,7 @@ class Game
   end
   
   def play
-    # binding.pry
     running = true
-    
     while running == true
       if over?
         running = false
