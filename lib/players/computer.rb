@@ -1,10 +1,18 @@
 require 'pry'
 module Players
   class Computer < Player
-    SIDES = [1,5,7,3]
-    CORNERS = [0,2,6,8]
-    OPPOSITE_CORNERS = [ [0,8], [2,6]]
+    SIDES = [2,6,8,4]
+    CORNERS = [1,3,7,9]
+    # OPPOSITE_CORNERS = [ [1,9], [3,7]]
+    
+    OPPOSITE_CORNERS = {
+      1 => 9,
+      3 => 7,
+      7 => 3,
+      9 => 1
+    }
     # binding.pry
+    
     
     def move(board)
       # 1 check for any one move wins
@@ -51,37 +59,57 @@ module Players
     # def can_block_fork?(board)
     # end
     
-    # 5 take center if open
-    # return false if taken
-    # return center if valid
-    def can_take_center?(board)
-      @board.taken?(4) ? true : false
-    end
     
     # 6 take corner opposite opponent corner
     # returns false if no opportunities
     # return position if exists
     def can_opposite_corner?(board)
-      # does opponent hold corners?
-        # find opposite corners
-        # return corner
-      # else return false
+      # Are there open corners?
+      open_corners = CORNERS.find_all do |corner|
+        board.taken?(corner) == false ? corner : next
+      end
+      
+      # are open corners opposite opponent
+      
+    end
+    
+    # ============== TESTED WORKING ==================
+    
+    # 5 take center if open
+    # return false if taken
+    # return center if valid
+    def can_take_center?(board)
+      board.taken?(5) ? false : true
     end
     
     # 7 take an empty corner
     # return false if all corners taken
     # else return first corner available
     def can_corner?(board)
-      CORNERS.find {|p| @board.valid_move?(p + 1)}
+      CORNERS.find {|p| board.valid_move?(p)}
     end
     
     # 8 take empty side
     # return false if sides taken
     # else return first side
     def side_available?(board)
-      SIDES.find {|p| @board.valid_move?(p + 1)}
+      SIDES.find {|p| board.valid_move?(p)}
     end
     
     
   end
 end
+opp_corner_pass = [
+  "O", " ", " ",
+  " ", " ", " ",
+  "O", " ", " "
+  ]
+
+
+
+b = Board.new
+b.cells = opp_corner_pass
+p1 = Players::Computer.new("X")
+p2 = Players::Computer.new("O")
+
+binding.pry
