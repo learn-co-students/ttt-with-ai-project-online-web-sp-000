@@ -3,8 +3,6 @@ module Players
   class Computer < Player
     SIDES = [2,6,8,4]
     CORNERS = [1,3,7,9]
-    # OPPOSITE_CORNERS = [ [1,9], [3,7]]
-    
     OPPOSITE_CORNERS = {
       1 => 9,
       3 => 7,
@@ -63,15 +61,13 @@ module Players
     # ============== TESTED WORKING ==================
     
     # 5 take center if open
-    # return false if taken
-    # return center if valid
+    # return false if taken return center if valid
     def can_take_center?(board)
       board.taken?(5) ? false : true
     end
     
     # 6 take corner opposite opponent corner
-    # returns false if no opportunities
-    # return position if exists
+    # returns false if no opportunities return position if exists
     def can_opposite_corner?(board)
       # Are there open corners?
       CORNERS.find_all do |corner|
@@ -90,15 +86,13 @@ module Players
     end
     
     # 7 take an empty corner
-    # return false if all corners taken
-    # else return first corner available
+    # return false if all corners taken else return first corner available
     def can_corner?(board)
       CORNERS.find {|p| board.valid_move?(p)}
     end
     
     # 8 take empty side
-    # return false if sides taken
-    # else return first side
+    # return false if sides taken else return first side
     def side_available?(board)
       SIDES.find {|p| board.valid_move?(p)}
     end
