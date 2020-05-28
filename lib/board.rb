@@ -27,7 +27,10 @@ class Board
      end
 
     def position(number)
+        #binding.pry
+        if number.to_s == number
         number = number.to_i
+        end
         number -= 1
         @cells[number]  
     end
@@ -61,7 +64,8 @@ class Board
     end
 
     def valid_move?(number)
-        if number.length > 1
+        # binding.pry
+        if number.size > 1
             return false
         end
         number = number.to_i
@@ -74,11 +78,12 @@ class Board
     end
     
     def update(number, letter)
+        # binding.pry
         number = number.to_i
         number -= 1
         cells[number] = letter.token
         token = letter.token
-        # binding.pry
+        
     end
 
 end

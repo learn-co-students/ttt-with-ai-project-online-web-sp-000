@@ -124,16 +124,18 @@ class Game
    def turn
     a = current_player.move(board)
     if !board.valid_move?(a)
-    while !board.valid_move?(a)
+      turn
       puts "not valid move"
-      a = current_player.move(board)
+      # a = current_player.move(board)
   
-    end
-  end
-  b = current_player
+    # end
+    else
+  # b = current_player
   # binding.pry
-   board.update(a, b)
-        # binding.pry
+   board.update(a, current_player)
+   board.display
+        #  binding.pry
+    end
   end
 
   def play
@@ -158,11 +160,16 @@ class Game
         puts "Cat's Game!"
        return
       end
+      
    
-    else
-      turn
-      play
+  else
+      # binding.pry
+        turn
+       play
     end
+    # if board.cells == ["X", " ", " ", "O", " ", " ", " ", " ", " "]
+    #  binding.pry
+    # end
     end
 
     # def start
