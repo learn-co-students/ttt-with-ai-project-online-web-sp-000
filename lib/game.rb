@@ -12,18 +12,18 @@ class Game
     [0,4,8],
     [2,4,6]
   ]
-
+  # ====================================================================
   def initialize(player_1=nil, player_2=nil, board=nil)
       @player_1 = player_1 == nil ? Players::Human.new("X") : player_1
       @player_2 = player_2 == nil ? Players::Human.new("O") : player_2
       @board = board == nil ? Board.new : board
       # @board.display()
   end
-
+  # ====================================================================
   def current_player
     (@board.turn_count + 1) % 2 == 0 ? @player_2 : @player_1
   end
-  
+  # ====================================================================
   def won?
     WIN_COMBINATIONS.each do |combo|
       tokens = combo.map {|position| @board.cells[position]}
@@ -33,30 +33,29 @@ class Game
     end
     false
   end
-
+  # ====================================================================
   def draw?
     @board.full? && won? == false
   end
-
+  # ====================================================================
   def over?
     won? || draw?
   end
-
+  # ====================================================================
   def winner
     won? ? @board.cells[won?[0]] : nil
   end
-
+  # ====================================================================
   def turn
     position = current_player.move(@board)
-    if @board.valid_move?(position) == true
-      @board.update(position, current_player)
-    else
-      until @board.valid_move?(position) == true
-        position = current_player.move(@board)
-      end
-    end
-  end
   
+    until @board.valid_move?(position) == true
+      @board.display
+      position = current_player.move(@board)
+    end
+    @board.update(position, current_player)
+  end
+  # ====================================================================
   def play
     running = true
     while running == true
@@ -74,7 +73,7 @@ class Game
       end
     end
   end
-  
+  # ====================================================================
   def self.start
     game_running = true
 
