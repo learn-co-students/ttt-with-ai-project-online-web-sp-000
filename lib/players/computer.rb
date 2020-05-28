@@ -3,16 +3,6 @@ module Players
   class Computer < Player
     SIDES = [2,6,8,4]
     CORNERS = [1,3,7,9]
-    # WIN_COMBINATIONS = [
-    # [0,1,2],
-    # [3,4,5],
-    # [6,7,8],
-    # [0,3,6],
-    # [1,4,7],
-    # [2,5,8],
-    # [0,4,8],
-    # [2,4,6]
-    # ]
     WIN_COMBINATIONS = [
     [1,2,3],
     [4,5,6],
@@ -53,19 +43,28 @@ module Players
       combos = get_winning_combos(board)
       combos.each do |combo|
         tokens = combo.collect {|p| board.position(p) if board.taken?(p)}
-        puts tokens.compact[0]
-        puts tokens.compact[0] == self.token
+        if tokens.compact[0] == self.token 
+          puts tokens.compact[0]
+          return combo.find {|p| board.taken?(p) == false}
+        end
       end
-      
+      false
     end
         
       
     
     # 2 check for blocking one move wins
-    # return false if no opportunities
-    # return position if exists
-    # def can_win_opponent?(board)
-    # end
+    # return false if no opportunities return position if exists
+    def can_win_opponent?(board)
+      opponent_token = self.token == "X" ? "O" : "X"
+      combos = get_winning_combos(board)
+      combos.each do |combo|
+        tokens = combo.collect {|p| board.position(p) if board.taken?(p)}
+        if tokens.compact[0] == opponent_token
+          return combo.find {|p| board.taken?(p) == false}
+        end
+      end
+    end
     
     # 3 create fork
     # return false if forks taken
@@ -132,8 +131,8 @@ test = [
   " ", " ", " ",
   ]
 win = [
-  "X", " ", " ",
-  " ", " ", " ",
+  "X", " ", "O",
+  " ", "O", " ",
   " ", " ", "X",
   ]
 b.cells = win
