@@ -3,15 +3,25 @@ module Players
   class Computer < Player
     SIDES = [2,6,8,4]
     CORNERS = [1,3,7,9]
+    # WIN_COMBINATIONS = [
+    # [0,1,2],
+    # [3,4,5],
+    # [6,7,8],
+    # [0,3,6],
+    # [1,4,7],
+    # [2,5,8],
+    # [0,4,8],
+    # [2,4,6]
+    # ]
     WIN_COMBINATIONS = [
-    [0,1,2],
-    [3,4,5],
-    [6,7,8],
-    [0,3,6],
+    [1,2,3],
+    [4,5,6],
+    [7,8,9],
     [1,4,7],
     [2,5,8],
-    [0,4,8],
-    [2,4,6]
+    [3,6,9],
+    [1,5,9],
+    [3,5,7]
     ]
     OPPOSITE_CORNERS = {
       1 => 9,
@@ -26,25 +36,35 @@ module Players
       # binding.pry
     end
     
-    # 1 check for any one move wins
-    # return false if none return position if exists
-    def can_win?(board)
-      # for each win WIN_COMBINATIONS
-      WIN_COMBINATIONS.each do |combo|
-        # if win combos are 2/3
-        taken_count = combo.count {|p| board.taken?(p) == true}
-        if taken_count == 2
-          puts combo
+    # Checks for any one move wins returns array of win combos
+    def get_winning_combos(board)
+      combos = WIN_COMBINATIONS.collect do |combo|
+        if combo.count {|p| board.taken?(p) == true} == 2
+          tokens = combo.collect {|p| board.position(p) if board.taken?(p)}
+          combo if tokens.compact.all? {|t| t == tokens[0]}
         end
       end
-          # if position tokens all == sel.token
-            # return empty position
+      combos.compact
     end
+    
+    # 1 check for any one move wins
+    # return false if none return position if exists
+    def can_win_self?(board)
+      combos = get_winning_combos(board)
+      combos.each do |combo|
+        tokens = combo.collect {|p| board.position(p) if board.taken?(p)}
+        puts tokens.compact[0]
+        puts tokens.compact[0] == self.token
+      end
+      
+    end
+        
+      
     
     # 2 check for blocking one move wins
     # return false if no opportunities
     # return position if exists
-    # def can_block_win?(board)
+    # def can_win_opponent?(board)
     # end
     
     # 3 create fork
@@ -103,6 +123,20 @@ module Players
   end
 end
 
+p1 = Players::Computer.new("X")
+b = Board.new
+
+test = [
+  "O", "X", " ",
+  " ", " ", "",
+  " ", " ", " ",
+  ]
+win = [
+  "X", " ", " ",
+  " ", " ", " ",
+  " ", " ", "X",
+  ]
+b.cells = win
 binding.pry
 
 
