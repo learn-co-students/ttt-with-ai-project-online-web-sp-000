@@ -17,6 +17,7 @@ class Game
       @player_1 = player_1 == nil ? Players::Human.new("X") : player_1
       @player_2 = player_2 == nil ? Players::Human.new("O") : player_2
       @board = board == nil ? Board.new : board
+      @board.display()
   end
 
   def current_player
@@ -78,7 +79,7 @@ class Game
   
   def self.start
     game_running = true
-    count = 0
+
     while game_running
       puts "Tic Tac Toe"
       puts "Would you like a:"
@@ -86,12 +87,13 @@ class Game
       puts "  (1) player game"
       puts "  (2) player game"
       puts "  exit"
-      count ++ 1
-      answer = gets
+      
+      answer = gets.strip
     
       if answer == "exit"
         puts "Goodbye"
         game_running = false
+        break
         
       elsif answer.to_i == 0 
         puts "Zero Player Game Chosen"

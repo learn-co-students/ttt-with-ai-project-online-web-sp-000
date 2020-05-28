@@ -3,46 +3,43 @@ module Players
   class Computer < Player
     SIDES = [2,6,8,4]
     CORNERS = [1,3,7,9]
+    WIN_COMBINATIONS = [
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+    [0,4,8],
+    [2,4,6]
+    ]
     OPPOSITE_CORNERS = {
       1 => 9,
       3 => 7,
       7 => 3,
       9 => 1
-    }
-    # binding.pry
-    
+      }
     
     def move(board)
-      # free_spots = board.cells.find {|c| c == " "}
-      board.cells.find {|c| c == " "}
+      free = board.cells.each_with_index.find{|c, i| i if c == " "}
+      return free[1] + 1
       # binding.pry
-      
-      
-      # 1 check for any one move wins
-      # def can_win?(board)
-      # 2 check for blocking one move wins
-      # def can_block_win?(board)
-      # 3 create fork
-      # def can_fork?(board)
-      # 4 block opponent fork
-      # def can_block_fork?(board)
-      # 5 take center if open
-      # def can_take_center?(board)
-      # 6 take corner opposite opponent corner
-      # def can_opposite_corner?(board)
-      # 7 take an empty corner
-      # def can_corner?(board)
-      # 8 take empty side
-      # def side_available?(board)
-      # "1"
-
     end
     
     # 1 check for any one move wins
-    # return false if none
-    # return position if exists
-    # def can_win?(board)
-    # end
+    # return false if none return position if exists
+    def can_win?(board)
+      # for each win WIN_COMBINATIONS
+      WIN_COMBINATIONS.each do |combo|
+        # if win combos are 2/3
+        taken_count = combo.count {|p| board.taken?(p) == true}
+        if taken_count == 2
+          puts combo
+        end
+      end
+          # if position tokens all == sel.token
+            # return empty position
+    end
     
     # 2 check for blocking one move wins
     # return false if no opportunities
@@ -105,17 +102,25 @@ module Players
     
   end
 end
-# opp_corner_pass = [
-#   "O", " ", " ",
-#   " ", " ", " ",
-#   "O", " ", " "
-#   ]
+
+binding.pry
 
 
 
-# b = Board.new
-# b.cells = opp_corner_pass
-# p1 = Players::Computer.new("X")
-# p2 = Players::Computer.new("O")
-
-# binding.pry
+# 1 check for any one move wins
+# def can_win?(board)
+# 2 check for blocking one move wins
+# def can_block_win?(board)
+# 3 create fork
+# def can_fork?(board)
+# 4 block opponent fork
+# def can_block_fork?(board)
+# 5 take center if open
+# def can_take_center?(board)
+# 6 take corner opposite opponent corner
+# def can_opposite_corner?(board)
+# 7 take an empty corner
+# def can_corner?(board)
+# 8 take empty side
+# def side_available?(board)
+# "1"
