@@ -78,7 +78,6 @@ class Board
     end
     
     def update(number, letter)
-        # binding.pry
         number = number.to_i
         number -= 1
         cells[number] = letter.token
