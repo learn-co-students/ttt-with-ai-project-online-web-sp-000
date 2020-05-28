@@ -1,9 +1,9 @@
 require 'pry'
 module Players
   class Computer < Player
-    SIDES = [2,6,8,4]
+    # SIDES = [2,6,8,4]
     
-    CORNERS = [1,3,7,9]
+    # CORNERS = [1,3,7,9]
     
     WIN_COMBINATIONS = [
     [1,2,3], 
@@ -101,7 +101,7 @@ module Players
     # 6 take corner opposite opponent corner
     # returns false if no opportunities return position if exists
     def can_opposite_corner?(board)
-      CORNERS.collect do |corner|
+      [1,3,7,9].collect do |corner|
         if board.taken?(corner) == false
           op_corner = OPPOSITE_CORNERS[corner]
           if board.taken?(op_corner) && board.position(op_corner) != self.token

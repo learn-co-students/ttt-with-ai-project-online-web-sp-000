@@ -17,7 +17,7 @@ class Game
       @player_1 = player_1 == nil ? Players::Human.new("X") : player_1
       @player_2 = player_2 == nil ? Players::Human.new("O") : player_2
       @board = board == nil ? Board.new : board
-      @board.display()
+      # @board.display()
   end
 
   def current_player
@@ -29,8 +29,6 @@ class Game
       tokens = combo.map {|position| @board.cells[position]}
       if tokens.all? {|t| t == "X"} or tokens.all? {|t| t == "O"}
         return combo
-      # else
-      #   next
       end
     end
     false
@@ -65,14 +63,14 @@ class Game
       if over?
         running = false
         if won?
-          # binding.pry
           puts "Congratulations #{winner}!"
         elsif draw?
           puts "Cat's Game!"
         end
       else
-        turn
         @board.display
+        puts "#{self.current_player.token}'s turn"
+        turn
       end
     end
   end
@@ -83,10 +81,8 @@ class Game
     while game_running
       puts "Tic Tac Toe"
       puts "Would you like a:"
-      puts "  (0) player game"
-      puts "  (1) player game"
-      puts "  (2) player game"
-      puts "  exit"
+      puts "(0, 1, or 2) player game"
+      puts "or exit"
       
       answer = gets.strip
     
@@ -96,7 +92,7 @@ class Game
         break
         
       elsif answer.to_i == 0 
-        puts "Zero Player Game Chosen"
+        puts "\nZero Player Game Chosen"
         game = Game.new(
             Players::Computer.new("X"),
             Players::Computer.new("O"),
@@ -105,7 +101,7 @@ class Game
         game.play
         
       elsif answer.to_i == 1
-        puts "One Player Game Chosen"
+        puts "\nOne Player Game Chosen"
         game = self.new(
             Players::Human.new("X"),
             Players::Computer.new("O"),
@@ -114,13 +110,10 @@ class Game
         game.play
         
       elsif answer.to_i == 2
-        puts "Two PLayer Game Chosen"
+        puts "\nTwo PLayer Game Chosen"
         game = self.new()
         game.play
         puts ""
-      
-      else
-        puts "error"
       end
       
     end
