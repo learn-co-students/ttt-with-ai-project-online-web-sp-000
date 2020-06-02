@@ -2,9 +2,11 @@ class Board
 
     attr_accessor :cells
 
-    def initialize
-        @cells = []
+    def initialize(cells = [])
+      @cells = cells
+      if cells == []
         self.reset!
+      end
     end
 
     def reset!
@@ -49,13 +51,13 @@ class Board
         index = index.to_i - 1
         if @cells[index] == " " || @cells[index] == "" || @cells[index] == nil
           return false
-        elsif @cells[index] == "X" or @cells[index] || "O"
+        elsif @cells[index] == "X" || @cells[index] == "O"
           return true
         end
     end
 
     def valid_move?(index)
-        if index.to_i.between?(1,9) && (!taken?(index))
+        if index.to_i.between?(1,9) && (taken?(index) == false)
           return true
         else
           return false

@@ -6,11 +6,20 @@ class Game
     @board = board
     @player_1 = player_1
     @player_2 = player_2
+    if player_1.class == Players::Computer
+      player_1.other_player = player_2
+    end
+    if player_2.class == Players::Computer
+      player_2.other_player = player_1
+    end
+    self.play
   end
 
   def current_player
       board.turn_count % 2 == 0 ? player_1 : player_2
   end
+
+
 
   def won?
     WIN_COMBINATIONS.each do |win_combination|
@@ -43,10 +52,11 @@ class Game
 
   def turn
     move = nil
-    while !board.valid_move?(move)
+    while board.valid_move?(move) == false
       move = current_player.move(self.board)
     end
     board.update(move, current_player)
+    board.display
   end
 
   def play
