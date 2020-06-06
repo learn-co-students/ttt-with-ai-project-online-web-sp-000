@@ -1,3 +1,4 @@
+require"pry"
 class Board
 
   attr_accessor :cells
@@ -54,17 +55,14 @@ class Board
 
   def valid_move?(input)
     user_input = input.to_i - 1
-    if @cells[user_input].between?(0, 9) || @cells[user_input] != taken?
+    if user_input.between?(0, 8) && !taken?(input)
       true
     else
       false
     end
-
-
   end
 
-
-
-
+  def update
+  end
 
 end
