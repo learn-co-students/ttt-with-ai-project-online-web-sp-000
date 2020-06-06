@@ -24,7 +24,47 @@ class Board
      @cells[user_input]
   end
 
-  def full?
+  def full?                   #do any of these values hold an "X" or an "O"?
+    @cells.all? do |cell|
+      cell == "X" || cell == "O"
+    end
   end
+
+  def turn_count
+    @cells.count do |cell|
+      cell == "X" || cell == "O"
+    end
+  end
+
+#   def taken?(input)
+#     user_input = input.to_i - 1
+#     return true if @cells[user_input] == "X" || @cells[user_input] == "O"
+#     false
+#   end
+# end
+
+  def taken?(input)
+    user_input = input.to_i - 1
+    if @cells[user_input] == "X" || @cells[user_input] == "O"
+      true
+    else
+      false
+    end
+  end
+
+  def valid_move?(input)
+    user_input = input.to_i - 1
+    if @cells[user_input].between?(0, 9) || @cells[user_input] != taken?
+      true
+    else
+      false
+    end
+
+
+  end
+
+
+
+
 
 end
