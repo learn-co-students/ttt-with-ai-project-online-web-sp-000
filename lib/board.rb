@@ -62,8 +62,10 @@ class Board
     end
   end
 
-  def update(position, object)
-
+  def update(cell, player)
+    user_input = cell.to_i - 1  ## converts string to number to_i
+    # binding.pry
+    @cells[user_input] = player.token
   end
 
 end
