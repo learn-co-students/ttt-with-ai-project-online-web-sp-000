@@ -30,10 +30,11 @@ class Game
   end
 
   def winner
-    board.cells[won?[0]]
+    won? ? board.cells[won?[0]] : nil
   end
 
   def turn
+    board.valid_move?(player_1.move(board)) ? player_2.move(board) : player_1.move(board)
   end
 
   def play
