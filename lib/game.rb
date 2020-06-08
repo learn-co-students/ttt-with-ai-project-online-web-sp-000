@@ -7,26 +7,31 @@ class Game
     @player_1=player_1
     @player_2=player_2
   end
-#player with "X" token
 
   def current_player
     board.turn_count.even? ? player_1 : player_2
   end
 
   def won?
-    WIN_COMBINATIONS.detect do |x|
-      win_index_1=x[0]
-      win_index_2=x[1]
-      win_index_3=x[2]
-      board.cells[win_index_1]==board.cells[win_index_3]&&board.cells[win_index_3]==board.cells[win_index_2]&&board[win_index_1]!=" "
+    WIN_COMBINATIONS.detect do |win_combination|
+      win_index_1=win_combination[0]
+      win_index_2=win_combination[1]
+      win_index_3=win_combination[2]
+      board.cells[win_index_1]==board.cells[win_index_3]&&board.cells[win_index_3]==board.cells[win_index_2]&&board.cells[win_index_1]!=" "
     end
   end
 
   def draw?
-    board.cells.full?&&!won?
+    board.full?&&!won?
   end
 
   def over?
+    draw?||won?
+  end
+
+  def winner
+    board.cells[won?[0]]
+  end
 
   def turn
   end
