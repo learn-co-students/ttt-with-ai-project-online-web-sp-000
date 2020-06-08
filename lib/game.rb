@@ -33,15 +33,29 @@ class Game
     won? ? board.cells[won?[0]] : nil
   end
 
+  # def turn
+  #   if !board.valid_move?(current_player.move(board))
+  #     turn
+  #   else
+  #     puts "Turn:#{board.turn_count+1}"
+  #     board.display
+  #     board.update(current_player.move(board),current_player)
+  #     puts "#{current_player.token} moved #{current_player.move(board)} "
+  #     board.display
+  #   end
+  # end
+
   def turn
-    if !board.valid_move?(current_player.move(board))
+    player = current_player
+    current_move = player.move(@board)
+    if !@board.valid_move?(current_move)
       turn
     else
-      puts "Turn:#{board.turn_count+1}"
-      board.display
-      board.update(current_player.move(board),current_player)
-      puts "#{current_player.token} moved #{current_player.move(board)} "
-      board.display
+      puts "Turn: #{@board.turn_count+1}\n"
+      @board.display
+      @board.update(current_move, player)
+      puts "#{player.token} moved #{current_move}"
+      @board.display
     end
   end
 
