@@ -37,13 +37,6 @@ class Board
     end
   end
 
-#   def taken?(input)
-#     user_input = input.to_i - 1
-#     return true if @cells[user_input] == "X" || @cells[user_input] == "O"
-#     false
-#   end
-# end
-
   def taken?(input)
     user_input = input.to_i - 1
     if @cells[user_input] == "X" || @cells[user_input] == "O"
@@ -64,7 +57,6 @@ class Board
 
   def update(cell, player)
     user_input = cell.to_i - 1  ## converts string to number to_i
-    # binding.pry
     @cells[user_input] = player.token
   end
 
