@@ -34,8 +34,17 @@ class Game
   end
 
   def turn
-    board.valid_move?(player_1.move(board)) ? player_2.move(board) : player_1.move(board)
+    if !board.valid_move?(current_player.move(board))
+      turn
+    else
+      puts "Turn:#{board.turn_count+1}"
+      board.display
+      board.update(current_player.move(board),current_player)
+      puts "#{current_player.token} moved #{current_player.move(board)} "
+      board.display
+    end
   end
+
 
   def play
   end

@@ -1,8 +1,7 @@
 module Players
   class Human < Player
     def move(board)
-      gets
+      gets.strip
     end
-    # your code here
   end
 end
