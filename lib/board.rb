@@ -6,7 +6,7 @@ class Board
   end
 
   def reset!
-    cells=Array.new(9," ")
+    @cells=Array.new(9," ")
   end
 
   def display
@@ -22,7 +22,7 @@ class Board
   end
 
   def update(number,player)
-    position(number)==
+    position(number)==player.token
   end
 
   def taken?(number)
