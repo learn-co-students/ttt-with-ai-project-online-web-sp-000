@@ -22,7 +22,7 @@ class Board
   end
 
   def update(number,player)
-    position(number)==player.token
+    cells[number.to_i-1]=player.token
   end
 
   def taken?(number)
