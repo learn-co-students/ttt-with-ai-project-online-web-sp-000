@@ -1,5 +1,6 @@
 class Board
   attr_accessor :cells
+  CORNERS_NUMBERS=[1,3,7,9]
 
   def initialize
     reset!
@@ -31,6 +32,14 @@ class Board
 
   def valid_move?(number)
     number.to_i.between?(1,9)&&!taken?(number)
+  end
+
+  def available_corners
+    available_corners=CORNERS_NUMBERS.select {|corner_number| !taken?(corner_number)}
+    if available_corners==[]
+      nil
+    end
+    available_corners
   end
 
   def full?

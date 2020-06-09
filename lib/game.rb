@@ -17,7 +17,20 @@ class Game
       win_index_1=win_combination[0]
       win_index_2=win_combination[1]
       win_index_3=win_combination[2]
-      board.cells[win_index_1]==board.cells[win_index_3]&&board.cells[win_index_3]==board.cells[win_index_2]&&board.cells[win_index_1]!=" "
+      board.cells[win_index_1]==board.cells[win_index_2]&&board.cells[win_index_3]==board.cells[win_index_2]&&board.cells[win_index_1]!=" "
+    end
+  end
+
+  def check_about_to_win?
+    WIN_COMBINATIONS.detect do |win_combination|
+      win_index_1=win_combination[0]
+      win_index_2=win_combination[1]
+      win_index_3=win_combination[2]
+      to_win=[]
+      to_win<<board.cells[win_index_1]
+      to_win<<board.cells[win_index_2]
+      to_win<<board.cells[win_index_3]
+      to_win.include?(" ")&&to_win.uniq.length=2
     end
   end
 
