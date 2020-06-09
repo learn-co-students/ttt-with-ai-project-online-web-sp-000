@@ -56,11 +56,12 @@ class Game
   #  end
 
   def turn
-    if !board.valid_move?(current_player.move(board))
+    current_move=current_player.move(board)
+    if !board.valid_move?(current_move)
       turn
     else
       board.display
-      board.update(current_player.move(board),current_player)
+      board.update(current_move,current_player)
     end
   end
 
