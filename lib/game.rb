@@ -37,25 +37,30 @@ class Game
   #   if !board.valid_move?(current_player.move(board))
   #     turn
   #   else
-  #     puts "Turn:#{board.turn_count+1}"
-  #     board.display
-  #     board.update(current_player.move(board),current_player)
-  #     puts "#{current_player.token} moved #{current_player.move(board)} "
-  #     board.display
+  #     board.update(current_player.move(board), current_player)
   #   end
   # end
 
+  # def turn
+  #    player = current_player
+  #    current_move = player.move(@board)
+  #    if !@board.valid_move?(current_move)
+  #      turn
+  #    else
+  #      puts "Turn: #{@board.turn_count+1}\n"
+  #      @board.display
+  #      @board.update(current_move, player)
+  #      puts "#{player.token} moved #{current_move}"
+  #      @board.display
+  #    end
+  #  end
+
   def turn
-    player = current_player
-    current_move = player.move(@board)
-    if !@board.valid_move?(current_move)
+    if !board.valid_move?(current_player.move(board))
       turn
     else
-      puts "Turn: #{@board.turn_count+1}\n"
-      @board.display
-      @board.update(current_move, player)
-      puts "#{player.token} moved #{current_move}"
-      @board.display
+      board.display
+      board.update(current_player.move(board),current_player)
     end
   end
 
