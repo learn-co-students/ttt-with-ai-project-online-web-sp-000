@@ -19,9 +19,14 @@ class Game
   end
 
   def current_player
-
+    board.turn_count.even? == true ? "O" : "X"
+    @player_1 || @player_2
   end
 
-
+  def won?
+    WIN_COMBINATIONS.detect do |combo|
+      board.taken?(combo[0]) && board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]]
+    end
+  end
 
 end
