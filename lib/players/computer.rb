@@ -1,48 +1,49 @@
 module Players
   class Computer < Player
     def move(board)
-      human_readable=""
+      #If first to Play
+      #first turn: pick a corner
+      #second turn: if opponent pick a corner=>pick any availabe corner
+      #             if opponent pick middle=>pick opposite corner
+      #the rest of the turn: check about_to_win? place win/block win move : random
+      #otherwise, try to pick middle cell, or corner, or random
+
       if token=="X"
-        if board==board.reset!
-          corner_number=Board::CORNERS_NUMBERS.sample
-          board.update(corner_number,self)
-          human_readable=corner_number
+        if board.turn_count==0
+          corner_index=Board::CORNERS_INDEXS.sample
+          board.update_with_index(corner_index,self)
         end
 
-        if board.cells[4]=="O"
-          oppo_corner=10-corner_number.to_i
-          board.update(oppo_corner.to_s,self) if board.cells[oppo_corner-1]==" "
-          board.update(board.available_corners.sample,self) if board.available_corners
-          board.update(board.cells.index(" ")+1,self)
-          human_readable=board.cells.index(" ")+1
+        if board.turn_count==2
+          if board.cells[4]=="O"
+            oppo_corner_index=8-corner_index
+            board.update_with_index(oppo_corner_index,self)
+          else
+            board.update(board.available_corners_index.sample,self)
+          end
+        end
+
+        if board.check_about_to_win?
+          index=board.check_about_to_win?.detect{|x|board.cells[x]==" "}
+          board.update_with_index(index,self)
         else
-          board.update(board.available_corners.sample,self) if board.available_corners
-          board.update(board.cells.index(" ")+1,self)
-          human_readable=board.cells.index(" ")+1
+          board.update_with_index(4,self) if board.cells[4]==" "
+          board.update_with_index(board.available_corners_index.sample,self) if board.available_corners_index
+          board.update_with_index(board.cells.index(" "),self)
         end
-
+# if second to play
+# check about_to_win? place win/block win move : random
+# otherwise, try to pick middle cell, or corner, or random
       else
         if board.check_about_to_win?
-          board.check_about_to_win?.each do |x|
-            if board[x]==" "
-              board.update(x+1,self)
-              human_readable=x+1
-            end
-          end
+          index=board.check_about_to_win?.detect{|x|board.cells[x]==" "}
+          board.update_with_index(index,self)
         else
-          board.update(board.available_corners.sample,self) if board.available_corners
-          board.update(board.index(" ")+1,self)
-          human_readable=board.cells.index(" ")+1
-
+          board.update_with_index(4,self) if board.cells[4]==" "
+          board.update_with_index(board.available_corners_index.sample,self) if board.available_corners_index
+          board.update_with_index(board.cells.index(" "),self)
         end
       end
-    return human_readable.to_s
     end
   end
 end
-#If computer goes first, takes a random corner
-#     if other players takes the corner, computer take another corner=>win
-#     if other players takes the middle, go to oppo corner,if other player go to corner, go to the last corner,you win,
-#                                                           if other players go to side, it will be a tie
-
-#if computer goes second, random unless there is about_to_win present on board.

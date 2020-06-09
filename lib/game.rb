@@ -21,18 +21,6 @@ class Game
     end
   end
 
-  def check_about_to_win?
-    WIN_COMBINATIONS.detect do |win_combination|
-      win_index_1=win_combination[0]
-      win_index_2=win_combination[1]
-      win_index_3=win_combination[2]
-      to_win=[]
-      to_win<<board.cells[win_index_1]
-      to_win<<board.cells[win_index_2]
-      to_win<<board.cells[win_index_3]
-      to_win.include?(" ")&&to_win.uniq.length=2
-    end
-  end
 
   def draw?
     board.full?&&!won?
@@ -75,17 +63,18 @@ class Game
 # When the game is over, the CLI should prompt the user if they would like to play again and allow
 # them to choose a new configuration for the game as described above. If the user doesn't want to play again, exit the program.
 
-  def start
-    puts "Welcome to Tic-tac-toe!"
-    puts "what kind of game they want to play, 0,1, or 2 player, please enter 0,1,or 2 accordingly"
-    player_number=gets until [0,1,2].include?(player_number)
-    puts "Who should go first and be 'X'?"
-
-
-
-
-    end
+  # def start
+  #   puts "Welcome to Tic-tac-toe!"
+  #   puts "what kind of game they want to play, 0,1, or 2 player, please enter 0,1,or 2 accordingly"
+  #   player_number=gets until [0,1,2].include?(player_number)
+  #   puts "Who should go first and be 'X'?"
+  #
+  #   #what do i want for user input
+  #   #how to impliment two gets data in initiating the game?
+  #
+  #
+  #
+  #
+  #   end
 
   end
-
-end
