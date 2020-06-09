@@ -55,26 +55,4 @@ class Game
     puts "Congratulations #{winner}!" if won?
     puts "Cat's Game!" if draw?
   end
-
-#   Greet the user with a message.
-# Prompt the user for what kind of game they want to play, 0,1, or 2 player.
-# Ask the user for who should go first and be "X".
-# Use the input to correctly initialize a Game with the appropriate player types and token values.
-# When the game is over, the CLI should prompt the user if they would like to play again and allow
-# them to choose a new configuration for the game as described above. If the user doesn't want to play again, exit the program.
-
-  # def start
-  #   puts "Welcome to Tic-tac-toe!"
-  #   puts "what kind of game they want to play, 0,1, or 2 player, please enter 0,1,or 2 accordingly"
-  #   player_number=gets until [0,1,2].include?(player_number)
-  #   puts "Who should go first and be 'X'?"
-  #
-  #   #what do i want for user input
-  #   #how to impliment two gets data in initiating the game?
-  #
-  #
-  #
-  #
-  #   end
-
-  end
+end
