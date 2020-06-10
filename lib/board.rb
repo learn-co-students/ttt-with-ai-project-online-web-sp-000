@@ -62,6 +62,11 @@ class Board
 
   def win_or_lose_move
     index=check_about_to_win?.detect{|x|cells[x]==" "}
+    check_about_to_win?.detect {|x| x!=" "}
+  end
+
+  def win_or_lose_move
+    index=check_about_to_win?.detect{|x|cells[x]==" "}
     (index+1).to_s
   end
 
