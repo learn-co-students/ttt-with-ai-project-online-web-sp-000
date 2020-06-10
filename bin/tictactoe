@@ -1,3 +1,37 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+
+puts "Hello! What type of game would you like to play?"
+puts "Enter '1 player', '2 player' or 'war games'"
+
+game_type = gets.strip
+
+case game_type
+when "1 player"
+  puts "Would you like to be player 1 or player 2?"
+  user = gets.strip
+  if user == "player 1"
+    new_game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+    new_game.board.display
+    new_game.play
+  elsif user == "player 2"
+    new_game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+    new_game.board.display
+    new_game.play
+  end
+when "2 player"
+  new_game = Game.new
+  new_game.play
+when "war games"
+  new_game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+  win_count = 0
+  100.times do
+    result = new_game.play
+    win_count += 1 if result == "win"
+    new_game.board.reset!
+  end
+  puts "win count: #{win_count}"
+end
