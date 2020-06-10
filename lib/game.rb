@@ -35,14 +35,13 @@ class Game
   end
 
   def turn
+    puts current_player
     current_move=current_player.move(board)
     if !board.valid_move?(current_move)
       turn
     else
-      board.display
-      puts "Turn: #{board.turn_count+1}\n"
+      puts "This is turn #{board.turn_count+1}\n"
       board.update(current_move,current_player)
-      puts "#{current_player.token} moved #{current_move}"
       board.display
     end
   end

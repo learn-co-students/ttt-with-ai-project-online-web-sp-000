@@ -44,8 +44,9 @@ class Board
     available_corner_index=CORNERS_INDEXS.select {|corner_index| cells[corner_index]==" " }
     if available_corner_index==[]
       nil
+    else
+      available_corner_index
     end
-    available_corner_index
   end
 
   def check_about_to_win?

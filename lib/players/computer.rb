@@ -10,26 +10,25 @@ module Players
 
       if token=="X"
         if board.turn_count==0
-          corner_index=Board::CORNERS_INDEXS.sample
-          board.update_with_index(corner_index,self)
+          (Board::CORNERS_INDEXS.sample+1).to_s
         end
 
         if board.turn_count==2
           if board.cells[4]=="O"
-            oppo_corner_index=8-corner_index
-            board.update_with_index(oppo_corner_index,self)
+            (oppo_corner_index=8-corner_index+1).to_s
           else
-            board.update(board.available_corners_index.sample,self)
+            (board.available_corners_index.sample+1).to_s
           end
         end
 
         if board.check_about_to_win?
           index=board.check_about_to_win?.detect{|x|board.cells[x]==" "}
-          board.update_with_index(index,self)
+          (index+1).to_s
+          "5"
+        elsif board.available_corners_index
+          (board.available_corners_index.sample+1).to_s
         else
-          board.update_with_index(4,self) if board.cells[4]==" "
-          board.update_with_index(board.available_corners_index.sample,self) if board.available_corners_index
-          board.update_with_index(board.cells.index(" "),self)
+          (board.cells.index(" ")+1).to_s
         end
 # if second to play
 # check about_to_win? place win/block win move : random
@@ -37,11 +36,13 @@ module Players
       else
         if board.check_about_to_win?
           index=board.check_about_to_win?.detect{|x|board.cells[x]==" "}
-          board.update_with_index(index,self)
+          (index+1).to_s
+        elsif board.cells[4]==" "
+          "5"
+        elsif board.available_corners_index
+          (board.available_corners_index.sample +1).to_s
         else
-          board.update_with_index(4,self) if board.cells[4]==" "
-          board.update_with_index(board.available_corners_index.sample,self) if board.available_corners_index
-          board.update_with_index(board.cells.index(" "),self)
+          (board.cells.index(" ")+1).to_s
         end
       end
     end
