@@ -22,11 +22,13 @@ module Players
         end
 
         if board.check_about_to_win?
-          index=board.check_about_to_win?.detect{|x|board.cells[x]==" "}
-          (index+1).to_s
+           index = board.check_about_to_win?.detect{|x|board.cells[x]==" "}
+
+        elsif board.cells[4]==" "
           "5"
         elsif board.available_corners_index
-          (board.available_corners_index.sample+1).to_s
+          index=board.available_corners_index.sample
+          (index+1).to_i
         else
           (board.cells.index(" ")+1).to_s
         end
@@ -35,12 +37,12 @@ module Players
 # otherwise, try to pick middle cell, or corner, or random
       else
         if board.check_about_to_win?
-          index=board.check_about_to_win?.detect{|x|board.cells[x]==" "}
-          (index+1).to_s
+           index = board.check_about_to_win?.detect{|x|board.cells[x]==" "}
+
         elsif board.cells[4]==" "
           "5"
-        elsif board.available_corners_index
-          (board.available_corners_index.sample +1).to_s
+        elsif board.available_corner_index
+          (board.available_corner_index+1).to_i
         else
           (board.cells.index(" ")+1).to_s
         end

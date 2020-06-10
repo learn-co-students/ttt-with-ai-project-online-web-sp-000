@@ -36,7 +36,7 @@ class Game
 
   def turn
     current_move=current_player.move(board)
-    puts current_move
+    binding.pry
     if !board.valid_move?(current_move)
       turn
     else

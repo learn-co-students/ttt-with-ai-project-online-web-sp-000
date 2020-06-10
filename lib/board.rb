@@ -40,13 +40,8 @@ class Board
     number.to_i.between?(1,9)&&!taken?(number)
   end
 
-  def available_corners_index
-    available_corner_index=CORNERS_INDEXS.select {|corner_index| cells[corner_index]==" " }
-    if available_corner_index==[]
-      nil
-    else
-      available_corner_index
-    end
+  def available_corner_index
+    CORNERS_INDEXS.detect {|corner_index| cells[corner_index]==" " }
   end
 
   def check_about_to_win?
