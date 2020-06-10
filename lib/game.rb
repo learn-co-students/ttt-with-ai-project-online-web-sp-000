@@ -36,7 +36,11 @@ class Game
 
   def turn
     current_move=current_player.move(board)
+<<<<<<< HEAD
     binding.pry
+=======
+    puts current_move
+>>>>>>> bc4b2cba472a180c694c4f3ee6a400c689b19134
     if !board.valid_move?(current_move)
       turn
     else
