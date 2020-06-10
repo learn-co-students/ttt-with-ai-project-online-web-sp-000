@@ -26,12 +26,6 @@ class Board
     cells[number.to_i-1]=player.token
   end
 
-  def update_with_index(index,player)
-    cells[index]=player.token
-    (index+1).to_s
-  end
-
-
   def taken?(number)
     position(number)!=" "
   end
@@ -55,6 +49,20 @@ class Board
       to_win<<cells[win_index_3]
       to_win.count(" ")==1&&to_win.uniq.length==2
     end
+  end
+
+  def opponent_token(player)
+    ["O","X"].reject {|x|x==player.token}[0]
+  end
+
+  def possible_winner_token
+    index=check_about_to_win?.detect {|x| x!=" "}
+    cells[index]
+  end
+
+  def win_or_lose_move
+    index=check_about_to_win?.detect{|x|cells[x]==" "}
+    (index+1).to_s
   end
 
   def full?
