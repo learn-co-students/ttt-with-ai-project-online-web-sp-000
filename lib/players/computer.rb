@@ -34,10 +34,10 @@ module Players
 # check about_to_win? place win/block win move : random
 # otherwise, try to pick middle cell, or corner, or random
       else
-        # if board.check_about_to_win?
-        #   index=board.check_about_to_win?.detect{|x|board.cells[x]==" "}
-        #   (index+1).to_s
-        if board.cells[4]==" "
+        if board.check_about_to_win?
+          index=board.check_about_to_win?.detect{|x|board.cells[x]==" "}
+          (index+1).to_s
+        elsif board.cells[4]==" "
           "5"
         elsif board.available_corners_index
           (board.available_corners_index.sample +1).to_s
