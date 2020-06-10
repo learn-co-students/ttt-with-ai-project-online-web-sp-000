@@ -2,20 +2,20 @@
 
 require_relative '../config/environment'
 
-  puts "Welcome to Tic-tac-toe!"
-  puts "what kind of game do you want to play? 0, 1, or 2 player? Please enter 0, 1,or 2 accordingly!"
-  player_number=gets.strip.to_i until [0,1,2].include?(player_number)
+puts "Welcome to Tic-tac-toe!"
+puts "what kind of game do you want to play? 0, 1, or 2 player? Please enter 0, 1,or 2 accordingly!"
+player_number=gets.strip.to_i until [0,1,2].include?(player_number)
 
-  case player_number
-  when 0
-    Game.new(Players::Computer.new("X"),Players::Computer.new("O"),Board.new).play
-  when 1
-    puts "If you want to go first, type in 'X', otherwise, type in 'O'"
+case player_number
+when 0
+  Game.new(Players::Computer.new("X"),Players::Computer.new("O"),Board.new).play
+when 1
+  puts "If you want to go first, type in 'X', otherwise, type in 'O'"
     if gets.strip=="X"
     Game.new(Players::Human.new("X"),Players::Computer.new("O"),Board.new).play
-    elsif gets.strip=="O"
+    else
     Game.new(Players::Computer.new("X"),Players::Human.new("O"),Board.new).play
     end
-  when 2
-    Game.new.play
-  end
+when 2
+  Game.new.play
+end

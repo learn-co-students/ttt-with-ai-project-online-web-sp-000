@@ -14,7 +14,7 @@ module Players
           (corner_index+1).to_s
         elsif board.turn_count==2
           if board.cells[4]=="O"
-            (oppo_corner_index=8-corner_index+1).to_s
+            (9-board.cells.index("X")).to_s
           else
             (board.available_corner_index+1).to_s
           end
@@ -33,7 +33,7 @@ module Players
 # otherwise, try to pick middle cell, or corner, or random
       else
         # binding.pry
-        if board.check_about_to_win?
+        if board.check_about_to_win? #[0,1,2]
            index=board.check_about_to_win?.detect{|x|board.cells[x]==" "}
            (index+1).to_s
 
