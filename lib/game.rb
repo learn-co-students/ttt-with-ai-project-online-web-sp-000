@@ -51,8 +51,12 @@ class Game
   end
 
   def turn
-    cells.count
-    binding.pry
+    puts "Please enter a number 1-9:"
+    input = current_player.move(@board)
+    if @board.valid_move?(input)
+      @board.update(input, current_player)
+    else
+      turn
+    end
   end
-
 end
