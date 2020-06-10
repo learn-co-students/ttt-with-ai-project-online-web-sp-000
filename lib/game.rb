@@ -59,4 +59,14 @@ class Game
       turn
     end
   end
+
+  def play
+    turn unless over? && if won?
+      puts winner
+    end
+
+
+
+
+  end
 end
