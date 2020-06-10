@@ -35,7 +35,6 @@ class Game
   end
 
   def turn
-    puts current_player
     current_move=current_player.move(board)
     if !board.valid_move?(current_move)
       turn
