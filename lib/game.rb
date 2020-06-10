@@ -1,3 +1,4 @@
+require'pry'
 class Game
   WIN_COMBINATIONS = [
     [0,1,2],
@@ -19,14 +20,39 @@ class Game
   end
 
   def current_player
-    board.turn_count.even? == true ? "O" : "X"
-    @player_1 || @player_2
+    board.turn_count.even? == true ? @player_1 : @player_2
   end
+
+
 
   def won?
     WIN_COMBINATIONS.detect do |combo|
-      board.taken?(combo[0]) && board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]]
+      board.taken?(combo[0]+1) && board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]]
     end
+  end
+
+  def draw?
+    !won? && @board.full?
+  end
+
+  def over?
+    if draw? || won?
+      true
+    else
+      false
+    end
+  end
+
+  def winner
+    if var = won?
+      index = var[0]
+      @board.cells[index]
+    end
+  end
+
+  def turn
+    cells.count
+    binding.pry
   end
 
 end
