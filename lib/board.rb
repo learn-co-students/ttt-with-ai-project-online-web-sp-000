@@ -56,7 +56,7 @@ class Board
   end
 
   def update(cell, player)
-    user_input = cell.to_i - 1  ## converts string to number to_i
+    user_input = cell.to_i - 1
     @cells[user_input] = player.token
   end
 
