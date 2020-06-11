@@ -23,8 +23,6 @@ class Game
     board.turn_count.even? == true ? @player_1 : @player_2
   end
 
-
-
   def won?
     WIN_COMBINATIONS.detect do |combo|
       board.taken?(combo[0]+1) && board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]]
@@ -61,9 +59,20 @@ class Game
   end
 
   def play
-    turn unless over? && if won?
-      puts winner
+    turn unless over? || winner
+    while !over?
+      turn
+      break if won?
     end
+
+
+    #
+    # if !over?
+    #   turn
+    #
+    # end
+
+
 
 
 
