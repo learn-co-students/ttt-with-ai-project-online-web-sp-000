@@ -22,8 +22,8 @@ class Game
         @board.cells[winner[0]] == @board.cells[winner[1]] &&
         @board.cells[winner[0]] == @board.cells[winner[2]] &&
         (@board.cells[winner[0]] == "X" || @board.cells[winner[0]] == "O")
+      end
     end
-   end
 
   def draw?
     @board.full? && !won?
@@ -36,9 +36,28 @@ class Game
   def winner
     if winning_combo = won?
         @winner = @board.cells[winning_combo.first]
+      end
     end
-   end
+    
+    def turn
+    player = current_player
+    current_move = current_player.move(@board)
+    if !@board.valid_move?(current_move)
+      turn
+    else
+      @board.update(current_move, player)
+    end
+  end
 
-   def turn
-   end
+  def play
+    while !over?
+      turn
+    end
+    if winner
+      puts "Congratulations #{winner}!"
+    else
+      puts "Cat's Game!"
+    end
+  end
+
 end
