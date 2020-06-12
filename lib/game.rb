@@ -46,6 +46,7 @@ class Game
       turn
     else
       @board.update(current_move, player)
+      @board.display
     end
   end
 
