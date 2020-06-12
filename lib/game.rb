@@ -42,12 +42,13 @@ class Game
       puts "This is turn #{board.turn_count+1}\n"
       board.update(current_move,current_player)
       board.display
+      sleep 3
     end
   end
 
   def play
     while !over?
-      puts "Please input your next move"
+      puts "Please select a square by entering 1-9, 1 for the top left and 9 for the bottom right:"
       turn
     end
     puts "Congratulations #{winner}!" if won?
