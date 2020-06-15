@@ -7,18 +7,18 @@ module Players
         "2"
       elsif board.cells[4] == " "
         "5"
-      elsif board.cells[8] == " "
-        "9"
       elsif board.cells[0] == " "
         "1"
       elsif board.cells[5] == " "
         "6"
+      elsif board.cells[8] == " "
+        "9"
       elsif board.cells[7] == " "
         "8"
       elsif board.cells[6] == " "
         "7"
       else
-        "3"    
+        "3"
       end
     end
   end
