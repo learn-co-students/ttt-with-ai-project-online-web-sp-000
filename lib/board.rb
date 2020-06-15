@@ -27,6 +27,10 @@ class Board
     !@cells.include?(" ")
   end
   
+  def blank?
+    !@cells.include?("X") && !@cells.include?("O")
+  end
+  
   def turn_count 
     @cells.count("X") + @cells.count("O")
   end

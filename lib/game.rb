@@ -18,6 +18,7 @@ class Game
         @player_2 = player_2
         @board = board
     end
+    
 
     def current_player
        @board.turn_count % 2 == 0 ? @player_1 : @player_2 
@@ -79,19 +80,23 @@ class Game
     end
 
     def turn
+      puts "Please enter 1-9"
+      @board.display
         player = current_player
         current_move = player.move(@board)
         if @board.valid_move?(current_move)
             @board.update(current_move,player)
             player = current_player
         else
-            turn
+          puts "Please enter a valid move"
+          turn
         end
     end
 
     def play  
     turn until over?
         if won?
+          @board.display
           puts "Congratulations #{winner}!"
         elsif draw?
           puts "Cat's Game!"
