@@ -18,16 +18,23 @@ module Players
     def move(board)
       
       # First 2 moves:
+      
        if board.blank?
          "3"
         elsif board.cells[4] == " " 
          "5"
+        
+      # Evaluate player and opponent winning moves:
         
       elsif winning_move?(board)
         move = winning_move?(board) + 1 
         
       elsif opponent_winning_move?(board)
         move = opponent_winning_move?(board) + 1 
+        
+        
+        # Additional logic:
+        
        else 
         rand(1..9)
        end
