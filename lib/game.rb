@@ -85,9 +85,7 @@ class Game
     end
 
     def turn
-        puts "Please enter 1-9:"
-        input = gets.strip
-        self.valid_move?(input)
+        self.player.move
     end
 
 end
