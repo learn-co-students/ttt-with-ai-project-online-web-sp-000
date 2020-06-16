@@ -1,3 +1,18 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "How many players?"
+input = gets.strip
+
+if input == "2"
+  game = Game.new 
+elsif input == "1"
+  game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+elsif input == "0" 
+  game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+else 
+  puts "Not a valid input"
+end
+
+game.play

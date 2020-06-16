@@ -25,6 +25,7 @@ module Players
          "5"
         
       # Evaluate player and opponent winning moves:
+
       elsif possible_winning_moves?(board)
         move = possible_winning_moves?(board).to_s.to_i + 1
 
@@ -38,6 +39,15 @@ module Players
       elsif opponent_winning_move?(board)
         move = opponent_winning_move?(board) + 1 
   
+
+        
+      elsif winning_move?(board)
+        move = winning_move?(board) + 1 
+        
+      elsif opponent_winning_move?(board)
+        move = opponent_winning_move?(board) + 1 
+        
+
         # Additional logic:
         
        else 
@@ -45,6 +55,7 @@ module Players
        end
        
     end
+
 
     def possible_winning_moves?(board)
     
@@ -94,6 +105,7 @@ module Players
       winning_moves = winning_moves.compact
     
     end
+
 
     def winning_move?(board)
       
