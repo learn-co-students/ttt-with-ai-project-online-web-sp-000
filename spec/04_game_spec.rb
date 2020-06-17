@@ -177,7 +177,7 @@ describe 'Game' do
       allow($stdout).to receive(:puts)
 
       expect(game.player_1).to receive(:gets).and_return("1")
-
+      
       game.turn
     end
 
