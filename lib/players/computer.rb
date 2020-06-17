@@ -33,7 +33,7 @@ module Players
                 #binding.pry
             else
                 @computer_move = rand(1..9).to_s
-                puts "took random"
+                
             end
 
             if board.valid_move?(@computer_move)
@@ -133,7 +133,7 @@ module Players
                 
             }
             #check if opponent is one move away from winning and block
-            puts "blocked"
+            puts "blocked!"
             WIN_COMBINATIONS.each {|c| 
                 
             if (board.cells[c[0]] == @opponent_token && board.cells[c[1]] == @opponent_token && board.cells[c[2]] == " ") ||
