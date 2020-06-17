@@ -114,4 +114,55 @@ class Game
         end
     end
 
+    def start
+        #Greets user with a message.
+        puts "Welcome to CLI Tic Tac Toe! Thanks for playing!"
+
+        # Prompt the user for what kind of game they want to play, 0,1, or 2 player.
+        puts "What kind of game would you like to play?"
+        puts "Enter: '0' for computer vs. computer, '1' for human vs. computer, and '2' for human vs. human."
+        input = gets.strip
+
+        # Ask the user for who should go first and be "X".
+        puts "Who should go first and be 'X'?"
+        puts "Enter: 'player 1' or 'player 2'"
+        token_input = gets.strip
+
+        # Use the input to correctly initialize a Game with the appropriate player types and token values.
+        case input
+        when "0"
+            if token_input == "player 1" || token_input == "Player 1"
+                Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+            elsif token_input == "player 2" || token_input == "Player 2"
+                Game.new(Players::Computer.new("O"), Players::Computer.new("X"))
+            end
+        when "1"
+            if token_input == "player 1" || token_input == "Player 1"
+                Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+            elsif token_input == "player 2" || token_input == "Player 2"
+                Game.new(Players::Human.new("O"), Players::Computer.new("X"))
+            end
+        when "2"
+            if token_input == "player 1" || token_input == "Player 1"
+                Game.new
+            elsif token_input == "player 2" || token_input == "Player 2"
+                Game.new(Players::Human.new("O"), Players::Human.new("X"))
+            end
+        end
+
+        # When the game is over, the CLI should prompt the user if they would like to play again
+        # and allow them to choose a new configuration for the game as described above.
+        if self.over?
+            puts "Would you like to play again?"
+            puts "Enter: 'yes' or 'no'."
+            over_input = gets.strip
+            if over_input == "yes" || over_input == "Yes"
+                start
+            elsif over_input == "no" || over_input == "No"
+                break
+            end
+        end
+        # If the user doesn't want to play again, exit the program.
+    end
+
 end
