@@ -22,17 +22,18 @@ module Players
             elsif corner_available?(board) && board.turn_count <= 2
                 
                 @computer_move = @corners[rand(0..@corners.length - 1)]
-
+                puts "took corner"
                 #binding.pry
             #elsif side_available?(board) && board.turn_count <= 2
             #    @computer_move = @side[rand(0..@side.length - 1)]
                 #binding.pry
             elsif one_move_away?(board)
+                
                 @computer_move = one_move_away?(board)
                 #binding.pry
             else
                 @computer_move = rand(1..9).to_s
-
+                puts "took random"
             end
 
             if board.valid_move?(@computer_move)
@@ -95,17 +96,31 @@ module Players
             #     end
             # }
             # @available_cells = @available_cells.sort
+            # old code
+            # if (board.cells[c[0]] == "X" && board.cells[c[1]] == "X" && board.cells[c[2]] == " ") ||
+            #     (board.cells[c[0]] == "O" && board.cells[c[1]] == "O" && board.cells[c[2]] == " ") ||
+            #     (board.cells[c[0]] == "X" && board.cells[c[1]] == " " && board.cells[c[2]] == "X") ||
+            #     (board.cells[c[0]] == "O" && board.cells[c[1]] == " " && board.cells[c[2]] == "O") ||
+            #     (board.cells[c[0]] == " " && board.cells[c[1]] == "X" && board.cells[c[2]] == "X") ||
+            #     (board.cells[c[0]] == " " && board.cells[c[1]] == "O" && board.cells[c[2]] == "O")
             
+            @computer_token = self.token
+            if @computer_token == "X"
+                @opponent_token = "O"
+            else
+                @opponent_token = "X"
+            end
+            #binding.pry
+            #check if self is one move away from winning
             WIN_COMBINATIONS.each {|c| 
                 
-                if (board.cells[c[0]] == "X" && board.cells[c[1]] == "X" && board.cells[c[2]] == " ") ||
-                   (board.cells[c[0]] == "O" && board.cells[c[1]] == "O" && board.cells[c[2]] == " ") ||
-                   (board.cells[c[0]] == "X" && board.cells[c[1]] == " " && board.cells[c[2]] == "X") ||
-                   (board.cells[c[0]] == "O" && board.cells[c[1]] == " " && board.cells[c[2]] == "O") ||
-                   (board.cells[c[0]] == " " && board.cells[c[1]] == "X" && board.cells[c[2]] == "X") ||
-                   (board.cells[c[0]] == " " && board.cells[c[1]] == "O" && board.cells[c[2]] == "O")
+                if (board.cells[c[0]] == @computer_token && board.cells[c[1]] == @computer_token && board.cells[c[2]] == " ") ||
+                   (board.cells[c[0]] == @computer_token && board.cells[c[1]] == " " && board.cells[c[2]] == @computer_token) ||
+                   (board.cells[c[0]] == " " && board.cells[c[1]] == @computer_token && board.cells[c[2]] == @computer_token) 
+                   
            
                    #binding.pry
+                   #return position to win
                    if board.cells[c[0]] == " "
                     return (c[0] + 1).to_s
                    elsif board.cells[c[1]] == " "
@@ -116,6 +131,26 @@ module Players
                    #c
                 end
                 
+            }
+            #check if opponent is one move away from winning and block
+            puts "blocked"
+            WIN_COMBINATIONS.each {|c| 
+                
+            if (board.cells[c[0]] == @opponent_token && board.cells[c[1]] == @opponent_token && board.cells[c[2]] == " ") ||
+                (board.cells[c[0]] == @opponent_token && board.cells[c[1]] == " " && board.cells[c[2]] == @opponent_token) ||
+                (board.cells[c[0]] == " " && board.cells[c[1]] == @opponent_token && board.cells[c[2]] == @opponent_token) 
+       
+               #binding.pry
+               if board.cells[c[0]] == " "
+                return (c[0] + 1).to_s
+               elsif board.cells[c[1]] == " "
+                return (c[1] + 1).to_s
+               elsif board.cells[c[2]] == " "
+                return (c[2] + 1).to_s
+               end
+               #c
+            end
+            
             }
             false
         end
