@@ -22,7 +22,7 @@ module Players
             elsif corner_available?(board) && board.turn_count <= 2
                 
                 @computer_move = @corners[rand(0..@corners.length - 1)]
-                puts "took corner"
+                
                 #binding.pry
             #elsif side_available?(board) && board.turn_count <= 2
             #    @computer_move = @side[rand(0..@side.length - 1)]
@@ -133,7 +133,7 @@ module Players
                 
             }
             #check if opponent is one move away from winning and block
-            puts "blocked!"
+            
             WIN_COMBINATIONS.each {|c| 
                 
             if (board.cells[c[0]] == @opponent_token && board.cells[c[1]] == @opponent_token && board.cells[c[2]] == " ") ||
@@ -141,6 +141,7 @@ module Players
                 (board.cells[c[0]] == " " && board.cells[c[1]] == @opponent_token && board.cells[c[2]] == @opponent_token) 
        
                #binding.pry
+               puts "blocked!"
                if board.cells[c[0]] == " "
                 return (c[0] + 1).to_s
                elsif board.cells[c[1]] == " "
