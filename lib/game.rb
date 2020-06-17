@@ -84,8 +84,34 @@ class Game
         end
     end
 
+    # Applies current player's token to the desired board space.
+    # Leveraging #move within the Human class, input is received. The desired space is then checked for validity.
+    # If the move is valid, then the board is updated to reflected the new move and then the updated board is displayed.
+    # If the move is invalid, the method starts again, by asking for user input.
     def turn
-        self.player.move
+        current_move = current_player.move(@board)
+        current_token = current_player.token
+        if self.board.valid_move?(current_move)
+            self.board.update(current_move, current_player)
+            self.board.display
+        else
+            turn
+        end
+    end
+
+    # Allows for a full playthrough of the game.
+    # Until the game is over, #turn will be called.
+    # Once the game is over, it verifies whether the game is over due to a win or a draw and outputs the approriate string.
+    def play
+        until self.over? do
+            turn
+        end
+
+        if self.won?
+            puts "Congratulations #{self.winner}!"
+        elsif self.draw?
+            puts "Cat's Game!"
+        end
     end
 
 end
