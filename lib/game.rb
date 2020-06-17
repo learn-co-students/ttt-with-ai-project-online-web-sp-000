@@ -159,7 +159,7 @@ class Game
             if over_input == "yes" || over_input == "Yes"
                 start
             elsif over_input == "no" || over_input == "No"
-                break
+                
             end
         end
         # If the user doesn't want to play again, exit the program.
