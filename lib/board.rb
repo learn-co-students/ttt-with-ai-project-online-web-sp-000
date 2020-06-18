@@ -49,6 +49,7 @@ class Board
         # binding.pry
         if input_to_int < 1 || input_to_int > 9
             puts 'invalid'
+            # binding.pry
             false
         elsif input_to_int >= 1 && input_to_int <= 9 && @cells[int_to_index] != "X" && @cells[int_to_index] != "O"
             true

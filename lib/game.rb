@@ -94,6 +94,7 @@ class Game
         if self.board.valid_move?(current_move)
             self.board.update(current_move, current_player)
             self.board.display
+            # binding.pry
         else
             turn
         end
@@ -117,6 +118,7 @@ class Game
     def start
         #Greets user with a message.
         puts "Welcome to CLI Tic Tac Toe! Thanks for playing!"
+        puts "To exit at any time, enter 'control+C'."
 
         # Prompt the user for what kind of game they want to play, 0,1, or 2 player.
         puts "What kind of game would you like to play?"
@@ -127,26 +129,29 @@ class Game
         puts "Who should go first and be 'X'?"
         puts "Enter: 'player 1' or 'player 2'"
         token_input = gets.strip
+        until token_input == "player 1" || token_input == "Player 1" || token_input == "player 2" || token_input == "Player 2" do
+            puts "Invalid. Please enter 'player 1' or 'player 2'."
+            token_input = gets.strip
+        end
 
         # Use the input to correctly initialize a Game with the appropriate player types and token values.
-        case input
-        when "0"
+        if input == "0"
             if token_input == "player 1" || token_input == "Player 1"
-                Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+                Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
             elsif token_input == "player 2" || token_input == "Player 2"
-                Game.new(Players::Computer.new("O"), Players::Computer.new("X"))
+                Game.new(Players::Computer.new("O"), Players::Computer.new("X")).play
             end
-        when "1"
+        elsif input == "1"
             if token_input == "player 1" || token_input == "Player 1"
-                Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+                Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
             elsif token_input == "player 2" || token_input == "Player 2"
-                Game.new(Players::Human.new("O"), Players::Computer.new("X"))
+                Game.new(Players::Human.new("O"), Players::Computer.new("X")).play
             end
-        when "2"
+        elsif input == "2"
             if token_input == "player 1" || token_input == "Player 1"
-                Game.new
+                Game.new.play
             elsif token_input == "player 2" || token_input == "Player 2"
-                Game.new(Players::Human.new("O"), Players::Human.new("X"))
+                Game.new(Players::Human.new("O"), Players::Human.new("X")).play
             end
         end
 
