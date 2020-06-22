@@ -141,12 +141,15 @@ module Players
                 (board.cells[c[0]] == " " && board.cells[c[1]] == @opponent_token && board.cells[c[2]] == @opponent_token) 
        
                #binding.pry
-               puts "blocked!"
+               
                if board.cells[c[0]] == " "
+                puts "blocked!"
                 return (c[0] + 1).to_s
                elsif board.cells[c[1]] == " "
+                puts "blocked!"
                 return (c[1] + 1).to_s
                elsif board.cells[c[2]] == " "
+                puts "blocked!"
                 return (c[2] + 1).to_s
                end
                #c
