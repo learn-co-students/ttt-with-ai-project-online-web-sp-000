@@ -25,7 +25,7 @@ class Board
     cells[input.to_i-1]
   end
 
-
+#Is board full?
   def full?
     cells.all? do |character|
       if character == "X" || character == "O"
@@ -51,7 +51,5 @@ class Board
   def update(input, player)
     cells[input.to_i-1] = player.token
   end
-  
-  
   
 end
