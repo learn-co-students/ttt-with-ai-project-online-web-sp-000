@@ -24,4 +24,59 @@ class Game
     board.turn_count % 2 == 0 ? player_1 : player_2
   end
 
+  def won?
+    WIN_COMBINATIONS.detect do |win_combo|
+      board.cells[win_combo[0]] == board.cells[win_combo[1]] && board.cells[win_combo[1]] == board.cells[win_combo[2]] && (board.cells[win_combo[0]] == "X" || board.cells[win_combo[0]] == "O")
+    end
+  end
+
+  def draw?
+    if !won? && !board.cells.include?(" ")
+      true
+    else
+      false
+    end
+  end
+
+  def over?
+    if won? || draw?
+      true
+    else
+      false
+    end
+  end
+
+  def winner
+    if won?
+      board.cells[won?[0]]
+    else
+      nil
+    end
+  end
+
+  def turn
+    puts "Now #{current_player}'s turn.'"
+    input = current_player.move(board)
+    if board.valid_move?(input)
+      board.update(input, current_player)
+    else
+      puts "Please enter other number."
+      turn
+    end
+  end
+
+  def play
+    puts "Welcome to Tic Tac Toe. Please enter 1-9."
+    input = gets.strip.to_i
+    until over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end
+
+  end
+
 end
