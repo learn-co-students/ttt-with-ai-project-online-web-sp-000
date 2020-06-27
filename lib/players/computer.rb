@@ -16,8 +16,17 @@ module Players
     ]
     CORNERS = [0, 2, 6, 8]
 
+    # def valid_moves(input)
+    #   if input.to_i.between?(1,9) && !taken?(input)
+    #     true
+    #   else
+    #     false
+    #   end
+    # end
+
     def move(board)
       @board = board
+      valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
       case
       when winning_move != nil
@@ -31,8 +40,8 @@ module Players
       when corner != nil
         input = corner + 1
       else
-        until != board.taken?(input)
-          input = (1..9).to_a.simplest
+        until !board.taken?(input)
+          input = valid_moves.sample
         end
       end
     end
@@ -47,13 +56,13 @@ module Players
 
     def opposite_corner
       case
-      when board.taken(1) && !board.taken(9)
+      when board.taken?(1) && !board.taken?(9)
         9
-      when board.taken(9) && !board.taken(1)
+      when board.taken?(9) && !board.taken?(1)
         1
-      when board.taken(3) && !board.taken(7)
+      when board.taken?(3) && !board.taken?(7)
         7
-      when board.taken(7) && !board.taken(3)
+      when board.taken?(7) && !board.taken?(3)
         3
       end
     end
