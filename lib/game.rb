@@ -55,7 +55,7 @@ class Game
   end
 
   def turn
-    puts "Now #{current_player}'s turn.'"
+    # puts "Now #{current_player}'s turn.'"
     input = current_player.move(board)
     if board.valid_move?(input)
       board.update(input, current_player)
@@ -66,7 +66,7 @@ class Game
   end
 
   def play
-    puts "Welcome to Tic Tac Toe. Please enter 1-9."
+    # puts "Welcome to Tic Tac Toe. Please enter 1-9."
     input = gets.strip.to_i
     until over?
       turn
