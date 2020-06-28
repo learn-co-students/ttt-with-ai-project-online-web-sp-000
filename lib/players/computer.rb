@@ -32,7 +32,7 @@ module Players
       when winning_move != nil
         input = (win_index + 1).to_s
       when blocking_move != nil
-        input = (block_index + 1).to_s
+        input = block_index + 1
       when center? != nil
         input = "5"
       when opposite_corner != nil
