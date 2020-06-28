@@ -30,15 +30,15 @@ module Players
 
       case
       when winning_move != nil
-        input = win_index + 1
+        input = (win_index + 1).to_s
       when blocking_move != nil
-        input = block_index + 1
+        input = (block_index + 1).to_s
       when center? != nil
-        input = 5
+        input = "5"
       when opposite_corner != nil
         input = opposite_corner
       when corner != nil
-        input = corner + 1
+        input = (corner + 1).to_s
       else
         until !board.taken?(input)
           input = valid_moves.sample
@@ -57,13 +57,13 @@ module Players
     def opposite_corner
       case
       when board.taken?(1) && !board.taken?(9)
-        9
+        "9"
       when board.taken?(9) && !board.taken?(1)
-        1
+        "1"
       when board.taken?(3) && !board.taken?(7)
-        7
+        "7"
       when board.taken?(7) && !board.taken?(3)
-        3
+        "3"
       end
     end
 
