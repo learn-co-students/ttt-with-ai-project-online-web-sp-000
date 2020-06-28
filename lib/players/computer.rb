@@ -29,19 +29,19 @@ module Players
       valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
       case
-      when winning_move != nil
-        input = (win_index + 1).to_s
-      when blocking_move != nil
-        input = block_index + 1
-      when center? != nil
-        input = "5"
-      when opposite_corner != nil
-        input = opposite_corner
-      when corner != nil
-        input = (corner + 1).to_s
+      when winning_move
+        (winning_move + 1).to_s
+      when blocking_move
+        (blocking_move + 1).to_s
+      when center?
+        "5"
+      when opposite_corner
+        opposite_corner
+      when corner
+        (corner + 1).to_s
       else
         until !board.taken?(input)
-          input = valid_moves.sample
+          valid_moves.sample
         end
       end
     end
@@ -77,6 +77,7 @@ module Players
       end
       if win != nil
         win_index = win.find {|index| board.cells[index] == " "}
+        win_index
       end
     end
 
@@ -86,6 +87,7 @@ module Players
       end
       if win != nil
         block_index = win.find {|index| board.cells[index] == " "}
+        block_index
       end
     end
 
