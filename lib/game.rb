@@ -78,14 +78,26 @@ class Game
   end
 
   def turn
-    puts "Please enter 1-9 for your turn:"
-    user_input = gets.chomp
-    index = board.position(user_input)
-    if board.valid_move?(index)
-      board.update(index, current_player)
-      board.display
+    player = current_player
+    current_move = player.move(@board)
+    # move_index = Players.move.to_i - 1
+    if @board.valid_move?(current_move)
+      @board.update(current_move, player)
+      @board.display
     else
       turn
+    end
+  end
+
+  def play
+    until over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts ""
+      puts "Cat's Game!"
     end
   end
 end
