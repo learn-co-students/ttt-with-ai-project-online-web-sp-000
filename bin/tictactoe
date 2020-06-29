@@ -1,3 +1,52 @@
 #!/usr/bin/env ruby
 
-require_relative '../config/environment'
+require "pry"
+
+require_relative "../config/environment"
+
+def greeting
+  puts "Hello, welcome to TicTacToe."
+  puts "What kind of game would you like to play? Press 0 for 0 human players, 1 for 1-player, 2 for 2-player, or 3 to exit the program."
+  user_input = gets.chomp
+  if user_input == "0"
+    #create instance of game and pass it
+    game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+  elsif user_input == "1"
+    game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+  elsif user_input == "2"
+    game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+  elsif user_input == "3"
+    exit!
+  end
+  game.play
+  puts ""
+  greeting
+end
+
+def who_should_go_first
+  puts "Who should go first and be X?"
+  user_input = gets.chomp
+  #   player_one = Player.new("X")
+  #   player_two = Player.new("O")
+  #   Game.new(player_one, player_two, board)
+  # end
+
+  human_player = Player.new("X")
+  computer_player = Player.new("O")
+  player_array = []
+  player_array << human_player
+  player_array << computer_player
+  player_array.sample #get this return value and then figure out what the other player is based on what is returned. then we should get one of the two players.
+  binding.pry
+  game = Game.new(human_player, computer_player)
+  game.play
+end
+
+#create generator that generates 0, 1 or 2 that
+
+#maybe have user enter player_1, player_2, or a computer player?
+# Ask the user for who should go first and be "X".
+# Use the input to correctly initialize a Game with the appropriate player types and token values.
+
+greeting
+who_should_go_first
