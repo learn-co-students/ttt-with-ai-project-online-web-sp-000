@@ -1,9 +1,17 @@
+<<<<<<< HEAD
 #  require 'pry'
 
+=======
+>>>>>>> ac5db6b2a229f98f73db06e0715fe2449f54bd96
 class Board
 
   attr_accessor :cells
 
+<<<<<<< HEAD
+=======
+  @cells = []
+
+>>>>>>> ac5db6b2a229f98f73db06e0715fe2449f54bd96
   def initialize
     self.reset!
   end
@@ -13,6 +21,7 @@ class Board
   end
 
   def display
+<<<<<<< HEAD
     puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
     puts "-----------"
     puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
@@ -22,6 +31,16 @@ class Board
 
  # binding.pry
 
+=======
+    puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2] }"
+    puts "-----------"
+    puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5] }"
+    puts "-----------"
+    puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8] }"
+    puts "-----------"
+  end
+
+>>>>>>> ac5db6b2a229f98f73db06e0715fe2449f54bd96
   def position(position)
     index = position.to_i - 1
     @cells[index]
@@ -40,8 +59,11 @@ class Board
     @cells.count("X") + @cells.count("O")
   end
 
+<<<<<<< HEAD
  # binding.pry
 
+=======
+>>>>>>> ac5db6b2a229f98f73db06e0715fe2449f54bd96
   def taken?(position)
     index = position.to_i - 1
     if @cells[index] != " "
@@ -55,4 +77,9 @@ class Board
     !taken?(position) && position.to_i > 0 && position.to_i <= 9
   end
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> ac5db6b2a229f98f73db06e0715fe2449f54bd96
 end

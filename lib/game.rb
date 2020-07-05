@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> ac5db6b2a229f98f73db06e0715fe2449f54bd96
 class Game
 
   attr_accessor :board, :player_1, :player_2
@@ -48,6 +51,7 @@ class Game
   end
 
   def turn
+<<<<<<< HEAD
     puts "Please enter a number 1-9:"
     input = current_player.move(@board)
     if @board.valid_move?(input)
@@ -67,6 +71,13 @@ class Game
     elsif draw?
       puts "Cat's Game!"
     end
+=======
+    input = gets.strip
+  end
+
+  def play
+
+>>>>>>> ac5db6b2a229f98f73db06e0715fe2449f54bd96
   end
 
 end
