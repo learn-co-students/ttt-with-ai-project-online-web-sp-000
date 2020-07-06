@@ -1,26 +1,20 @@
-module Players
-    class Computer < Player
+require 'pry'
 
-    def move(board)
-        if board.cells[4] == " "
-            "5"
-          elsif board.cells[0] == " "
-            "1"
-          elsif board.cells[2] == " "
-            "3"
-          elsif board.cells[6] == " "
-            "7"
-          elsif board.cells[8] == " "
-            "9"
-          elsif board.cells[1] == " "
-            "2"
-          elsif board.cells[3] == " "
-            "4"
-          elsif board.cells[5] == " "
-            "6"
-          elsif board.cells[7] == " "
-            "8"
-        end
-    end
-    end
+module Players
+	class Computer < Player
+		def move(board)
+		move = nil	
+			if !board.taken?("5")
+				move = "5"
+			elsif board.turn_count == 1
+				move = "3"
+			elsif board.turn_count == 2
+				move = [1,3,7.9].detect {|open| board.taken?(open) == false }.to_s
+			else
+				move = [1, 2, 3, 4, 5, 6, 7, 8, 9].detect {|open| board.taken?(open) == false }.to_s
+			end
+		move
+		end
+	end
+
 end
