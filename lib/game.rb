@@ -106,5 +106,24 @@ class Game
     end
   end
 
+  def self.start
+    puts "Welcome to Tic Tac Toe!"
+    game = Game.new
+    puts "What kind of game do you want to play? 0, 1, or 2 players?"
+    puts "Type just the number: 0, 1, or 2"
+    gtype_input = gets.strip
+    if gtype_input == 0
+      game.player_1 == Players::Computer.new("X") && game.player_2 == Players::Computer.new("O")
+    elsif gtype_input == 1
+      game.player_1 == Players::Human.new("X") && game.player_2 == Players::Computer.new("O")
+    elsif gtype_input == 2
+      game.player_1 == Players::Human.new("X") && game.player_2 == Players::Human.new("O")
+    end
+
+    until game.won?
+      game.play
+    end
+  end
+
 
 end
