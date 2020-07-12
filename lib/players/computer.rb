@@ -10,6 +10,7 @@ module Players
     #   [0,4,8],  # Diagonal 1 (negative slope)
     #   [2,4,6]   # Diagonal 2 (positive slope)
     # ]
+
     def move(board)
 
     #   if board.turn_count == 0
@@ -21,6 +22,13 @@ module Players
     #     end
     #   end
     # end
+current_player = board.current_player
+
+if game.current_player == game.player_1
+  other_player == game.player_2
+else
+  other_player == game.player_1
+end
 
 
 
@@ -52,14 +60,20 @@ when 9
 
 end
 
+  return input
+end
 
 
 
+# def other_player
+#   if game.current_player == game.player_1
+#     other_player == game.player_2
+#   else
+#   other_player == game.player_1
+# end
+# return other_player
+# end
 
-
-
-      return input
-    end
 
 def my_positions
   my_pos = []
@@ -83,6 +97,16 @@ end
 
 def empty_positions
   empty_positions = ((1..9).to_a - my_positions) - their_positions
+end
+
+
+def two_in_a_rows?(player)
+  case player
+  when current_player
+my_matches = WIN_COMBINATIONS.select{|combo| (my_positions & combo).count == 2}
+  when !current_player
+their_matches = WIN_COMBINATIONS.select{|combo| (their_positions & combo).count == 2}
+  end
 end
 
 
