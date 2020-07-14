@@ -82,6 +82,31 @@ def won?
     end
   end
 
+  def config
+     puts "Welcome to Tic-Tac-Toe!"
+     puts "How many people are playing? (0-2)"
+     number_of_players = gets.strip
+     case number_of_players
+     when "2"
+        Game.new()
+      when "1"
+        puts "Would you like to be X or O?"
+        token_human = gets.strip.upcase
+        if token_human == "X"
+          token_comp == "O"
+        else
+          token_comp == "X"
+        end
+       puts "Who should go first? (1: yourself, 2: computer)"
+       first = gets.strip
+       if first == "1"
+         Game.new(Players::Human.new(token_human), Players::Computer(token_comp), Board.new)
+       elsif first == "2"
+         Game.new(Players::Computer(token_comp), Players::Human.new(token_human), Board.new)
+         game.play
+     end
+  end
+
   def play
     while ((board.turn_count < 9) && !over?)
       turn
