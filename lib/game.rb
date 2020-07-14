@@ -1,3 +1,4 @@
+require 'pry'
 class Game
   
   attr_accessor :board, :player_1, :player_2
@@ -8,6 +9,7 @@ class Game
     @board = board
     @player_1 = player_1
     @player_2 = player_2
+    @board.display
   end
   
   def current_player
@@ -44,7 +46,7 @@ class Game
     if @board.full? == true && won? == false
       true
     elsif @board.full? == false && won? == true
-      true
+      false
     else
       false
     end
@@ -62,26 +64,70 @@ class Game
     if won? == false
       nil
     else
-      winning_array = won?
-      winning_array_int = winning_array[0].to_i
-      if @board.cells[winning_array_int] == player_1.token
+      if @board.cells[won?[0]] == player_1.token
         player_1.token
-      elsif @board.cells[winning_array_int] == player_2.token
+      elsif @board.cells[won?[0]] == player_2.token
         player_2.token
       end
     end
   end
   
   def turn
-    puts "Please enter 1-9:"
-    input = gets.chomp
-    index = input.to_i
-    if @board.valid_move?(index)
-      @board.update(index, current_player)
+    move = current_player.move(@board)
+    if @board.valid_move?(move) == true
+      @board.update(move, current_player)
       @board.display
     else
+      @board.display
       turn
     end
   end
+  
+
+  def play
+    until over? == true
+      turn
+    end
     
+    if won? != false
+      puts "Congratulations #{winner}!"
+      restart?
+    elsif draw? == true
+      puts "Cat's Game!"
+      restart?
+    end
+  end
+    
+  def restart?
+    puts "Would you like to play again? [y/n]"
+    input = gets.chomp
+    if input == "y"
+      Game.start
+    end
+  end
+  
+  def self.start
+    puts "Hello, and welcome to Tic Tac Toe!"
+    puts "How many Players? (0, 1 or 2)"
+    
+    input = gets.chomp
+    
+    if input == "1" || input == "2"
+      puts "Which player will go first and be X (1, or 2)"
+        input_2 = gets.chomp
+        if input == "1" && input_2 == "1"
+          Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new).play
+        elsif input == "1" && input_2 == "2"
+          Game.new(Players::Human.new("O"), Players::Computer.new("X"), Board.new).play
+        elsif input == "2"
+          Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new).play
+          
+        end
+    end
+    
+    if input == "0"
+      puts "Starting automated game"
+        Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
+    end
+  end
 end
