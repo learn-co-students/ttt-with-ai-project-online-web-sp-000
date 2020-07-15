@@ -1,5 +1,7 @@
 class Game
 
+
+
   WIN_COMBINATIONS = [
     [0,1,2],  # Top row
     [3,4,5],  # Middle row (horizontal)
@@ -18,6 +20,16 @@ def initialize(p1 = Players::Human.new("X"), p2 = Players::Human.new("O"), board
   @board = board
   @player_1 = p1
   @player_2 = p2
+  save
+end
+
+
+def save
+  @@current_game = self
+end
+
+def self.current_game
+return @@current_game
 end
 
 def current_player
@@ -73,6 +85,7 @@ def won?
   end
 
   def turn
+    @board.display
     input = current_player.move(@board)
     if !board.valid_move?(input)
       puts "Invalid input---input must contain an integer, 1-9, and cell must not be occupied."
@@ -82,33 +95,39 @@ def won?
     end
   end
 
-  def config
+  def self.config
      puts "Welcome to Tic-Tac-Toe!"
      puts "How many people are playing? (0-2)"
      number_of_players = gets.strip
      case number_of_players
      when "2"
-        Game.new()
+       puts "X goes first."
+        new_game = Game.new()
       when "1"
         puts "Would you like to be X or O?"
         token_human = gets.strip.upcase
+        token_comp = nil
         if token_human == "X"
           token_comp == "O"
         else
           token_comp == "X"
         end
+
        puts "Who should go first? (1: yourself, 2: computer)"
        first = gets.strip
        if first == "1"
-         Game.new(Players::Human.new(token_human), Players::Computer(token_comp), Board.new)
+         new_game = Game.new(Players::Human.new(token_human), Players::Computer.new(token_comp), Board.new)
        elsif first == "2"
-         Game.new(Players::Computer(token_comp), Players::Human.new(token_human), Board.new)
-         game.play
+         new_game = Game.new(Players::Computer.new(token_comp), Players::Human.new(token_human), Board.new)
      end
+     when "0"
+        new_game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+   end
+     new_game.play
   end
 
   def play
-    while ((board.turn_count < 9) && !over?)
+    while ((board.turn_count < 9) && (self.over? != true))
       turn
     end
 
@@ -118,5 +137,24 @@ def won?
       puts "Congratulations #{winner}!"
     end
   end
+
+def replay?
+  puts "Would you like to play again? (y/n)"
+  answer = gets.strip.downcase
+  if (answer == "yes") || (answer == "y")
+    puts "Same configuration? (y/n)"
+    answer == gets.strip.downcase
+      if (answer == "yes") || (answer == "y")
+        self.board.reset!
+      else
+        new_game = Game.config
+      end
+      self.play
+    else
+      return false
+    end
+
+end
+
 
 end

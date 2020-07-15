@@ -1,3 +1,4 @@
+require 'pry'
 class Board
 
 attr_accessor :cells
@@ -50,7 +51,7 @@ def taken?(input)
 end
 
 def valid_move?(input)
-  input = input.to_i
+  binding.pry
   if input.between?(1, 9) && !taken?(input)
     return true
   else
