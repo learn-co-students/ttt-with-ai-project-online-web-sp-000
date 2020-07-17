@@ -3,8 +3,10 @@ class Board
 
 attr_accessor :cells
 
+
   def initialize
     @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    # @turn_count = 0
   end
 
   def cells
@@ -28,18 +30,20 @@ attr_accessor :cells
     return @cells[position]
   end
 
+
   def full?
-    return @cells.none? {|i| (i == " ") || (i == "")}
+    # !(self.cells.any?{|i| (i == " ") || (i == "")})
+    return !(self.cells.any?{|i| (i == " ") || (i == "")})
   end
 
-  def turn_count
-  count = 0
-  @cells.each { |cell|
-    if (cell == "X") || (cell == "O")
-      count += 1
-    end}
-  return count
-end
+#   def turn_count
+#   @cells.each { |cell|
+#     # if taken?((@cells.index(cell) + 1).to_s)
+#     if taken?(cell)
+#       @turn_count += 1
+#     end}
+#   return @turn_count
+# end
 
 def taken?(input)
   contents = position(input)
@@ -50,17 +54,24 @@ def taken?(input)
   end
 end
 
+def empty_positions
+  # empty_positions = ((1..9).to_a - self.positions) - them.positions
+  return @cells.select{ |cell| !taken?(cell) }
+end
+
 def valid_move?(input)
-  binding.pry
-  if input.between?(1, 9) && !taken?(input)
-    return true
+  if ((input.to_i >= 1) && (input.to_i <= 9)) && !taken?(input)
+    # if (1..9).include?(input.to_i) && !taken?(input)
+      return true
   else
-    return false
+      return false
   end
 end
 
+
 def update(input, player)
-  @cells[input.to_i - 1] = player.token
+  input = input.to_i - 1
+  @cells[input] = player.token
 end
 
 end

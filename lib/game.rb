@@ -1,5 +1,7 @@
+require 'pry'
 class Game
 
+@@current_game = nil
 
 
   WIN_COMBINATIONS = [
@@ -13,13 +15,14 @@ class Game
     [2,4,6]   # Diagonal 2 (positive slope)
   ]
 
-  attr_accessor :board, :player_1, :player_2
+  attr_accessor :board, :player_1, :player_2, :turn_count
 
 
 def initialize(p1 = Players::Human.new("X"), p2 = Players::Human.new("O"), board = Board.new)
   @board = board
   @player_1 = p1
   @player_2 = p2
+  @turn_count = 0
   save
 end
 
@@ -33,12 +36,24 @@ return @@current_game
 end
 
 def current_player
-  if @board.turn_count.even?
+  if @turn_count.even?
     return @player_1
-  elsif @board.turn_count.odd?
+  elsif @turn_count.odd?
     return @player_2
   end
 end
+
+
+# def positions(player)
+#
+# @board.cells.each_index.select{|i| board.cells[i] == player.token}
+#
+#
+#
+# end
+
+
+
 
 def won?
 
@@ -57,16 +72,16 @@ def won?
        return x_winning_index
   elsif o_winning_index
        return o_winning_index
-    end
   end
+end
 
-  def draw?
-    if board.full? && !won?
-      return true
-    else
-      return false
-    end
+def draw?
+  if board.full? && !won?
+    return true
+  else
+    return false
   end
+end
 
   def over?
     if board.full? || won? || draw?
@@ -87,11 +102,13 @@ def won?
   def turn
     @board.display
     input = current_player.move(@board)
-    if !board.valid_move?(input)
+    if @board.valid_move?(input)
+      board.update(input, current_player)
+      current_player.positions << (input.to_i - 1)
+      @turn_count += 1
+    else
       puts "Invalid input---input must contain an integer, 1-9, and cell must not be occupied."
       turn
-    else
-      board.update(input, current_player)
     end
   end
 
@@ -103,14 +120,14 @@ def won?
      when "2"
        puts "X goes first."
         new_game = Game.new()
-      when "1"
+     when "1"
         puts "Would you like to be X or O?"
         token_human = gets.strip.upcase
         token_comp = nil
         if token_human == "X"
-          token_comp == "O"
+          token_comp = "O"
         else
-          token_comp == "X"
+          token_comp = "X"
         end
 
        puts "Who should go first? (1: yourself, 2: computer)"
@@ -119,15 +136,16 @@ def won?
          new_game = Game.new(Players::Human.new(token_human), Players::Computer.new(token_comp), Board.new)
        elsif first == "2"
          new_game = Game.new(Players::Computer.new(token_comp), Players::Human.new(token_human), Board.new)
-     end
+       end
      when "0"
         new_game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
-   end
+     end
+
      new_game.play
   end
 
   def play
-    while ((board.turn_count < 9) && (self.over? != true))
+    while ((@turn_count < 9) && (self.over? != true))
       turn
     end
 
@@ -136,6 +154,7 @@ def won?
     elsif won?
       puts "Congratulations #{winner}!"
     end
+    replay?
   end
 
 def replay?
@@ -143,15 +162,15 @@ def replay?
   answer = gets.strip.downcase
   if (answer == "yes") || (answer == "y")
     puts "Same configuration? (y/n)"
-    answer == gets.strip.downcase
+    answer = gets.strip.downcase
       if (answer == "yes") || (answer == "y")
         self.board.reset!
+        play
       else
-        new_game = Game.config
+        Game.config
       end
-      self.play
     else
-      return false
+      exit
     end
 
 end

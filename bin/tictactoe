@@ -5,8 +5,8 @@ require_relative '../config/environment'
 Game.config
 
 
-answer = nil
-
-if Game.current_game.replay? == false
-  exit
-end
+# answer = nil
+#
+# if Game.current_game.replay? == false
+#   exit
+# end
