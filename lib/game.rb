@@ -55,7 +55,6 @@ class Game
   end
 
   def turn
-    @board.display
     input = current_player.move(@board)
     if @board.valid_move?(input)
       board.update(input, current_player)
@@ -72,6 +71,7 @@ class Game
   end
 
   def play
+    @board.display
     while ((@board.turn_count < 9) && !over?)
       turn
     end
@@ -81,7 +81,54 @@ class Game
     elsif won?
       puts "Congratulations #{winner}!"
     end
-    # replay?
+    replay?
+  end
+
+  def self.config
+    puts "Welcome to Tic-Tac-Toe!"
+    puts "How many people are playing? (0-2)"
+    number_of_players = gets.strip
+    case number_of_players
+    when "2"
+      puts "X goes first."
+      new_game = Game.new()
+    when "1"
+      puts "Would you like to be X or O?"
+      token_human = gets.strip.upcase
+      token_comp = nil
+      if token_human == "X"
+        token_comp = "O"
+      else
+        token_comp = "X"
+      end
+      puts "Who should go first? (1: yourself, 2: computer)"
+        first = gets.strip
+      if first == "1"
+        new_game = Game.new(Players::Human.new(token_human), Players::Computer.new(token_comp), Board.new)
+      elsif first == "2"
+        new_game = Game.new(Players::Computer.new(token_comp), Players::Human.new(token_human), Board.new)
+      end
+    when "0"
+      new_game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+    end
+    new_game.play
+  end
+
+  def replay?
+    puts "Would you like to play again? (y/n)"
+    answer = gets.strip.downcase
+    if (answer == "yes") || (answer == "y")
+      puts "Same configuration? (y/n)"
+      answer = gets.strip.downcase
+      if (answer == "yes") || (answer == "y")
+        @board.reset!
+        play
+      else
+        Game.config
+      end
+    else
+      exit
+    end
   end
 
 end

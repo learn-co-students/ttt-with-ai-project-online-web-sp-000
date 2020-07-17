@@ -30,7 +30,7 @@ end
 
 def turn_count
  count = 0
- @cells.each_index{|index| taken?((index + 1).to_s) ? count += 1 : false}
+ @cells.each_index{|index| self.taken?((index + 1).to_s) ? count += 1 : false}
  return count
 end
 
@@ -54,6 +54,7 @@ end
 def update(input, player)
  index = input.to_i - 1
  @cells[index] = player.token
+ display
 end
 
 end
