@@ -116,6 +116,7 @@ class Game
     when "0"
       new_game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
     end
+    binding.pry
     new_game.play
   end
 

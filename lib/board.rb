@@ -3,20 +3,22 @@ require 'set'
 
 class Board
 
-attr_accessor :cells, :corners, :edges, :center, :turn_count
+attr_accessor :cells, :corners, :edges, :center, :turn_count, :moves
 
 
 def initialize
   @cells
-  @corners = Set[1, 3, 7, 9]
-  @edges = Set[2, 4, 6, 8]
+  @corners = Set[0, 2, 6, 8]
+  @edges = Set[1, 3, 5, 7]
   @center = 5
   @turn_count = 0
+  @moves
   reset!
 end
 
 def reset!
   @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+  @moves = []
 end
 
 def display
@@ -67,6 +69,7 @@ end
 def update(input, player)
  index = input.to_i - 1
  @cells[index] = player.token
+ @moves << index
  display
  @turn_count += 1
 end

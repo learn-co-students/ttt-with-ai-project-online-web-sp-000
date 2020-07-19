@@ -27,9 +27,18 @@ module Players
 
       case game.board.turn_count
       when 0
+        if them.class == Players::Computer
         input = "1"
+      else
+        input = "5"
+      end
+
       when 1
-        $them_positions.include?(5) ? input = "1" : input = "5"
+        if $them_positions.include?(game.board.center)
+          input = "1"
+        else
+          input = "5"
+        end
       when 2
         if game.board.taken?("5")
           if game.board.taken?("1")
