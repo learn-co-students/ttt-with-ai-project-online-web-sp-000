@@ -1,3 +1,7 @@
+require 'pry'
+require 'set'
+
+
 module Players
   class Human < Player
     def move(game)

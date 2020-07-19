@@ -1,3 +1,6 @@
+require 'pry'
+require 'set'
+
 class Game
   WIN_COMBINATIONS = [
     [0,1,2],  # Top row
@@ -16,6 +19,8 @@ class Game
     @board = board
     @player_1 = p1
     @player_2 = p2
+    @player_1.game = self
+    @player_2.game = self
   end
 
   def current_player
@@ -71,7 +76,7 @@ class Game
   end
 
   def play
-    @board.display
+@board.display
     while ((@board.turn_count < 9) && !over?)
       turn
     end

@@ -1,10 +1,17 @@
+require 'pry'
+require 'set'
+
 class Board
 
-attr_accessor :cells
+attr_accessor :cells, :corners, :edges, :center, :turn_count
 
 
 def initialize
   @cells
+  @corners = Set[1, 3, 7, 9]
+  @edges = Set[2, 4, 6, 8]
+  @center = 5
+  @turn_count = 0
   reset!
 end
 
@@ -34,9 +41,10 @@ def full?
 end
 
 def turn_count
- count = 0
- @cells.each_index{|index| self.taken?((index + 1).to_s) ? count += 1 : false}
- return count
+ # count = 0
+ # @cells.each_index{|index| taken?((index + 1).to_s) ? count += 1 : false}
+ # return count
+ return @turn_count
 end
 
 def taken?(input)
@@ -60,6 +68,7 @@ def update(input, player)
  index = input.to_i - 1
  @cells[index] = player.token
  display
+ @turn_count += 1
 end
 
 end
