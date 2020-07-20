@@ -11,7 +11,7 @@ def initialize
   @corners = Set[0, 2, 6, 8]
   @edges = Set[1, 3, 5, 7]
   @center = 5
-  @turn_count = 0
+  @turn_count
   @moves
   reset!
 end
@@ -19,11 +19,12 @@ end
 def reset!
   @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
   @moves = []
+  @turn_count = 0
 end
 
 def display
   puts " "
-  puts "Round #{turn_count}:"
+  # puts "Round #{turn_count}:"
   puts "-----------"
   puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
   puts "-----------"
