@@ -8,8 +8,8 @@ attr_accessor :cells, :corners, :edges, :center, :turn_count, :moves
 
 def initialize
   @cells
-  @corners = Set[0, 2, 6, 8]
-  @edges = Set[1, 3, 5, 7]
+  @corners = Set[1, 3, 7, 9]
+  @edges = Set[2, 4, 6, 8]
   @center = 5
   @turn_count
   @moves

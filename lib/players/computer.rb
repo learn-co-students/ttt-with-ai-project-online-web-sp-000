@@ -67,20 +67,20 @@ module Players
           input = (fork?(self) + 1).to_s
         elsif fork?(them) != nil
           input = (fork?(them) + 1).to_s
-        elsif !game.board.taken?((game.board.center + 1).to_s)
-          input = (game.board.center + 1).to_s
-        elsif $them_positions.include?(0) && $empty_positions.include?(8)
+        elsif !game.board.taken?((game.board.center).to_s)
+          input = (game.board.center).to_s
+        elsif $them_positions.include?(1) && $empty_positions.include?(9)
           input = "9"
-        elsif $them_positions.include?(8) && $empty_positions.include?(0)
+        elsif $them_positions.include?(9) && $empty_positions.include?(1)
           input = "1"
-        elsif $them_positions.include?(2) && $empty_positions.include?(6)
+        elsif $them_positions.include?(3) && $empty_positions.include?(7)
           input = "7"
-        elsif $them_positions.include?(6) && $empty_positions.include?(2)
+        elsif $them_positions.include?(7) && $empty_positions.include?(3)
           input = "3"
         elsif ($empty_positions.to_set & game.board.corners).count > 0
-          input = (($empty_positions.to_set & game.board.corners).to_a[0] + 1).to_s
+          input = (($empty_positions.to_set & game.board.corners).to_a[0]).to_s
         elsif ($empty_positions.to_set & game.board.edges).count > 0
-          input = (($empty_positions.to_set & game.board.edges).to_a[0] + 1).to_s
+          input = (($empty_positions.to_set & game.board.edges).to_a[0]).to_s
         else
         index = game.board.cells.find_index{|cell| cell == " "}
         input = (index + 1).to_s
@@ -134,7 +134,7 @@ end
               # winning_combo = game.won?
               # game.board.cells[test_index] = " "
               existing_indexes << test_index
-              binding.pry
+              # binding.pry
               test_combos = existing_indexes.permutation(3).to_a
 
               existing_indexes.pop
