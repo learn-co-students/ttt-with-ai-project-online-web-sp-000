@@ -53,8 +53,23 @@ WIN_COMBINATIONS = [
   end
 
   def turn
-     puts "#{current_player}, please enter the number of your next move:"
-     choice=gets.strip
+    choice=0
+     while choice.to_i < 1 || choice.to_i > 9
+       choice=current_player.move(board)
+     end
+     choice
+     board.update(choice.to_i, current_player)
+  end
+
+  def play
+    while !over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end
   end
 
 end
