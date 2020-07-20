@@ -3,14 +3,7 @@ require 'set'
 module Players
   class Computer < Player
 
-    # $self_positions
-    # $them_positions
-
-    # $corners = Set[1, 3, 7, 9]
-    # $edges = Set[2, 4, 6, 8]
-    # $center = 5
-    def move(game1)
-
+    def move
       if self == game.player_1
         them = game.player_2
       else
