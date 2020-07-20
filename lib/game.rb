@@ -76,7 +76,7 @@ class Game
   end
 
   def play
-@board.display
+    @board.display_start
     while ((@board.turn_count < 9) && !over?)
       turn
     end

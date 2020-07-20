@@ -3,7 +3,7 @@ require 'set'
 
 class Board
 
-attr_accessor :cells, :corners, :edges, :center, :turn_count, :moves
+attr_accessor :cells, :corners, :edges, :center, :turn_count
 
 
 def initialize
@@ -12,13 +12,11 @@ def initialize
   @edges = Set[2, 4, 6, 8]
   @center = 5
   @turn_count
-  @moves
   reset!
 end
 
 def reset!
   @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-  @moves = []
   @turn_count = 0
 end
 
@@ -35,6 +33,19 @@ def display
   puts " "
 end
 
+def display_start
+  puts " "
+  # puts "Round #{turn_count}:"
+  puts "-----------"
+  puts " 1 | 2 | 3 "
+  puts "-----------"
+  puts " 4 | 5 | 6 "
+  puts "-----------"
+  puts " 7 | 8 | 9 "
+  puts "-----------"
+  puts " "
+end
+
 def position(input)
   return @cells[input.to_i - 1]
 end
@@ -44,9 +55,6 @@ def full?
 end
 
 def turn_count
- # count = 0
- # @cells.each_index{|index| taken?((index + 1).to_s) ? count += 1 : false}
- # return count
  return @turn_count
 end
 
@@ -70,7 +78,6 @@ end
 def update(input, player)
  index = input.to_i - 1
  @cells[index] = player.token
- @moves << index
  display
  @turn_count += 1
 end
