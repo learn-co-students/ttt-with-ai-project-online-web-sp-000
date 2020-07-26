@@ -341,11 +341,16 @@ describe 'Game' do
       expect(game.player_1).to receive(:gets).and_return("7")
 
       expect($stdout).to receive(:puts).with("Congratulations X!")
-
       game.play
     end
   end
 
-  describe 'start' do
-  end
+  # describe 'start' do
+  #   it 'greets the user at the start of the game' do
+  #     game = Game.new
+  #     allow($stdout).to receive(:puts)
+  #
+  #     expect($stdout).to receive(:puts).with("Welcome to Tic Tac Toe W/ AI!")
+  #   end
+  # end
 end

@@ -1,3 +1,9 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+game = Game.new
+game.start 
+
+# Players::Computer.new()
+# twice and save them each as
+# variables and then pass them into game.new
