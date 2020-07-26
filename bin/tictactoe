@@ -1,3 +1,57 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def start_game
+
+  puts "Welcome to Tic Tac Toe!"
+  puts "How many human players for this game? Please enter 0, 1, or 2."
+  players = gets.strip
+
+  case players
+  when "1"
+    puts "Who should go first? Please enter your name or 'Computer'."
+    first = gets.strip.downcase
+    if first == "computer"
+      puts "What's your name?"
+      name = gets.strip
+      game = Game.computer_first_game
+      game.player_2.name = name.capitalize
+      puts "You'll be \"O\", #{game.player_2.name}."
+    else
+      game = Game.computer_second_game
+      game.player_1.name = first.capitalize
+      puts "#{game.player_1.name}, you'll be 'X'."
+    end
+  when "2"
+    puts "What is player one's name?"
+    name_1 = gets.strip.downcase
+    puts "What is player two's name?"
+    name_2 = gets.strip.downcase
+    game = Game.new
+    game.player_1.name = name_1.capitalize
+    game.player_2.name = name_2.capitalize
+    puts "#{player_1.name} will be \"X\". #{player_2.name} will be \"O\"."
+  when "0"
+    game = Game.all_computer_game
+  else
+    start_game
+  end
+
+  game.board.display
+  game.play
+
+  play_again?
+end
+
+def play_again?
+  puts "Would you like to play again? y/n?"
+  answer = gets.strip.downcase
+  if answer == "y"
+    start_game
+  else
+    exit
+  end
+end
+
+start_game
