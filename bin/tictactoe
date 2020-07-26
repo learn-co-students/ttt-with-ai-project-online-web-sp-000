@@ -1,3 +1,12 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+require_relative '../lib/player.rb'
+
+
+
+puts "Hello, welcome to ttt!"
+Player.assign_players
+#this starts the game off by calling assign_players on the Player class
+#this method sets up the players and calls other classes like Game
+#within the Game class are the powerhouse methods of play and turn
