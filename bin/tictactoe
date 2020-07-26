@@ -1,3 +1,32 @@
 #!/usr/bin/env ruby
-
-require_relative '../config/environment'
+ require_relative '../config/environment'
+ # input = 0
+ # until input == 4
+ # puts "Welcome to Tic-tac-toe"
+ # puts "To play 0 players press 0"
+ # puts "To play with 1 player enter 1"
+ # puts "To play with 2 players press 2"
+ # puts "Press 4 to exit"
+ # inputs = gets
+ # input = inputs.to_i
+ # if input == 2
+ # human_player = Players::Human.new("X")
+ # game = Game.new
+ # game.play
+ # elsif input == 1
+ # computer_player = Players::Computer.new("X")
+ # game = Game.new(computer_player)
+ # game.play
+ # elsif input == 0
+ # computer_player = Players::Computer.new("X")
+ # computer_player_2 = Players::Computer.new("O")
+ # game = Game.new(computer_player,computer_player_2)
+ # game.play
+ # elsif input == 4
+ #   break
+ # end
+ # puts "Do you want to play again?. press 3"
+ # puts "Press 4 to exit"
+ # inputs = gets
+ # input = inputs.to_i
+ # end
