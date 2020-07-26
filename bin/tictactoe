@@ -1,3 +1,45 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+new_game = "Y"
+
+while new_game == "Y" || new_game == "y"
+  
+  puts "What sort of game would you like to play? (1, 2, or 0 player?)"
+  answer = gets.strip.to_i
+  case answer
+    when 1
+      puts "Player 1 vs Computer!"
+      puts "You will be 'X's, and the Computer will be 'O's!"
+      player_1 = Players::Human.new('X')
+      player_2 = Players::Computer.new('O')
+      board = Board.new 
+      new_game = Game.new(player_1, player_2, board)
+      puts "Pick a number (1-9) to select a space."
+      new_game.play
+      puts "Play again? (Y or N)"
+      new_game = gets.strip
+    when 2 
+      puts "Player 1 vs Player 2!"
+      puts "Player 1 will be 'X's, and Player 2 will be 'O's!"
+      player_1 = Players::Human.new('X')
+      player_2 = Players::Human.new('O')
+      board = Board.new 
+      new_game = Game.new(player_1, player_2,board)
+      puts "X will start. Pick a number (1-9) to select a space."
+      new_game.play
+      puts "Play again? (Y or N)"
+      new_game = gets.strip
+    when 0 
+      puts "Computer Match!"
+      puts "Player 1 will be 'X's, and Player 2 will be 'O's!"
+      player_1 = Players::Computer.new('X')
+      player_2 = Players::Computer.new('O')
+      board = Board.new 
+      new_game = Game.new(player_1, player_2,board)
+      puts "X will start. Pick a number (1-9) to select a space."
+      new_game.play
+      puts "Play again? (Y or N)"
+      new_game = gets.strip
+  end
+end
