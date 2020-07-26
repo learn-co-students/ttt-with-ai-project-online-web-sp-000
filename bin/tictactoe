@@ -1,3 +1,33 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def game_flow
+  puts 'Hello! Please input how many human players do you have? (0, 1, 2):'
+  input = -1
+  input = gets.strip.to_i until input >= 0 && input < 3
+  game = nil
+  if input == 0
+    game = Game.new(Players::Computer.new('X'), Players::Computer.new('O'))
+  elsif input == 1
+    puts 'Would you like to go first? (Y/N):'
+    answer = gets.strip
+    game = if answer[0].casecmp('y').zero?
+             Game.new(Players::Human.new('X'), Players::Computer.new('O'))
+           else
+             Game.new(Players::Computer.new('X'), Players::Human.new('O'))
+           end
+  else
+    game = Game.new(Players::Human.new('X'), Players::Human.new('O'))
+  end
+  game.board.display
+  game.play
+end
+
+game_flow
+replay = ''
+until replay.downcase.eql?('n')
+  puts 'Would you like to play again? (Y/N):'
+  replay = gets.strip
+  game_flow if replay[0].casecmp('y').zero?
+end
