@@ -1,3 +1,63 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+# create new game with assigned players, play it, then end it (play again or quit)
+def run
+  create_game(num_players).play
+  end_game
+end
+
+# ask for number of players and get player assignment (human or computer)
+def num_players
+  puts "How many people are playing (0-2)?"
+  input = gets.strip.to_i
+
+  # answer validation to run player assignment
+  if input.between?(0,2)
+    input
+#    assign_players(input)
+  else
+    puts "Your answer must be 0, 1, or 2."
+    num_players
+  end
+end
+
+  # assigns players as human or computer
+def create_game(input)
+  if input == 0
+    game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), nil)
+  elsif input == 2
+    game = Game.new(nil, nil, nil)
+  elsif input == 1
+    puts "Would you like to go first? (y/n)"
+    answer = gets.strip.downcase
+    if answer == "y" || answer == "yes"
+      game = Game.new(nil, Players::Computer.new("O"), nil)
+    elsif answer == "n" || answer == "no"
+      game = Game.new(Players::Computer.new("X"), nil, nil)
+    else
+      puts "Your answer must be y or n."
+      create_game(input)
+    end
+  end
+#  game
+end
+
+# game over: ask to play again, get answer, start new game or quit
+def end_game
+  puts "Do you want to play again? (y/n)"
+  input = gets.strip.downcase
+  if input == "y" || input == "yes"
+    run
+  elsif input == "n" || input == "no"
+    puts "Goodbye!"
+  else
+    puts "Your answer must be y or n."
+    end_game
+  end
+end
+
+# welcomes user, then runs game
+puts "Welcome to Tic-Tac-Toe!"
+run
