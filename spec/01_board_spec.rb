@@ -125,4 +125,13 @@ describe "Board" do
       expect(board.position("1")).to eq("X")
     end
   end
+  #----------------------------------- Added Tests by JWD
+  describe '#index_position' do 
+    it 'returns the token on the board given the board index' do 
+      board.cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "]
+      
+      expect(board.index_position(0)).to eq (' ')
+      expect(board.index_position(4)).to eq ('X')
+    end 
+  end
 end

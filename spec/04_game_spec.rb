@@ -344,8 +344,7 @@ describe 'Game' do
 
       game.play
     end
-  end
-
-  describe 'start' do
-  end
+  end 
+  
+  
 end
