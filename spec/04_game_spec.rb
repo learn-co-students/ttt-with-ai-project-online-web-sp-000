@@ -190,6 +190,7 @@ describe 'Game' do
 
       game.turn
     end
+    
 
     it 'changes to player 2 after the first turn' do
       game = Game.new
