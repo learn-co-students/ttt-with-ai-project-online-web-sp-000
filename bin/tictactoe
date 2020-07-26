@@ -1,3 +1,41 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+puts "Shall we play Tic Tac Toe? The only winning move is not to play!"
+
+def start
+  puts "How many players? (0, 1, 2, or q to quit)"
+  i = gets.strip
+  case i
+    when "0"
+      a=Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+      a.play
+      restart
+    when "1"
+      a=Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+      a.play
+      restart
+    when "2"
+      a=Game.new(Players::Human.new("X"), Players::Human.new("O"))
+      a.play
+      restart
+    when "q"
+      puts "Maybe a nice game of chess next time!"
+    else
+      puts "Try again..."
+      start
+  end
+end
+def restart
+  puts "Shall we play again? (y/n)"
+  i = gets.strip
+  case i
+    when "y"
+      start
+    when "n"
+      puts "Maybe a nice game of chess next time!"
+    else
+      restart
+  end
+end
+start
