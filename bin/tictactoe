@@ -1,3 +1,106 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to tictactoe"
+
+  def start
+    puts "Choose the game type: 0 (CPU onlys) 1 (Player Vs CPU) 2 (PVP)"
+    type = gets.strip
+    puts "Choose who should go first X or O"
+    token = gets.strip.upcase
+    
+    if type == "0" && token == "X" 
+    new_game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+    new_game.play
+      if new_game.over?
+      puts "Do you want to play again?"
+      answer = gets.strip.upcase
+        if answer == "YES" || answer == "Y"
+        start
+        else 
+        exit
+        end
+      end
+      
+    elsif type == "0" && token == "O" 
+     new_game = Game.new(player_1 = Players::Computer.new("O"), player_2 = Players::Computer.new("X"), board = Board.new)
+     new_game.play
+          if new_game.over?
+      puts "Do you want to play again?"
+      answer = gets.strip.upcase
+        if answer == "YES" || answer == "Y" 
+        start
+        else 
+        exit
+        end
+      end
+      
+     
+    elsif type == "1" && token == "X"
+      new_game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+      new_game.play
+           if new_game.over?
+      puts "Do you want to play again?"
+      answer = gets.strip.upcase
+        if answer == "YES" || answer == "Y"
+        start
+        else 
+        exit
+        end
+      end
+      
+      
+    elsif type == "1" && token == "O"
+      new_game = Game.new(player_1 = Players::Human.new("O"), player_2 = Players::Computer.new("X"), board = Board.new)
+      new_game.play
+           if new_game.over?
+      puts "Do you want to play again?"
+      answer = gets.strip.upcase
+        if answer == "YES" || answer == "Y"
+        start
+        else 
+        exit
+        end
+      end
+      
+      
+    elsif type == "2" && token == "X"
+      new_game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+      new_game.play
+              if new_game.over?
+      puts "Do you want to play again?"
+      answer = gets.strip.upcase
+        if answer == "YES" || answer == "Y"
+        start
+        else 
+        exit
+        end
+      end
+      
+      
+    elsif type == "2" && token == "O"
+      new_game = Game.new(player_1 = Players::Human.new("O"), player_2 = Players::Human.new("X"), board = Board.new)
+      new_game.play
+           if new_game.over?
+      puts "Do you want to play again?"
+      answer = gets.strip.upcase
+        if answer == "YES" || answer == "Y"
+        start
+        else 
+        exit
+        end
+      end
+      
+      
+    else
+    puts "invalid data"
+    start
+    end
+end
+
+start
+
+  
+  
+
