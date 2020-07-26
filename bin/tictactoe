@@ -1,3 +1,45 @@
+
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Hello User, welcome to the game that shouldn't be won"
+puts "How many players?"
+players = gets.chomp
+int = players.to_i
+while int < 0 || int > 2
+puts "How many players?"
+players = gets.chomp
+int = players.to_i
+end
+if players == "0"
+    player_1 = Players::Computer.new("X")
+    player_2 = Players::Computer.new("O")
+elsif players == "1"
+    player_1 = Players::Human.new("X")
+    player_2 = Players::Computer.new("O")
+    elsif players == "2"
+    player_1 = Players::Human.new("X")
+    player_2 = Players::Human.new("O")
+
+end
+puts "Which player should be first and be X?"
+first = gets.chomp
+int = first.to_i
+while int < 1 || int > 2 
+"Which player should be first and be X?"
+first = gets.chomp
+int = first.to_i
+end
+if first == "2"
+    player_1, player_2 = player_2, player_1
+end
+
+if players == 2
+ttt = Game.new(player_1, player_2)
+elsif players == 1
+ttt= Game.new(player_1, player_2)
+else
+ttt = Game.new(player_1, player_2)
+end
+ttt.play
