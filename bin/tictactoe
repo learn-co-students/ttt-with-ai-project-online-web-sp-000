@@ -1,3 +1,38 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic Tac Toe!"
+puts "Please choose the number of human players."
+players = ""
+while !players.match(/^(0|1|2)$/)
+  puts "Type in 0, 1, or 2, and then press Enter."
+  players = gets.chomp
+end
+puts "You have chosen #{players} human player(s)."
+
+player_1 = ""
+player_2 = ""
+
+if players == "1" || players == "2" #if there are human players
+  first = ""
+  first_not_match = true
+
+  while first_not_match
+    puts "Type in 1 for player 1 to go first, or 2 for player 2 to go first. Then, press Enter."
+    first = gets.chomp
+    if first == "1"
+      player_1 = "X"
+      player_2 = "O"
+    elsif first == "2"
+      player_1 = "O"
+      player_2 = "X"
+    end
+    first_not_match = false if first.match(/(1|2)/)
+  end
+end
+
+game = Game.new(Players::Computer.new("X"), Players::Computer.new("O")) if players == "0"
+game = Game.new(Players::Human.new(player_1), Players::Computer.new(player_2)) if players == "1"
+game = Game.new(Players::Human.new(player_1), Players::Human.new(player_2)) if players == "2"
+game.play
