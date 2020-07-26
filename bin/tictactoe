@@ -1,3 +1,97 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+    puts "Welcome to Tic-Tac_Toe!" 
+
+    puts "Do you have 0, 1 or 2 players?"
+
+    user_game_type = gets
+    change_it = user_game_type.to_i
+    
+    
+    
+    def start_game(change_it)
+    case change_it
+    when 0 
+      @comp_1 = Players::Computer.new("X") 
+      @comp_2 = Players::Computer.new("O")
+      new_game = Game.new(@comp_1, @comp_2)
+      new_game.play
+    
+    when 1 
+      puts "Do you want to go first and be X or go second and be O?"
+      puts "Type X or O"
+      
+      token_choice = gets.strip 
+      if token_choice == "X" 
+        @hum_1 = Players::Human.new("X")
+        @comp_2 = Players::Computer.new("O")
+        new_game = Game.new(@hum_1, @comp_2)
+        new_game.play
+        
+        puts "Game Over! Would you like to play again?"
+      puts "Y for Yes, N for No and quit: " 
+      play_again = gets.strip
+      if play_again == "Y"
+        start_game(change_it)
+        next_game.play
+      elsif play_again == "N"
+        exit
+        end
+        
+      elsif token_choice == "O" 
+        @comp_1 = Players::Computer.new("X")
+        @hum_2 = Players::Human.new("O")
+        new_game = Game.new(@comp_1, @hum_2)
+        new_game.play
+        
+        puts "Game Over! Would you like to play again?"
+      puts "Y for Yes, N for No and quit: " 
+      play_again = gets.strip
+      if play_again == "Y"
+        start_game(change_it)
+      elsif play_again == "N"
+        exit
+        end
+      end
+      
+    when 2 
+      @hum_1 = Players::Human.new("X")
+      @hum_2 = Players::Human.new("O")
+      new_game = Game.new(@hum_1, @hum_2)
+      new_game.play
+      
+      puts "Game Over! Would you like to play again?"
+      puts "Y for Yes, N for No and quit: " 
+      play_again = gets.strip
+      if play_again == "Y"
+        start_game(change_it)
+      elsif play_again == "N"
+        exit
+        end
+      
+      else 
+      "invalid entry"
+    end
+    end 
+    
+    start_game(change_it)
+    
+#currently game plays same game 
+
+      
+     
+      
+      
+    
+    
+    
+
+      
+  
+
+
+
+
+
