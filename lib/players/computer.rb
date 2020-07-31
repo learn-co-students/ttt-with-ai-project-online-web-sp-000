@@ -1,10 +1,14 @@
-require 'pry'
-
 module Players
   class Computer < Player 
     
     def move(board)
-      rand(8).to_s
+      input = rand(1..9).to_s
+      
+      until !board.taken?(input)
+      input = rand(1..9).to_s
+      end
+      
+      return input
     end
     
   end 

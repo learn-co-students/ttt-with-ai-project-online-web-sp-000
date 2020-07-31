@@ -64,6 +64,8 @@ class Game
   end 
   
   def turn
+    board.display
+    puts "#{current_player.token}, make your move (1 - 9)."
     input = current_player.move(board)
     if board.valid_move?(input)
       board.update(input, current_player)
@@ -78,9 +80,11 @@ class Game
       turn
     end
     if draw?
+      board.display
       puts "Cat's Game!"
       return true
     elsif won?
+      board.display
       puts "Congratulations #{winner}!" 
       return true
     end
