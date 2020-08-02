@@ -11,7 +11,7 @@ class Game
     [3,4,5],
     [6,7,8]
   ]
-  
+    
   def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
     @player_1 = player_1
     @player_2 = player_2
@@ -33,7 +33,6 @@ class Game
       combination.each do |index|
         position << board.cells[index]
       end 
-      
       if position.all?{|token| token == "X"} || position.all?{|token| token == "O"}
         return combination
       else
@@ -42,7 +41,7 @@ class Game
     end
     false
   end
-            
+  
   def draw?
     if board.full? && !won?
       return true 
