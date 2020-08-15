@@ -1,3 +1,5 @@
+require 'pry'
+
 class Game
 
   attr_accessor :player_1, :player_2, :board
@@ -20,11 +22,17 @@ class Game
   end
 
   def current_player
-    if @board.turn_count.even?
-      player_1
-    else
-      player_2
-    end
+    @board.turn_count.even? ? player_1 : player_2
+  end
+
+  def won?
+    #binding.pry
+    x_win = WIN_COMBINATIONS.detect{|combo| combo.all?{|index| @board.cells[index] == "X"}}
+    x_win ? x_win : WIN_COMBINATIONS.detect{|combo| combo.all?{|index| @board.cells[index] == "O"}}
+  end
+
+  def draw?
+    @board.full? && !self.won?
   end
 
 end
