@@ -39,4 +39,8 @@ class Game
     draw? || won?
   end
 
+  def winner
+    won? ? @board.cells[won?[0]] : nil
+  end
+
 end
