@@ -48,4 +48,14 @@ class Game
     @board.valid_move?(input) ? @board.update(input,current_player) : current_player.move(@board)
   end
 
+  def play
+    until over?
+      turn
+    end
+    if draw?
+      puts "Cat's Game!"
+    else
+      puts "Congratulations #{winner}!"
+    end
+end
 end
