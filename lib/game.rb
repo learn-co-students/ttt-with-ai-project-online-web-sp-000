@@ -32,7 +32,11 @@ class Game
   end
 
   def draw?
-    @board.full? && !self.won?
+    @board.full? && !won?
+  end
+
+  def over?
+    draw? || won?
   end
 
 end
