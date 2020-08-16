@@ -3,6 +3,31 @@
 require_relative '../config/environment'
 
 puts "Welcome to Tic Tac Toe!"
+puts "How many human players are in your game? Please enter 0, 1 or 2."
+input = gets.strip.to_i
+case input
+when input == 0
+when input == 1
+  puts "Great! Please enter your name."
+  name = gets.strip
+  puts "Thank you #{name}! The first player to move is X and the second player to move is O."
+  puts "Please enter either X or O to tell me your preference."
+  token = gets.strip
+  until token == "X" || token == "O" do
+    puts "Oops! I think you mistyped. Please enter X or O."
+    token.clear
+    token = gets.strip
+  end
+  if token == "X"
+    name = Players::Human.new("X")
+    Game.new(name,Players::Computer.new("O"))
+  else
+    name = Players::Human.new("O")
+    Game.new(Players::Computer.new("X"),name)
+  end
+when input == 2
+
+end
 
 new_game = Game.new
 new_game.board.display
