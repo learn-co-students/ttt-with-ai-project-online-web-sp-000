@@ -5,9 +5,7 @@ require_relative '../config/environment'
 puts "Welcome to Tic Tac Toe!"
 puts "How many human players are in your game? Please enter 0, 1 or 2."
 input = gets.strip.to_i
-case input
-when input == 0
-when input == 1
+  if input == 1
   puts "Great! Please enter your name."
   name = gets.strip
   puts "Thank you #{name}! The first player to move is X and the second player to move is O."
@@ -25,8 +23,6 @@ when input == 1
     name = Players::Human.new("O")
     Game.new(Players::Computer.new("X"),name)
   end
-when input == 2
-
 end
 
 new_game = Game.new
