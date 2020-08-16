@@ -18,13 +18,9 @@ input = gets.strip.to_i
   end
   if token == "X"
     name = Players::Human.new("X")
-    Game.new(name,Players::Computer.new("O"))
+    Game.new(name,Players::Computer.new("O")).play
   else
     name = Players::Human.new("O")
-    Game.new(Players::Computer.new("X"),name)
+    Game.new(Players::Computer.new("X"),name).play
   end
 end
-
-new_game = Game.new
-new_game.board.display
-new_game.play

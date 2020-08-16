@@ -22,11 +22,10 @@ class Game
   end
 
   def current_player
-    @board.turn_count.even? ? player_1 : player_2
+    @board.turn_count.even? ? @player_1 : @player_2
   end
 
   def won?
-    #binding.pry
     x_win = WIN_COMBINATIONS.detect{|combo| combo.all?{|index| @board.cells[index] == "X"}}
     x_win ? x_win : WIN_COMBINATIONS.detect{|combo| combo.all?{|index| @board.cells[index] == "O"}}
   end
