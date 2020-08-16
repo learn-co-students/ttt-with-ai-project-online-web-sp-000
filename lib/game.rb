@@ -43,9 +43,9 @@ class Game
   end
 
   def turn
-    input = current_player.move(@board)
+    input = ""
     until @board.valid_move?(input) do
-      turn
+      input = current_player.move(@board)
     end
     @board.update(input,current_player)
     @board.display
