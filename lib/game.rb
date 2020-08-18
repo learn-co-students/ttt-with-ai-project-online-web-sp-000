@@ -47,23 +47,20 @@ class Game
   end
   
   def winner
-    if won?
+    if board.cells[won?[0]] == " "
+      nil
+    else  
       board.cells[won?[0]]
     end
   end
   
-  
   def turn
-    #puts "Please enter 1-9:"
-    #index = input_to_index(user_input)
-    if board.valid_move?
+    if board.valid_move?(user_response)
       board.cells[position] = current_player
-
-      binding.pry
-      #move(index, character = current_player)
-      #display_board
-    # else
-    #   turn
+      board.update(input, player)
+      # switch to the next player
+    else
+      turn
     end
   end
 
