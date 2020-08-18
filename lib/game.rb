@@ -67,7 +67,7 @@ class Game
   def play
     turn until over?
     if won?
-      puts "Congratulations #{winner}!"
+      puts "Congratulations #{self.winner}!"
     #binding.pry
     elsif draw?
       puts "Cat's Game!"
