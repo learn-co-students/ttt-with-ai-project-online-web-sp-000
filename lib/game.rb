@@ -34,7 +34,8 @@ class Game
   
   def won?
     WIN_COMBINATIONS.find do |win_combination|
-      board.cells[win_combination[0]] == board.cells[win_combination[1]] && board.cells[win_combination[1]] == board.cells[win_combination[2]] && board.taken?(win_combination[0])
+      @board.cells[win_combination[0]] == @board.cells[win_combination[1]] && @board.cells[win_combination[1]] == @board.cells[win_combination[2]] && @board.taken?(win_combination[0])
+    #binding.pry
     end
   end
 
@@ -43,15 +44,15 @@ class Game
   end
 
   def over?
-    won? || draw? || board.full?
+    won? || draw?
   end
   
   def winner
-    if board.cells[won?[0]] != " "
-      board.cells[won?[0]]
+    if @board.cells[won?[0]] != " "
+      @board.cells[won?[0]]
       #binding.pry
-    else  
-      nil
+    # else  
+    #   nil
     end
   end
   
@@ -65,9 +66,11 @@ class Game
   end
 
   def play
-    turn until over?
+    while !over?
+      turn
+    end
     if won?
-      puts "Congratulations #{self.winner}!"
+      puts "Congratulations #{winner}!"
     #binding.pry
     elsif draw?
       puts "Cat's Game!"
