@@ -1,8 +1,3 @@
-require 'pry'
-
-# The Game class is the main model of the application and
-# represents a singular instance of a Tic-tac-toe session
-
 class Game
 
   attr_accessor :board, :player_1, :player_2
@@ -34,8 +29,7 @@ class Game
   
   def won?
     WIN_COMBINATIONS.find do |win_combination|
-      @board.cells[win_combination[0]] == @board.cells[win_combination[1]] && @board.cells[win_combination[1]] == @board.cells[win_combination[2]] && @board.taken?(win_combination[0])
-    #binding.pry
+      @board.cells[win_combination[0]] == @board.cells[win_combination[1]] && @board.cells[win_combination[1]] == @board.cells[win_combination[2]] && @board.taken?(win_combination[0]+1)
     end
   end
 
@@ -48,11 +42,8 @@ class Game
   end
   
   def winner
-    if @board.cells[won?[0]] != " "
+    if won?
       @board.cells[won?[0]]
-      #binding.pry
-    # else  
-    #   nil
     end
   end
   
@@ -71,7 +62,6 @@ class Game
     end
     if won?
       puts "Congratulations #{winner}!"
-    #binding.pry
     elsif draw?
       puts "Cat's Game!"
     end

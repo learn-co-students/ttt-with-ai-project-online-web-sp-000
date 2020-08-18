@@ -1,7 +1,3 @@
-require 'pry'
-
-# represents the data and logic of a Tic-tac-toe game board
-
 class Board
 
   attr_accessor :cells
@@ -24,16 +20,10 @@ class Board
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
   end
 
-  # USE position(input) METHOD FOR ALL METHODS NEEDING INDEX
   def position(input)
     @cells[input.to_i - 1]
   end
 
-  # This method will take two arguments, the first will be the position the user 
-  # wants to occupy in the form of 1-9 strings that you will need to convert to 
-  # the board cells' array index, along with the player object making the move. 
-  # When you update the appropriate index in the cells, you will set it equal 
-  # to the token of the player object by calling the #token method on the player.
   def update(input, player)
     @cells[input.to_i - 1] = player.token
   end

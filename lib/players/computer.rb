@@ -1,13 +1,8 @@
-require 'pry'
-
-# Players::Computer
-
 module Players
   class Computer < Player
     
     def move(board)
-      #binding.pry
-      # condition-based algorithm: 
+       
       if board.valid_move?("5")
         "5"
       elsif board.valid_move?("1")
