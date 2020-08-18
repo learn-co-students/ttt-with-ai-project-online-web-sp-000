@@ -25,9 +25,9 @@ class Game
   end
   
   def current_player
-    if player_1
+    if board.turn_count % 2 == 0
       player_1
-    elsif player_2
+    else
       player_2
     end
   end
@@ -47,16 +47,15 @@ class Game
   end
   
   def winner
-    #binding.pry
-    if board.cells[won?[0]] == " "
-      nil
-    else  
+    if board.cells[won?[0]] != " "
       board.cells[won?[0]]
+      #binding.pry
+    else  
+      nil
     end
   end
   
   def turn
-    binding.pry
     current_move = current_player.move(@board)
     if !board.valid_move?(current_move)
       turn
@@ -66,15 +65,10 @@ class Game
   end
 
   def play
-    # current_player
-    # round = 0
-    # until round == 9 || over?
-    #   round += 1
-    #   turn
-    # end
     turn until over?
     if won?
       puts "Congratulations #{winner}!"
+    #binding.pry
     elsif draw?
       puts "Cat's Game!"
     end
