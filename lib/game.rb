@@ -56,7 +56,7 @@ class Game
   end
   
   def turn
-    #binding.pry
+    binding.pry
     current_move = current_player.move(@board)
     if !board.valid_move?(current_move)
       turn

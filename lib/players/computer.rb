@@ -8,8 +8,6 @@ module Players
     def move(board)
       #binding.pry
       # condition-based algorithm: 
-      # "On turn 1 always try to go in the middle 
-      # if you can" and if not "try to go in a corner"
       if board.valid_move?("5")
         "5"
       elsif board.valid_move?("1")
