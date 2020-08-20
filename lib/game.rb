@@ -17,7 +17,9 @@ class Game
 
   def initialize(player_1=Players::Human.new("X"),player_2=Players::Human.new("O"),board=Board.new)
     @player_1 = player_1
+    @player_1.game = self
     @player_2 = player_2
+    @player_2.game = self
     @board = board
   end
 
@@ -54,6 +56,7 @@ class Game
   def play
     until over?
       turn
+      sleep(2)
     end
     if draw?
       puts "Cat's Game!"
