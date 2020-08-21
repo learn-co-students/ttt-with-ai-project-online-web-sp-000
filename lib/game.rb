@@ -2,7 +2,7 @@ require 'pry'
 
 class Game
 
-  attr_accessor :player_1, :player_2, :board
+  attr_accessor :player_1, :player_2, :board, :last_move
 
   WIN_COMBINATIONS = [
     [0,1,2],
@@ -49,6 +49,7 @@ class Game
     until @board.valid_move?(input) do
       input = current_player.move(@board)
     end
+    @last_move = input
     @board.update(input,current_player)
     @board.display
   end
