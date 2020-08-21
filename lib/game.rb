@@ -16,10 +16,10 @@ class Game
   ]
 
   def initialize(player_1=Players::Human.new("X"),player_2=Players::Human.new("O"),board=Board.new)
+    player_1.game = self
     @player_1 = player_1
-    @player_1.game = self
+    player_2.game = self
     @player_2 = player_2
-    @player_2.game = self
     @board = board
   end
 
@@ -63,41 +63,5 @@ class Game
     else
       puts "Congratulations #{winner}!"
     end
-end
-
-def start(input)
-  case input
-  when 0
-    puts "Now commencing game Computer vs Computer..."
-    Game.new(Players::Computer.new("X"),Players::Computer.new("O")).play
-  when 1
-    puts "Great! Please enter your name."
-    name = gets.strip
-    puts "Thank you #{name}! The first player to move is X and the second player to move is O."
-    puts "Please enter either X or O to tell me your preference."
-    token = gets.strip
-    until token == "X" || token == "O" do
-      puts "Oops! I think you mistyped. Please enter X or O."
-      token.clear
-      token = gets.strip
-    end
-    puts "Now commencing game #{name} vs Computer..."
-    if token == "X"
-      name = Players::Human.new("X")
-      Game.new(name,Players::Computer.new("O")).play
-    else
-      name = Players::Human.new("O")
-      Game.new(Players::Computer.new("X"),name).play
-    end
-  when 2
-    puts "Great! Please enter the name of the player who would like to go first and be X."
-    name_1 = gets.strip
-    puts "Thank you #{name_1}! Now please enter the name of player 2 who will be O."
-    name_2 = gets.strip
-    puts "Thank you #{name_2}. Now commencing game #{name_1} vs #{name_2}..."
-    name_1 = Players::Human.new("X")
-    name_2 = Players::Human.new("O")
-    Game.new(name_1,name_2).play
-  end
 end
 end

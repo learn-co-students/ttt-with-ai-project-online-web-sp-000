@@ -18,44 +18,55 @@ module Players
     def move(board)
       puts "Computer is thinking of a move..."
       case board.turn_count
-      when 0..3
-        puts "#{board.turn_count}"
+      when 0..2
         input = [1,2,3,4,5,6,7,8,9].sample
-        puts "#{input}"
-        #unless board.cells[input-1] == " " do
-        #  input.clear
-        #  input = [1,2,3,4,5,6,7,8,9].sample
-      #  end
-      when 4..9
+      when 3..9
         puts "#{board.turn_count}"
         puts "#{offense_play?(board)}"
-          if offense_play?(board)
-            puts "#{offense_play?(board)}"
-            input = offense_play?(board)
-            puts "#{input}"
-          else defense_play?(board)
-            input = defense_play?(board)
-          end
+        puts "#{win_move(board)}"
+        puts "#{self.token}"
+        puts "#{defense_play?(board)}"
+        puts "#{defense_move(board)}"
+          #if offense_play?(board) != nil
+          #  input = win_move(board)
+        #  elsif defense_play?(board) != nil
+          #  input = defense_move(board)
+        #  else
+            input = [1,2,3,4,5,6,7,8,9].sample
+          #end
         end
     input.to_s
   end
 
 
 def offense_play?(board)
-  move_array = WIN_COMBINATIONS.collect{|combo| board.cells[combo[0]] == "#{self.token}" && board.cells[combo[1]] == "#{self.token}" || board.cells[combo[1]] == "#{self.token}" && board.cells[combo[2]] == "#{self.token}" || board.cells[combo[0]] == "#{self.token}" && board.cells[combo[2]] == "#{self.token}"}
-  win_move = move_array.detect{|index| index == " "}
-  if win_move != nil
+  WIN_COMBINATIONS.detect{|combo| board.cells[combo[0]] == "#{self.token}" && board.cells[combo[1]] == "#{self.token}" || board.cells[combo[1]] == "#{self.token}" && board.cells[combo[2]] == "#{self.token}" || board.cells[combo[0]] == "#{self.token}" && board.cells[combo[2]] == "#{self.token}"}
+end
+end
+
+def win_move(board)
+  win_move = offense_play?(board).detect{|index| board.cells[index] == " "}
+  if offense_play?(board) != nil && win_move != nil
     win_move.to_i + 1
+  else
+    nil
   end
 end
 
+#WIN_COMBINATIONS.detect{|combo| board[combo[0]] == "X" && board[combo[1]] == "X" || board[combo[1]] == "X" && board[combo[2]] == "X" || board[combo[0]] == "X" && board[combo[2]] == "X"}
+
 def defense_play?(board)
-  self.token == "X" ? char = O : char = X
-  move_array = WIN_COMBINATIONS.collect{|combo| board.cells[combo[0]] == "#{char}" && board.cells[combo[1]] == "#{char}" || board.cells[combo[1]] == "#{char}" && board.cells[combo[2]] == "#{char}" || board.cells[combo[0]] == "#{char}" && board.cells[combo[2]] == "#{char}"}
-  win_move = move_array.detect{|index| index == " "}
-  if win_move != nil
-    win_move.to_i + 1
+  self.token == "X" ? char = "O" : char = "X"
+  WIN_COMBINATIONS.detect{|combo| board.cells[combo[0]] == "#{char}" && board.cells[combo[1]] == "#{char}" || board.cells[combo[1]] == "#{char}" && board.cells[combo[2]] == "#{char}" || board.cells[combo[0]] == "#{char}" && board.cells[combo[2]] == "#{char}"}
+end
+end
+
+
+def defense_move(board)
+  defense_move = defense_play?(board).detect{|index| board.cells[index] == " "}
+  if defense_play?(board) != nil && defense_move != nil
+    defense_move.to_i + 1
+  else
+    nil
   end
-end
-end
 end
