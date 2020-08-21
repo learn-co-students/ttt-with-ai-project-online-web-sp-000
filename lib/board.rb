@@ -44,7 +44,7 @@ class Board
   end
 
   def taken?(index)
-    !(position(index).nil? || position(index) == " ")
+    !(position(index).nil? || position(index) == " " || position(index) == "")
   end
 
   def valid_move?(index)

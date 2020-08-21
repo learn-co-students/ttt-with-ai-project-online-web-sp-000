@@ -92,6 +92,15 @@ describe 'Game' do
       expect(game.won?).to contain_exactly(2, 5, 8)
     end
 
+    it 'returns the correct winning combination when there are blank spaces on the boad' do
+      game = Game.new
+      game.board.cells = [" ", " ", "X",
+                          " ", " ", "X",
+                          " ", " ", "X"]
+
+      expect(game.won?).to contain_exactly(2, 5, 8)
+    end
+
     it "isn't hard-coded" do
       game = Game.new
       game.board.cells = ["O", "O", "O",
