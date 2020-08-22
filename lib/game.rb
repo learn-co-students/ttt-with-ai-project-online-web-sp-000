@@ -71,17 +71,19 @@ class Game
   # end
 
   def turn
-    puts "Please enter 1-9:"
+    board.display
+    puts "\nTurn #{board.turn_count + 1}"
+    puts "Player #{current_player.token}, please enter 1-9:"
     input = current_player.move(board)
     if board.valid_move?(input)
       board.update(input, current_player)
-      board.display
+      #board.display
     else
-      puts "Not a valid move. Please enter 1-9:"
-      board.display
+      puts "#{input} is not a valid move. Please enter 1-9:"
+      #board.display
       turn
     end
-    board.display
+    #board.display
   end
 
   def play
