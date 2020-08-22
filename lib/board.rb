@@ -47,6 +47,10 @@ class Board
     !(position(index).nil? || position(index) == " " || position(index) == "")
   end
 
+  def empty?(index)
+    !taken?(index)
+  end
+
   def valid_move?(index)
     #binding.pry
     taken?(index) == false && input_to_index(index).between?(0,8)

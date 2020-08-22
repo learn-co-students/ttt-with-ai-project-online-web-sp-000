@@ -62,11 +62,34 @@ class Game
     end
   end
 
-  def turn
+  # def change_player
+  #   if current_player == player_1
+  #     current_player =
+  #   elsif current_player == player_2
+  #
+  #   end
+  # end
 
+  def turn
+    puts "Please enter 1-9:"
+    input = current_player.move(board)
+    if board.valid_move?(input)
+      board.update(input, current_player)
+      board.display
+    else
+      puts "Not a valid move. Please enter 1-9:"
+      board.display
+      turn
+    end
+    board.display
   end
 
   def play
-
+    turn until over?
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end
   end
 end
