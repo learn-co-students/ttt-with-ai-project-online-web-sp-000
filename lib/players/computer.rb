@@ -84,8 +84,6 @@ end
 
 def move(board)
   puts "Computer is thinking of a move..."
-  puts "#{@opponent_token}"
-  puts "#{opponent_board(board)}"
   case board.turn_count
   when 0
     input = 4
@@ -99,7 +97,6 @@ def move(board)
       @my_last_move = input
     end
   when 2
-    puts "#{board.open_cells}"
     input = board.open_cells.detect{|x| next_to(@game.last_move, board).include?(x-1) == true && next_to(my_last_move, board).include?(x-1) ==  true}
   when 3..9
     if win_move(board) != nil
@@ -107,7 +104,7 @@ def move(board)
     elsif defense_move(board) != nil
         input = defense_move(board)
     else
-        input = rand(8)
+
       end
     end
 input += 1
