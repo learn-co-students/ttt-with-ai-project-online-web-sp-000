@@ -1,3 +1,5 @@
+require 'pry'
+
 class Game 
   
   attr_accessor :board, :player_1, :player_2
@@ -57,13 +59,16 @@ class Game
   
   def turn
     puts "Please enter a number, 1-9:"
-    input = current_player.move(input)
+    input = current_player.move(board)
   
     if @board.valid_move?(input)
       @board.update(input, current_player)
+      @board.display
     else
-      puts "Please enter a number, 1-9:"
+      # puts "Invalid input. Please enter a number, 1-9:"
+      # @board.display
       turn
+      @board.display
     end
   end
   
