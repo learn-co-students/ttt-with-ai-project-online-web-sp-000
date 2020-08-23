@@ -22,7 +22,11 @@ module Players
 
 def defense_play?(board)
   self.token == "X" ? char = "O" : char = "X"
-  WIN_COMBINATIONS.detect{|combo| board.cells[combo[0]] == "#{char}" && board.cells[combo[1]] == "#{char}" || board.cells[combo[1]] == "#{char}" && board.cells[combo[2]] == "#{char}" || board.cells[combo[0]] == "#{char}" && board.cells[combo[2]] == "#{char}"}
+  possible_plays = []
+  possible_plays << WIN_COMBINATIONS.detect{|combo| board.cells[combo[0]] == "#{char}" && board.cells[combo[1]] == "#{char}"}
+  possible_plays << WIN_COMBINATIONS.detect{|combo| board.cells[combo[1]] == "#{char}" && board.cells[combo[2]] == "#{char}"}
+  possible_plays << WIN_COMBINAIONS.detect{|combo| board.cells[combo[0]] == "#{char}" && board.cells[combo[2]] == "#{char}"}
+  possible_plays.detect{|play| play != nil}
 end
 
 
