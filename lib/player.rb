@@ -1,6 +1,6 @@
 class Player
 
-  attr_accessor :game, :name, :opponent_token
+  attr_accessor :game, :name, :opponent_token, :my_last_move
   attr_reader :token
 
   def initialize(token="X")

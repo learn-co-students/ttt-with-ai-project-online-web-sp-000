@@ -49,7 +49,7 @@ class Game
     until @board.valid_move?(input) do
       input = current_player.move(@board)
     end
-    @last_move = input
+    @last_move = input.to_i - 1
     @board.update(input,current_player)
     @board.display
   end

@@ -45,4 +45,8 @@ class Board
     @cells[input.to_i - 1] = player.token
   end
 
+  def open_cells
+    [1,2,3,4,5,6,7,8,9].select{|x| self.taken?(x) == false}
+  end
+
 end

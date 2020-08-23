@@ -21,11 +21,10 @@ module Players
 
 
 def defense_play?(board)
-  self.token == "X" ? char = "O" : char = "X"
   possible_plays = []
-  possible_plays << WIN_COMBINATIONS.detect{|combo| board.cells[combo[0]] == "#{char}" && board.cells[combo[1]] == "#{char}"}
-  possible_plays << WIN_COMBINATIONS.detect{|combo| board.cells[combo[1]] == "#{char}" && board.cells[combo[2]] == "#{char}"}
-  possible_plays << WIN_COMBINATIONS.detect{|combo| board.cells[combo[0]] == "#{char}" && board.cells[combo[2]] == "#{char}"}
+  possible_plays << WIN_COMBINATIONS.detect{|combo| board.cells[combo[0]] == "#{@opponent_token}" && board.cells[combo[1]] == "#{@opponent_token}"}
+  possible_plays << WIN_COMBINATIONS.detect{|combo| board.cells[combo[1]] == "#{@opponent_token}" && board.cells[combo[2]] == "#{@opponent_token}"}
+  possible_plays << WIN_COMBINATIONS.detect{|combo| board.cells[combo[0]] == "#{@opponent_token}" && board.cells[combo[2]] == "#{@opponent_token}"}
   possible_plays.detect{|play| play != nil}
 end
 
@@ -37,6 +36,10 @@ def defense_move(board)
   else
     nil
   end
+end
+
+def opponent_board(board)
+  board.cells.select{|x| x == @opponent_token}
 end
 
 
@@ -56,23 +59,23 @@ end
 def next_to(input,board)
   case input
   when 0
-    [1,3,4].detect{|x| board.cells[x] == " "}
+    [1,3,4].select{|x| board.cells[x] == " "}
   when 1
-    [0,3,4].detect{|x| board.cells[x] == " "}
+    [0,3,4].select{|x| board.cells[x] == " "}
   when 2
-    [1,4,5].detect{|x| board.cells[x] == " "}
+    [1,4,5].select{|x| board.cells[x] == " "}
   when 3
-    [0,4,6].detect{|x| board.cells[x] == " "}
+    [0,4,6].select{|x| board.cells[x] == " "}
   when 4
-    [0,1,2,3,5,6,7,8].detect{|x| board.cells[x] == " "}
+    [0,1,2,3,5,6,7,8].select{|x| board.cells[x] == " "}
   when 5
-    [2,4,8].detect{|x| board.cells[x] == " "}
+    [2,4,8].select{|x| board.cells[x] == " "}
   when 6
-    [3,4,7].detect{|x| board.cells[x] == " "}
+    [3,4,7].select{|x| board.cells[x] == " "}
   when 7
-    [6,4,8].detect{|x| board.cells[x] == " "}
+    [6,4,8].select{|x| board.cells[x] == " "}
   when 8
-    [4,5,7].detect{|x| board.cells[x] == " "}
+    [4,5,7].select{|x| board.cells[x] == " "}
   end
 
 
@@ -84,15 +87,18 @@ def move(board)
   case board.turn_count
   when 0
     input = 4
+    @my_last_move = input
   when 1
-    if @game.last_move =! "5"
+    if @game.last_move != 4
       input = 4
+      @my_last_move = input
     else
       input = [0,1,2,3,5,6,7,8].sample
+      @my_last_move = input
     end
   when 2
-    puts "#{@game.last_move.class}"
-    input = next_to(@game.last_move.to_i-1,board)
+    puts "#{board.open_cells}"
+    input = board.open_cells.detect{|x| next_to(@game.last_move, board).include?(x-1) == true && next_to(my_last_move, board).include?(x-1) ==  true}
   when 3..9
     if win_move(board) != nil
         input = win_move(board)
