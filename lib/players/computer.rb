@@ -42,6 +42,10 @@ def opponent_board(board)
   [0,1,2,3,4,5,6,7,8].select{|index| board.cells[index] == @opponent_token}
 end
 
+def my_board(board)
+  [0,1,2,3,4,5,6,7,8].select{|index| board.cells[index] == @token}
+end
+
 
 def offense_play?(board)
 WIN_COMBINATIONS.detect{|combo| board.cells[combo[0]] == "#{self.token}" && board.cells[combo[1]] == "#{self.token}" || board.cells[combo[1]] == "#{self.token}" && board.cells[combo[2]] == "#{self.token}" || board.cells[combo[0]] == "#{self.token}" && board.cells[combo[2]] == "#{self.token}"}
@@ -80,7 +84,7 @@ def next_to(input,board)
 
 
 
-end
+
 
 def move(board)
   puts "Computer is thinking of a move..."
@@ -97,16 +101,25 @@ def move(board)
       @my_last_move = input
     end
   when 2
-    input = board.open_cells.detect{|x| next_to(@game.last_move, board).include?(x-1) == true && next_to(my_last_move, board).include?(x-1) ==  true}
+    input = board.open_cells.select{|x| next_to(@game.last_move, board).include?(x-1) && next_to(my_last_move, board).include?(x-1)}
   when 3..9
     if win_move(board) != nil
         input = win_move(board)
     elsif defense_move(board) != nil
         input = defense_move(board)
     else
-
+      list = []
+      WIN_COMBINATIONS.each do |combo|
+        combo.each do |x|
+        if opponent_board(board).include?(x) && !my_board(board).include?(x)
+          list << combo[0]
+          list << combo[1]
+          list << combo[2]
       end
     end
+  end
+  input = list.detect{ |x| list.count(x) > 1 }
+end
 input += 1
 input.to_s
 end
