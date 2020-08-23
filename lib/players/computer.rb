@@ -115,7 +115,7 @@ def move(board)
       list = []
       WIN_COMBINATIONS.each do |combo|
         combo.each do |index|
-        if opponent(board).include?(index)
+        if opponent_board(board).include?(index)
           list << combo
         end
       end
