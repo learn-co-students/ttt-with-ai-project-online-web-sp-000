@@ -39,7 +39,7 @@ def defense_move(board)
 end
 
 def opponent_board(board)
-  board.cells.select{|x| x == @opponent_token}
+  [0,1,2,3,4,5,6,7,8].select{|index| board.cells[index] == @opponent_token}
 end
 
 
@@ -84,6 +84,8 @@ end
 
 def move(board)
   puts "Computer is thinking of a move..."
+  puts "#{@opponent_token}"
+  puts "#{opponent_board(board)}"
   case board.turn_count
   when 0
     input = 4
