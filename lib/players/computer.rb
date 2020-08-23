@@ -81,6 +81,7 @@ def next_to(input,board)
   when 8
     [4,5,7].select{|x| board.cells[x] == " "}
   end
+end
 
 
 
@@ -101,28 +102,42 @@ def move(board)
       @my_last_move = input
     end
   when 2
-    input = board.open_cells.select{|x| next_to(@game.last_move, board).include?(x-1) && next_to(my_last_move, board).include?(x-1)}
+    input = board.open_cells.select{|x| next_to(@game.last_move, board).include?(x-1) && next_to(my_last_move, board).include?(x-1)}.sample
+    input -= 1
   when 3..9
-    if win_move(board) != nil
-        input = win_move(board)
-    elsif defense_move(board) != nil
-        input = defense_move(board)
-    else
+    puts "#{win_move(board)}"
+    #if win_move(board) != nil
+      #  input = win_move(board)
+      puts "#{defense_move(board)}"
+  #  elsif defense_move(board) != nil
+      #  input = defense_move(board)
+  #  else
       list = []
       WIN_COMBINATIONS.each do |combo|
-        combo.each do |x|
-        if opponent_board(board).include?(x) && !my_board(board).include?(x)
-          list << combo[0]
-          list << combo[1]
-          list << combo[2]
+        combo.each do |index|
+        if opponent(board).include?(index)
+          list << combo
+        end
       end
     end
-  end
-  input = list.detect{ |x| list.count(x) > 1 }
+      puts "#{list.flatten}"
+      #  if combo.any?{|x|opponent_board(board).include?(x)} && combo.none?{|x| my_board(board).include?(x)}
+      #    list << combo[0]
+        #  list << combo[1]
+        #  list << combo[2]
+      #  end
+    #  end
+  #  end
+    #a = list.detect{ |x| list.count(x) > 1 }
+
+
+#  end
 end
 input += 1
 input.to_s
+
 end
+
 
 
 
