@@ -57,7 +57,6 @@ class Game
   def play
     until over?
       turn
-      sleep(2)
     end
     if draw?
       puts "Cat's Game!"

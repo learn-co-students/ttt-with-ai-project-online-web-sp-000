@@ -60,26 +60,26 @@ nil
 end
 end
 
-def next_to(input,board)
+def next_to(input,board,char)
   case input
   when 0
-    [1,3,4].select{|x| board.cells[x] == " "}
+    [1,3,4].select{|x| board.cells[x] == char}
   when 1
-    [0,3,4].select{|x| board.cells[x] == " "}
+    [0,3,4].select{|x| board.cells[x] == char}
   when 2
-    [1,4,5].select{|x| board.cells[x] == " "}
+    [1,4,5].select{|x| board.cells[x] == char}
   when 3
-    [0,4,6].select{|x| board.cells[x] == " "}
+    [0,4,6].select{|x| board.cells[x] == char}
   when 4
-    [0,1,2,3,5,6,7,8].select{|x| board.cells[x] == " "}
+    [0,1,2,3,5,6,7,8].select{|x| board.cells[x] == char}
   when 5
-    [2,4,8].select{|x| board.cells[x] == " "}
+    [2,4,8].select{|x| board.cells[x] == char}
   when 6
-    [3,4,7].select{|x| board.cells[x] == " "}
+    [3,4,7].select{|x| board.cells[x] == char}
   when 7
-    [6,4,8].select{|x| board.cells[x] == " "}
+    [6,4,8].select{|x| board.cells[x] == char}
   when 8
-    [4,5,7].select{|x| board.cells[x] == " "}
+    [4,5,7].select{|x| board.cells[x] == char}
   end
 end
 
@@ -102,7 +102,7 @@ def move(board)
       @my_last_move = input
     end
   when 2
-    input = board.open_cells.select{|x| next_to(@game.last_move, board).include?(x-1) && next_to(my_last_move, board).include?(x-1)}.sample
+    input = board.open_cells.select{|x| next_to(@game.last_move, board, " ").include?(x-1) && next_to(my_last_move, board, " ").include?(x-1)}.sample
     input -= 1
   when 3..9
     puts "#{win_move(board)}"
@@ -116,11 +116,28 @@ def move(board)
       WIN_COMBINATIONS.each do |combo|
         combo.each do |index|
         if opponent_board(board).include?(index)
-          list << combo
+          if combo.none?{|index| my_board(board).include?(index)}
+            list << combo
+        end
         end
       end
     end
+      play_1 = list.flatten.detect{|index| list.flatten.count(index) > 1}
+      play_2 = list.flatten.each do |index|
+        puts "#{next_to(index,board, @token)}"
+        if next_to(index,board,@token)
+          index
+        end
+      end
+      if play_1 != nil
+        input = play_1
+      else
+        input = play_2
+      end
+      puts "#{input}"
       puts "#{list.flatten}"
+      puts "#{play_1}"
+      puts "#{play_2}"
       #  if combo.any?{|x|opponent_board(board).include?(x)} && combo.none?{|x| my_board(board).include?(x)}
       #    list << combo[0]
         #  list << combo[1]
