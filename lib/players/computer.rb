@@ -91,24 +91,19 @@ def move(board)
   puts "Computer is thinking of a move..."
   case board.turn_count
   when 0
-    input = 4
+    input = [0,2,6,8].sample
     @my_last_move = input
   when 1
-    if @game.last_move != 4
-      input = 4
+      input = next_to(@game.last_move, board, " ").sample
       @my_last_move = input
-    else
-      input = [0,1,2,3,5,6,7,8].sample
-      @my_last_move = input
-    end
   when 2
     input = board.open_cells.select{|x| next_to(@game.last_move, board, " ").include?(x-1) && next_to(my_last_move, board, " ").include?(x-1)}.sample
     input -= 1
-  when 3..9
-    puts "#{win_move(board)}"
+  when 3..7
+    puts "win move#{win_move(board)}"
+    puts "defense move#{defense_move(board)}"
     if win_move(board) != nil
         input = win_move(board)
-      puts "#{defense_move(board)}"
     elsif defense_move(board) != nil
         input = defense_move(board)
     else
@@ -132,19 +127,22 @@ def move(board)
       end
     end
   end
-      play_1 = defend_list.flatten.detect{|index| defend_list.flatten.count(index) > 1}
+      play_1 = defend_list.flatten.detect{|index| defend_list.flatten.count(index) > 1 && board.open_cells.include?(index + 1)}
       possible_plays = []
       possible_plays << WIN_COMBINATIONS.detect{|combo| board.cells[combo[0]] == " " && board.cells[combo[1]] == " "}
       possible_plays << WIN_COMBINATIONS.detect{|combo| board.cells[combo[1]] == " " && board.cells[combo[2]] == " "}
       possible_plays << WIN_COMBINATIONS.detect{|combo| board.cells[combo[0]] == " " && board.cells[combo[2]] == " "}
-      puts "#{possible_plays.flatten.uniq}"
-      possible_plays = possible_plays.uniq.delete(nil)
+      puts "#{possible_plays.uniq.flatten}"
+      possible_plays = possible_plays.uniq.flatten
       play_2 = possible_plays.detect{|index| possible_plays.count(index) > 1}
 
-      if play_1 != nil
+      if play_1 != nil && board.open_cells.include?(play_1 + 1)
         input = play_1
-      else
+      elsif
+        play_2 != nil
         input = play_2
+      else
+        input = board.open_cells.sample - 1
       end
 
       puts "#{possible_plays}"
@@ -154,6 +152,8 @@ def move(board)
       puts "#{offense_list.flatten}"
       puts "#{play_1}"
       puts "#{play_2}"
+      puts "#{input}"
+
       #  if combo.any?{|x|opponent_board(board).include?(x)} && combo.none?{|x| my_board(board).include?(x)}
       #    list << combo[0]
         #  list << combo[1]
@@ -166,6 +166,11 @@ def move(board)
 
 #  end
 end
+when 8
+  puts "here is 8"
+  puts "#{board.open_cells}"
+  input = board.open_cells[0] - 1
+
 end
 input += 1
 input.to_s
