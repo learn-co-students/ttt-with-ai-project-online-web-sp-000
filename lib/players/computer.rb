@@ -169,7 +169,7 @@ end
 
 
 
-def move
+def move(board)
   puts "Computer is thinking of a move..."
   case @board.turn_count
   when 0
@@ -182,13 +182,14 @@ def move
     else
       input = [0,2,6,8].sample
       @my_last_move = input
+    end
   when 2
     input = @board.open_cells.select{|x| next_to(@game.last_move, board, " ").include?(x-1) && next_to(my_last_move, board, " ").include?(x-1)}.sample
     input -= 1
   when 3..7
-      if win_move != nil
-        input = win_move
-    elsif win_move == nil && defense_move != nil
+      if offense_move != nil
+        input = offense_move
+    elsif offense_move == nil && defense_move != nil
         input = defense_move
     else
       defend_list = []
@@ -249,7 +250,7 @@ def move
 
 
 #  end
-#end
+end
 when 8
   puts "here is 8"
   puts "#{@board.open_cells}"
