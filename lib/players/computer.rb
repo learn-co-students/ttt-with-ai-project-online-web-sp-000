@@ -123,7 +123,11 @@ def move
     input = [0,2,6,8].sample
     @my_last_move = input
   when 1
-      input = next_to(@game.last_move, board, " ").sample
+    if [0,2,6,8].include?(@game.last_move)
+      input = 4
+      @my_last_move = input
+    else
+      input = [0,2,6,8].sample
       @my_last_move = input
   when 2
     input = @board.open_cells.select{|x| next_to(@game.last_move, board, " ").include?(x-1) && next_to(my_last_move, board, " ").include?(x-1)}.sample
