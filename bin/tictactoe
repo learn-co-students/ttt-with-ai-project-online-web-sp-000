@@ -24,7 +24,7 @@ when "1"
     new_game.play
   else
     new_game = Game.new(cpu_1, player_2)
-    puts "Starting game with CPU as 'X' and Human as 'X'..."
+    puts "Starting game with CPU as 'X' and Human as 'O'..."
     new_game.play
   end
 when "2"
