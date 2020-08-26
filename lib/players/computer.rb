@@ -48,7 +48,11 @@ end
 
 
 def offense_play?(board)
-WIN_COMBINATIONS.detect{|combo| board.cells[combo[0]] == "#{self.token}" && board.cells[combo[1]] == "#{self.token}" || board.cells[combo[1]] == "#{self.token}" && board.cells[combo[2]] == "#{self.token}" || board.cells[combo[0]] == "#{self.token}" && board.cells[combo[2]] == "#{self.token}"}
+  possible_plays = []
+  possible_plays << WIN_COMBINATIONS.detect{|combo| board.cells[combo[0]] == "#{@token}" && board.cells[combo[1]] == "#{@token}"}
+  possible_plays << WIN_COMBINATIONS.detect{|combo| board.cells[combo[1]] == "#{@token}" && board.cells[combo[2]] == "#{@token}"}
+  possible_plays << WIN_COMBINATIONS.detect{|combo| board.cells[combo[0]] == "#{@token}" && board.cells[combo[2]] == "#{@token}"}
+  possible_plays.detect{|play| play != nil}
 end
 
 
