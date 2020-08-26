@@ -21,6 +21,8 @@ class Game
     player_2.game = self
     @player_2 = player_2
     @board = board
+    player_1.board = @board
+    player_2.board = @board
   end
 
   def current_player

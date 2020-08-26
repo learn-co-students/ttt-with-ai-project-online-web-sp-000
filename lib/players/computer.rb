@@ -16,6 +16,23 @@ module Players
       [2,4,6]
     ]
 
+    VERTICAL_WINS = [
+      [0,3,6],
+      [1,4,7],
+      [2,5,8],
+    ]
+
+    HORIZONTAL_WINS = [
+      [0,1,2],
+      [3,4,5],
+      [6,7,8],
+    ]
+
+    DIAGONAL_WINS = [
+      [0,4,8],
+      [2,4,6]
+    ]
+
 
 
 
@@ -38,12 +55,12 @@ def defense_move(board)
   end
 end
 
-def opponent_board(board)
-  [0,1,2,3,4,5,6,7,8].select{|index| board.cells[index] == @opponent_token}
+def opponent_board
+  [0,1,2,3,4,5,6,7,8].select{|index| @board.cells[index] == @opponent_token}
 end
 
-def my_board(board)
-  [0,1,2,3,4,5,6,7,8].select{|index| board.cells[index] == @token}
+def my_board
+  [0,1,2,3,4,5,6,7,8].select{|index| @board.cells[index] == @token}
 end
 
 
@@ -72,26 +89,26 @@ nil
 end
 end
 
-def next_to(input,board,char)
+def next_to(input, char)
   case input
   when 0
-    [1,3,4].select{|x| board.cells[x] == char}
+    [1,3,4].select{|x| @board.cells[x] == char}
   when 1
-    [0,3,4].select{|x| board.cells[x] == char}
+    [0,3,4].select{|x| @board.cells[x] == char}
   when 2
-    [1,4,5].select{|x| board.cells[x] == char}
+    [1,4,5].select{|x| @board.cells[x] == char}
   when 3
-    [0,4,6].select{|x| board.cells[x] == char}
+    [0,4,6].select{|x| @board.cells[x] == char}
   when 4
-    [0,1,2,3,5,6,7,8].select{|x| board.cells[x] == char}
+    [0,1,2,3,5,6,7,8].select{|x| @board.cells[x] == char}
   when 5
-    [2,4,8].select{|x| board.cells[x] == char}
+    [2,4,8].select{|x| @board.cells[x] == char}
   when 6
-    [3,4,7].select{|x| board.cells[x] == char}
+    [3,4,7].select{|x| @board.cells[x] == char}
   when 7
-    [6,4,8].select{|x| board.cells[x] == char}
+    [6,4,8].select{|x| @board.cells[x] == char}
   when 8
-    [4,5,7].select{|x| board.cells[x] == char}
+    [4,5,7].select{|x| @board.cells[x] == char}
   end
 end
 
@@ -99,9 +116,9 @@ end
 
 
 
-def move(board)
+def move
   puts "Computer is thinking of a move..."
-  case board.turn_count
+  case @board.turn_count
   when 0
     input = [0,2,6,8].sample
     @my_last_move = input
@@ -109,10 +126,9 @@ def move(board)
       input = next_to(@game.last_move, board, " ").sample
       @my_last_move = input
   when 2
-    input = board.open_cells.select{|x| next_to(@game.last_move, board, " ").include?(x-1) && next_to(my_last_move, board, " ").include?(x-1)}.sample
+    input = @board.open_cells.select{|x| next_to(@game.last_move, board, " ").include?(x-1) && next_to(my_last_move, board, " ").include?(x-1)}.sample
     input -= 1
   when 3..7
-
   #  puts "win move#{win_move(board)}"
   #  puts "offense play #{offense_play?(board)}"
   #  puts "defense move#{defense_move(board)}"
@@ -124,6 +140,17 @@ def move(board)
   #  elsif win_move(board) == nil && defense_move(board) != nil
       #  input = defense_move(board)
     #else
+
+    puts "win move#{win_move(board)}"
+    puts "defense move#{defense_move(board)}"
+
+    puts "#{win_move(board)}"
+    if win_move(board) != nil
+        input = win_move(board)
+    elsif defense_move(board) != nil
+        input = defense_move(board)
+    else
+
       defend_list = []
       WIN_COMBINATIONS.each do |combo|
         combo.each do |index|
@@ -185,8 +212,8 @@ def move(board)
 #end
 when 8
   puts "here is 8"
-  puts "#{board.open_cells}"
-  input = board.open_cells[0] - 1
+  puts "#{@board.open_cells}"
+  input = @board.open_cells[0] - 1
 
 end
 input += 1
