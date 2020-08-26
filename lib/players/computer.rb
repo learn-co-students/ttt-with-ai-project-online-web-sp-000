@@ -49,16 +49,24 @@ end
 
 def offense_play?(board)
   possible_plays = []
-  possible_plays << WIN_COMBINATIONS.detect{|combo| board.cells[combo[0]] == "#{@token}" && board.cells[combo[1]] == "#{@token}"}
-  possible_plays << WIN_COMBINATIONS.detect{|combo| board.cells[combo[1]] == "#{@token}" && board.cells[combo[2]] == "#{@token}"}
-  possible_plays << WIN_COMBINATIONS.detect{|combo| board.cells[combo[0]] == "#{@token}" && board.cells[combo[2]] == "#{@token}"}
-  possible_plays.detect{|play| play != nil}
+  possible_plays << WIN_COMBINATIONS.collect{|combo| board.cells[combo[0]] == "#{@token}" && board.cells[combo[1]] == "#{@token}"}
+  possible_plays << WIN_COMBINATIONS.collect{|combo| board.cells[combo[1]] == "#{@token}" && board.cells[combo[2]] == "#{@token}"}
+  possible_plays << WIN_COMBINATIONS.collect{|combo| board.cells[combo[0]] == "#{@token}" && board.cells[combo[2]] == "#{@token}"}
+  #possible_plays.select{|play| play != nil}
 end
 
 
 def win_move(board)
-  if offense_play?(board) != nil
-    offense_play?(board).detect{|index| board.cells[index] == " "}
+  win_move = []
+  if offense_play?(board)[0] != nil
+    offense_play?(board).each do |combo|
+      combo.each do |index|
+        if board.open_cells.include?(index + 1)
+          win_move << index
+        end
+      end
+    end
+    win_move.uniq.sample
 else
 nil
 end
@@ -104,13 +112,18 @@ def move(board)
     input = board.open_cells.select{|x| next_to(@game.last_move, board, " ").include?(x-1) && next_to(my_last_move, board, " ").include?(x-1)}.sample
     input -= 1
   when 3..7
-    puts "win move#{win_move(board)}"
-    puts "defense move#{defense_move(board)}"
-    if win_move(board) != nil
-        input = win_move(board)
-    elsif defense_move(board) != nil
-        input = defense_move(board)
-    else
+
+  #  puts "win move#{win_move(board)}"
+  #  puts "offense play #{offense_play?(board)}"
+  #  puts "defense move#{defense_move(board)}"
+  #  puts "defense play#{defense_play?(board)}"
+
+  #  puts "#{win_move(board)}"
+  #  if win_move(board) != nil
+      #  input = win_move(board)
+  #  elsif win_move(board) == nil && defense_move(board) != nil
+      #  input = defense_move(board)
+    #else
       defend_list = []
       WIN_COMBINATIONS.each do |combo|
         combo.each do |index|
@@ -169,7 +182,7 @@ def move(board)
 
 
 #  end
-end
+#end
 when 8
   puts "here is 8"
   puts "#{board.open_cells}"
