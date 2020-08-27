@@ -29,7 +29,7 @@ when 1
     token = gets.strip
   end
   puts "Now commencing game #{name} vs Computer..."
-  if token == "X"
+  if token == "X" || token == "x"
     name = Players::Human.new("X")
     Game.new(name,Players::Computer.new("O")).play
   else
