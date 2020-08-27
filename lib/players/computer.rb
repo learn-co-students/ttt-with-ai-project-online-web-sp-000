@@ -296,10 +296,7 @@ def move(board)
 #  end
 
 when 8
-  puts "here is 8"
-  puts "#{@board.open_cells}"
   input = @board.open_cells[0] - 1
-
 end
 input += 1
 input.to_s
