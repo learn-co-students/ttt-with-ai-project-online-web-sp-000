@@ -137,7 +137,7 @@ def compete_move
     end
   end
     if final_plays != nil
-      final_plays
+      final_plays.sample
     else
       nil
     end
@@ -191,7 +191,7 @@ def move(board)
       @my_last_move = input
     end
   when 2
-    input = @board.open_cells.select{|x| next_to(@game.last_move, " ").include?(x-1) && next_to(my_last_move, " ").include?(x-1)}.sample
+    input = @board.open_cells.select{|x| next_to(@game.last_move, " ").include?(x-1) && next_to(@my_last_move, " ").include?(x-1)}.sample
     input -= 1
   when 3..7
       if offense_move != nil
