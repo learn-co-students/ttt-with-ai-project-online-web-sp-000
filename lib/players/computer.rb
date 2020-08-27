@@ -147,7 +147,11 @@ def compete_move
       @board.open_cells.include?(index + 1) && next_to(index, @opponent_token)
     end
   end
-    final_plays.sample
+    if final_plays != nil
+      final_plays
+    else
+      nil
+    end
   end
 
 def opponent_board
@@ -236,7 +240,7 @@ def move(board)
     elsif compete_move != nil && offense_move == nil && defense_move == nil
       input = compete_move
     else
-      input = @board.open_cells.sample
+      input = @board.open_cells.sample - 1
       end
     #else
     #  defend_list = []
