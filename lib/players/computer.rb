@@ -49,7 +49,7 @@ def defense_play?
         blank_count += 1
       end
     end
-    if opponent_token_count == 2 && blank_count == 0
+    if opponent_token_count == 2 && blank_count == 1
       defense_plays << combo
     end
   end
@@ -71,7 +71,7 @@ def offense_play?
         blank_count += 1
       end
     end
-    if token_count == 2 && blank_count == 0
+    if token_count == 2 && blank_count == 1
       offense_plays << combo
     end
   end
@@ -184,60 +184,58 @@ def move(board)
       @my_last_move = input
     end
   when 2
-    input = @board.open_cells.select{|x| next_to(@game.last_move, board, " ").include?(x-1) && next_to(my_last_move, board, " ").include?(x-1)}.sample
+    input = @board.open_cells.select{|x| next_to(@game.last_move, " ").include?(x-1) && next_to(my_last_move, " ").include?(x-1)}.sample
     input -= 1
   when 3..7
       if offense_move != nil
         input = offense_move
-    elsif offense_move == nil && defense_move != nil
+    else offense_move == nil && defense_move != nil
         input = defense_move
-    else
-      defend_list = []
-      WIN_COMBINATIONS.each do |combo|
-        combo.each do |index|
-        if opponent_board.include?(index)
-          if combo.none?{|index| my_board.include?(index)}
-            defend_list << combo
-        end
-        end
       end
-    end
-    offense_list = []
-    WIN_COMBINATIONS.each do |combo|
-      combo.each do |index|
-      if my_board.include?(index)
-        if combo.none?{|index| opponent_board.include?(index)}
-          offense_list << combo
-      end
-      end
-    end
-  end
-      play_1 = defend_list.flatten.detect{|index| defend_list.flatten.count(index) > 1 && @board.open_cells.include?(index + 1)}
-      possible_plays = []
-      possible_plays << WIN_COMBINATIONS.detect{|combo| @board.cells[combo[0]] == " " && @board.cells[combo[1]] == " "}
-      possible_plays << WIN_COMBINATIONS.detect{|combo| @board.cells[combo[1]] == " " && @board.cells[combo[2]] == " "}
-      possible_plays << WIN_COMBINATIONS.detect{|combo| @board.cells[combo[0]] == " " && @board.cells[combo[2]] == " "}
-      puts "#{possible_plays.uniq.flatten}"
-      possible_plays = possible_plays.uniq.flatten
-      play_2 = possible_plays.detect{|index| possible_plays.count(index) > 1}
+    #else
+    #  defend_list = []
+    #  WIN_COMBINATIONS.each do |combo|
+    #    combo.each do |index|
+    #    if opponent_board.include?(index)
+    #      if combo.none?{|index| my_board.include?(index)}
+    #        defend_list << combo
+    #    end
+    #    end
+    #  end
+    #end
+    #offense_list = []
+    #WIN_COMBINATIONS.each do |combo|
+    #  combo.each do |index|
+    #  if my_board.include?(index)
+    #    if combo.none?{|index| opponent_board.include?(index)}
+    #      offense_list << combo
+    #  end
+    #  end
+    #end
+  #end
+  #    play_1 = defend_list.flatten.detect{|index| defend_list.flatten.count(index) > 1 && @board.open_cells.include?(index + 1)}
+  #    possible_plays = []
+  #    possible_plays << WIN_COMBINATIONS.detect{|combo| @board.cells[combo[0]] == " " && @board.cells[combo[1]] == " "}
+  #    possible_plays << WIN_COMBINATIONS.detect{|combo| @board.cells[combo[1]] == " " && @board.cells[combo[2]] == " "}
+  #    possible_plays << WIN_COMBINATIONS.detect{|combo| @board.cells[combo[0]] == " " && @board.cells[combo[2]] == " "}
+  #    puts "#{possible_plays.uniq.flatten}"
+  #    possible_plays = possible_plays.uniq.flatten
+  #    play_2 = possible_plays.detect{|index| possible_plays.count(index) > 1}
 
-      if play_1 != nil && @board.open_cells.include?(play_1 + 1)
-        input = play_1
-      elsif
-        play_2 != nil
-        input = play_2
-      else
-        input = @board.open_cells.sample - 1
-      end
+  #    if play_1 != nil && @board.open_cells.include?(play_1 + 1)
+  #      input = play_1
+  #    elsif
+  #      play_2 != nil
+  #      input = play_2
+  #    else
+  #      input = @board.open_cells.sample - 1
+  #    end
 
-      puts "#{possible_plays}"
+      puts "#{offense_play?}"
+      puts "#{defense_play?}"
+      puts "offense move#{offense_move}"
+      puts "defense move#{defense_move}"
 
-      puts "#{input}"
-      puts "#{defend_list.flatten}"
-      puts "#{offense_list.flatten}"
-      puts "#{play_1}"
-      puts "#{play_2}"
-      puts "#{input}"
 
       #  if combo.any?{|x|opponent_board(board).include?(x)} && combo.none?{|x| my_board(board).include?(x)}
       #    list << combo[0]
@@ -250,7 +248,7 @@ def move(board)
 
 
 #  end
-end
+
 when 8
   puts "here is 8"
   puts "#{@board.open_cells}"
