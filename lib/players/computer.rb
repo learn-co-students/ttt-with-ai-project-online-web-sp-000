@@ -78,7 +78,36 @@ def offense_play?
   offense_plays
 end
 
-
+def compete_play?
+  compete_plays_offense = []
+  compete_plays_defense = []
+  final_plays = []
+  WIN_COMBINATIONS.each do |combo|
+      token_count = 0
+      opponent_token_count = 0
+      blank_count = 0
+    combo.each do |index|
+      if @board.cells[index] == @token
+        token_count += 1
+      elsif @board.cells[index] == @opponent_token
+        opponent_token_count += 1
+      else
+        blank_count += 1
+      end
+    end
+    if token_count == 1 && blank_count == 2
+      compete_plays_offense << combo
+    elsif opponent_token_count == 1 && blank_count == 2
+      compete_defense_plays << combo
+    end
+  end
+  compete_plays_offense.each do |combo|
+    combo.each do |index|
+    compete_defense_plays.each{|com| com.include?(index) ? final_plays << combo }
+    end
+  end
+  final_plays
+end
 
 
 
@@ -107,6 +136,14 @@ def offense_move
     nil
   end
 end
+
+def compete_move
+  if compete_play?[0] != nil
+    final_plays = compete_play?.flatten.select do |index|
+      @board.open_cells.include?(index + 1) && next_to(index, @opponent_token)
+    end
+    final_plays.sample
+  end
 
 def opponent_board
   [0,1,2,3,4,5,6,7,8].select{|index| @board.cells[index] == @opponent_token}
@@ -189,8 +226,10 @@ def move(board)
   when 3..7
       if offense_move != nil
         input = offense_move
-    else offense_move == nil && defense_move != nil
+    elsif offense_move == nil && defense_move != nil
         input = defense_move
+    else
+        input = compete_move
       end
     #else
     #  defend_list = []
@@ -231,10 +270,6 @@ def move(board)
   #      input = @board.open_cells.sample - 1
   #    end
 
-      puts "#{offense_play?}"
-      puts "#{defense_play?}"
-      puts "offense move#{offense_move}"
-      puts "defense move#{defense_move}"
 
 
       #  if combo.any?{|x|opponent_board(board).include?(x)} && combo.none?{|x| my_board(board).include?(x)}
