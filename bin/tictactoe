@@ -2,5 +2,5 @@
 
 require_relative '../config/environment'
 
-hi = Players::Human.new("X")
-puts hi.token
+hi = Players::Computer.new("X")
+print hi.move(Board.new)

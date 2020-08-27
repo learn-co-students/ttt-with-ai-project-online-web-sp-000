@@ -1,6 +1,9 @@
-# hi = Players::Human.new("X")
+# hi = Players::Human.new("X") #doesnt work
 # puts hi.token
-hello = Player.new
+#hello = Player.new #also doesnt work
+#basically the only way it works is in the bin/tictactoe
+
+
 class Board
   attr_accessor :cells
   #cells: is is an instnace variable
