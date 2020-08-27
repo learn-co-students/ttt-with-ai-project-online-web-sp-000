@@ -23,7 +23,7 @@ when 1
   puts "Thank you #{name}! The first player to move is X and the second player to move is O."
   puts "Please enter either X or O to tell me your preference."
   token = gets.strip
-  until token == "X" || token == "O" do
+  until token == "X" || token == "O" || token == "x" || token == "o" do
     puts "Oops! I think you mistyped. Please enter X or O."
     token.clear
     token = gets.strip
