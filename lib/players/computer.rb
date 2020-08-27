@@ -98,14 +98,18 @@ def compete_play?
     if token_count == 1 && blank_count == 2
       compete_plays_offense << combo
     elsif opponent_token_count == 1 && blank_count == 2
-      compete_defense_plays << combo
+      compete_plays_defense << combo
     end
   end
   compete_plays_offense.each do |combo|
     combo.each do |index|
-    compete_defense_plays.each{|com| com.include?(index) ? final_plays << combo }
+    compete_plays_defense.each do |com|
+      if com.include?(index)
+      final_plays << combo
+    end
     end
   end
+end
   final_plays
 end
 
@@ -142,6 +146,7 @@ def compete_move
     final_plays = compete_play?.flatten.select do |index|
       @board.open_cells.include?(index + 1) && next_to(index, @opponent_token)
     end
+  end
     final_plays.sample
   end
 
@@ -228,8 +233,10 @@ def move(board)
         input = offense_move
     elsif offense_move == nil && defense_move != nil
         input = defense_move
+    elsif compete_move != nil && offense_move == nil && defense_move == nil
+      input = compete_move
     else
-        input = compete_move
+      input = @board.open_cells.sample
       end
     #else
     #  defend_list = []
