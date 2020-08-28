@@ -8,8 +8,9 @@ def continue_play?
 end
 
 play_input = "Y"
-until play_input == "N" || play_input == "n" do
+while play_input != "N" || play_input != "n" do
   if play_input != "Y" && play_input != "y"
+    play_input.clear
     play_input = continue_play?
   end
 puts "Welcome to Tic Tac Toe!"
