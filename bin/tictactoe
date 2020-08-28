@@ -13,7 +13,24 @@ when 0
   puts "Now commencing game Computer vs Computer..."
   Game.new(Players::Computer.new("X"),Players::Computer.new("O")).play
 elsif num_rounds == "wargames"
-  100.times {Game.new(Players::Computer.new("X"),Players::Computer.new("O")).play}
+  x_wins = 0
+  o_wins = 0
+  c_wins = 0
+  100.times do |game|
+    game = Game.new(Players::Computer.new("X"),Players::Computer.new("O"))
+    game.play
+    if game.draw? == true
+      c_wins += 1
+    elsif game.winner == "X"
+      x_wins += 1
+    elsif game.winner == "O"
+      o_wins += 1
+    else
+    end
+  end
+  puts "X won #{x_wins} times."
+  puts "O won #{o_wins} times."
+  puts "It was a Cat's Game #{c_wins} times."
 else
   puts "Sorry you mistyped!"
 end
