@@ -18,7 +18,8 @@ puts "How many human players are in your game? Please enter 0, 1 or 2."
 input = gets.strip.to_i
 case input
 when 0
-  puts "Would you like for the computer to play itself once or 100 times? Type 1 for once and wargames for 100."
+  puts "Would you like for the computer to play itself once or 100 times?"
+  puts "Type 1 for once and wargames for 100."
   num_rounds = gets.strip
   if num_rounds == "1"
   puts "Now commencing game Computer vs Computer..."
