@@ -1,3 +1,6 @@
+# NOTE 1: THERE IS REDUNDANT CODE IN THIS PROJECT. SOME CODE COULD NOT BE REMOVED IN ORDER TO FULFILL THE SPEC REQUIREMENTS.
+# NOTE 2: REMOVE THE COMMENTS (#) IN THE #PLAY METHOD BELOW TO ACTIVATE COMPUTER PLAY MODE.
+
 class Game
   
   attr_accessor :board, :player_1, :player_2
@@ -100,8 +103,9 @@ class Game
     end
   end
   
+# REMOVE THE COMMENTS (#) IN THE #PLAY METHOD BELOW TO ACTIVATE COMPUTER PLAY MODE.
+  
   def play
-    
     puts "Welcome to Tic-Tak-Toe v.3.2!"
     # set_player_1
     # set_player_2
@@ -116,7 +120,5 @@ class Game
     end
     
     # play_again?
-  
   end
-
 end
