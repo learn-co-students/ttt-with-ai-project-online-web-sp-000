@@ -103,8 +103,8 @@ class Game
   def play
     
     puts "Welcome to Tic-Tak-Toe v.3.2!"
-    set_player_1
-    set_player_2
+    # set_player_1
+    # set_player_2
     board.display
     
     turn until over?
@@ -115,7 +115,7 @@ class Game
       puts "Cat's Game!"
     end
     
-    play_again?
+    # play_again?
   
   end
 
