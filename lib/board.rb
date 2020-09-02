@@ -2,6 +2,10 @@ require 'pry'
 
 class Board
 
+  def value_at(input)
+    @cells[input]
+  end
+
   def initialize()
     @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
   end
@@ -28,7 +32,7 @@ class Board
   end
 
   def position(userInput)
-    arrayInput = (userInput.to_i - 1)
+    arrayInput = userInput.to_i - 1
     return @cells[arrayInput]
   end
 
@@ -76,6 +80,15 @@ class Board
     else
       return false
     end
+  end
+
+  def full?
+    @cells.each do | cell |
+      if (cell == " " || cell == nil)
+        return false
+      end
+    end
+    return true
   end
 
 end
