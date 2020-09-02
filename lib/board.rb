@@ -2,9 +2,9 @@ require 'pry'
 
 class Board
 
-  def value_at(input)
-    @cells[input]
-  end
+#  def value_at(input)
+#    @cells[input]
+#  end
 
   def initialize()
     @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]

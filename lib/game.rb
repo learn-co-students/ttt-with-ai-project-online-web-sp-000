@@ -45,8 +45,10 @@ class Game
 
   def won?
     WIN_COMBINATIONS.each do | selectedCombo |
-      if (@board.value_at(selectedCombo[0]) == @board.value_at(selectedCombo[1]) && @board.value_at(selectedCombo[1]) == @board.value_at(selectedCombo[2]) && @board.value_at(selectedCombo[0] != " "))
-        return selectedCombo
+      if (@board.cells[selectedCombo[0]] == @board.cells[selectedCombo[1]] && @board.cells[selectedCombo[1]] == @board.cells[selectedCombo[2]])
+        if (@board.cells[selectedCombo[0]] != " ")
+          return selectedCombo
+        end
       end
     end
     return false
@@ -73,10 +75,10 @@ class Game
   end
 
   def winner
-    #binding.pry
+  #  binding.pry
     if (self.won? != false)
       winArray = self.won?
-      return @board.value_at(winArray[0])
+      return @board.cells[winArray[0]]
     else
       return
     end
@@ -94,9 +96,9 @@ class Game
       @board.display
     end
     if (self.won?)
-      return "Congratulations, #{self.winner}"
+      puts "Congratulations #{self.winner}!"
     else
-      return "Cat's Game!"
+      puts "Cat's Game!"
     end
   end
 
