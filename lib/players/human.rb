@@ -10,8 +10,10 @@ module Players
           passing = true
         end
       end
-      inputBoard.update(ui)
+      #.pry
+      return ui
     end
-  end
 
+
+  end
 end
