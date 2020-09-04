@@ -16,24 +16,6 @@ module Players
       [2,4,6]
     ]
 
-    VERTICAL_WINS = [
-      [0,3,6],
-      [1,4,7],
-      [2,5,8],
-    ]
-
-    HORIZONTAL_WINS = [
-      [0,1,2],
-      [3,4,5],
-      [6,7,8],
-    ]
-
-    DIAGONAL_WINS = [
-      [0,4,8],
-      [2,4,6]
-    ]
-
-
 def defense_play?
   defense_plays = []
   WIN_COMBINATIONS.each do |combo|
@@ -110,7 +92,7 @@ def compete_play?
     end
   end
 end
-  final_plays
+  final_plays.uniq
 end
 
 
@@ -133,7 +115,7 @@ end
 def compete_move
   if compete_play?[0] != nil
     final_plays = compete_play?.flatten.select do |index|
-      @board.open_cells.include?(index + 1) && next_to(index, @opponent_token)
+      @board.open_cells.include?(index + 1) && next_to(index, @opponent_token)[0] != nil
     end
   end
     if final_plays != nil
@@ -178,7 +160,7 @@ end
 
 def move(board)
   puts "Computer is thinking of a move..."
-  case board.turn_count
+  case @board.turn_count
   when 0
     input = [0,2,6,8].sample
     @my_last_move = input
@@ -194,7 +176,7 @@ def move(board)
     input = @board.open_cells.select{|x| next_to(@game.last_move, " ").include?(x-1) && next_to(@my_last_move, " ").include?(x-1)}.sample
     input -= 1
   when 3..7
-      if offense_move != nil
+    if offense_move != nil
         input = offense_move
     elsif offense_move == nil && defense_move != nil
         input = defense_move

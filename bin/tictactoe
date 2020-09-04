@@ -3,7 +3,7 @@
 require_relative '../config/environment'
 
 def continue_play?
-  puts "Would you like to play again? Enter N/n for no, press any other key for yes."
+  puts "Would you like to play again? Enter N for no, press any other key for yes."
   play_input = gets.strip
 end
 
@@ -73,8 +73,8 @@ end
 end
 
 start_game
-while continue_play? != "N" || continue_play? != "n" do
-  start_game
-  continue_play?
+while continue_play? != "N" do
+start_game
 end
+
 puts "Thanks for playing! Goodbye."
