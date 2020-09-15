@@ -1,5 +1,12 @@
 module Players
   class Computer < Player
+  attr_accessor :token, :combos
+    def initialize(token)
+     @token = token
+       @combos = Game::WIN_COMBINATIONS
+       @opponents_token = "O" if @token == "X"
+       @opponents_token = "X" if @token == "O"
+    end
 
 
     def move(board)
