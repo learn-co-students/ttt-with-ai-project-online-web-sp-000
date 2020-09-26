@@ -1,8 +1,11 @@
-class Players
-  class Human < Player 
+module Players
+
+  class Human < Player
+
     def move(input)
-      puts "Please choose a number between 1 and 9"
-      gets.strip
+      puts "Please enter your selection"
+      input = gets.strip
     end
+
   end
 end
