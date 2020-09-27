@@ -1,5 +1,5 @@
 require 'spec_helper'
-
+require 'pry'
 describe 'Player' do
 
   describe '#initialize' do
