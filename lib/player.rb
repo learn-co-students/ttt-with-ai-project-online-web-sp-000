@@ -1,9 +1,7 @@
 
 
 
-class Player
-
-    extend Players::Human
+class Player 
 
 
     attr_reader :token

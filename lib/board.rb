@@ -1,9 +1,10 @@
 
 require "pry"
 
-class Board 
 
-    extend Players::Human
+class Board
+
+    
 
     attr_accessor :cells
 
