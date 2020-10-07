@@ -1,22 +1,31 @@
 module Players
 
   class Computer < Player
-#
+
     def move(board)
-      input = rand(1..9)
+      input = optimal_move(board)
       while board.valid_move?(input) == true
-        input = rand(1..9)
+        input = optimal_move(board)
       end
       return input.to_s
     end
 
 
-    # optimal spots
-    #     - 3. middle
-    #     - 4. corner
-    #     - 2. any row or column with 2 of the other team
-    #     - 1. any row or column that 2 of your pieces 
-
+    def optimal_move(board)
+      if !board.taken?(5)
+        return 5
+      elsif !board.taken?(1)
+        return 1
+      elsif !board.taken?(3)
+        return 3
+      elsif !board.taken?(7)
+        return 7
+      elsif !board.taken?(9)
+        return 9
+      else
+        return rand(1..9)
+      end
+    end
 
   end
 
