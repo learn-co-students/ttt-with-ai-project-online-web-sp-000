@@ -49,9 +49,6 @@ class Board
   end
 
   def valid_move?(input) #is the input valid?
-    puts input.to_i.to_s == input
-    puts input.to_i.between?(1,9)
-    puts !taken?(input)
     input.to_i.to_s == input && input.to_i.between?(1,9) && !taken?(input)
   end
 

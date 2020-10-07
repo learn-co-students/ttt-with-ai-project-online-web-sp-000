@@ -34,7 +34,6 @@ class Game
   end
 
   def won? # true if someone won the game
-    puts "won?"
     WIN_COMBINATIONS.each do |win_combination|
 
       win_index_1 = win_combination[0]
@@ -68,7 +67,6 @@ class Game
   end
 
   def draw? #are all the cells full but there is no winner?
-    puts "draw?"
     if won? == false and full? == true
       return true
     else
@@ -77,7 +75,6 @@ class Game
   end
 
   def over? #is the game over?
-    puts "over?"
     if won? != false or draw? == true or full? == true
       return true
     else
@@ -103,20 +100,16 @@ class Game
   end
 
   def turn #take a turn
-    puts "turn"
     move = current_player.move(board)  #move = input
     if @board.valid_move?(move)  #if it is a valit input
-      puts "valid move"
       @board.update(move, current_player) #update the board
       @board.display #show the new board
     else
-      puts "invalid move"
       turn
     end
   end
 
   def play #play the game
-    puts "play start"
     while over? == false  #if the game is not over
       turn  #take a turn
     end
@@ -126,7 +119,6 @@ class Game
     elsif draw? == true #if the game is a draw
       puts "Cat's Game!" #puts cats game
     end
-    puts "end play"
   end
 
 end
