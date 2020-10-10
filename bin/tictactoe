@@ -1,3 +1,44 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts 'Welcome to Tic Tac Toe!'
+puts 'What type of game would you like to play? (Enter "0" for 0 players, "1" for 1 player vs. computer, or "2" for 2 players.'
+game_type = gets.strip
+puts 'Would you like to go first (enter "X") or second (enter "O")'
+order = gets.strip
+if game_type == "0"
+  game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+elsif game_type == "1" && order == "X"
+  game = Game.new(Players::Human.new("X"), Players::Computer.new("O")) 
+elsif game_type == "1" && order == "O"
+  game = Game.new(Players::Computer.new("X"), Players::Human.new("O")) 
+elsif game_type == "2"
+  game = Game.new
+end
+
+while !game.over?
+  game.play
+end
+
+input = ''
+until input.downcase == 'n'
+  puts 'Would you like to play again (y/n)?'
+  input = gets.strip
+  if input.downcase == 'y'
+    puts 'What type of game would you like to play? (Enter "0" for 0 players, "1" for 1 player vs. computer, or "2" for 2 players.'
+    game_type = gets.strip
+    puts 'Would you like to go first (enter "X") or second (enter "O")'
+    order = gets.strip
+    if game_type == "0"
+      game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+    elsif game_type == "1" && order == "X"
+      game = Game.new(Players::Human.new("X"), Players::Computer.new("O")) 
+    elsif game_type == "1" && order == "O"
+      game = Game.new(Players::Computer.new("X"), Players::Human.new("O")) 
+    elsif game_type == "2"
+      game = Game.new
+    end
+    game.play until game.over?
+  end
+end
