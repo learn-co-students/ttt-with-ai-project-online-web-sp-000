@@ -29,13 +29,7 @@ class Board
     end
 
     def turn_count
-        count = 0
-        @cells.each do |i|
-            if i == "X" || i == "O"
-                count += 1
-            end
-        end
-        count
+       @cells.count {|i| i == "X" || i == "O"}
     end
 
     def taken?(pos)
