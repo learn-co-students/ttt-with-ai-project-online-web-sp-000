@@ -79,4 +79,3 @@ end
 
 
 
-# g = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))

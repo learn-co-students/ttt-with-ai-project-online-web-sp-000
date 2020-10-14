@@ -12,7 +12,7 @@ require_relative '../config/environment'
 def start_game
     puts "Welcome to TicTacToe!"
     puts "Select your Player Mode"
-    puts "Type in 0, 1 or 2:"
+    puts "Type in 0, 1 or 2"
     input = gets.chomp.to_i
 
     case input
@@ -51,7 +51,7 @@ def start_game
         start_game
         if play_again_response == 'n'
             break
-        elsif play_again_response != 'y' || play_again_response != 'o'
+        elsif play_again_response != 'y' || play_again_response != 'n'
             break
         end
     end
