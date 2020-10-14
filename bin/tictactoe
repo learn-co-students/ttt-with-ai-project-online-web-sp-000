@@ -1,3 +1,67 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+# Greets the user with a message
+# Prompt the user for what kind of game they want to play: 0, 1 or 2 player?
+# Ask the user who should go first and be "X"
+# Use the input to correctly initialize a Game with the appropriate player types and token values
+# When the game is over, prompt user to play again? allowing them to choose a new config for the game as above
+# If user does not want to play, exit out of the game.
+
+def start_game
+    puts "Welcome to TicTacToe!"
+    puts "Select your Player Mode"
+    puts "Type in 0, 1 or 2"
+    input = gets.chomp.to_i
+
+    case input
+    when 0
+        game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
+        game.board.display
+        game.play
+    when 1
+        puts "Would you like to go first?"
+        puts "If yes type 'x' else type 'o':"
+        response = gets.strip.downcase
+
+        if response == 'x'
+            game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"))
+            game.board.display
+            game.play
+        else
+            game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"))
+            game.board.display
+            puts "\n\n"
+            game.play
+        end
+    when 2
+        puts "Enjoy the Game!!"
+        game = Game.new
+        game.board.display
+        game.play
+    end
+
+    puts "Would you like to play again?"
+    puts "Type 'y' for yes or 'n' to exit"
+
+    play_again_response = gets.chomp.downcase
+
+    while play_again_response == 'y'
+        start_game
+        if play_again_response == 'n'
+            break
+        elsif play_again_response != 'y' || play_again_response != 'n'
+            break
+        end
+    end
+
+end
+
+start_game
+
+
+
+
+
+

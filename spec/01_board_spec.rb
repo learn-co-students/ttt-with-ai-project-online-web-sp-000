@@ -40,10 +40,10 @@ describe "Board" do
 
       output = capture_puts{ board.display }
 
-      expect(output).to include(" X | X | X ")
       expect(output).to include("-----------")
       expect(output).to include(" X | O | O ")
       expect(output).to include("-----------")
+      expect(output).to include(" X | X | X ")
       expect(output).to include(" X | O | O ")
 
 
