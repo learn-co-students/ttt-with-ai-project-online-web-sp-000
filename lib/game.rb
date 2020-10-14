@@ -49,12 +49,12 @@ class Game
   def turn
     player = current_player
     current_move = player.move(@board)
+    # @board.display
     if @board.valid_move?(current_move)
         puts "Turn: #{@board.turn_count + 1}\n"
-        @board.display
         @board.update(current_move, player)
-        puts "#{player.token} moved #{current_move}"
         @board.display
+        puts "\n\n"
     else
         turn
     end
@@ -76,3 +76,7 @@ class Game
   
 
 end
+
+
+
+# g = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
