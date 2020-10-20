@@ -15,7 +15,7 @@ class Game
     end
 
     def won?
-        WIN_COMBINATIONS.each do |win_arrays|
+        WIN_COMBINATIONS.find do |win_arrays|
             pos1 = win_arrays[0]
             pos2 = win_arrays[1]
             pos3 = win_arrays[2]
@@ -27,7 +27,7 @@ class Game
     end
 
     def draw?
-      !board.cells.detect {|i| i == " "} && won? == false
+      !board.cells.detect {|i| i == " "} && !won?
     end
 
     def over?
@@ -35,9 +35,12 @@ class Game
     end
 
     def winner
-        if won?
-            winner = won?[0]
-            @board.cells[winner]
-        end
+      if won?
+        winner = won?[0]
+        @board.cells[winner]
+      end
     end
-  end
+
+    def turn
+    end
+end
