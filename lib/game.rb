@@ -48,4 +48,8 @@ class Game
             @board.cells[winner]
         end
     end
+
+    def turn
+        
+    end
 end
