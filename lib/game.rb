@@ -27,11 +27,11 @@ class Game
     end
 
     def draw?
-      !board.cells.detect {|i| i == " "} && won? == false ? true : false
+      !board.cells.detect {|i| i == " "} && won? == false
     end
 
     def over?
-      won? || draw? ? true : false 
+      won? || draw?
     end
 
     def winner
@@ -40,8 +40,4 @@ class Game
             @board.cells[winner]
         end
     end
-
-    def turn
-
-    end
-end
+  end
