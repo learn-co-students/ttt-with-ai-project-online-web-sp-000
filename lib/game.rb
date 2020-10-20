@@ -8,7 +8,7 @@ class Game
         @player_1 = player_1
         @player_2 = player_2
     end
-      
+
     def current_player
         turns = @board.cells.select {|i| i == "X" || i == "O"}
         turns.count % 2 == 0? player_1 : player_2
@@ -27,19 +27,11 @@ class Game
     end
 
     def draw?
-        if !board.cells.detect {|i| i == " "} && won? == false
-            true
-        else
-            false
-        end
+      !board.cells.detect {|i| i == " "} && won? == false ? true : false
     end
 
     def over?
-        if won? || draw?
-            true
-        else
-            false
-        end
+      won? || draw? ? true : false 
     end
 
     def winner
@@ -50,6 +42,6 @@ class Game
     end
 
     def turn
-        
+
     end
 end
