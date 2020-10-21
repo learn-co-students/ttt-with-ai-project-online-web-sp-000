@@ -42,5 +42,12 @@ class Game
     end
 
     def turn
+      player = self.current_player
+      input = player.move
+      if @board.valid_move?(input) && !@board.taken?(input)
+        @board.update(input, player)
+      else
+        turn
+      end
     end
 end
