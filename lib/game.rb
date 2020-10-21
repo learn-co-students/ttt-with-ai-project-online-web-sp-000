@@ -8,14 +8,14 @@ class Game
         @player_1 = player_1
         @player_2 = player_2
     end
-      
+
     def current_player
         turns = @board.cells.select {|i| i == "X" || i == "O"}
         turns.count % 2 == 0? player_1 : player_2
     end
 
     def won?
-        WIN_COMBINATIONS.each do |win_arrays|
+        WIN_COMBINATIONS.find do |win_arrays|
             pos1 = win_arrays[0]
             pos2 = win_arrays[1]
             pos3 = win_arrays[2]
@@ -27,29 +27,20 @@ class Game
     end
 
     def draw?
-        if !board.cells.detect {|i| i == " "} && won? == false
-            true
-        else
-            false
-        end
+      !board.cells.detect {|i| i == " "} && !won?
     end
 
     def over?
-        if won? || draw?
-            true
-        else
-            false
-        end
+      won? || draw?
     end
 
     def winner
-        if won?
-            winner = won?[0]
-            @board.cells[winner]
-        end
+      if won?
+        winner = won?[0]
+        @board.cells[winner]
+      end
     end
 
     def turn
-        
     end
 end

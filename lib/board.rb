@@ -23,11 +23,7 @@ class Board
     end
 
     def full?
-        if @cells.include?(" ")
-            false
-        else
-            true
-        end
+     !@cells.include?(" ")
     end
 
     def turn_count
@@ -35,21 +31,13 @@ class Board
     end
 
     def taken?(pos)
-        pos = position(pos)
-        if pos == "X" || pos == "O"
-            true
-        else
-            false
-        end
+      pos = position(pos)
+      pos == "X" || pos == "O"
     end
 
     def valid_move?(input)
-        input = input.to_i
-        if input > 0 && input <= 9 && !taken?(input)
-            true
-        else
-            false
-        end
+      input = input.to_i
+      input > 0 && input <= 9 && !taken?(input) 
     end
 
     def update(input, player)
