@@ -50,4 +50,16 @@ class Game
         turn
       end
     end
+
+    def play
+      until over?
+        turn
+      end
+      if won?
+        player = winner
+        puts "Congratulations #{player}!"
+      elsif draw?
+        puts "Cat's Game!"
+      end
+    end
 end
