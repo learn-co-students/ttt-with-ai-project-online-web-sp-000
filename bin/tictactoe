@@ -16,7 +16,7 @@ def start_new_game
   end
 
    elsif answer == "0"
-     Game.new(Players::Computer.new("X"), Players::Computer.new("0"), Board.new).play
+     Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
 
    elsif answer == "2"
      Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new).play
