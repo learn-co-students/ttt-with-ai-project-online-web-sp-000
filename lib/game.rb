@@ -11,7 +11,7 @@ class Game
 
     def current_player
         turns = @board.cells.select {|i| i == "X" || i == "O"}
-        turns.count % 2 == 0? player_1 : player_2
+        turns.count % 2 == 0 ? player_1 : player_2
     end
 
     def won?
