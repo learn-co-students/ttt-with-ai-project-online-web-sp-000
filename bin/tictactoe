@@ -10,7 +10,7 @@ def start_new_game
 
   if answer == "1"
      puts "Would you like to go first? Enter YES or NO."
-     if gets.chomp == "YES"
+     if gets.chomp.upcase == "YES"
        Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
      else Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new).play
   end
@@ -26,4 +26,4 @@ def start_new_game
 
 end
 
-  start_new_game until gets.chomp == "NO"
+  start_new_game until gets.chomp.upcase == "NO"
