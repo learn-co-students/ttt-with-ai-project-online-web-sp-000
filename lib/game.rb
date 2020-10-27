@@ -11,7 +11,7 @@ class Game
 
     def current_player
         turns = @board.cells.select {|i| i == "X" || i == "O"}
-        turns.count % 2 == 0? player_1 : player_2
+        turns.count % 2 == 0 ? player_1 : player_2
     end
 
     def won?
@@ -42,10 +42,12 @@ class Game
     end
 
     def turn
+      puts "Please enter 1-9:"
       player = self.current_player
       input = player.move
       if @board.valid_move?(input) && !@board.taken?(input)
         @board.update(input, player)
+        @board.display
       else
         turn
       end
