@@ -1,24 +1,15 @@
-require "pry"
-
 class Board
 
-  attr_accessor :board, :cells
+  attr_accessor :cells
 
-  @@cells = []
-
-  def initialize(board = nil)
-    @board = board || Array.new(9, " ")
-  end
-
-  def cells
-    @@cells
-  end
+  @cells = []
 
   def reset!
-    board = self.cells
-    board = Array.new(9, " ")
-#binding.pry
+    self.cells = Array.new(9, " ")
+  end
 
+  def initialize
+    reset!
   end
 
 end
