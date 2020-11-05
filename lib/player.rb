@@ -1,13 +1,9 @@
 class Player
 
-  attr_accessor :token
+  attr_reader :token
 
   def initialize(token)
     @token = token
-    #cannot be changed
-    #if self.token != token
-    #  raise NoMethodError
-    #end
   end
 
 
