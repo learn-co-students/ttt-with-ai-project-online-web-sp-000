@@ -33,11 +33,7 @@ class Board
   end
 
   def taken?(input)
-    if position(input) == " "
-      false
-    else
-      true
-    end
+    position(input) == " " ? false : true
   end
 
   def valid_move?(input)
