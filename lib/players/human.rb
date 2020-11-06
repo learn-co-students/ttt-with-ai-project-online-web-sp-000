@@ -1,6 +1,7 @@
 module Players
   class Human < Player
-    def move(user_input)
+    def move(board)
+      puts "Please enter a move between 1-9:"
       gets.chomp
     end
   end
