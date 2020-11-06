@@ -8,7 +8,7 @@ puts "What kind of game would you like to play? 0, 1, or 2 players?"
 players = gets.strip
 
 if players == "1"
-  puts "Who is x? Player 1? or Player 2?"
+  puts "Do you want player 1 to be x? type yes or no"
   first = gets.strip
 end
 
@@ -16,7 +16,7 @@ case players
 when "0"
   player_1, player_2 = Players::Computer.new("X"), Players::Computer.new("O")
 when "1"
-  if first == "Player 1"
+  if first == "yes"
     player_1, player_2 = Players::Human.new("X"), Players::Computer.new("O")
   else
     player_1, player_2 = Players::Computer.new("X"), Players::Human.new("O")
