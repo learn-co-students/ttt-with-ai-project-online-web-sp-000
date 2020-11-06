@@ -28,11 +28,13 @@ class Game
   def won?
     WIN_COMBINATIONS.detect do |combo|
       if  board.cells[combo[0]] == board.cells[combo[1]] &&
-          board.cells[combo[1]] == board.cells[combo[2]] #&&
-          combo
-          
+          board.cells[combo[1]] == board.cells[combo[2]] &&
+          board.taken?(combo[0]+1)
+
+          return combo
       end
     end
+      false
   end
 
   def draw?
@@ -45,7 +47,11 @@ class Game
 
   def winner
     if won?
-      #then
+      array = won?
+      board.cells[array[0]]
+    else
+      nil
+    end
   end
 
 end
