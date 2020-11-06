@@ -5,7 +5,7 @@ require_relative '../config/environment'
 puts "Welcome to Tic-Tac-Toe!"
 
   def start_game
-    puts "How many players? Enter 0, 1 or 2."
+    puts "How many players? Enter 0, 1, 2."
     answer = gets.strip
 
     if answer = "0"
@@ -18,8 +18,6 @@ puts "Welcome to Tic-Tac-Toe!"
           Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
         elsif input.upcase = "NO"
           Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new)
-        else
-          puts "Would you like to go first? Enter YES or NO."
         end
 
     elsif answer = "2"
