@@ -21,6 +21,36 @@ class Game
     @player_2 = player_2
   end
 
+  def start
+    puts "Welcome to Tic-Tac-Toe!"
+    main_menu
+  end
+
+  def main_menu
+    puts "How many players? Enter 0, 1, 2."
+    answer = gets.strip
+
+    case answer
+    when "0"
+      @player_1 = Players::Computer.new("X")
+      @player_2 = Players::Computer.new("O")
+      puts "Computer versus Computer. Victory is mine..."
+      play
+    when "1"
+      @player_2 = Players::Computer.new("O")
+      puts "You versus Computer. Best of luck, Human."
+      play
+    when "2"
+      puts "Human versus Human. Game on."
+      play
+    when "exit"
+    else
+      puts "Does...not...compute. Try another option."
+      main_menu
+    end
+  end
+
+
   def current_player
     board.turn_count % 2 == 0 ? @player_1 : @player_2
   end
@@ -56,6 +86,7 @@ class Game
 
   def turn
     puts "Please enter 1-9:"
+    board.display
     input = current_player.move(board)
 
     if board.valid_move?(input)
@@ -70,6 +101,7 @@ class Game
     turn until over?
 
     if won?
+      board.display
       puts "Congratulations #{winner}!"
     elsif draw?
       puts "Cat's Game!"
