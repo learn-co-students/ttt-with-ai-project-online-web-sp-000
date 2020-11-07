@@ -31,25 +31,43 @@ class Game
     answer = gets.strip
 
     case answer
-    when "0"
-      @player_1 = Players::Computer.new("X")
-      @player_2 = Players::Computer.new("O")
-      puts "Computer versus Computer. Victory is mine..."
-      play
-    when "1"
-      @player_2 = Players::Computer.new("O")
-      puts "You versus Computer. Best of luck, Human."
-      play
-    when "2"
-      puts "Human versus Human. Game on."
-      play
-    when "exit"
+      when "0"
+        @player_1 = Players::Computer.new("X")
+        @player_2 = Players::Computer.new("O")
+        puts "Computer versus Computer. Victory is mine..."
+        play
+        again
+      when "1"
+        @player_2 = Players::Computer.new("O")
+        puts "You versus Computer. Best of luck, Human."
+        play
+        again
+      when "2"
+        puts "Human versus Human. Game on."
+        play
+        again
+      when "exit"
     else
       puts "Does...not...compute. Try another option."
       main_menu
     end
   end
 
+  def again
+    puts "Would you like to play again? Enter Y or N."
+    input = gets.strip
+
+    if input.upcase == "Y"
+      start
+    elsif input.upcase == "N"
+      puts "Thanks for playing. See you next time!"
+      "exit"
+    else
+      puts "Rewind, and try another option."
+      again
+    end
+
+  end
 
   def current_player
     board.turn_count % 2 == 0 ? @player_1 : @player_2
