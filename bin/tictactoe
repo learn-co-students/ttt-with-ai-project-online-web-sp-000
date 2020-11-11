@@ -1,3 +1,53 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+loop do
+  puts "Welcome to TicTacToe!"
+
+  puts  "How many players will be playing? Please input a number 0 - 2."
+  number_players = gets.strip.to_i
+  while !number_players.between?(0, 2)
+    puts  "How many players will be playing? Please input a number 0 - 2."
+    number_players = gets.strip.to_i
+  end
+
+  puts "Who will go first as X? Please input 1 or 2."
+  first_player = gets.strip.to_i
+  while !first_player.between?(1, 2)
+    puts "Who will go first as X? Please input 1 or 2."
+    first_player = gets.strip.to_i
+  end
+
+  if first_player == 1
+    first_token = "X"
+    second_token = "O"
+  else
+    first_token = "O"
+    second_token = "X"
+  end
+
+  if number_players == 0
+    player_1 = Players::Computer.new(first_token)
+    player_2 = Players::Computer.new(second_token)
+  elsif number_players == 1
+    player_1 = Players::Human.new(first_token)
+    player_2 = Players::Computer.new(second_token)
+  elsif number_players == 2
+    player_1 = Players::Human.new(first_token)
+    player_2 = Players::Human.new(second_token)
+  end
+
+  Game.new(player_1, player_2).play
+
+  puts "Would you like to play again? Please input Y or N."
+  play_again = gets.strip.upcase
+  while !(play_again == "Y" || play_again == "N")
+    puts  "Would you like to play again? Please input Y or N."
+    play_again = gets.strip.upcase
+  end
+  if play_again == "N"
+    break
+  end
+
+end
