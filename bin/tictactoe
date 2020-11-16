@@ -1,3 +1,49 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+puts " dBBBBBBP dBP dBBBP  dBBBBBBP dBBBBBb     dBBBP  dBBBBBBP dBBBBP dBBBP  dBP"
+puts "                                   BB                    dBP.BP        dBP "
+puts "  dBP   dBP dBP       dBP      dBP BB   dBP       dBP   dBP.BP dBBP   dBP  "
+puts " dBP   dBP dBP       dBP      dBP  BB  dBP       dBP   dBP.BP dBP    dBP   "
+puts "dBP   dBP dBBBBP    dBP      dBBBBBBB dBBBBP    dBP   dBBBBP dBBBBP        "
+puts "                                                                    dBP    " 
+puts "PRESS ENTER"
+
+
+
+def press_start
+  puts "Welcome to TIC TAC TOE"
+  puts "
+        1 → 1 Player
+        2 → 2 Player 
+        0 → CPU Versus
+        X → Wargame"
+  
+
+  player_mode = gets.strip
+  case player_mode
+  when "1"
+    puts "Would you like to go first? y/n"
+    if gets.strip == "y"
+      Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
+    else Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new).play
+    end
+    
+  when "2"
+    Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new).play
+
+  when "0"
+    Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
+    
+  when "X"
+    Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).wargame
+
+  
+  end
+  puts "Play Again? y/n"
+
+end
+
+press_start until gets.strip == "n"
