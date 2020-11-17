@@ -1,3 +1,46 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic Tac Toe!"
+puts "How many players would you like? (0, 1, or 2)"
+case gets.to_i
+when 2
+  game = Game.new
+  puts "Player 1, you are X, go first."
+  puts "Remember to take turns."
+  game.board.display
+when 1
+  game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+  puts "Human player, you are first."
+  game.board.display
+when 0
+  game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+# when "wargames"
+#   game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+#   win_count = 0
+#   puts "There were #{win_count} wins."
+end
+
+
+until game.over?
+  game.play
+end
+
+play_again = ""
+until play_again == "n"
+  puts "Would you like to play again? (y/n)"
+  play_again = gets.strip
+  case play_again
+  when "y"
+    game.board.reset!
+    game.board.display
+    until game.over?
+      game.play
+    end
+  when "n"
+    break
+  else
+    puts "invalid"
+  end
+end
