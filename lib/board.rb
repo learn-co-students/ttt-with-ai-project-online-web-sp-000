@@ -40,7 +40,7 @@ class Board
     end
 
     def taken?(index)
-        if @cells[index] == "X" || @cells[index] == "O"
+        if @cells[index.to_i - 1] == "X" || @cells[index.to_i - 1] == "O"
           true
         else
           false
@@ -48,7 +48,7 @@ class Board
     end
 
     def valid_move?(index)
-        if (0..8).to_a.include?(index.to_i) && (!(taken?(index)))
+        if (0..8).to_a.include?(index.to_i - 1) && (!(taken?(index)))
             true
         else
             false
