@@ -2,6 +2,7 @@ class Board
     attr_accessor :cells
 
     def initialize
+        @cells = []
         reset!
     end
 
@@ -31,7 +32,7 @@ class Board
     end
 
     def full?
-        @cells.all?{|c| c == "X" || position == "O"}
+        @cells.all?{|c| c == "X" || c == "O"}
     end
 
     def turn_count
