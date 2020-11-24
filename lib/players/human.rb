@@ -1,5 +1,5 @@
 module Players
-    class Human
+    class Human < Player
         def move(board)
             gets.strip
         end
