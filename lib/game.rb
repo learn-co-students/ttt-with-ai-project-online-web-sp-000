@@ -10,14 +10,17 @@ class Game
       [0,4,8],
       [2,4,6]
     ]
+
     def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
       @player_1 = player_1
       @player_2 = player_2
       @board = board
     end
+
     def current_player
         board.turn_count.even? ? player_1 : player_2
     end
+
     def won?
       WIN_COMBINATIONS.each {|win_combo|
         index_0 = win_combo[0]
@@ -35,6 +38,7 @@ class Game
       }
       return false
     end
+
     def draw?
       if !won? && board.full?
         true
@@ -42,6 +46,7 @@ class Game
         false
       end
     end
+
     def over?
       if won? || draw?
         true
@@ -49,6 +54,7 @@ class Game
         false
       end
     end
+
     def winner
       index = []
         index = won?
@@ -62,6 +68,7 @@ class Game
           end
         end
     end
+
     def turn
         puts "Please choose a number 1-9:"
         if board.turn_count.even?
@@ -78,6 +85,7 @@ class Game
           turn
         end
     end
+
     def play
       until over? == true
         turn

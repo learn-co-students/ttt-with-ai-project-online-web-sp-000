@@ -26,6 +26,7 @@ class Board
   def turn_count
     @cells.count{|token| token == "X" || token == "O"}
   end
+  
   def taken?(user_input)
     index = input_to_index(user_input)
     !(@cells[index].nil? || @cells[index] == " ")
