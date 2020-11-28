@@ -43,13 +43,13 @@ class CommandLineInterface
 
   def repeat_or_exit
     if @choice == "y" || @choice == "Y"
-        run
+      run
     elsif @choice == "n" || @choice == "N"
-        puts "Thanks for playing."
+      puts "Thanks for playing."
     else
-        puts "Please enter y or n."
-        @choice = gets.strip
-        repeat_or_exit
+      puts "Please enter y or n."
+      @choice = gets.strip
+      repeat_or_exit
     end
   end
 end
