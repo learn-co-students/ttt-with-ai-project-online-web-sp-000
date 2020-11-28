@@ -32,7 +32,7 @@ class CommandLineInterface
         game.play
     else
         puts "please enter a valid choice"
-        intro
+        gets_choice
     end
   end
 
