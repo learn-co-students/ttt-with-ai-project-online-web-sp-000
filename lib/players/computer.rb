@@ -12,8 +12,7 @@ module Players
       [6,4,2]]
 
     def move(board)
-      #win(board) || block(board)
-      win(board) || first_move(board) || corners(board) || random
+      win(board) ||  block(board)|| first_move(board) || corners(board) || random
     end
 
     def first_move(board)
@@ -43,25 +42,23 @@ module Players
       end
     end
 
-    #def block(board)
-    #  WIN_COMBINATIONS.find do |win_combination|
-    #    if board.cells[win_combination[0]] == opponent && board.cells[win_combination[1]] == opponent && !board.taken?(win_combination[2]+1)
-    #      win_combination[2]
-    #    elsif board.cells[win_combination[1]] == opponent && board.cells[win_combination[2]] == opponent && !board.taken?(win_combination[0]+1)
-    #      win_combination[0]
-    #    elsif board.cells[win_combination[0]] == opponent && board.cells[win_combination[2]] == opponent && !board.taken?(win_combination[1]+1)
-    #      win_combination[1]
-    #    end
-    #  end
-    #end
+    def blocking_combo(board)
+      WIN_COMBINATIONS.find do |win_combination|
+        if board.cells[win_combination[0]] == opponent && board.cells[win_combination[1]] == opponent && !board.taken?(win_combination[2]+1)
+          win_combination[2]
+        elsif board.cells[win_combination[1]] == opponent && board.cells[win_combination[2]] == opponent && !board.taken?(win_combination[0]+1)
+          win_combination[0]
+        elsif board.cells[win_combination[0]] == opponent && board.cells[win_combination[2]] == opponent && !board.taken?(win_combination[1]+1)
+          win_combination[1]
+        end
+      end
+    end
 
-    #def win(board)
-    #  winning_combo(board).find {|cell| board.cells[cell] == " "}.to_s unless winning_combo(board) == nil
-  #  end
-
-    #def block(board)
-  #    blocking_combo(board).find {|cell| board.cells[cell] == " "}.to_s unless blocking_combo(board) == nil
-  #  end
+    def block(board)
+      if blocking_combo(board) != nil
+        blocking_combo(board).find {|cell| board.cells[cell] == " "} + 1
+      end
+    end
 
     def opponent
       if self.token == "X"
