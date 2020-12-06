@@ -25,14 +25,10 @@ module Players
     end
 
     def winning_combo(board)
-      WIN_COMBINATIONS.find do |win_combination|
-        if board.cells[win_combination[0]] == token && board.cells[win_combination[1]] == token && !board.taken?(win_combination[2]+1)
-           win_combination[2]
-        elsif board.cells[win_combination[1]] == self.token && board.cells[win_combination[2]] == token && !board.taken?(win_combination[0]+1)
-          win_combination[0]
-        elsif board.cells[win_combination[0]] == self.token && board.cells[win_combination[2]] == token && !board.taken?(win_combination[1]+1)
-          win_combination[1]
-        end
+      check = WIN_COMBINATIONS.find do |win_combination|
+        (board.cells[win_combination[0]] == token && board.cells[win_combination[1]] == token && !board.taken?(win_combination[2]+1)) ||
+        (board.cells[win_combination[1]] == self.token && board.cells[win_combination[2]] == token && !board.taken?(win_combination[0]+1)) ||
+        (board.cells[win_combination[0]] == self.token && board.cells[win_combination[2]] == token && !board.taken?(win_combination[1]+1))
       end
     end
 
