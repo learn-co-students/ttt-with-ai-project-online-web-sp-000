@@ -54,6 +54,18 @@ end
 def start
 end
 
+def full?
+  self.board.cells.select{ |item| item != " " && !item.nil? && item != ""}.size == 9
+end
+
+def draw?
+  !(won? || !full?)
+end
+
+def over?
+  won? || full? || draw?
+end
+
 def play
   while !over?
         turn
