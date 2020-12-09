@@ -74,15 +74,18 @@ WIN_COMBINATIONS = [
       input = next_player.move(board)
       index = input_to_index(input)
     end
+    self.board.update(index, current_player.token)
     if next_player == player_1
       next_player = player_2
     else
       next_player = player_1
     end
-    cur_pl = current_player
-    self.board.update(index, current_player.token)
-    move(index, cur_pl)
-    display_board
+    self.board.display
+  end
+
+  def input_to_index(input)
+    index = input.to_i
+    index - 1
   end
 
 end
