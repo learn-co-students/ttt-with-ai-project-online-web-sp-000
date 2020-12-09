@@ -46,4 +46,13 @@ class Board
     index.between?(0,8) && !taken?(index)
   end
 
+  def empty?
+    found_item = self.cells.find { |item| item != " " && item != nil}
+    if found_item == nil
+      return true
+    else
+      return false
+    end
+  end
+
 end
