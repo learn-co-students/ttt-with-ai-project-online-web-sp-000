@@ -68,11 +68,11 @@ WIN_COMBINATIONS = [
   end
 
   def turn
-    input = next_player.move(board)
-    index = input_to_index(input)
+    index = next_player.move(board)
+
     while !self.board.valid_move?(index)
-      input = next_player.move(board)
-      index = input_to_index(input)
+      index = next_player.move(board)
+
     end
     self.board.update(index, current_player.token)
     if next_player == player_1
@@ -81,11 +81,6 @@ WIN_COMBINATIONS = [
       next_player = player_1
     end
     self.board.display
-  end
-
-  def input_to_index(input)
-    index = input.to_i
-    index - 1
   end
 
 end
