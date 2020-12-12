@@ -20,11 +20,18 @@ class Board
   end
 
   def position(input)
-    @cells[input]
+    index = input_to_index(input)
+    self.cells[index]
+  end
+
+  def input_to_index(input)
+    index = input.to_i
+    index - 1
   end
 
   def update(position, player)
-    @cells[position]=player.token
+    index = input_to_index(position)
+    @cells[index]=player.token
   end
 
   def full?
@@ -41,11 +48,12 @@ class Board
     count
   end
 
-  def taken?(index)
-    !(position(index).nil? || position(index) == " ")
+  def taken?(input)
+    position(input) == "X" || position(input) == "O"
   end
-  def valid_move?(index)
-    index.between?(0,8) && !taken?(index)
+  def valid_move?(input)
+    index = input_to_index(input)
+    index.between?(0,8) && !taken?(input)
   end
 
   def empty?

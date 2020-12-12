@@ -4,8 +4,6 @@ module Players
     def move(board)
       puts "Please enter 1-9:"
       input = gets.strip
-      index = input_to_index(input)
-      index
     end
 
     def input_to_index(input)

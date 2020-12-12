@@ -1,7 +1,5 @@
 class Game
-attr_accessor :board, :player_1, :player_2
-
-@next_player
+attr_accessor :board, :player_1, :player_2, :current_player
 
 WIN_COMBINATIONS = [
   [0,1,2], # Top row
@@ -13,7 +11,7 @@ WIN_COMBINATIONS = [
   [1,4,7],
   [2,5,8]]
 
-  def initialize(player_1=players::Human.new, player_2=Players::Human.new, board=Board.new)
+  def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
     @player_1 = player_1
     @player_2 = player_2
     @board = board
@@ -76,9 +74,9 @@ WIN_COMBINATIONS = [
     end
     self.board.update(index, current_player.token)
     if next_player == player_1
-      next_player = player_2
+      self.current_player = player_2
     else
-      next_player = player_1
+      self.current_player = player_1
     end
     self.board.display
   end
