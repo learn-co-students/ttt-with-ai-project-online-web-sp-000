@@ -21,6 +21,6 @@ def play_game
   user_answer = gets.strip.upcase
 end 
 
-play_game until user_anser == "N"
+play_game until user_answer == "N"
 
 
