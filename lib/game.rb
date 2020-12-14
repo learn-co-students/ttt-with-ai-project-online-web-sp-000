@@ -46,14 +46,23 @@ class Game
     end 
   end 
   
-  def turn 
+  def turn
+    puts "Please enter a number 1-9:"
     input = current_player.move(board)
     if @board.valid_move?(input)
       @board.update(input, current_player)
-    else 
-      puts "Invalid move. Try again."
-      turn 
-    end 
+    else puts "Please enter a number 1-9:"
+      @board.display
+      turn
+    end
+    @board.display
+    #input = current_player.move(board)
+    #if @board.valid_move?(input)
+      #@board.update(input, current_player)
+    #else 
+     # puts "Invalid move. Try again."
+      #turn 
+    #end 
   end
   
   def play 
@@ -68,6 +77,6 @@ class Game
       puts "Congratulations #{winner}!"
     else 
       puts "Cat's Game!"
-    end
+    end 
   end 
 end 
