@@ -2,10 +2,25 @@
 
 require_relative '../config/environment'
 
-new_game = Game.new 
+def play_game 
+  puts "Welcome to Tic Tac Toe."
+  puts "What kind of game would you like to play?"
+  puts "Enter 0 for Computer vs Computer. Enter 1 for one Player vs Computer. Enter 2 for two players. 
+  
+  input = gets.strip 
+  
+  if input == "0"
+    Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
+  elsif input == "1"
+    Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new).play 
+  else 
+    Game.new(Players::Human.new("X"), Players::Human.new("O"), Baord.new).play 
+  end 
+  
+  puts "Game over. Would you like to play again? (Y/N)"
+  user_answer = gets.strip.upcase
+end 
 
-new_game.play 
-
-puts "Game over. Would you like to start a new game?" 
+play_game until user_anser == "N"
 
 
