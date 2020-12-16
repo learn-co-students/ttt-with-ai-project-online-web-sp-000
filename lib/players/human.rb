@@ -2,7 +2,7 @@ module Players
   class Human < Player
 
     def move(board)
-      puts "Please enter 1-9:"
+      puts "Current player, please enter 1-9:"
       input = gets.strip
       move = input_to_index(input)
     end

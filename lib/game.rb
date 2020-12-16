@@ -65,10 +65,6 @@ WIN_COMBINATIONS = [
           player_2 = Players::Human.new("O")
         end
       elsif input == "2"
-        puts "Enter name for player 1, who will go first"
-        player_1_name = gets.chomp
-        puts "Enter name for player 2"
-        player_2_name = gets.chomp
         player_1 = Players::Human.new("X")
         player_2 = Players::Human.new("O")
       end
