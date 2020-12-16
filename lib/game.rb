@@ -67,10 +67,25 @@ WIN_COMBINATIONS = [
       elsif input == "2"
         player_1 = Players::Human.new("X")
         player_2 = Players::Human.new("O")
+      elsif input == "wargames"
+        player_1 = Players::Computer.new("X")
+        player_2 =  Players::Computer.new("O")
       end
       board = Board.new
       game = Game.new(player_1, player_2, board)
-      game.play
+      if(input != "wargames")
+        game.play
+      else
+        won_counter = 0
+        100.times do
+          board.reset
+          game.play
+          if game.won?
+            won_counter +=1
+          end
+        end
+        puts "Number of games won = "+ won_counter.to_s
+      end
       puts "Would you like to play again? (please type yes or no)"
       play_again = gets.chomp
     end
