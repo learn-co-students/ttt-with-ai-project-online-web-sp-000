@@ -19,8 +19,7 @@ class Board
     puts " #{@cells[6]} "+"|"+" #{@cells[7]} "+"|"+" #{@cells[8]} "
   end
 
-  def position(input)
-    index = input_to_index(input)
+  def position(index)
     self.cells[index]
   end
 
@@ -30,8 +29,7 @@ class Board
   end
 
   def update(position, player)
-    index = input_to_index(position)
-    @cells[index]=player.token
+    @cells[position]=player.token
   end
 
   def full?
@@ -49,11 +47,12 @@ class Board
   end
 
   def taken?(input)
+    puts input.to_s + "taken?"
+    puts position(input) == "X" || position(input) == "O"
     position(input) == "X" || position(input) == "O"
   end
   def valid_move?(input)
-    index = input_to_index(input)
-    index.between?(0,8) && !taken?(input)
+    input != nil && input.to_i.between?(0,8) && !taken?(input)
   end
 
   def empty?

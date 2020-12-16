@@ -15,12 +15,7 @@ WIN_COMBINATIONS = [
     @player_1 = player_1
     @player_2 = player_2
     @board = board
-    @next_player = player_1
-  end
-
-  def current_player
-    turns = self.board.turn_count
-    return turns % 2 == 0 ? "X" : "O"
+    @current_player = player_1
   end
 
   def won?
@@ -43,6 +38,46 @@ WIN_COMBINATIONS = [
   end
 
   def start
+    puts "Welcome to Tic Tac Toe"
+    play_again = "yes"
+    while play_again == "yes"
+      puts "What kind of game would you like to play, (please enter 0, 1, 2 or wargames)"
+      input = gets.chomp
+      while input != "0" && input != "1" && input != "2" && input != "wargames"
+        puts "What kind of game would you like to play, (please enter 0, 1, 2 or wargames)"
+        input = gets.chomp
+      end
+      if input == "0"
+        player_1 = Players::Computer.new("X")
+        player_2 =  Players::Computer.new("O")
+      elsif input == "1"
+        puts "Do you want to go first? (type yes or no)"
+        yes_no = gets.chomp
+        while yes_no != "yes" && yes_no != "no"
+          puts "Do you want to go first? (type yes or no)"
+          yes_no = gets.chomp
+        end
+        if yes_no == "yes"
+          player_1 = Players::Human.new("X")
+          player_2 = Players::Computer.new("O")
+        elsif yes_no == "no"
+          player_1 = Players::Computer.new("X")
+          player_2 = Players::Human.new("O")
+        end
+      elsif input == "2"
+        puts "Enter name for player 1, who will go first"
+        player_1_name = gets.chomp
+        puts "Enter name for player 2"
+        player_2_name = gets.chomp
+        player_1 = Players::Human.new("X")
+        player_2 = Players::Human.new("O")
+      end
+      board = Board.new
+      game = Game.new(player_1, player_2, board)
+      game.play
+      puts "Would you like to play again? (please type yes or no)"
+      play_again = gets.chomp
+    end
   end
 
   def draw?
@@ -66,14 +101,16 @@ WIN_COMBINATIONS = [
   end
 
   def turn
-    index = next_player.move(board)
+    index = self.current_player.move(board)
 
     while !self.board.valid_move?(index)
-      index = next_player.move(board)
-
+      index = self.current_player.move(board)
     end
-    self.board.update(index, current_player.token)
-    if next_player == player_1
+    puts "got out of the invalid loop"
+    puts "about to update the board with index "+ index.to_s
+    self.board.update(index, current_player)
+    puts current_player.to_s + "current player"
+    if self.current_player == player_1
       self.current_player = player_2
     else
       self.current_player = player_1
