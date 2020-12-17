@@ -41,7 +41,7 @@ WIN_COMBINATIONS = [
     puts "Welcome to Tic Tac Toe"
     play_again = "yes"
     while play_again == "yes"
-      puts "What kind of game would you like to play, (please enter 0, 1, 2 or wargames)"
+      puts "What kind of game would you like to play, (please enter 0 for 0 human players, 1 for 1 human player, 2 for 2 human players or wargames for computer games)"
       input = gets.chomp
       while input != "0" && input != "1" && input != "2" && input != "wargames"
         puts "What kind of game would you like to play, (please enter 0, 1, 2 or wargames)"
@@ -78,7 +78,10 @@ WIN_COMBINATIONS = [
       else
         won_counter = 0
         100.times do
-          board.reset
+          board.reset!
+          player_1 = Players::Computer.new("X")
+          player_2 =  Players::Computer.new("O")
+          game = Game.new(player_1, player_2, board)
           game.play
           if game.won?
             won_counter +=1
