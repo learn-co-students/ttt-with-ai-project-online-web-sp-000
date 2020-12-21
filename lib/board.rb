@@ -20,7 +20,13 @@ class Board
   end
 
   def position(index)
-    self.cells[index]
+    if index.class == String
+      i = input_to_index(index)
+      self.cells[i]
+    else
+        self.cells[index]
+    end
+
   end
 
   def input_to_index(input)
@@ -29,7 +35,12 @@ class Board
   end
 
   def update(position, player)
-    @cells[position]=player.token
+    if position.class == String
+      i = input_to_index(position)
+      self.cells[i]=player.token
+    else
+        self.cells[position]=player.token
+    end
   end
 
   def full?
@@ -52,7 +63,7 @@ class Board
     position(input) == "X" || position(input) == "O"
   end
   def valid_move?(input)
-    input != nil && input.to_i.between?(0,8) && !taken?(input)
+    input != nil && (Float(input) rescue false) && input.to_i.between?(0,8) && !taken?(input)
   end
 
   def empty?

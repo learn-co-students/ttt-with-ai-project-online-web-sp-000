@@ -11,7 +11,7 @@ module Players
       puts "inside computer move"
       if(board.empty? || self.first_move)
         self.first_move = false
-        return 4
+        return "5"
       else
         if self.token == "X"
           move = play_strategy("X", "O", board)
@@ -40,18 +40,23 @@ module Players
         end
         puts winning_comb.to_s + "winning combination"
         if !board.taken?(winning_comb[0])
-          move = winning_comb[0]
-          puts "move "+move.to_s
+          move = index_to_input(winning_comb[0])
+          puts "move "+move
           move
         elsif !board.taken?(winning_comb[2])
-          move = winning_comb[2]
-          puts "move "+move.to_s
+          move = index_to_input(winning_comb[2])
+          puts "move "+move
           move
         else
-          move = winning_comb[1]
-          puts "move "+move.to_s
+          move = index_to_input(winning_comb[1])
+          puts "move "+move
           move
         end
+    end
+
+    def index_to_input(index)
+        input = (index + 1).to_s
+        input
     end
   end
 end
