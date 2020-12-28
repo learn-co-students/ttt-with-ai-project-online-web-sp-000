@@ -1,3 +1,49 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Game has started, are you ready to win or die? :^)"
+    puts "Select one of the following:\n1. AI destroy each other\n2. YOU FACE THE AI OVERLORDS AS HUMANITIES REPRESENTATIVE\n3.A regular game vs a friend...or by yourself ya loner"
+
+def start()
+    
+    choice = gets.strip
+    case choice 
+      when "1"
+        game = Game.new(Players::Computer.new("X"),Players::Computer.new("O"))
+        game.play
+      when "2"
+        puts "Do you choose to side with ""X"" or ""O"""
+        token = gets_token
+        if (token == "X")
+          game = Game.new(Players::Human.new("X"),Players::Computer.new("O"))
+          game.play
+        else
+          game = Game.new(Players::Computer.new("X"),Players::Human.new("O"))
+          game.play
+        end
+      when "3"
+        puts "sigh you weakling, here ya go?"
+        game = Game.new
+        game.play
+        
+      else
+        puts "Try again YA FOOL"
+        start
+    end
+      
+  end
+  
+  def gets_token
+  
+    token = gets.strip
+    if(token != "X" && token != "O")
+      puts "put X or O .-."
+      gets_token
+    else
+      return token
+    end
+    
+  end
+  
+  start
