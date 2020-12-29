@@ -70,10 +70,9 @@ class Game
   end
   
   def play 
-
-    @board.display
+    
     while(!over?) do
-      
+      puts "==========="
       turn
       
     end
@@ -84,5 +83,5 @@ class Game
   end
   
 end
-  
-  
+
+
