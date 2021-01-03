@@ -1,3 +1,76 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+require 'pry'
+
+$game_mode = nil
+$first_player
+
+# Determine the game mode/number of players
+def game_mode
+  puts "How many players? Please enter 0, 1, or 2:"
+  $game_mode = gets.chomp.to_i
+  if !$game_mode.between?(0,2) #!= 0 || $game_mode != 1 || $game_mode != 2
+    new_game
+  elsif $game_mode == 1
+    first_player = first
+  end
+  $game_mode
+end
+
+# Determine the first player when playing with a single player
+def first
+  puts "Who should go first as X? 1. Player or 2. Computer? (enter 1 or 2)"
+  $first_player = gets.chomp.to_i
+  if !$first_player.between?(1,2) #!= "1" || first_player != "2"
+    first
+  end
+  # elsif first_player == "1"
+  #   starting = "human"
+  # elsif first_player == "2"
+  #   starting = "computer"
+  # end
+  # starting
+end
+
+# Main method to start the game
+def new_game
+  puts "Welcome to Tic-tac-toe!"
+  game_mode
+
+  board = Board.new # create new blank board
+
+  if $game_mode == 0
+    # Create game with 2 computer players
+    game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), board)
+  elsif $game_mode == 1 && $first_player == 1 #"human"
+    # Create game with 1 human player, human as player 1
+    game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), board)
+  elsif $game_mode == 1 && $first_player == 2 #"computer"
+    # Create game with 1 human player, computer as player 1
+    game = Game.new(Players::Computer.new("X"), Players::Human.new("O"), board)
+  elsif $game_mode == 2
+    # Create game with 2 human players
+    game = Game.new(Players::Human.new("X"), Players::Human.new("O"), board)
+  end
+
+  # Display the instructions
+  board.display_instructions
+  # Start the game play on the above created game
+  # binding.pry
+  game.play
+
+  # Ask if player would like to play again, or exit program
+  puts "Would you like to play again? Yes or No"
+  play_again = gets.chomp
+  if play_again == "Yes"
+    game = nil
+    $game_mode = nil
+    new_game
+  elsif play_again == "No"
+    exit
+  end
+end
+
+# Trigger to start the first game and welcome player
+new_game
