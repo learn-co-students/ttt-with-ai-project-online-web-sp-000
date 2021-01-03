@@ -31,4 +31,13 @@ class Board
         @cells.count {|turn| turn == "X" || turn == "O"}
     end
 
+    def taken?(input)
+        
+        if position(input) == "X" || position(input) == "O"
+            true
+        else
+            false
+        end
+    end
+
 end
