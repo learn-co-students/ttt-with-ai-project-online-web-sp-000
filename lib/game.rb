@@ -24,9 +24,61 @@ class Game
     end
 
     def won?
-        WIN_COMBINATIONS.find do |combo|
-            
+        WIN_COMBINATIONS.each do |win|
+      
+            win_1 = win[0]
+            win_2 = win[1]
+            win_3 = win[2]
+  
+            first_position = @board.cells[win_1]
+            second_position = @board.cells[win_2]
+            third_position = @board.cells[win_3]
+     
+        if first_position == "X" && second_position == "X" && third_position == "X" || first_position == "O" && second_position == "O" && third_position == "O"
+                return win
+            end          
+         end
+        false
+    end
 
+    def draw?
+         @board.full? && !won?
+    end
+
+    def over?
+        draw? || won?
+    end
+
+    def winner
+        if won?
+            winner_arr = won?
+           @board.cells[winner_arr[0]]
+        else
+            nil
+        end
+    end
+
+    def turn
+        player = current_player
+        input = player.move(board)
+        # binding.pry
+        if @board.valid_move?(input)
+            @board.update(input, player)
+        else
+            puts "Please input a number 1-9"
+            player.move(board)
+        end
+    end
+
+    def play
+        while !over?
+            turn 
+        end
+        if won?
+            puts "Congratulations #{winner}!"
+        elsif draw?
+            puts "Cat's Game!"
+        end
     end
 
 end
