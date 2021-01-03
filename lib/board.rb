@@ -32,12 +32,19 @@ class Board
     end
 
     def taken?(input)
-        
         if position(input) == "X" || position(input) == "O"
             true
         else
             false
         end
+    end
+
+    def valid_move?(input)
+        input.to_i.between?(1,9) && !taken?(input)
+    end
+
+    def update(input, char)
+      cells[input.to_i - 1] = char.token
     end
 
 end
