@@ -19,8 +19,16 @@ class Board
         puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
     end
 
-    def position
+    def position(input)
+      cells[input.to_i-1]
+    end
 
+    def full?
+      cells.all? {|position| position == "X" || position == "O" }
+    end
+
+    def turn_count
+        @cells.count {|turn| turn == "X" || turn == "O"}
     end
 
 end
