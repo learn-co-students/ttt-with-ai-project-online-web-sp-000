@@ -7,8 +7,9 @@ module Players
         computer_move = rand(1..9)
         # binding.pry
         if !board.taken?(computer_move)
-            board.update(computer_move, char)
-
+            sleep 2
+            return computer_move.to_s
+            # board.update(computer_move, char)
         end
     end
 end 

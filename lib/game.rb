@@ -12,11 +12,35 @@ class Game
     [2,5,8],
     [0,3,6]
   ]
+    def greeting 
+        puts "Hi, welcome to Tic Tac Toe!"
+        puts "What kind of game would you like to play? With 0, 1, or 2 player?"
+        
+        players = gets.strip
+      
+        case players 
 
-  def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
-    @board = board 
-    @player_1 = player_1
-    @player_2 = player_2
+        when "0"
+            @player_1 = Players::Computer.new("X")
+            @player_2 = Players::Computer.new("O")
+            self.play
+        when "1" 
+        #   binding.pry
+            @player_2 = Players::Computer.new("O")
+            self.play
+        when "2" 
+            self.play
+            # @player_1 = Players::Human.new("X")
+            # @player_2 = Players::Human.new("O")
+        else 
+           "Please choose 0, 1, or 2"
+        end
+    end
+    
+    def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+      @board = board 
+      @player_1 = player_1
+      @player_2 = player_2
     end
 
     def current_player
@@ -65,19 +89,41 @@ class Game
         if @board.valid_move?(input)
             @board.update(input, player)
         else
-            puts "Please input a number 1-9"
-            player.move(board)
+            puts "That position is taken, please try again."
+            self.turn
         end
     end
 
     def play
+        #against computer? if yes, then player2 = computer
         while !over?
+            @board.display
             turn 
         end
         if won?
+            
             puts "Congratulations #{winner}!"
+            @board.display
         elsif draw?
             puts "Cat's Game!"
+            @board.display
+        end
+        puts "Would you like to play another game? y or n"
+        play_again?
+
+    end
+
+    def play_again? 
+      input = gets.strip
+
+        if input == "y"
+            greeting
+        elsif input == "n"
+            puts "Ok, have a good day!"
+            abort
+        else
+            puts "Please choose y or n"
+            play_again?
         end
     end
 
