@@ -1,4 +1,4 @@
-require 'spec_helper'
+yrequire 'spec_helper'
 
 describe "Board" do
   let(:board){Board.new}
