@@ -31,6 +31,7 @@ class Game
       Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new).play
     else
       puts "Invalid number."
+      start
     end
   end
   
@@ -41,13 +42,13 @@ class Game
   def won?
     WIN_COMBINATIONS.each do |combo|
 
-    combo_1 = combo[0]
-    combo_2 = combo[1]
-    combo_3 = combo[2]
+      combo_1 = combo[0]
+      combo_2 = combo[1]
+      combo_3 = combo[2]
 
-    position_1 = @board.cells[combo_1]
-    position_2 = @board.cells[combo_2]
-    position_3 = @board.cells[combo_3]
+      position_1 = @board.cells[combo_1]
+      position_2 = @board.cells[combo_2]
+      position_3 = @board.cells[combo_3]
 
       if position_1 == "X" && position_2 == "X" && position_3 == "X" || position_1 == "O" && position_2 == "O" && position_3 == "O"
         return combo
