@@ -1,3 +1,55 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def new_game
+  puts "Welcome to Tic Tac Toe! Please enter the number of players there are:"
+  player_count = gets.strip
+  if player_count == "0"
+    game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+    game.play
+  elsif player_count == "1"
+    puts "Would you like to go first? Please enter Y or N:"
+    start = gets.strip
+    if start == "Y" || start == "y"
+      game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+      game.play
+    else start == "N" || start == "n"
+      game = Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new)
+      game.play
+    end
+  elsif player_count == "2"
+    game = Game.new
+    game.play
+  else player_count == "wargames"
+    counter = 0
+    100.times do
+      game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+      game.play
+      if game.won?
+        counter += 1
+      end
+    end
+    if counter == 0
+      sleep(2)
+      puts "HELLO"
+      sleep(2)
+      puts "A STRANGE GAME."
+      sleep(2)
+      puts "THE ONLY WINNING MOVE IS"
+      puts "NOT TO PLAY."
+      sleep(4)
+      puts "HOW ABOUT A NICE GAME OF CHESS?"
+      sleep(2)
+    end
+  end
+  if game.over?
+    puts "Would you like to play again? Y or N:"
+    play_again = gets.strip
+    if play_again == "Y" || play_again == "y"
+      new_game
+    end
+  end
+end
+
+new_game
