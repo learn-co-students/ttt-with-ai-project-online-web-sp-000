@@ -10,6 +10,8 @@ module Players
         
         def move(board)
 
+            move = nil
+
             sleep(2)
 
             puts "I'm thinking real hard here..."
@@ -21,12 +23,16 @@ module Players
             elsif !!can_lose(board)
                 move = can_lose(board).find{|i| board.position(i+1) == " "} + 1
             elsif board.turn_count < 5
-                strategic_move(board)
+                move = strategic_move(board)
             else
                 move = valid_moves(board).sample.to_s
             end
 
-            # move = valid_moves(board).sample
+            if !board.valid_move?(move)
+                move = valid_moves(board).sample
+            else
+                move
+            end
 
         end
 
@@ -78,7 +84,7 @@ module Players
                     #if opponent is taking center and playing defensively, take a corner in response. bar rule and can_win/can_lose will take care of the rest
                     move = CORNERS.sample
                 elsif board.turn_count == 3 && CORNERS.any?{|c| board.position(c) == "X" && board.position(opposite_corner(c)) == "O" }
-                    #if opponent takes opposite corner in response, play an open corner
+                #     #if opponent takes opposite corner in response, play an open corner
                     move = CORNERS.select{|c| !board.taken?(c)}.sample
                 elsif board.turn_count == 3 && CORNERS.any?{|c| board.position(c) == board.position(opposite_corner(c))}
                     #break out of ideal trap here
