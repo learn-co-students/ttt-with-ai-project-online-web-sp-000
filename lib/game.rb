@@ -33,10 +33,11 @@ class Game
             windex_1 = combo[0]
             windex_2 = combo[1]
             windex_3 = combo[2]
-            
+
             position_1 = self.board.cells[windex_1]
             position_2 = self.board.cells[windex_2]
             position_3 = self.board.cells[windex_3]
+            binding.pry
             position_1 == position_2 && position_2 == position_3 && self.board.taken?(windex_1)
         end
     end
