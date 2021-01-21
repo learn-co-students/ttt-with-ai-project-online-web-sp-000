@@ -28,8 +28,8 @@ class Game
     end
 
     def won?
-        winning_combo = []
-        WIN_COMBINATIONS.each do |combo|
+        
+        WIN_COMBINATIONS.find do |combo|
             windex_1 = combo[0]
             windex_2 = combo[1]
             windex_3 = combo[2]
@@ -37,26 +37,12 @@ class Game
             position_1 = self.board.cells[windex_1]
             position_2 = self.board.cells[windex_2]
             position_3 = self.board.cells[windex_3]
-
-            if position_1 == position_2 && position_2 == position_3 && self.board.taken?(windex_1)
-                winning_combo = combo
-            end
-        end
-        if winning_combo != []
-            winning_combo
-        else
-            false
+            position_1 == position_2 && position_2 == position_3 && self.board.taken?(windex_1)
         end
     end
 
     def draw?
-        if self.board.full?
-            if self.won?
-                false
-            else 
-                true
-            end
-        end
+        self.board.full? && !self.won?
     end
 
     def over?
@@ -64,12 +50,15 @@ class Game
     end
 
     def winner 
-        winner = nil
-        if self.won?
-            winning_combo = self.won?
-            winner = self.board.cells[winning_combo]
+        if self.won? 
+            #&& self.board.cells[self.won?[0]] == "X" || self.board.cells[self.won?[0]] == "O"
+        self.board.cells[self.won?[0]]
         end
-        winner
+
+        # if self.won?
+        #     winning_combo = self.won?
+        #     return self.board.cells[winning_combo[0]]
+        # end
     end
 
 end

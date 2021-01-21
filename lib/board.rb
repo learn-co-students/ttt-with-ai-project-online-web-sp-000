@@ -21,9 +21,8 @@ class Board
     end
 
     def position(input)
-        input = input.to_i
-        input -= 1
-        self.cells[input]
+        index = input.to_i - 1
+        self.cells[index]
     end
 
     def full?
@@ -40,10 +39,9 @@ class Board
         counter
     end
 
-    def taken?(position)
-        position = position.to_i
-        position -= 1
-        self.cells[position] == "X" || self.cells[position] == "O"
+    def taken?(input)
+        index = input.to_i - 1
+        self.cells[index] == "X" || self.cells[index] == "O"
     end
 
     def valid_move?(input)

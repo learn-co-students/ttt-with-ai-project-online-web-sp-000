@@ -1,0 +1,20 @@
+
+[1mFrom:[0m /home/drew/developements/flatiron/labs/ttt-with-ai-project-online-web-sp-000/lib/game.rb @ line 42 Game#won?:
+
+    [1;34m30[0m: [32mdef[0m [1;34mwon?[0m
+    [1;34m31[0m: 
+    [1;34m32[0m:     [1;34;4mWIN_COMBINATIONS[0m.find [32mdo[0m |combo|
+    [1;34m33[0m:         windex_1 = combo[[1;34m0[0m]
+    [1;34m34[0m:         windex_2 = combo[[1;34m1[0m]
+    [1;34m35[0m:         windex_3 = combo[[1;34m2[0m]
+    [1;34m36[0m:         
+    [1;34m37[0m:         position_1 = [1;36mself[0m.board.cells[windex_1]
+    [1;34m38[0m:         position_2 = [1;36mself[0m.board.cells[windex_2]
+    [1;34m39[0m:         position_3 = [1;36mself[0m.board.cells[windex_3]
+    [1;34m40[0m: 
+    [1;34m41[0m:         position_1 == position_2 && position_2 == position_3 && [1;36mself[0m.board.taken?(windex_1)
+ => [1;34m42[0m:         binding.pry
+    [1;34m43[0m:         puts [31m[1;31m"[0m[31mtest[1;31m"[0m[31m[0m
+    [1;34m44[0m:     [32mend[0m
+    [1;34m45[0m: [32mend[0m
+
