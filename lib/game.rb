@@ -67,7 +67,7 @@ class Game
         winner = nil
         if self.won?
             winning_combo = self.won?
-            winner = self.board.cells[winning_combo[0]]
+            winner = self.board.cells[winning_combo]
         end
         winner
     end
