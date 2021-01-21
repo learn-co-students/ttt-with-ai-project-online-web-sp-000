@@ -1,3 +1,51 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "You have entered the dojo for a match of"
+puts "TIC"
+puts "TAC"
+puts "TOOOOEEEE"
+puts "How many fighters?"
+input = gets.strip.to_i
+until input == 0 || input == 1 || input == 2
+    puts "try again"
+    input = gets.strip.to_i
+end
+if input == 2
+     puts "Player One, who do you fight for?"
+    p1 = gets.chomp
+    until p1 == "X" || p1 == "O"
+        puts "That house has been destroyed"
+        p1 = gets.strip
+    end
+    if p1 == "X"
+        p2 = "O"
+    else
+        p2 = "X"
+    end
+    puts "Player two, you fight for #{p2}."
+    
+    game = Game.new(Players::Human.new(p1), Players::Human.new(p2))
+
+elsif input == 1
+    puts "Player One, who do you fight for?"
+    p1 = gets.chomp
+    until p1 == "X" || p1 == "O"
+        puts "That house has been destroyed"
+        p1 = gets.strip
+    end
+    if p1 == "X"
+        p2 = "O"
+    else
+        p2 = "X"
+    end
+    puts "Player two, you fight for #{p2}."
+    
+    game = Game.new(Players::Human.new(p1), Players::Computer.new(p2))
+
+else game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+end
+
+game.board.display
+game.play
