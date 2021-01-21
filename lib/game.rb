@@ -37,8 +37,7 @@ class Game
             position_1 = self.board.cells[windex_1]
             position_2 = self.board.cells[windex_2]
             position_3 = self.board.cells[windex_3]
-            binding.pry
-            position_1 == position_2 && position_2 == position_3 && self.board.taken?(windex_1)
+            position_1 == position_2 && position_2 == position_3 && self.board.taken?(windex_1 + 1)
         end
     end
 
@@ -52,14 +51,58 @@ class Game
 
     def winner 
         if self.won? 
-            #&& self.board.cells[self.won?[0]] == "X" || self.board.cells[self.won?[0]] == "O"
         self.board.cells[self.won?[0]]
         end
-
-        # if self.won?
-        #     winning_combo = self.won?
-        #     return self.board.cells[winning_combo[0]]
-        # end
     end
 
+    def turn
+        puts "Please enter 1-9"
+        input = current_player.move(self.board)
+        if self.board.valid_move?(input)
+            self.board.update(input, current_player)
+        else
+            puts "No can move buddy rove"
+            self.turn
+        end    
+    end
+
+    def play
+        until self.over? do
+            if current_player.token == "X"
+                puts "Strike now Daniel Son!"
+            elsif current_player.token == "O"
+                puts "Hit hard and fast Johnny Lawrence!"
+            end
+        self.turn
+        self.board.display
+        end
+        if self.won?
+            puts "Congratulations #{self.winner}!"
+        elsif self.draw?
+            puts "Cat's Game!"
+        end
+    end
+
+    # def start
+    #     puts "Welcome to tic tac toe!"
+    #     puts "Enter amount of players:"
+       
+    # end
+
+    # def two_player_match
+    #     puts "Player One, who do you fight for?"
+    #     p1 = gets.chomp
+    #     until p1 == "X" || p1 == "O"
+    #         puts "That house has been destroyed"
+    #         p1 = gets.strip
+    #     end
+    #     if p1 = "X"
+    #         p2 = "O"
+    #     else
+    #         p2 = "X"
+    #     end
+    #     puts "Player two, you fight for #{p2}."
+        
+    #     game = Game.new(Players::Human.new(p1), Players::Human.new(p2))
+    # end
 end
