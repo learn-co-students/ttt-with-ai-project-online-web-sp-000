@@ -29,7 +29,7 @@ class Game
     end
 
     def draw? 
-        @board.full? && !won?
+      @board.full? && !won?
     end
 
     def over?
@@ -37,13 +37,18 @@ class Game
     end
 
     def winner 
-        won? ?  @board.cells[won?[0]] : nil
+      won? ?  @board.cells[won?[0]] : nil
     end
 
     def turn 
-        input = current_player.move(@board)
-        @board.valid_move?(input) ? @board.update(input, current_player) : current_player.move(@board)
-        board.display
+     input = current_player.move(@board)
+        
+        if @board.valid_move?(input) 
+           @board.update(input, current_player)
+           @board.display
+        else 
+          turn
+        end
     end
 
     def play 
