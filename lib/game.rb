@@ -1,99 +1,60 @@
+require 'pry'
+
 class Game
-  WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[6,4,2]]
-  
-  def initialize(player_1 = Player.new("X"), player_2 = Player.new("O"), board = Board.new)
+  attr_accessor :board, :player_1, :player_2, :user_input
+
+  WIN_COMBINATIONS = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
+
+  def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
     @board = board
     @player_1 = player_1
     @player_2 = player_2
   end
-  
-  def player_1
-    @player_1
-  end
-  
-  def player_2
-    @player_2
+
+  def current_player
+    @board.turn_count % 2 == 0 ? player_1 : player_2
   end
 
-  def board
-    @board 
-  end
-  
-  def current_player
-    if board.turn_count % 2 != 0 
-      player_1.token ## "X"
-    else
-      player_2.token ##"O"
-    end
-  end
-  
   def won?
-    i = 0
-    current_player_array = [] ##array containing current player's board positions
-    while i <= board.cells.count 
-      if board.cells[i] == current_player
-        current_player_array << i ##addition of each of current player's board positons
-      end           
-      i+=1
-    end
-    winning_array = []
-    WIN_COMBINATIONS.each{|win_combination| 
-      position0 = win_combination[0]
-      position1 = win_combination[1]
-      position2 = win_combination[2]
-      if current_player_array.include?(position0)
-        winning_array << position0
-      if current_player_array.include?(position1)
-        winning_array << position1
-      if current_player_array.include?(position2)
-        winning_array << position2
-      }
-    if winning_array.count == 3 && WIN_COMBINATIONS.include?(winning_array) == true
-      true
-    else
-      false
-  end
-  
-  def winner
-    if won? == true
-      current_player
-    else
-      nil
+    WIN_COMBINATIONS.detect do |winner|
+      @board.cells[winner[0]] == @board.cells[winner[1]] &&
+      @board.cells[winner[1]] == @board.cells[winner[2]] &&
+      (@board.cells[winner[0]] == "X" || @board.cells[winner[0]] == "O")
     end
   end
-  
+
   def draw?
-    if won? == false && board.full? == true
-      true
-    else
-      false
-    end
+    @board.full? && !won?
   end
-  
+
   def over?
-    if won? == true || draw? == true
-      true
-    else
-      false
+    won? || draw?
+  end
+
+  def winner
+    if winning_combo = won?
+      @winner = @board.cells[winning_combo.first]
     end
   end
 
   def turn
-    current_player
-    puts "Please enter a valid move: #1-9"
-    board.user_input
-    if board.valid_move? == true
-      board.update
-    else
-      while board.valid_move? == false
-        puts "Invalid move. Try again, please."
-        board.user_input
-        if board.valid_move? == true
-          board.update
-        end
-      end
+    puts "Please enter a number 1-9:"
+    @user_input = current_player.move(@board)
+    if @board.valid_move?(@user_input)
+      @board.update(@user_input, current_player)
+    else puts "Please enter a number 1-9:"
+      @board.display
+      turn
     end
+    @board.display
   end
-  
-  
+
+  def play
+    turn until over?
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end
+    end
 end

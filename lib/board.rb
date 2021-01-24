@@ -1,69 +1,46 @@
+require 'pry'
+
 class Board
-  
   attr_accessor :cells
 
-  def reset
-    @cells = [" "," ", " ", " ", " ", " ", " ", " ", " "]
-  end
-  
-  
   def initialize
-    @cells
-    reset
+    reset!
   end
-  
+
+  def reset!
+    @cells = Array.new(9, " ")
+  end
+
   def display
     puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
-    puts  "-----------"
+    puts "-----------"
     puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
-    puts  "-----------"
+    puts "-----------"
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
   end
-  
-  def user_input 
-    user_input = gets.chomp.to_i
+
+  def position(user_input)
+    cells[user_input.to_i - 1]
   end
-  
-  def position
-    position = user_input - 1
-    if player_token == "X"
-      @cells[position] = "X"
-    else
-      @cells[position] = "O"
+
+  def update(user_input, player)
+    cells[user_input.to_i - 1] = player.token
   end
-  
+
   def full?
-    @cells.all?{|cell| cell == "X" || cell == "O"}
+    cells.all? {|index| index == "X" || index == "O"}
   end
 
   def turn_count
-    turn_count = 0
-    @cells.each{|cell| if (cell == "X" || cell == "O") turn_count += 1}
-    turn_count
+    cells.count{|char| char == "X" || char == "O"}
   end
-  
-  def taken?
-    if position == "X" || position == "O"
-      true
-    else 
-      false
-    end
+
+  def taken?(user_input)
+    position(user_input) == "X" || position(user_input) == "O"
   end
-  
-  def valid_move?
-    if (user_input >= 1 && user_input <= 9) && taken? == false
-      true
-    else
-      false
-    end
+
+  def valid_move?(user_input)
+    user_input.to_i.between?(1, 9) && !taken?(user_input)
   end
-  
-  def update
-    if valid_move? == true && full? == false
-      position
-    else
-      nil
-    end
-  end
-  
+
 end
