@@ -24,4 +24,18 @@ class Board
         self.cells[user_input.to_i - 1]
     end
 
+    def full?
+        self.cells.all? {|cell| cell == "X" || cell == "O"}
+    end
+
+    def turn_count
+        turn = 0
+        self.cells.each do |space|
+            if space == "X" || space == "O"
+               turn += 1
+            end
+        end
+        turn 
+    end
+
 end
