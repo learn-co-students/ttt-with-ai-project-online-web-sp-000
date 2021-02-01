@@ -1,14 +1,19 @@
 module Players
   class Computer < Player
-<<<<<<< HEAD
 
     def initialize(token)
       super(token)
     end
-    
-=======
->>>>>>> 0db86b9d25e627751506d247ce46807ee9627528
+
     def move(board)
+      if board.turn_count == 0 || !board.taken?("5")
+        return "5"
+      end
+
+      if board.turn_count == 1 || board.turn_count == 2
+        return !board.taken?("3") ? "3" : "1"
+      end
+
       (rand(8) + 1).to_s
     end
   end
