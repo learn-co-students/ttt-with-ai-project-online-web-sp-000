@@ -38,4 +38,17 @@ class Board
         turn 
     end
 
+    def taken?(user_input)
+        position(user_input) == "X" || position(user_input) == "O"
+    end
+
+    def valid_move?(user_input)
+        user_input.to_i.between?(1,9) && !taken?(user_input)
+    end
+
+    def update(user_input, player)
+        self.cells[user_input.to_i-1] = player.token #Looking forward, I think this will be a method you create in the player section
+
+    end
+
 end
