@@ -36,7 +36,11 @@ class Game
   def turn
     player = current_player
     move = player.move(board)
+<<<<<<< HEAD
 
+=======
+    binding.pry
+>>>>>>> 0db86b9d25e627751506d247ce46807ee9627528
     board.valid_move?(move) ? board.update(move, player) : turn
   end
 
@@ -55,7 +59,11 @@ class Game
   end
 
   def over?
+<<<<<<< HEAD
     draw? || won?
+=======
+    board.full? || won?
+>>>>>>> 0db86b9d25e627751506d247ce46807ee9627528
   end
 
   def position_taken?(i)
@@ -63,7 +71,12 @@ class Game
   end
 
   def draw?
+<<<<<<< HEAD
     board.full? && !won?
+=======
+    return false if won? || !over?
+    true
+>>>>>>> 0db86b9d25e627751506d247ce46807ee9627528
   end
 
   def winner
