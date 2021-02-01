@@ -1,3 +1,44 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def get_mode
+  p "What kind of game would you like to play? (0, 1, or 2 players)"
+  str = gets
+  str = str.chomp
+
+  i = str.to_i
+  return i >= 0 && i <= 2 ? i : get_mode
+end
+
+p "Welcome to TicTacToe"
+
+board = Board.new
+player = Player.new("X")
+player = Player::Human.new("Test")
+mode = get_mode
+
+player_1 = nil, player_2 = nil
+case mode
+  when 0
+    player_1 = Player::Computer.new("X")
+    player_2 = Player::Computer.new("O")
+  when 1
+    player_1 = Player::Human.new("X")
+    player_2 = Player::Computer.new("O")
+   # load second player as bot
+  when 2
+   player_1 = Player::Human.new("X")
+   player_2 = Player::Human.new("O")
+end
+
+p "Who would you like to go first and be 'X'? (1 or 2)"
+p1 = gets.chomp
+
+if p1.include?("2")
+  game = Game.new(player_2, player_1, Board.new)
+else
+  game = Game.new(player_1, player_2, Board.new)
+end
+
+game.play
