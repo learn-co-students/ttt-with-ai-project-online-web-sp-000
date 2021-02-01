@@ -24,8 +24,4 @@ class Board
         self.cells[user_input.to_i - 1]
     end
 
-    #this is a test
-    #a what? a test
-
-
 end
