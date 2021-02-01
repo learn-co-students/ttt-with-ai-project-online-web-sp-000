@@ -48,7 +48,6 @@ class Board
 
     def update(user_input, player)
         self.cells[user_input.to_i-1] = player.token #Looking forward, I think this will be a method you create in the player section
-
     end
 
 end
