@@ -2,5 +2,38 @@
 
 require_relative '../config/environment'
 
+def start
 
-Game.new
+    puts "Welcome to TicTacToe!"
+    puts "Do you want to play:"
+    puts "Enter '1' if Human vs. Human"
+    puts "Enter '2' Human vs. Computer"
+    puts "Enter '3' Computer vs. Computer"
+
+    game_type = gets.strip
+
+    if game_type == 1
+     puts "Do you want to go first? y or n"
+        if gets.strip. == y
+            Game.new().play
+        elsif gets.strip == n
+            Game.new(Player::Human.new("O"), Player::Human.new("X"), Board.new).play
+        end
+    end
+
+    if game_type == 2
+        puts "Do you want to go first? y or n"
+        if gets.strip. == y
+            Game.new(Player::Human.new("X"), Player::Computer.new("O"), Board.new).play
+        elsif gets.strip == n
+            Game.new(Player::Computer.new("X"), Player::Human.new("O"), Board.new).play
+        end
+    end
+
+    if game_type == 3 then Game.new(Player::Computer.new("X"), Player::Computer.new("O"), Board.new).play end
+
+    #if game_type != 1 || game_type != 2 || game_type != 3 then start end
+
+end
+
+start
