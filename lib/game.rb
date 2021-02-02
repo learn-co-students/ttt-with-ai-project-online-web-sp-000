@@ -21,13 +21,14 @@ class Game
     end
 
     def current_player
-        @board.turn_count % 2 == 0 ? @player_1: @player_2
+        @board.turn_count % 2 == 0 ? @player_1 : @player_2
     end
 
     def won?
         WIN_COMBINATIONS.each do |combo|
             if @board.cells[combo[0]] == @board.cells[combo[1]] &&
-             @board.cells[combo[1]] == @board.cells[combo[2]]
+             @board.cells[combo[1]] == @board.cells[combo[2]] && 
+             @board.cells[combo[0]] != " "
             return combo
             end
         end
@@ -42,9 +43,33 @@ class Game
         draw? || won?
     end
 
-    def winner #Not yet working. It is returning the winner, but not "nil" if a winner is nonexistant. 
+    def winner 
+      if won?
        combo = won?
-       won? ? @board.cells[combo[0]] : nil
+       @board.cells[combo[0]]
+      else
+        return nil
+      end
+    end
+
+    def turn
+        puts "Please enter a number 1-9:"
+        @board.display
+        @user_input = current_player.move(@board)
+        if  @board.valid_move?(@user_input)
+              @board.update(@user_input, current_player)
+        else 
+            turn
+        end
+    end
+
+    def play
+        turn until over?
+        if won?
+            puts "Congratulations #{winner}!"
+        elsif draw?
+            puts "Cat's Game!"
+        end
     end
 
 end
