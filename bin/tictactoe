@@ -12,25 +12,25 @@ def start
 
     game_type = gets.strip
 
-    if game_type == 1
+    if game_type.to_i == 1
      puts "Do you want to go first? y or n"
-        if gets.strip. == y
+        if gets.strip == "y"
             Game.new().play
-        elsif gets.strip == n
-            Game.new(Player::Human.new("O"), Player::Human.new("X"), Board.new).play
+        elsif gets.strip == "n"
+            Game.new(Players::Human.new("O"), Players::Human.new("X"), Board.new).play
         end
     end
 
-    if game_type == 2
+    if game_type.to_i == 2
         puts "Do you want to go first? y or n"
-        if gets.strip. == y
-            Game.new(Player::Human.new("X"), Player::Computer.new("O"), Board.new).play
-        elsif gets.strip == n
-            Game.new(Player::Computer.new("X"), Player::Human.new("O"), Board.new).play
+        if gets.strip == "y"
+            Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
+        elsif gets.strip == "n"
+            Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new).play
         end
     end
 
-    if game_type == 3 then Game.new(Player::Computer.new("X"), Player::Computer.new("O"), Board.new).play end
+    if game_type.to_i == 3 then Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play end
 
     #if game_type != 1 || game_type != 2 || game_type != 3 then start end
 
