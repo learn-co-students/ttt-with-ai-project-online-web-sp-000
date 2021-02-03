@@ -10,7 +10,7 @@ class Game
         [1,4,7],
         [2,5,8],
         [0,4,8],
-        [6,4,2]
+        [2,4,6]
     ]
 
     def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
@@ -54,13 +54,15 @@ class Game
 
     def turn
         puts "Please enter a number 1-9:"
-        @board.display
+        #@board.display
         @user_input = current_player.move(@board)
         if  @board.valid_move?(@user_input)
               @board.update(@user_input, current_player)
-        else 
+        else
+            @board.display 
             turn
         end
+        @board.display
     end
 
     def play
