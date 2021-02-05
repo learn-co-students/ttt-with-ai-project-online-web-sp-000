@@ -1,3 +1,5 @@
+require 'pry'
+
 class Board
   
   attr_accessor :cells
@@ -46,14 +48,26 @@ class Board
   
   def valid_move?(input)
     input = input.to_i
-    if input < 10 && !taken?(input)
-      true
-    else
+    if input == 0
       false
+    elsif input > 10 
+      false
+    elsif full?
+      false
+    elsif taken?(input)
+      false
+    else
+      true
     end
   end
   
-  def update
+  def update(position, player)
+    if player.token == "X" || player.token == "O"
+      if valid_move?(position)
+        index = position.to_i - 1
+        @cells[index] = player.token
+      end
+    end
   end
   
 end
