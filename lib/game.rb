@@ -1,6 +1,6 @@
 class Game
   
-  attr_accessor :board, :player_1, :player_2
+  attr_accessor :player_1, :player_2, :board
   
   # Define Winning Combinations Constant
   WIN_COMBINATIONS = [
@@ -14,15 +14,11 @@ class Game
     [2,4,6]
     ]
     
+   def initialize (p1 = player_1, p2 = player_2, b = [" "," ", " "," "," "," "," "," "," "])
+    @player_1 = p1
+    @player_2 = p2
+    @board = b
+  end
 
-  
-#  def initialize(player_1, player_2)
-#    @player_1 = player_1
-#    @player_2 = player_2
-#    @board = Board.new
-#  end
-  
-  
-  
 end
 
