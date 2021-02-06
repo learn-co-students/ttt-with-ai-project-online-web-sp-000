@@ -87,6 +87,13 @@ class Game
     until self.over? || self.draw?
       self.turn
     end
+    if self.draw?
+      puts "Cat's Game!"
+    else
+      if self.won?
+       puts "Congratulations " + self.winner + "!"
+      end
+    end
   end
       
 end
