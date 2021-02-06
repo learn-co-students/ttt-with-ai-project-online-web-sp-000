@@ -90,6 +90,33 @@ class Game
       puts "Cat's Game!"
     end
   end
+  
+  def start
+    puts "Welcome to Tic Tac Toe!"
+    puts "What kind of game would you like to play?"
+    puts "0 : for computer vs. computer"
+    puts "1 : for player vs. computer"
+    puts "2 : for player vs. player"
+    input = gets.strip.to_i
+    case input
+      when 2
+        game = Game.new
+        game.play
+      when 1
+        player1 = Players::Computer.new("X")
+        game = Game.new(player1)
+        game.play
+      when 0
+        player1 = Players::Computer.new("X")
+        player2 = Players::Computer.new("O")
+        game = Game.new(player1,player2)
+        game.play
+    else
+      puts "Please input 0, 1, or 2."
+      self.start
+  end
+
+end
       
 end
   
