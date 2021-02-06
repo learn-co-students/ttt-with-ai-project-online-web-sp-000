@@ -3,8 +3,12 @@ module Players
     
     def move(board)
       input = gets.strip
-      board.update(input, self)
-      input
+      if board.valid_move?(input)
+        board.update(input, self)
+        input
+     else
+        false
+      end
     end
     
   end

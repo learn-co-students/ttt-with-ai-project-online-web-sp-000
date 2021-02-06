@@ -66,6 +66,8 @@ class Board
       if valid_move?(position)
         index = position.to_i - 1
         @cells[index] = player.token
+      else
+        nil
       end
     end
   end

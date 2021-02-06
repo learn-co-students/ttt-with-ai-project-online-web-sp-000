@@ -42,6 +42,7 @@ class Game
     nil
   end
 
+
   def draw?
     if self.won?
       return nil
@@ -76,12 +77,17 @@ class Game
   def turn
     puts "Please enter 1-9:"
     if self.current_player.move(self.board) == false
-      puts "invalid"
       self.turn
     else
       self.board.display
     end
   end
-
+  
+  def play
+    until self.over? || self.draw?
+      self.turn
+    end
+  end
+      
 end
-
+  
