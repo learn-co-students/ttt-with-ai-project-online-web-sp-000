@@ -23,7 +23,7 @@ class Game
   end
 
   def current_player
-    @board.turn_count % 2 == 0 ? @player_1 : @player_2
+    self.board.turn_count % 2 == 0 ? @player_1 : @player_2
   end
   
   def won?
@@ -32,24 +32,24 @@ class Game
       win_index1 = win_combination[0]
       win_index2 = win_combination[1]
       win_index3 = win_combination[2]
-      position_1 = @board.position(win_index1 + 1)
-      position_2 = @board.position(win_index2 + 1)
-      position_3 = @board.position(win_index3 + 1)
-      if position_1 == position_2 && position_2 == position_3 && @board.taken?(win_index1)
+      position_1 = self.board.cells[win_index1]
+      position_2 = self.board.cells[win_index2]
+      position_3 = self.board.cells[win_index3]
+      if position_1 == position_2 && position_1 == position_3 && self.board.taken?(win_index1 + 1)
         return result
       end
     end
-    nil
+    false
   end
 
 
   def draw?
     if self.won?
-      return nil
+      return false
     elsif self.board.full?
       return true
     else
-      return nil
+      return false
     end
   end
 
@@ -57,20 +57,16 @@ class Game
     if self.won? || self.draw? || self.board.full?
       return true
     else
-      return nil
+      return false
     end
   end
   
   def winner
-    if self.won? != nil
+    if self.won?
       win_combination = self.won?
-      if self.board.position(win_combination[0] + 1) == "X" && self.board.position(win_combination[1] + 1) == "X" && self.board.position(win_combination[2] + 1) == "X"
-        player_1.token
-      elsif self.board.position(win_combination[0] + 1) == "O" && self.board.position(win_combination[1] + 1) == "O" && self.board.position(win_combination[2] + 1) == "O"
-        player_2.token
-      else
-        nil
-      end
+      @board.cells[win_combination[0]]
+    else
+      nil
     end
   end
 
@@ -84,15 +80,14 @@ class Game
   end
   
   def play
-    until self.over? || self.draw?
+    # for additional players
+    until self.over?
       self.turn
     end
-    if self.draw?
-      puts "Cat's Game!"
-    else
-      if self.won?
+    if self.won?
        puts "Congratulations " + self.winner + "!"
-      end
+    elsif self.draw?
+      puts "Cat's Game!"
     end
   end
       
