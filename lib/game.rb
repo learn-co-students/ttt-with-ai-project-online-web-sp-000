@@ -75,10 +75,11 @@ class Game
 
   def turn
     puts "Please enter 1-9:"
-    if self.current_player.move(self.board) != false
-      self.board.display
-    else
+    if self.current_player.move(self.board) == false
+      puts "invalid"
       self.turn
+    else
+      self.board.display
     end
   end
 
