@@ -52,10 +52,11 @@ class Board
   end
 
   def full?
-    if @cells.all? != " "
+    if @cells.any? {|space| space == " " || space == ""}
+      false
+    else
       true
     end
-    binding.pry
   end
 
 end
