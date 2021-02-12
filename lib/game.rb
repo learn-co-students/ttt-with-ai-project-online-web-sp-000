@@ -1,17 +1,42 @@
 require 'pry'
+#require_relative "../config/environment.rb"
 
 class Game
+  #extend Players::Human
 
   attr_accessor :board, :player_1, :player_2
 
-  def initialize
-    player_1 = Player.new("X")
-    player_2 = Player.new("O")
-    board = Board.new
+  def initialize(p1 = Players::Human.new("X"), p2 = Players::Human.new("O"), board = Board.new)
+    @player_1 = p1
+    @player_2 = p2
+    @board = board
+    #binding.pry
+  end
+
+  def player_1
+    @player_1
+  end
+
+  def player_2
+    @player_2
   end
 
   def board
     @board
+  end
+
+  def current_player
+    if board.turn_count % 2 == 0
+      @player_1
+    else
+      @Player_2
+    end
+  end
+
+  def won?
+    WIN_COMBINATIONS.detect do |win_combo|
+      board.cells[win_combo[0]] == board.cells[win_combo[1]] && board.cells[win_combo[1]] == board.cells[win_combo[2]] && board.taken?(win_combo[0]+1)
+    end
   end
 
   WIN_COMBINATIONS = [
@@ -19,8 +44,8 @@ class Game
     [3,4,5],
     [6,7,8],
     [0,3,6],
-    [1,4,7],
     [2,5,8],
+    [1,4,7],
     [0,4,8],
     [2,4,6]
   ]
