@@ -57,11 +57,11 @@ class Game
 
 
   def draw?
-    board.full? && !won? ? true : false #remember ?: for cleaner code!
+    board.full? && !won? #? true : false #remember ?: for cleaner code!
   end
 
   def over?
-    won? || draw? ? true : false
+    won? || draw? #? true : false
   end
 
   def winner
@@ -75,19 +75,26 @@ class Game
 #  current Player gets input in Players::Human.move
     user_input = current_player.move(board)
 #    if input is valid, update board, else ask for new input
-    board.valid_move?(user_input) ? board.update(user_input, current_player) : turn
+    if board.valid_move?(user_input)
+      board.update(user_input, current_player)
+    else
+      puts "Choose a number not already taken"
+      turn
+    end
     board.display
+    puts "\n\n"
+    sleep 1
+
   end
 
   def play
-    board.display
-    until over?
-      turn
-    end
+    turn until over?
+
     if won?
       puts "Congratulations #{winner}!"
     else
       puts "Cat's Game!"
     end
   end
+
 end
