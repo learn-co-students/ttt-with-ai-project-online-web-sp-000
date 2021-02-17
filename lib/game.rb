@@ -9,9 +9,14 @@ def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new
 end 
   
 def turn
-  current_player.move(board)
-
-end
+  player = current_player
+  current_move = player.move(@board)
+  if !@board.valid_move?(current_move)
+  turn
+  else
+   @board.update(current_move, player)
+  end
+end 
 
 def current_player
   move = board.turn_count
@@ -24,7 +29,7 @@ end
 
 def won?
   WIN_COMBINATIONS.find do |win_combination|
-  @board.cells[win_combination[0]] == @board.cells[win_combination[1]] && @board.cells[win_combination[1]] == @board.cells[win_combination[2]] && @board.taken?(win_combination[0])
+  @board.cells[win_combination[0]] == @board.cells[win_combination[1]] && @board.cells[win_combination[1]] == @board.cells[win_combination[2]] && @board.taken?(win_combination[0]+1)
 end
 end 
 
@@ -33,7 +38,7 @@ def draw?
 end 
 
 def over?
-  won? || board.full?
+  won? || draw?
 end 
 
 def winner
@@ -46,5 +51,18 @@ def winner
   end
   return nil
 end 
+
+def play
+  until over?
+  player = current_player
+  current_move = player.move(@board)
+  @board.update(current_move, player)
+  end 
+  if winner != nil
+  puts "Congratulations #{winner}!"
+  else 
+  puts "Cat's Game!"
+  end 
+  end
   
 end 
