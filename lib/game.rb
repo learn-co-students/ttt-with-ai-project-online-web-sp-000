@@ -65,4 +65,26 @@ def play
   end 
   end
   
+def start
+  computer = Players::Computer
+  human = Players::Human
+  puts "What kind of game would you like to play? (0),(1) or (2) player?"
+  input1 = gets
+  puts "Who should go first and be X? Player_1(1) or Player_2(2)?"
+  input2 = gets
+  if input1 == "0" && input2 == 
+  game = Game.new(computer,computer,board)
+  game.play
+  elsif input1 == "1"
+  game = Game.new(player,computer,board)
+  game.play
+  elsif input1 == "2"
+  game = Game.new(player,player.board)
+  game.play
+  end 
+  puts "Who should go first and be X?"
+  input2 = gets
+  
+  end
+  
 end 
