@@ -4,7 +4,6 @@ module Players
 
     def move(board)
       #binding.pry
-      @board = board
       num_of_empty = board.cells.count(" ")
       #random number to start
       if num_of_empty > 7
@@ -13,12 +12,12 @@ module Players
       elsif num_of_empty < 8
         WIN_COMBINATIONS.each do |x|
           #Plays offense
-          if @board.cells[x[0]] == @board.cells[x[1]] and @board.cells[x[0]] != " "
-            comp_position = @board.cells[x[2]]
-          elsif @board.cells[x[1]] == @board.cells[x[2]] and @board.cells[x[1]] != " "
-            comp_position = @board.cells[x[0]]
-          elsif @board.cells[x[0]] == @board.cells[x[2]] and @board.cells[x[0]] != " "
-            comp_position = @board.cells[x[1]]
+          if board.cells[x[0]] == board.cells[x[1]] and board.cells[x[0]] != " "
+            comp_position = board.cells[x[2]]
+          elsif board.cells[x[1]] == board.cells[x[2]] and board.cells[x[1]] != " "
+            comp_position = board.cells[x[0]]
+          elsif board.cells[x[0]] == board.cells[x[2]] and board.cells[x[0]] != " "
+            comp_position = board.cells[x[1]]
           else
             comp_position = rand(1..9)
           end

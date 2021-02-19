@@ -14,11 +14,11 @@ puts "3. 2 player - play against a friend"
 @game_type = gets.strip.to_i
 
 case
-  when game_type = 1
+when @game_type == 1
     @player_1 = Players::Computer.new("X")
-    @player_2 = Players::Computer.new("0")
+    @player_2 = Players::Computer.new("O")
 
-  when game_type = 2
+  when @game_type == 2
     puts "X will have the first turn. Would you like to be X or O?"
     human_token = gets.strip
     @player_1 = Players::Human.new(human_token)
@@ -29,7 +29,8 @@ case
     else
     end
 
-  when game_type = 3
+  when @game_type == 3
+
     puts "X will have the first turn.  Player 1 please select if you want to be X or O."
     human_token = gets.strip
     @player_1 = Players::Human.new(human_token)

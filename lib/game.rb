@@ -8,12 +8,12 @@ class Game
 
     def initialize (player_1=nil, player_2=nil, board=nil)
       @board = board || Board.new
-      @player_1 = player_1 || Players::Human.new("X")
-      @player_2 = player_2 || Players::Human.new("O")
+      @player_1 = player_1
+      @player_2 = player_2
     end
 
     def current_player
-      if board.cells.count{|x| x == "O" or x == "X"}.even?
+      if board.cells.count{|x| x == "O" || x == "X"}.even?
         player_1
       else
         player_2
@@ -66,8 +66,10 @@ class Game
 
       if won? && winner == "X"
         puts "Congratulations X!"
+        binding.pry
       elsif won? && winner == "O"
         puts "Congratulations O!"
+        binding.pry
       elsif draw?
         puts "Cat's Game!"
       else
