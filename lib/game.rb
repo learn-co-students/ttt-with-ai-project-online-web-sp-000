@@ -53,12 +53,21 @@ class Game
   end
 
   def turn
-    input = current_player.move(@board).to_i
-    if board.valid_move?(input)
-      board.update(input, current_player)
-    else
-      turn
+    #binding.pry
+    input = 10
+    while board.valid_move?(input) == false
+      board.display
+      puts "Player #{current_player.token}, what position would you like?"
+      input = current_player.move(@board).to_i
     end
+    board.update(input, self.current_player)
+    # if board.valid_move?(input)
+    #   board.update(input, current_player)
+    # else
+    #   board.display
+    #   puts "Invalid move. Please select another position."
+    #   turn
+    # end
   end
 
   def play
@@ -67,10 +76,13 @@ class Game
     end
 
     if won? && winner == "X"
+      board.display
       puts "Congratulations X!"
     elsif won? && winner == "O"
+      board.display
       puts "Congratulations O!"
     elsif draw?
+      board.display
       puts "Cat's Game!"
     else
     end
