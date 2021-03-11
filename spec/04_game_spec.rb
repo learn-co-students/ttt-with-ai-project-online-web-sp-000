@@ -136,7 +136,7 @@ describe 'Game' do
     it 'returns true for a won game' do
       game = Game.new
       game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "O", "X"]
-
+     
       expect(game.over?).to be_truthy
     end
 
