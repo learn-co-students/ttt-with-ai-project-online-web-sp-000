@@ -82,6 +82,11 @@ class Game
       @player_1 = Players::Human.new("X")
       @player_2 = Players::Human.new("O")
     end
+    
+    if chosen = "2"
+      @player_1.token = "0"
+      @player_2.token = "X"
+    end
       
     play
   end
