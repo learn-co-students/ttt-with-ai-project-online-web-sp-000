@@ -1,3 +1,12 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+require 'pry'
+
+# start of program
+
+puts "\nこんにちは! Welcome to Tic Tac Toe!"
+
+GameController.new.start
+
+puts "\nThanks for playing!\n\n"
