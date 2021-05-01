@@ -1,0 +1,76 @@
+class Game
+
+  attr_accessor :board, :player_1, :player_2
+
+  def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+    @board = board
+    @player_1 = player_1
+    @player_2 = player_2
+  end
+
+  WIN_COMBINATIONS = [
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+    [0,4,8],
+    [6,4,2]]
+
+  def current_player
+    if board.turn_count % 2 == 0
+      player_1
+    else
+      player_2
+    end
+  end
+
+  def won?
+    WIN_COMBINATIONS.find do |win_combo|
+      board.taken?(win_combo[0]+1) &&
+      board.cells[win_combo[0]] == board.cells[win_combo[1]] &&
+      board.cells[win_combo[1]] == board.cells[win_combo[2]]
+    end
+  end
+
+  def draw?
+    board.full? && !won?
+  end
+
+  def over?
+    draw? || won?
+  end
+
+  def winner
+    if won?
+      win_combo = won?
+      board.cells[win_combo[0]]
+    end
+  end
+
+  def turn
+    move = current_player.move(self.board)
+    if self.board.valid_move?(move)
+      self.board.update(move, current_player)
+      self.board.display
+    else
+      puts "Invalid Entry. Try Again!"
+      self.board.display
+      turn
+    end
+  end
+
+  def play
+    turn until over?
+    if draw?
+      puts "Cat's Game!"
+    elsif won?
+      puts "Congratulations #{winner}!"
+    end
+  end
+
+end
+
+
+#rspec spec/04_game_spec.rb
