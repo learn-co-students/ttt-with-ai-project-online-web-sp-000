@@ -1,3 +1,26 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def start
+    puts "Welcome to TicTacToe!"
+    puts "Do you want to play:"
+    puts "Enter '1' if Human vs. Human"
+    puts "Enter '2' Human vs. Computer"
+    puts "Enter '3' Computer vs. Computer"
+    game_type = gets.strip
+    if game_type == "1"
+        Game.new().play
+    elsif game_type == "2"
+        puts "Do you want to go first? (y/n)"
+        if gets.strip == "y"
+            Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
+        else #gets.strip == "n"
+            Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new).play
+        end
+    elsif game_type == "3" 
+        Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
+    end
+    puts "Do you still want to play? (y/n)"
+end
+start until gets.strip == "n"
