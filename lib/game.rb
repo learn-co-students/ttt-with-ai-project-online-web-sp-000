@@ -1,4 +1,5 @@
 class Game
+
 attr_accessor :board, :player_1, :player_2
 
 WIN_COMBINATIONS = [
@@ -65,4 +66,5 @@ WIN_COMBINATIONS = [
       puts "Cat's Game!"
     end
   end
+
 end
