@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
-
+require 'irb'
 require_relative '../config/environment'
+
+IRB.start
 
 puts "Welcome to Tic-Tac-Toe"
 puts "Please select game mode:"
@@ -13,12 +15,14 @@ input = gets.strip.to_i
 if input.between?(1,3)
     case input
     when 1
-        g = Game.new(Players::Computer.new("X"),Players::Computer.new("O") )
+        
     when 2
-        g = Game.new(Players::Human.new("X"),Players::Computer.new("O") )
+        
     else 
-        g = Game.new
+        
     end
 end
+
+g = Game.new
 
 g.play
