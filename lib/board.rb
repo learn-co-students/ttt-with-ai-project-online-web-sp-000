@@ -37,22 +37,25 @@ class Board
   end 
   
   def taken?(input)
-    if self.position(input) == " "
-      return false
+    status = false
+    if self.position(input) == "X" || self.position(input) == "O"
+      status = true
     end 
-    true 
+    status 
   end 
   
   def valid_move?(input)
+    status = false
     if input.to_i.between?(1,9) && taken?(input) == false
-      return true
+      status = true 
     end
-    false
+    status
   end 
   
-  def update(input, player_token)
-    index = (input.to_i)-1 
-    @cells[index] = player_token 
+  def update(input, token)
+    
+    index = (input.to_i)-1
+    @cells[index] = player.token 
   end 
   
 end 
