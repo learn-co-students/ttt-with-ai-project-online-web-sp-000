@@ -20,8 +20,7 @@ class Board
   end 
   
   def position(input)
-    index = (input.to_i)-1
-    @cells[index]
+    @cells[(input.to_i)-1]
   end 
   
   def full?
@@ -52,10 +51,8 @@ class Board
     status
   end 
   
-  def update(input, token)
-    
-    index = (input.to_i)-1
-    @cells[index] = player.token 
+  def update(input, player)
+    @cells[(input.to_i)-1] = player.token 
   end 
   
 end 
