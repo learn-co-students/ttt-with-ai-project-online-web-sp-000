@@ -1,36 +1,54 @@
+require "pry"
 class Game
   WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
   attr_accessor :board, :player_1, :player_2
   
-  def initialize(player_1, player_2, board)
+  def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
     @player_1 = player_1
     @player_2 = player_2
     @board = board
-  end 
-
-  def current_player
+  end
   
+  def current_player
+    @board.turn_count.even? ? @player_1 : @player_2
   end 
   
   def won?
-    
+    status = false 
+    WIN_COMBINATIONS.each do |combo|
+      if @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]] 
+        status = combo
+      end 
+    end 
+    status
   end
   
   def draw?
-    
+    @board.full? == true && self.won? == false ? true : false
   end 
   
   def over?
-    
+    self.won? || self.draw? ? true : false
   end 
   
   def winner
-    
+    if self.won? 
+      @board.cells[self.won?[0]]
+    end 
   end 
   
   def turn
-  
-  end
+    puts "Please enter 1 - 9"
+    input = self.current_player.move
+    binding.pry
+    if @board.valid_move?(input)
+      binding.pry 
+      @board.update(input, self.current_player.token)  
+      binding.pry 
+    else 
+      self.turn
+    end
+  end 
   
   def play 
     
