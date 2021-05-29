@@ -14,9 +14,9 @@ class Game
   end 
   
   def won?
-    status = false 
+    status = false
     WIN_COMBINATIONS.each do |combo|
-      if @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]] 
+      if @board.position(combo[0]) != " " && (@board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]])
         status = combo
       end 
     end 
@@ -32,19 +32,18 @@ class Game
   end 
   
   def winner
-    if self.won? 
-      @board.cells[self.won?[0]]
+    if self.won?
+      @board.cells[self.won?[0]] 
+    else 
+      nil
     end 
   end 
   
   def turn
     puts "Please enter 1 - 9"
-    input = self.current_player.move
-    binding.pry
+    input = self.current_player.move(@board)
     if @board.valid_move?(input)
-      binding.pry 
       @board.update(input, self.current_player.token)  
-      binding.pry 
     else 
       self.turn
     end
