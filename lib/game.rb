@@ -43,14 +43,18 @@ class Game
     puts "Please enter 1 - 9"
     input = self.current_player.move(@board)
     if @board.valid_move?(input)
-      @board.update(input, self.current_player.token)  
+      @board.update(input, self.current_player)  
     else 
       self.turn
     end
   end 
   
   def play 
-    
+    until self.over?
+      self.turn
+    end 
+   
+      
   end 
   
 end 
