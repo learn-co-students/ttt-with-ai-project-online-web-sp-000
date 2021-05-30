@@ -13,31 +13,42 @@ class Game
     @board.turn_count.even? ? @player_1 : @player_2
   end 
   
-  def won?
-    status = false
-    WIN_COMBINATIONS.each do |combo|
-      if @board.position(combo[0]) != " " && (@board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]])
-        status = combo
-      end 
-    end 
-    status
+  # def won?
+  #   WIN_COMBINATIONS.detect do |combo|
+  #     @board.taken?(combo[0]) && (@board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]])
+  #   end 
+  #   #status
+  # end
+  
+    def won?
+    WIN_COMBINATIONS.detect do |combo|
+      @board.cells[combo[0]] == @board.cells[combo[1]] &&
+      @board.cells[combo[1]] == @board.cells[combo[2]] &&
+      @board.taken?(combo[0]+1)
+    end
   end
   
   def draw?
-    @board.full? == true && self.won? == false ? true : false
+    @board.full? == true && won? == false ? true : false
   end 
   
   def over?
-    self.won? || self.draw? ? true : false
+    won? || draw? ? true : false
   end 
   
+  # def winner
+  #   if self.won?
+  #     @board.cells[self.won?[0]] 
+  #   else 
+  #     nil
+  #   end 
+  # end 
+  
   def winner
-    if self.won?
-      @board.cells[self.won?[0]] 
-    else 
-      nil
-    end 
-  end 
+    if winning_combo = won?
+      @winner = @board.cells[winning_combo.first]
+    end
+  end
   
   def turn
     puts "Please enter 1 - 9"
