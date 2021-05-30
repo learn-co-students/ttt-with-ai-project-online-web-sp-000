@@ -37,7 +37,7 @@ class Board
   
   def taken?(input)
     status = false
-    if self.position(input) == "X" || self.position(input) == "O"
+    if position(input) == "X" || position(input) == "O"
       status = true
     end 
     status 

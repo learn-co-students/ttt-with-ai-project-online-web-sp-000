@@ -13,14 +13,7 @@ class Game
     @board.turn_count.even? ? @player_1 : @player_2
   end 
   
-  # def won?
-  #   WIN_COMBINATIONS.detect do |combo|
-  #     @board.taken?(combo[0]) && (@board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]])
-  #   end 
-  #   #status
-  # end
-  
-    def won?
+  def won?
     WIN_COMBINATIONS.detect do |combo|
       @board.cells[combo[0]] == @board.cells[combo[1]] &&
       @board.cells[combo[1]] == @board.cells[combo[2]] &&
@@ -29,43 +22,38 @@ class Game
   end
   
   def draw?
-    @board.full? == true && won? == false ? true : false
+    @board.full? && !won?
   end 
   
   def over?
-    won? || draw? ? true : false
+    won? || draw?
   end 
   
-  # def winner
-  #   if self.won?
-  #     @board.cells[self.won?[0]] 
-  #   else 
-  #     nil
-  #   end 
-  # end 
-  
   def winner
-    #if winning_combo = won?
-      @winner = @board.cells[won?[0]]
-    #end
-  end
+    if self.won?
+      @board.cells[self.won?[0]] 
+    end 
+  end 
   
   def turn
     puts "Please enter 1 - 9"
-    input = self.current_player.move(@board)
+    input = current_player.move(@board)
     if @board.valid_move?(input)
-      @board.update(input, self.current_player)  
+      @board.update(input, current_player)  
     else 
-      self.turn
+      turn
     end
   end 
   
   def play 
-    until self.over?
-      self.turn
+    until over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    else
+      puts "Cat's Game!"
     end 
-   
-      
   end 
   
 end 
