@@ -22,7 +22,7 @@ class Board
     end 
 
     def full?
-        @cells.all? {|character| character == "X" || character == "O"}
+        @cells.all? {|token| token == "X" || token == "O"}
     end 
 
     def turn_count

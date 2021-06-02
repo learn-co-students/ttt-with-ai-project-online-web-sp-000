@@ -42,21 +42,6 @@ class Game
             @board.cells[won?[0]]
         end
     end 
-
-    # def turn
-    #     player = current_player
-    #     current_move = player.move(@board)
-    #     if !@board.valid_move?(current_move)
-    #       turn
-    #     else
-    #       puts "Turn: #{@board.turn_count+1}\n"
-    #       @board.display
-    #       @board.update(current_move, player)
-    #       puts "#{player.token} moved #{current_move}"
-    #       @board.display
-    #       puts "\n\n"
-    #     end
-    #   end
     
     def turn
         puts "Please enter 1-9:"
