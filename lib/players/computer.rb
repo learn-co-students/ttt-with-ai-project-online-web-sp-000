@@ -13,12 +13,12 @@ module Players
         end
             
         def next_move(board)
-                move = [8,6,2,0].find {|cell| !board.taken?(cell)}.to_s
-                move
+            move = [8,6,2,0].find {|cell| !board.taken?(cell)}.to_s
+            move
         end 
         def last_moves(board)
-                move = [7,5,3,1,8,6,2,0].find {|cell| !board.taken?(cell)}.to_s
-                move
+            move = [7,5,3,1,8,6,2,0].find {|cell| !board.taken?(cell)}.to_s
+            move
         end
     end 
 end 
