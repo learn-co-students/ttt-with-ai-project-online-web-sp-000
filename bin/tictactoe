@@ -1,3 +1,37 @@
 #!/usr/bin/env ruby
-
+require 'pry'
 require_relative '../config/environment'
+
+puts "Welcome to Tic Tac Toe!"
+puts "What kind of game would you like to play?"
+puts "Enter '0' for computer versus computer."
+puts "Enter '1' for a one player game."
+puts "Enter '2' for a two player game."
+puts "Enter 'wargames' to see a computer play itself 100 times."
+
+user_input = gets.strip
+
+case user_input
+when '0' 
+    Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O")).play
+when '1'
+    Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O")).play
+when '2'
+    Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O")).play
+when 'wargames'
+    count = 0
+    while count < 100
+        game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O")).play
+        count += 1
+    end
+end
+
+puts "Would you like to play again? (Y,N)"
+user_input_replay = gets. strip
+
+if user_input_replay == "Y"
+    Game.new
+else
+    puts "Thanks for playing!"
+end
+
