@@ -23,7 +23,8 @@ module Players
             # if !board.taken?("5")
             #     "5"
             # else
-            #     until won? do ["1", "2", "3", "4", "6", "7", "8", "9"].sample
+            #     until won? do 
+             #   ["1", "2", "3", "4", "6", "7", "8", "9"].sample
             #     end
             # end
         end
