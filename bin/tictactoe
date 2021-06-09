@@ -13,15 +13,15 @@ user_input = gets.strip
 
 case user_input
 when '0' 
-    Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O")).play
+    Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), Board.new).play
 when '1'
-    Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O")).play
+    Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), Board.new).play
 when '2'
-    Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O")).play
+    Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), Board.new).play
 when 'wargames'
     count = 0
     while count < 100
-        game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O")).play
+        Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), Board.new).play
         count += 1
     end
 end
@@ -30,7 +30,7 @@ puts "Would you like to play again? (Y,N)"
 user_input_replay = gets. strip
 
 if user_input_replay == "Y"
-    Game.new
+    Game.new.play
 else
     puts "Thanks for playing!"
 end
